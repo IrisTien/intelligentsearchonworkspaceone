@@ -1,0 +1,16 @@
+LOAD CSV WITH HEADERS FROM "file:///customers.csv" AS line
+CREATE (:Customer {name: line.Customer})
+
+LOAD CSV WITH HEADERS FROM "file:///feature.csv" AS line2
+CREATE (:Feature {feature: line2.Feature})
+                 
+LOAD CSV with headers from 'file:///customers.csv' as line
+MATCH (c:Customer {name: line.Customer})
+MATCH (f:Feature {feature:line.Feature})
+CREATE (f)-[:raisedBy]->(c)
+
+
+match (c:Customer)
+match (f:Feature)
+match (f)-[:raisedBy]->(c)
+return c,f;

@@ -1,0 +1,17 @@
+
+
+
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///ideas4.csv" AS line
+CREATE (:Idea {title: line.title,
+                 created: line.created,
+                 votes:line.votes,
+                 authors: line.authors,
+                 submitter: line.submitter,
+                 imageURL: line.imageURL,
+                 eventRegistration: line.eventRegistration})
+                 
+LOAD CSV with headers from 'file:///ideas4.csv' as line
+MATCH (person:Person {name:line.submitter})
+MATCH (idea:Idea {title:line.title})
+CREATE (person)-[:submitterOf]->(idea)

@@ -1,0 +1,431 @@
+authors,created,eventRegistration,submitter,title,votes
+"
+Aaron Wei
+",08/20/19,"
+Beijing - EUC Tech Fair only
+",Aaron Wei,A transition server to allow user to use other VDI client with Horizon,0
+"
+Qi Sun, Hongsheng Li, Mingsheng Zang, Felix Yan, Steven Liu
+",08/13/19,"
+Beijing - EUC Tech Fair only
+",Steven Liu,Remote feature CI Component Test,2
+"
+Jizhi Du, Tiddy Zenglin Xiong, Xiaodong Zhu, Haisong Yan, Puhui Meng
+",08/15/19,"
+Beijing - EUC Tech Fair only
+",Jizhi Du,PsRun: A integration tool for horizon small scale of system stress testing,2
+"
+Felix Yan, Hongsheng Li
+",08/09/19,"
+Beijing - EUC Tech Fair only
+",Hongsheng Li,5G VS Horizon,3
+"
+Zhiyu Li
+",08/28/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Zhiyu Li,Hybrid computation for USB performance-sensitive application,0
+"
+William Zhang
+",08/23/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",William Zhang,A Systematic Way to Test Windows Focusing and Z-order for A Consistent RDSH Powered Client User Experience,0
+"
+Wenhua Gao
+",08/17/19,"
+Beijing - EUC Tech Fair only
+",Wenhua Gao,Live Broadcast and Sharing - Horizon View,1
+"
+Yue Sun, Yong Zhao, Wenhua Gao
+",08/22/19,"
+Beijing - EUC Tech Fair only
+",Yue Sun,Use SCCM and WSUS to help all Windows have latest Update in test cloud,1
+"
+Zhiyu Li, Zhun Lin, Gang Si
+",08/27/19,"
+Beijing - EUC Tech Fair only
+",Gang Si,A new Virtualized USB host controller for Horizon,2
+"
+Mangui She, Hui Yuan, Weigang Huang, Hui Zhang
+",08/26/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Hui Zhang,Server-based Font management,0
+"
+Yuan Ma
+",08/22/19,"
+Beijing - EUC Tech Fair only
+",Yuan Ma,Message based component testing,0
+"
+Huanguo Zhong, Lin Lv, Yanchao Zhang, Baochen Wang
+",08/26/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Huanguo Zhong,Enhanced Workflow and Collaboration in Workspace One,0
+"
+Zhi Lin
+",08/27/19,"
+Beijing - EUC Tech Fair only
+",Zhi Lin,Post-test in CI: Dump Auto Analyzer,0
+"
+Zhenghua Ji, Bin Bai, Tao Jin, Zhiyuan Wang
+",08/27/19,"
+Beijing - EUC Tech Fair only
+",Zhiyuan Wang,Upgrading Horizon Linux Client to Gtk+ 3,0
+"
+Ken Song, Jack Liu, Zhi Lin
+",08/27/19,"
+Beijing - EUC Tech Fair only
+",Zhi Lin,Record session base on auditing,0
+"
+Nan Wang
+",08/20/19,"
+Beijing - EUC Hackathon only
+",Nan Wang,VMware OpenSource Visualizer,0
+"
+Sabrina Hou, Yue Hao
+",08/28/19,"
+Beijing - EUC Tech Fair only
+",Yue Hao,Blockchain Permission Certificate Generation with Horizon Cloud,1
+"
+Hunter Cao
+",08/09/19,"
+Beijing - EUC Hackathon only
+",Hunter Cao,MobileCam for Horizon,1
+"
+Zhenghua Ji, Zhiyuan Wang
+",08/19/19,"
+Beijing - EUC Tech Fair only
+",Zhenghua Ji,Support Seamless Window in Linux ARM Platform,0
+"
+Yue Sun, Bo Liu, Wyatt Xu, Shawn Hu
+",08/21/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Yue Sun,Apply Eye Tracking Technology to enhance Horizon View User Experience and Security,1
+"
+Owen Ye, Yue Sun
+",08/27/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Yue Sun,Horizon View publish Linux Desktop and Seamless App based on WSL,1
+"
+Tim Liu, Roger Zhang, Owen Ye
+",08/28/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Owen Ye,"Display realtime status of UAG/Connection servers, Agents on Horizon Client UI",0
+"
+Yang Liu, Steven Liu, Huanhuan Zhang, Lin Lv
+",08/09/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Steven Liu,Analyze cloud logs using Machine Learning,1
+"
+Li Huang, Steven Liu, Hongsheng Li, Zhongzheng Tu
+",08/12/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Li Huang,Horizon Feature Store on Cloud,3
+"
+Nan Wang
+",08/20/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Nan Wang,Oral Programming,0
+"
+Wyatt Xu, Bo Liu, Terry Wang, An Min Gong
+",08/26/19,"
+Beijing - EUC Tech Fair only
+",Wyatt Xu,Horizon Easy Version Check,3
+"
+Le Yu, Li Huang
+",08/12/19,"
+Beijing - EUC Tech Fair only
+",Li Huang,Extend VDI Desktop With iPad,3
+"
+Amanda Zhang
+",08/26/19,"
+Beijing - EUC Hackathon only
+",Shawn Hu,Code Change Heat Map,1
+"
+Guoxin Liu, Zhenhua Qin, Yuechang Li
+",08/20/19,"
+Beijing - EUC Tech Fair only
+",Yuechang Li,Open remote desktops/applications by using Siri Shortcuts on Horizon iOS client,2
+"
+Wenhua Gao, Yue Sun, Yong Zhao
+",08/28/19,"
+Beijing - EUC Tech Fair only
+",Yong Zhao,HPQC Assistant,0
+"
+Huanguo Zhong, Yang Liu, Michael Zhang, Le Yu, Tingting Yin
+",08/25/19,"
+Beijing - EUC Tech Fair only
+",Le Yu,How we optimizing the Horizon Client E2E BATs Automation,0
+"
+Roger Zhang, Yao Zhang, Wenping Fan
+",08/28/19,"
+Beijing - EUC Tech Fair only
+",Wenping Fan,Predict VDI user logon with Multi-Instance-Multi-Label machine learning approach,0
+"
+Roger Zhang, Jianhang Zhu, Hua Chen
+",08/27/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Hua Chen,A serverless data-driven api platform,0
+"
+Xinda Yan, Tong Zhao, Yilin Wang, Yue Zhao, Jinxing Hu
+",08/27/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Jinxing Hu,support password-less authentication in Horizon,0
+"
+Clare He, Levi Zhao, Yanchao Zhang
+",08/16/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Yanchao Zhang,DSC for LinuxVDI,0
+"
+Joe Zhao, Tony Wang, Ofox Shi, Gang Si
+",08/27/19,"
+Beijing - EUC Tech Fair only
+",Gang Si,General Bluetooth device redirection for Horizon,1
+"
+Lin Lv, Jack Liu, Ella San, Sarah Cheng
+",08/23/19,"
+Beijing - EUC Tech Fair only
+",Ella San,Detect and Collaboration Now!,0
+"
+Nan Wang, Sam Zhao
+",08/20/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Nan Wang,Containerize Horizon Infrastructure,1
+"
+Hui Yuan, Mangui She, Weigang Huang, Hui Zhang
+",08/26/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Hui Zhang,Script based Component Test Framework,0
+"
+Wei Tian, Han Zhang
+",08/26/19,"
+Beijing - EUC Hackathon only
+",Han Zhang,Light weight user session monitoring portal.,1
+"
+Zhongzheng Tu, Qi Sun, Dongyu Zhao
+",08/12/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Zhongzheng Tu,Assistant Bot - Virtual Customer Assistant,3
+"
+Han Zhang, Wei Tian
+",08/27/19,"
+Beijing - EUC Tech Fair only
+",Wei Tian,New Generation of CMS UI with Customized Visualization,1
+"
+Zhikai Chen, Yinghua Chen, Xinda Yan, Jinxing Hu, Luke Yue
+",08/26/19,"
+Beijing - EUC Tech Fair only
+",Luke Yue,Using AppDefense to guard Horizon environment,1
+"
+An Min Gong, Yue Sun, Wyatt Xu, Bo Liu
+",08/19/19,"
+Beijing - EUC Tech Fair only
+",Bo Liu,Unlock with Windows Hello companion devices in remote session.,3
+"
+Aaron Wei, Sarah Cheng, Hao Bai, Guoxin Liu
+",08/28/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Guoxin Liu,Make iPad as the fully interactive device with Horizon Mac Client,0
+"
+Sabrina Hou, Huanhuan Zhang, Yue Zhao, Yingfeng Ou
+",08/09/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Sabrina Hou,Intelligent search on Workspace One,4
+"
+Qi Sun, Steven Liu, Felix Yan
+",08/14/19,"
+Beijing - EUC Tech Fair only
+",Qi Sun,A unified audit framework for remote features.,1
+"
+Xing Wei
+",08/28/19,"
+Beijing - EUC Tech Fair only
+",Xing Wei,Virtual disk redirection on Horizon View,0
+"
+Wu Bai
+",08/15/19,"
+Beijing - EUC Tech Fair only
+",Wu Bai,An edge computing solution to improve the remote experience for desktop/apps in Cloud,1
+"
+Puhui Meng, Haisong Yan, Jizhi Du, Tiddy Zenglin Xiong, Xiaodong Zhu
+",08/15/19,"
+Beijing - EUC Tech Fair only
+",Puhui Meng,How we using WMWare WaveFront in System Stress Test,2
+"
+Nora Zhao, Helena Zhang
+",08/27/19,"
+Beijing - EUC Tech Fair only
+",Helena Zhang,Migrate Linux Client Automation from Jython to Python,0
+"
+Xiaodong Zhu, Tiddy Zenglin Xiong, Jizhi Du, Haisong Yan, Puhui Meng
+",08/15/19,"
+Beijing - EUC Tech Fair only
+",Xiaodong Zhu,Virtual USB solution on System Stress Test,3
+"
+Ken Song, Jack Liu, Lin Lv, Ella San, Sarah Cheng
+",08/23/19,"
+Beijing - EUC Tech Fair only
+",Sarah Cheng,Supervisor in Collaboration,0
+"
+Hui Zhang
+",08/25/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Hui Zhang,Auto Log  Analyzer Service,0
+"
+Zhao Li, Qing Wan, Felix Yan, Steven Liu, Ofox Shi
+",08/15/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Zhao Li,Remote Experiences As A Service,6
+"
+Zhiyu Li
+",08/28/19,"
+Beijing - EUC Tech Fair only
+",Zhiyu Li,Pen redirection for Horizon,0
+"
+Shawn Hu, William Zhang, Tony Wang
+",08/09/19,"
+Beijing - EUC Tech Fair only
+",William Zhang,Modernize Load Balancing for VMware Environments with Avi Vantage Platform Integration and Cloud Solutions,1
+"
+Steven Liu, Sabrina Hou, Hongsheng Li, Felix Yan
+",08/28/19,"
+Beijing - EUC Tech Fair only
+",Hongsheng Li,Agile Smartcard,0
+"
+Peter Zhang, Zhifu Jin
+",08/18/19,"
+Beijing - EUC Hackathon only
+",Zhifu Jin,Intelligent DevOps Bot,5
+"
+Levi Zhao, Yu Song
+",08/28/19,"
+Beijing - EUC Tech Fair only
+",Yu Song,Enhanced OCR in E2E testing,0
+"
+Zhao Li, Xing Wei, Wu Bai, Felix Yan, Weigang Huang
+",08/15/19,"
+Beijing - EUC Tech Fair only
+",Zhao Li,CDR Performance Improvement,2
+"
+Yang Liu
+",08/25/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Yang Liu,Horizon tester assistant,0
+"
+Yilin Wang, Tong Zhao, Xinda Yan, Yue Zhao, Jinxing Hu
+",08/28/19,"
+Beijing - EUC Tech Fair only
+",Yilin Wang,Combine Protractor and Docker to Achieve CI in Horizon,0
+"
+Clare He
+",08/13/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Clare He,ADD LINUX ASSISTANT TOOL IN HORIZON LINUX AGENT,0
+"
+Wen Wang, Bomin Nie, Nan Wang, Ray Meng, Sam Zhao
+",08/16/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Sam Zhao,Cloud AD Domain Based Hybrid Cloud Network Union,6
+"
+Aaron Wei, YiQun Yun, Lei Wang
+",08/27/19,"
+Beijing - EUC Hackathon only
+",Lei Wang,Battery status redirection,0
+"
+Guoxin Liu, Aaron Wei, Hao Bai
+",08/28/19,"
+Beijing - EUC Tech Fair only
+",Hao Bai,Seamless apps,0
+"
+Zhongzheng Tu, Mingsheng Zang, Hongsheng Li
+",08/28/19,"
+Beijing - EUC Tech Fair only
+",Zhongzheng Tu,Unified Multimedia Redirection solution on multiple platforms,0
+"
+Ning Ge
+",08/23/19,"
+Beijing - EUC Tech Fair only
+",Ning Ge,3rd party (including open source) binary solution auto integration system,0
+"
+Ning Ge, Ofox Shi, Gang Si
+",08/27/19,"
+Beijing - EUC Tech Fair only
+",Gang Si,Native experience of TWAIN scanning for Horizon,0
+"
+Ella San, Jack Liu, Yue Zhao, Tong Zhao, Lin Lv
+",08/19/19,"
+Beijing - EUC Tech Fair only
+",Lin Lv,End User Defined SaaS/Web Apps in Workspace ONE,2
+"
+Xiaodong Zhu, Puhui Meng, Jizhi Du, Haisong Yan, Tiddy Zenglin Xiong
+",08/16/19,"
+Beijing - EUC Tech Fair only
+",Haisong Yan,vmCC - A lightweight process recording and playback tool based on Vcenter,1
+"
+Wen Wang, Peter Zhang, Sabrina Hou, Zhao Li, Qing Wan
+",08/12/19,"
+Beijing - EUC Tech Fair only
+",Sabrina Hou,"Unified Deploy, Configuration and Upgrading on Horizon Cloud",1
+"
+Lin Lv, Zhaohan Ren, Yu Chen
+",08/27/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Yanchao Zhang,Instant collaboration notification,0
+"
+Guang Shi, Jane Gao, Mandy Yang, Tony Wang
+",08/27/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Guang Shi,Customer Portraying System,0
+"
+Terry Wang, Baochen Wang, An Min Gong, Bo Liu, Wyatt Xu, Lisa Li
+",08/20/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Lisa Li,VMware Horizon connectivity diagnostic and optimization,1
+"
+Qichen Hao, Yaoyao Feng, Dehai Han
+",08/25/19,"
+Beijing - EUC Tech Fair only
+",Yaoyao Feng,Metrics based solution to diagnose product issue and provide product health,2
+"
+Gang Si, Joe Zhao
+",08/09/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Joe Zhao,Online self diagnosis for Peripheral device usages in Horizon environment,0
+"
+Haishan Luo, Bin Guo, Wenping Fan, Yao Zhang
+",08/22/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Yao Zhang,Cloud Capsule,1
+"
+Owen Ye
+",08/28/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Owen Ye,Using SNMP to query and display Horizon solution VMs statistics data,0
+"
+Guang Shi, Winnie Wu, Jane Gao, Tony Wang, Mandy Yang
+",08/22/19,"
+Beijing - EUC Tech Fair only
+",Guang Shi,vCanon - Caseless Automation Test Using State Machine,0
+"
+Arong Pan
+",08/22/19,"
+Beijing - EUC Hackathon only
+",Arong Pan,VMware Serial/COM port redirection,0
+"
+Yingfeng Ou, Huanhuan Zhang, Sabrina Hou, Yue Zhao
+",08/20/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Sabrina Hou,Adapt Knowledge Graph on Workspace One,0
+"
+Yue Hao, Dongyu Zhao
+",08/11/19,"
+Beijing - EUC Hackathon & EUC Tech Fair
+",Dongyu Zhao,CI Resource Distribution Optimization Based On Operations Research,2
+"
+YiQun Yun, Hao Bai, Aaron Wei
+",08/25/19,"
+Beijing - EUC Tech Fair only
+",Aaron Wei,reverse seamless window on Horizon,0
+"
+Qi Sun, Steven Liu, Li Huang, Felix Yan
+",08/15/19,"
+Beijing - EUC Tech Fair only
+",Qi Sun,An idea for DnD performance improvement before going cloud,2
