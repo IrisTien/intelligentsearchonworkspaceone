@@ -1,0 +1,40 @@
+#Search all ideas and submitters, managers
+
+match (p:Person)-[:submitterOf]->(i:Idea)
+match (p)-[:reportTo]->(m:Person)
+return p, i,m;
+
+
+#Search all bugs and assignee
+
+match (p:Person)-[:assigneeOf]->(b:Bug)
+return p,b;
+
+
+#Search all bugs and assignee, managers
+
+match (p:Person)-[:assigneeOf]->(b:Bug)
+match (p:Person)-[:reportTo]->(m:Person)
+return p,b,m
+
+#Search specific bug, build, assignee
+
+match (bug:Bug {bugID: "2394109"})
+match (bug:Bug)-[:foundIn]->(b:Build)
+match (p:Person)-[:assigneeOf]->(bug)
+return bug, p, b;
+
+
+# Search specific build and show build components
+
+match (b:Build {buildId: "14450286"})
+match (com:BuildComponent)-[:componentOf]->(b:Build)
+return com,b
+
+
+# Search bug, build, component relationships
+match (bug:Bug {bugID: "2399000"})
+match (bug)-[:foundIn]->(build:Build)
+match (com)-[:componentOf]->(build)
+match (build)-[:relatedTo]->(c:ChangeList)
+return bug, com,build,c

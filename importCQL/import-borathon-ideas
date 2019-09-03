@@ -1,0 +1,173 @@
+     
+LOAD CSV WITH HEADERS FROM "file:///all-vmware-person.csv" AS line              
+CREATE (:Person {shortName: line.shortName,
+                 personID: line.personID,
+                 distinguishedName: line.distinguishedName,
+                 phoneNumber:line.phoneNumber,
+                 orgLink: line.orgLink,
+                 title: line.title,
+                 imageURL: line.imageURL,
+                 mobile: line.mobile,
+                 emailAddress: line.emailAddress,
+                 employeeNumber: line.employeeNumber,
+                 link: line.link,
+                 personId: line.personId,
+                 region: line.region,
+                 managerDN: line.managerDN})
+
+LOAD CSV WITH HEADERS FROM "file:///all-vmware-person.csv" AS line              
+MATCH (p:Person {distinguishedName:line.distinguishedName})
+MATCH (m:Person {distinguishedName:line.managerDN})
+CREATE (p)-[:reportTo]->(m)
+
+#c
+
+# delete all person rel
+match (p)-[r:reportTo]->(m) detach delete r;
+
+#delete duplicated person
+MATCH (g:Person) 
+WITH g.personID as id, collect(g) AS nodes 
+WHERE size(nodes) >  1
+FOREACH (g in tail(nodes) | DELETE g)
+          
+#remove duplicated relationship
+          
+MATCH (a:Person)-[r:reportTo]->(b:Person)
+WITH a, b, TAIL (COLLECT (r)) as rr
+WHERE size(rr)>0
+FOREACH (r IN rr | DELETE r)
+
+LOAD CSV WITH HEADERS FROM "file:///2019-bj-borathon.csv" AS line
+CREATE (:Idea {shortName: line.shortName,
+               title: line.title,
+                 created: line.created,
+                 teamMamber: line.teamMembers,
+                 submitter: line.submitter,
+                 shortName: line.shortName,
+                 theme: line.theme,
+                 description: line.description,
+                 link: line.link})
+                 
+LOAD CSV WITH HEADERS FROM "file:///2019-bj-borathon.csv" AS line
+MATCH (p:Person {shortName: line.submitter})
+MATCH (i:Idea {title: line.title})
+CREATE (p)-[:submitterOf]->(i)
+
+
+# remove duplicated relationshiop
+MATCH (a:Person)-[r:submitterOf]->(b:Idea)
+WITH a, b, TAIL (COLLECT (r)) as rr
+WHERE size(rr)>0
+FOREACH (r IN rr | DELETE r)
+
+
+#import bugs
+
+LOAD CSV WITH HEADERS FROM "file:///bugs-2019-09-01.csv" AS line
+CREATE (:Bug {shortName: line.shortName,
+               bugID: line.BugID,
+               summary: line.Summary,
+                 severify: line.Severity,
+                 priority: line.Priority,
+                 status: line.Status,
+                 asignee: line.Asignee,
+                 reporter: line.Reporter,
+                 product: line.Product,
+                 category: line.Category,
+                 component: line.Componnet,
+                 keywords: line.Keywords,
+                 build: line.Build,
+                 regression: line.Regression,                 
+                 link: line.link})
+                 
+create index on :Bug(bugID)
+
+                 
+LOAD CSV WITH HEADERS FROM "file:///bugs-2019-09-01.csv" AS line
+MATCH (p:Person {personID: line.Assignee})
+MATCH (b:Bug {bugID: line.BugID})
+CREATE (p)-[:assigneeOf]->(b)
+
+
+LOAD CSV WITH HEADERS FROM "file:///bugs-2019-09-01.csv" AS line
+MATCH (b:Bug {bugID: line.BugID})
+CREATE (p)-[:assigneeOf]->(b)
+
+
+# remove duplicated relatinship
+MATCH (a:Person)-[r:assigneeOf]->(b:Bug)
+WITH a, b, TAIL (COLLECT (r)) as rr
+WHERE size(rr)>0
+FOREACH (r IN rr | DELETE r)
+
+
+LOAD CSV WITH HEADERS FROM "file:///bugs-2019-09-01.csv" AS line
+CREATE (:BugCategory {shortName: line.Category})
+
+MATCH (g:BugCategory) 
+WITH g.shortName as id, collect(g) AS nodes 
+WHERE size(nodes) >  1
+FOREACH (g in tail(nodes) | DELETE g)
+
+LOAD CSV WITH HEADERS FROM "file:///bugs-2019-09-01.csv" AS line
+CREATE (:BugComponent {shortName: line.Component})
+
+LOAD CSV WITH HEADERS FROM "file:///bugs-2019-09-01.csv" AS line
+MATCH (c:BugCategory {shortName: line.Category})
+MATCH (b:Bug {bugID: line.BugID})
+CREATE (b)-[:isCategoryOf]->(c)
+
+LOAD CSV WITH HEADERS FROM "file:///bugs-2019-09-01.csv" AS line
+MATCH (c:BugComponent {shortName: line.Component})
+MATCH (b:Bug {bugID: line.BugID})
+CREATE (b)-[:isComponentOf]->(c)
+
+MATCH (a:Bug)-[r:isCategoryOf]->(b:BugCategory)
+WITH a, b, TAIL (COLLECT (r)) as rr
+WHERE size(rr)>0
+FOREACH (r IN rr | DELETE r)
+
+
+# Import builds
+
+LOAD CSV WITH HEADERS FROM "file:///builds_win_cart20fq3.csv" AS line
+CREATE (:Build {shortName: line.shortName,
+               branch: line.branch,
+               buildId: line.buildId,
+                 changeset: line.changeset,
+                 changeset_link: line.changeset_link,
+                 clog_link: line.clog_link,
+                 link: line.link,
+                 product: line.product,
+                 releaseType: line.releaseType,
+                 category: line.Category,
+                 version: line.version})
+
+create index on :Build(buildId)
+
+LOAD CSV WITH HEADERS FROM "file:///bugs-2019-09-01.csv" AS line
+MATCH (build:Build {buildId: line.Build})
+MATCH (bug:Bug {bugID: line.BugID})
+CREATE (bug)-[:foundIn]->(build)
+
+
+# Import Build component
+
+LOAD CSV WITH HEADERS FROM "file:///builds_hcwin_components_cart20fq3.csv" AS line
+CREATE (:BuildComponent {shortName: line.shortName,
+               componentId: line.componentId,
+               branch: line.branch,
+               buildId: line.buildId,
+                 changeset: line.changeset,
+                 changeset_link: line.changeset_link,                
+                 link: line.link,
+                 product: line.product,
+                 releaseType: line.buildType,
+                 scmserver:line.scmserver
+                 })
+
+LOAD CSV WITH HEADERS FROM "file:///builds_hcwin_components_cart20fq3.csv" AS line
+MATCH (build:Build {buildId: line.BuildId})
+MATCH (com:BuildComponent {componentId: line.componentId})
+CREATE (com)-[:isComponentOf]->(build)
