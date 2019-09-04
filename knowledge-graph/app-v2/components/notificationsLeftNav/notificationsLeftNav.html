@@ -1,0 +1,6 @@
+<h2 class="left-nav-heading section-headline-style2">{{notificationsLeftNav.headerLabel }}</h2>
+<ul class="left-nav-list">
+    <li class="category-list-item {{nav.class}}" ng-repeat="nav in notificationsLeftNav.links" title="{{nav.label}}" ui-sref="{{nav.link}}" ui-sref-active="is-selected">
+        <span>{{nav.label}}</span>
+    </li>
+</ul>

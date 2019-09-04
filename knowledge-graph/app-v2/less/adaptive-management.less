@@ -1,0 +1,229 @@
+// Adaptive Enrollment flow, slide in from right
+@adaptivemanagementHeaderHeight: 46px;
+@list-min-height: 56px;
+
+.adaptive-management-page {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height:100%;
+    font-size: 14px;
+    color:@mediumgrey;
+    background: @white;
+}
+
+.adaptive-management-header {
+    position: absolute;
+    width:100%;
+    top:0;
+    height: @adaptivemanagementHeaderHeight;
+    z-index: 50;
+
+    .icon-modal-fullscreen-close {
+        position: absolute;
+        top:0;
+        left:0;
+        width: 42px;
+        height: 42px;
+        z-index:100;
+        margin-top:11px;
+        z-index: 100;
+        cursor: pointer;
+        opacity: @light-text-opacity;
+    }
+}
+
+.adaptive-management-content {
+    position: absolute;
+    top:0;
+    padding-top:@adaptivemanagementHeaderHeight;
+    padding-bottom:46px;
+    height: 100%;
+    width: 100%;
+}
+.adaptive-management-content-scrollable {
+    height: 100%;
+    width: 100%;
+    overflow-x:hidden;
+    overflow-y: auto;
+}
+.adaptive-management-body {
+    width: 100%;
+    font-size:15px;
+    text-align: center;
+
+    @media (min-width: @browser-transition-point) {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+.adaptive-management-title {
+    width:85%;
+    font-size: 16px;
+    font-family: "Open Sans Semibold", sans-serif;
+    height: 32px;
+    line-height:32px;
+    margin: 16px auto 12px;
+    .single-line-ellipsis();
+
+    @media (min-width: @phoneS) {
+        font-size:20px;
+    }
+
+    @media (min-width: @tabletS) {
+        font-size:28px;
+        margin: 32px auto 36px;
+    }
+}
+
+.tunnel-app-body {
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+
+    @media (min-width: @browser-transition-point) {
+        padding-top: 40px;
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+.tunnel-svg {
+    width: 210px;
+    height: 170px;
+    margin-bottom: 20px;
+
+    @media (min-width: @browser-transition-point) {
+        margin-bottom: 40px;
+    }
+}
+
+.tunnel-app-text {
+    width: 70%;
+    margin:10px auto;
+    font-size:13px;
+    line-height:24px;
+
+    @media (min-width: @phoneS) {
+        font-size:15px;
+    }
+
+    @media (min-width: @tabletS) {
+        width: 60%;
+        max-width: 420px;
+        margin:15px auto;
+        line-height:32px;
+        font-size:18px;
+    }
+
+    .tunnel-app-name {
+        font-family: "Open Sans Semibold", sans-serif;
+    }
+}
+
+.tunnel-install-help-text {
+    text-align: left;
+    padding: 30px;
+}
+
+.tunnel-install-step {
+    text-align: left;
+    padding: 15px 30px;
+}
+
+.adaptive-management-subtitle {
+    width: 85%;
+    margin: 0 auto;
+    font-size:13px;
+    line-height:24px;
+    margin-bottom: 20px;
+
+    @media (min-width: @phoneS) {
+        font-size:15px;
+    }
+
+    @media (min-width: @tabletS) {
+        width: 70%;
+        max-width: 420px;
+        font-size:18px;
+        margin-bottom: 40px;
+    }
+}
+.adaptive-benefits-list {
+    width: 84%;
+    margin: 30px auto 40px;
+    font-size:13px;
+    line-height: 18px;
+
+    @media (min-width: @phoneS) {
+        font-size:15px;
+        line-height: 22px;
+    }
+
+    @media (min-width: @tabletS) {
+        width: 70%;
+        max-width: 450px;
+        font-size:18px;
+        line-height: 26px;
+    }
+
+
+
+    li {
+        width: 100%;
+        min-height: @list-min-height;
+        margin-bottom: 15px;
+        line-height: 24px;
+        text-align: left;
+        clear:both;
+
+        p {
+            width: 100%;
+            padding-top:5px;
+            opacity: 0.8;
+        }
+
+        svg {
+            float: left;
+            width: 56px;
+            height: 56px;
+            margin: 0 10px 10px 0;
+
+            @media (min-width: @tabletS) {
+                width: 64px;
+                height:64px;
+                margin: 0 24px 10px 0;
+            }
+        }
+    }
+}
+
+.modal-content a.privacy-link {
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 0 24px;
+    margin-bottom:40px;
+    font-family: "Open Sans Semibold", sans-serif;
+    color: @highlightblue;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.adaptive-management-footer {
+    width: 100%;
+    text-align: center;
+    height: @dialog-actions-height;
+    line-height: @dialog-actions-height;
+    font-size:16px;
+    z-index:1050;
+    white-space: nowrap;
+    position: absolute;
+    bottom:0;
+    left:0;
+    color:@white;
+    background:@highlightblue;
+    padding: 0 24px;
+}

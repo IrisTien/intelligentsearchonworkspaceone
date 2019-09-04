@@ -1,0 +1,59 @@
+@notify-text-size: 13px;
+
+.notify-container {
+  .notify-content {
+    position: fixed;
+    width: 100%;
+    z-index: 1500;
+    bottom: 0;
+  }
+
+  .notify-message-list {
+    .notify-message-container {
+      padding: 10px;
+      background-color: @notify-background;
+      color: @notify-text-color;
+      margin: 10px;
+      display: block;
+      line-height: 15px;
+      border-radius: 4px;
+      font-size: @notify-text-size;
+      animation: slide-up 0.4s ease;
+      -webkit-animation: slide-up 0.4s ease;
+      -moz-animation: slide-up 0.4s ease;
+      &.error{
+        background-color: @notify-error-background;
+      }
+    }
+  }
+
+  .message-body{
+    display: table;
+    width: 100%;
+  }
+
+  .notify-close-button, .message-text {
+    vertical-align: middle;
+    color: @notify-text-color;
+    display: table-cell;
+  }
+
+  .message-text {
+    padding: 10px 0;
+  }
+
+  @keyframes slide-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+      -moz-transform: translateY(20px);
+      -webkit-transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      -moz-transform: translateY(0);
+      -webkit-transform: translateY(0);
+    }
+  }
+}

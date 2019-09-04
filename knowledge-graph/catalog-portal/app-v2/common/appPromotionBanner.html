@@ -1,0 +1,20 @@
+<div class="promobanner-container" ng-if="appBannerCtrl.showPromoBanner">
+    <svg svg-symbol="icon-close-popup" class="promobanner-close-button" ng-click="appBannerCtrl.close()"></svg>
+    <div class="promobanner-content">
+        <div class="promobanner-text">
+            <ng-include src="'app-v2/svgincludes/icon-ws1-lockup.html'" class="icon-ws1-promobanner"></ng-include>
+            <h2 class="promobanner-title">{{::'appCenter' | i18n }}</h2>
+            <p class="promobanner-message">{{::'app.promotion.banner.message' | i18n }}</p>
+
+            <label class="promobanner-option-text">
+                <input type="checkbox" ng-model="appBannerCtrl.pvsettings" value="donotSHOW" id="promobanner-donotshow" class="promobanner-settings-choice" ng-change="appBannerCtrl.setPromoBannerPreference()" />
+                <p class="promobanner-preference">{{ ::'app.promotion.banner.donotshowagain' | i18n}}</p>
+            </label>
+        </div>
+
+        <p class="promobanner-actions">
+            <button class="promobanner-action secondary-button" id="pt-promo-openinapp-link"  ng-click="appBannerCtrl.openWorkspaceOneApp()">{{ ::'app.promotion.banner.open' | i18n }}</button>
+            <button class="promobanner-action primary-button" id="pt-promo-download-link" ng-click="appBannerCtrl.downloadApp()"> {{::'app.promotion.banner.download' | i18n }}</button>
+        </p>
+    </div>
+</div>

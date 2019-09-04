@@ -1,0 +1,8 @@
+<svg id="icon-tunnel" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" stroke-width="0">
+	<circle cx="8" cy="8" r="7.5" fill="#6db33f" stroke-width="0"/>
+	<line x1="8" y1="10.35" x2="8" y2="10.9" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7"/>
+	<line x1="8" y1="12.22" x2="8" y2="12.78" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7"/>
+	<path d="M4.69,10.93V5.39a3.76,3.76,0,0,1,6.64,0v5.53" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7"/>
+	<path d="M3.74,12,6.87,8.83l0,0V6.52a1.25,1.25,0,0,1,2.21,0V8.81l0,0L12.26,12" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7"/>
+	<line x1="6.89" y1="8.82" x2="9.11" y2="8.82" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7"/>
+</svg>

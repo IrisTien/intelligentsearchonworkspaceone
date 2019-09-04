@@ -1,0 +1,171 @@
+/*
+ * Project Horizon
+ * (c) 2013-2015 VMware, Inc. All rights reserved.
+ * VMware Confidential.
+ */
+
+/** @pattern .dropdown
+A button from which a panel drops down when clicked.
+The panel often contains a menu.
+
+@example[dropdown-menu.html, dropdown-menu.js]
+*/
+
+@dropdown-color: @text-color;
+@dropdown-backgroundColor: @page-background-color;
+@dropdown-borderColor: #A7B8C4;
+@dropdown-borderRadius: 4px;
+@dropdown-boxShadow: 0 2px 8px rgba(0,0,0,0.36);
+@dropdown-offset: 5px;
+@dropdown-padding-horizontal: 12px;
+@dropdown-padding-vertical: 10px;
+@dropdown-toggle-color: @link-color;
+@dropdown-label-color: @greytext-color;
+@dropdown-arrow-width: 8px;
+@dropdown-arrow-height: 10px;
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 1; // for stacking context
+
+    .dropdown-toggle {
+        cursor: pointer;
+        color: @dropdown-toggle-color;
+        &:hover {
+            text-decoration: none;
+        }
+        label {
+            color: @dropdown-label-color;
+            margin-right: .5em;
+            &::after {
+                content: ":";
+            }
+        }
+    }
+
+    .dropdown-panel {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin-top: @dropdown-offset;
+        padding: @dropdown-padding-horizontal @dropdown-padding-vertical;
+        min-width: 100%;
+        min-height: 1em;
+        color: @dropdown-color;
+        background-color: @dropdown-backgroundColor;
+        border: 1px solid @dropdown-borderColor;
+        border-radius: @dropdown-borderRadius;
+        box-shadow: @dropdown-boxShadow;
+        min-width: 250px;
+        max-height: 600px;
+        visibility: hidden;
+        opacity: 0;
+        overflow: visible;
+        transform: translateY(-0.5em);
+        z-index: -1;
+        -webkit-transition: opacity 0.3s ease-in-out 0s, transform  0.3s ease-in-out 0s, visibility 0s linear 0.4s, z-index 0s linear 0.01s;
+        -moz-transition: opacity 0.3s ease-in-out 0s, transform  0.3s ease-in-out 0s, visibility 0s linear 0.4s, z-index 0s linear 0.01s;
+        -o-transition: opacity 0.3s ease-in-out 0s, transform  0.3s ease-in-out 0s, visibility 0s linear 0.4s, z-index 0s linear 0.01s;
+        transition: opacity 0.3s ease-in-out 0s, transform  0.3s ease-in-out 0s, visibility 0s linear 0.4s, z-index 0s linear 0.01s;
+
+        @dropdown-arrow-width: 16px;
+        @dropdown-arrow-height: 9px;
+        @dropdown-arrow-left: 6px;
+        @dropdown-arrow-right: 5px;
+
+        /*
+        Need to use 2 SVGs: one for the white background and one for the border,
+        because the arrow css trick (with border) doesn't scale down (zooming out)
+        */
+        .dropdown-arrow {
+            svg.symbol {
+                position: absolute;
+                width: @dropdown-arrow-width;
+                bottom: 100%;
+                left: 0;
+                stroke: none;
+            }
+            svg.bg {
+                height: @dropdown-arrow-height;
+                margin-left: @dropdown-arrow-left + 1;
+                margin-bottom: -1px;
+                fill: @dropdown-backgroundColor;
+            }
+            svg.border {
+                width: @dropdown-arrow-width + 2;
+                height: @dropdown-arrow-height + 1;
+                margin-left: @dropdown-arrow-left;
+                fill: @dropdown-borderColor;
+            }
+
+            &.dropdown-arrow-right {
+                svg.symbol {
+                    left: auto;
+                    right: 0;
+                    margin-left: 0;
+                    margin-right: @dropdown-arrow-right + 1;
+                }
+
+                svg.border {
+                    margin-right: @dropdown-arrow-right;
+                }
+            }
+        }
+    }
+
+    &.inline- {
+        display: inline-block;
+    }
+
+    &.right- {
+        .dropdown-panel {
+            left: auto;
+            right: 0;
+        }
+    }
+
+    &.center- {
+        .dropdown-panel {
+            left: 50%;
+            .translateX(-50%);
+        }
+    }
+
+    &.is-active {
+        > .dropdown-panel {
+            visibility: visible;
+            opacity: 1;
+            z-index: 2;
+            .transform(translateY(0%));
+            -webkit-transition-delay: 0s, 0s, 0s, 0s;
+            -moz-transition-delay: 0s, 0s, 0s, 0s;
+            -o-transition-delay: 0s, 0s, 0s, 0s;
+            transition-delay: 0s, 0s, 0s, 0s;
+        }
+    }
+
+    .menu .menu-hrule {
+        width: auto;
+        margin-left: -@dropdown-padding-vertical;
+        margin-right: -@dropdown-padding-vertical;
+        margin-top: 0;
+        margin-bottom: @dropdown-padding-horizontal;
+    }
+
+    .menu > li {
+        padding: 0;
+        padding-bottom: @dropdown-padding-horizontal;
+
+    }
+
+    .dropdown-panel.menu li:last-child {
+        padding-bottom: 0;
+    }
+    .dropdown-panel > .menu:last-child {
+        li:last-child {
+            padding-bottom: 0;
+        }
+    }
+}

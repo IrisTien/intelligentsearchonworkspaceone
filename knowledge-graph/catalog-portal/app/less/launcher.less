@@ -1,0 +1,396 @@
+.launcher-main {
+    @emblem-border-radius: 4px;
+    @emblem-box-shadow: 0 1px 3px 0 rgba(0,0,0,0.18);
+    @emblem-hover-border-color: #3d87c3;
+    @emblem-hover-box-shadow: 0 2px 8px 0 rgba(0,0,0,0.36);
+
+    .page > .grid {
+
+        .emblem::before {
+          border-radius: @emblem-border-radius;
+          box-shadow: @emblem-box-shadow;
+        }
+
+        .emblem:hover::before {
+          border: 2px solid @emblem-hover-border-color;
+          box-shadow:@emblem-hover-box-shadow;
+        }
+
+        .emblem-title {
+            font-size: 13px;
+            font-family: @font-family-semiBold;
+        }
+    }
+
+    .page.full-bleed-{
+        padding: 0px 0px 10px 0px;
+   }
+       
+   .launcheritem:hover {
+      cursor: pointer;
+   }
+
+  .launcheritem-details-dialog {
+    @dialog-pad: 25px;
+    @pad: 15px;
+    @emblem-tile-size: 80px;
+
+    .grid > .width( 7 );
+    min-height: 310px;
+    position: absolute;
+    background-color: @launcher-dialog-background;
+    .box-sizing( border-box );
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    padding: @dialog-pad;
+    padding-bottom: 100px;
+    border: 1px solid #a8a6a8;
+    z-index: 2;
+    -webkit-transform: translateZ(2px); // because emblem-info has translateZ, Safari bug.
+    cursor: default; // parent is clickable, but the dialog itself isn't
+    &.north-, &.northeast-, &.northwest- {
+      bottom: (-@grid-gutter/2);
+    }
+
+    &.south-, &.southeast-, &.southwest- {
+      top: (-@grid-gutter/2);
+    }
+
+    &.northeast-, &.southeast- {
+      left: (-@grid-gutter/2);
+    }
+
+    &.northwest-, &.southwest- {
+      right: (-@grid-gutter/2);
+    }
+    &.north-, &.south- {
+      left: 50%;
+      .translateX( -50% );
+    }
+
+    .dialog-image {
+      float: left;
+      background-repeat: no-repeat;
+      border: 1px solid #a8a6a8;
+      border-radius: 20%;
+      background-position: center;
+      background-color: white;
+      background-size: 64px;
+    }
+
+    .emblem{
+      margin-left: -(@emblem-tile-size+10px);
+      float: left;
+    }
+    .image-size( @size: 2 * @grid-modulus - @grid-gutter ) when (isnumber(@size)) {
+      @lmargin: @size + 2 * @pad;
+      .dialog-image {
+        margin-right: @pad;
+        width: @size;
+        height: @size;
+      }
+    }
+    .symbol {
+      font-size: 30px;
+      stroke: none;
+
+      &[symbol="trash"] { fill: @removeAppIconColor; }
+      &[symbol="launch"] {
+        fill: @launchAppIconColor;
+        font-size: 26px;
+        padding-top: 5px;
+      }
+      &[symbol="close"] {
+        fill: @closeIconColor;
+        font-size: 15px;
+      }
+      &[symbol="star"] {
+        fill: none;
+        stroke: @favorite-stroke-color;
+        &.filled- {
+          fill: @favorite-fill-color;
+          stroke: none;
+        }
+      }
+      &[symbol="power"] {
+        font-size: 35px;
+        fill: @favorite-stroke-color;
+        stroke: @favorite-stroke-color;
+      }
+      &[symbol="default-icon"] {
+        fill: none;
+        stroke: @favorite-stroke-color;
+      }
+      &[symbol="set-password"] {
+        fill: none;
+        stroke: none;
+      }
+    }
+
+    .dialog-close{
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 2em;
+      height: 2em;
+      margin: 5px;
+
+    }
+    dl {
+      margin: .5em 0;
+    }
+    dt, dd {
+      display: inline;
+      line-height: 1.5;
+      margin: 0;
+    }
+    dt + dd:before {
+      // The localized label in the <dt> already contains a colon.
+      content: ' ';
+      display: inline-block;
+      width: .5em;
+    }
+    dd:after {
+      display: block;
+      content: '';
+      height: 0;
+    }
+    dt {
+      font-weight: 600;
+    }
+
+    .info-container {
+      .font > .size( small );
+      padding-left: @emblem-tile-size + 10px;
+
+      h3 {
+        .font > .size( large );
+        word-wrap: break-word;
+        line-height: 1.2em;
+        margin: 0;
+        padding-top: 8px;
+
+      }
+    }
+
+    .dialog-text{
+      overflow: hidden;
+      width: 100%;
+      .app-description {
+        padding: @pad 0;
+      }
+    }
+    .image-size();
+
+    .dialog-actions {
+      list-style: none;
+      padding: @dialog-pad;
+      bottom: 0px;
+      position: absolute;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      margin-left: -@dialog-pad;
+      width: 100%;
+
+      .actions {
+        height: 30px;
+        margin-bottom: 1em;
+        width: auto;
+        li {
+          padding: 0 0.5em;
+        }
+
+        a:active,
+        a:focus {
+          outline: none;
+        }
+      }
+
+        .launch-btn {
+            padding-left: 0.8em;
+            padding-right: 0.8em;
+            background-color: @basicGreenColor;
+            border-color: @basicGreenColor;
+            color: @primaryBtnTextColor;
+            &:hover {
+                background-color: @basicGreenHoverColor;
+                horder-color: @basicGreenHoverColor;
+            }
+        }
+
+        .launch-link {
+            .button > .size( small );
+            padding-left: 0;
+            padding-right: 0;
+            &.is-disabled {
+                color: rgba(151, 151, 151, 0.7);
+            }
+        }
+
+        .launch-btn, .launch-link {
+            padding-top: 6px;
+            padding-bottom: 6px;
+            float: right;
+        }
+
+        .launch-options li {
+            margin-left: 0.5em;
+        }
+    }
+
+    @media @page-LP {
+      // hide the labels on the buttons and let them flow in one row, if possible
+      .dialog-actions {
+        > li {
+          width: (100%/6); // this works out to 43px touch target on @grid-SX
+          padding: 10px 0 0;
+        }
+      }
+    }
+
+    @media @page-MP {
+      // on small screens, eliminate the icon, making the dialog narrower
+      .grid > .width(5);
+      min-height: auto;
+
+      .dialog-image {
+        display: none;
+      }
+    }
+    .launch-options {
+        li {
+          float: none;
+          margin-top: 2px;
+        }
+      .button.is-disabled {
+        float: right;
+      }
+    }
+    .symbol {
+      &[symbol="carat-down"] {
+        fill: white;
+        stroke: white;
+        font-size: 15px;
+        padding-left: 3px;
+      }
+    }
+  }
+
+  .emblem {
+    a {
+      cursor: pointer;
+    }
+
+    .emblem-title {
+      @lineHeight: 1.25em;
+      @maxTitleLines: 2;
+
+      white-space: normal;
+      line-height: @lineHeight;
+      height: @maxTitleLines * @lineHeight;
+    }
+  }
+
+  @media @page-at-least-M {
+    .searchFilterMsg {
+      display: none;
+    }
+    .dialog-close {
+      margin: 5px;
+    }
+  }
+
+    .welcomeMessageContainer {
+        height: @desktop-filter-dropdown-container-height - (@l-tile-padding/2);
+        width: 100%;
+        margin:auto;
+        padding: 40px (@l-tile-padding/2) (44px - (@l-tile-padding/2)) (@l-tile-padding/2);
+        .welcomeMessage {
+            font-size: @welcome-font-size;
+            line-height: @welcome-line-height;
+            .font .weight(thin);
+            width: 65%;
+            float:left;
+            .ellipsis();
+        }
+        .desktopFilterBarContainer {
+            .dropdown-panel {
+                max-width: @desktop-filter-dropdown-container-width - @filter-favorite-container-width;
+              .menu-item-name {
+                .ellipsis(@desktop-filter-dropdown-container-width - @filter-favorite-container-width - 45px);
+              }
+            }
+            .filterName {
+                .ellipsis(@desktop-filter-dropdown-container-width - @filter-favorite-container-width - 30px);
+            }
+        }
+    }
+    .mobileFilterBarContainer {
+        margin: @mobile-filter-dropdown-container-margin 0 (@mobile-filter-dropdown-container-margin -  (@l-tile-padding-mobile/2)) 0;
+        @media @page-LP {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+        @media @page-SP {
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+    }
+
+  #launch-progress-container {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(200, 200, 200, 0.4);
+    height: 100%;
+    width: 100%;
+    display:none;
+
+    > .spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      .translate( -50%, -50% );
+      z-index: 2;
+    }
+  }
+}
+.launch-password-dialog {
+    .input-field {
+      border: none;
+      border-bottom: 1px solid #99a8b5;
+      border-radius: 0;
+      padding: 0 0 8px 0;
+      margin: 0;
+      box-shadow: none;
+    }
+    .password-field {
+        width: 100%;
+    }
+    .error-message {
+      font-weight: 200;
+      font-size: 15px;
+      color: #E4331E;
+    }
+  .spinner {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+  }
+
+  &.fade {
+    opacity: 0.5;
+  }
+}
+.dialog-info-icon {
+  .symbol {
+    font-size: 30px;
+    stroke: none;
+    &[symbol="info"] {
+      fill: #3A87C5;
+      stroke: #3A87C5;
+    }
+  }
+}
+

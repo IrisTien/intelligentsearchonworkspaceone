@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="51px" height="39px" viewBox="0 0 51 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.2 (12043) - http://www.bohemiancoding.com/sketch -->
+    <title>Back Arrow</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Launcher" stroke="none" stroke-width="1" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="CUSTOMIZE-MY-VIEW" sketch:type="MSArtboardGroup" transform="translate(-39.000000, -35.000000)">
+            <g id="&lt;--Back-title-bar" sketch:type="MSLayerGroup">
+                <path d="M87.2995949,56.2704444 L45.3382265,56.2704444 L61.7360686,71.0455556 C62.417858,71.7211111 62.417858,72.8144444 61.7360686,73.4917778 C61.0533844,74.1682222 59.9474896,74.1682222 59.2639107,73.4917778 L39.6673844,55.8375556 C39.6154896,55.7957778 39.5421212,55.8135556 39.4938054,55.7655556 C39.1412791,55.4153333 38.9882791,54.9566667 39.0008054,54.4988889 C38.9873844,54.0402222 39.1412791,53.5842222 39.4938054,53.2313333 C39.5439107,53.1842222 39.6181738,53.202 39.6700686,53.1602222 L59.2639107,35.506 C59.9474896,34.8313333 61.0533844,34.8313333 61.7360686,35.506 C62.417858,36.1842222 62.417858,37.2784444 61.7360686,37.954 L45.3382265,52.7282222 L87.2995949,52.7282222 C88.2873844,52.7282222 89.0890686,53.5228889 89.0890686,54.4997778 C89.0890686,55.4757778 88.2873844,56.2704444 87.2995949,56.2704444" id="Back-Arrow" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

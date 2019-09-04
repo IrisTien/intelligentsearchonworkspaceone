@@ -1,0 +1,136 @@
+// no profile username in browser view tablet size
+@desktopapp-settings-width: 400px;
+@desktopapp-profile-rightmargin:10px;
+@desktopapp-profile-topmargin: 3px;
+
+.profile-container-desktopapp {
+    position: absolute;
+    top: 0;
+    right:0;
+    display: inline-block;
+    /* in order for the slidein-right animation to happen, the height needs to be defined as 100%
+      so set width 0 here */
+    width: 0;
+    height: 100%;
+    line-height:@desktopapp-header-height;
+    margin: @desktopapp-profile-topmargin @desktopapp-profile-rightmargin 0 @desktopapp-profile-rightmargin/2;
+    vertical-align: middle;
+    z-index: 600;
+    direction: rtl;
+    cursor: pointer;
+
+    @media (min-width: @desktopappS) {
+        margin: @desktopapp-profile-topmargin (@desktopapp-profile-rightmargin + 10px) 0 @desktopapp-profile-rightmargin/2;
+    }
+
+    &.is-active {
+        height: 100%;
+    }
+}
+
+.ws-mac .profile-container-desktopapp {
+    padding-top: @mac-toolbar-height;
+}
+
+//For Samsung docked desktopapp layout DE recommnded app screen
+.recommendedapps-style.profile-container-desktopapp{
+    display: none;
+}
+
+.profile-dropdown-desktopapp-container {
+    position: fixed;
+    direction: ltr;
+    width: @desktopapp-settings-width;
+    top: @desktopapp-header-height;
+    // need to consider the dropshadow which is about 2px on the right of the dropdown-panel-body
+    right:-@desktopapp-profile-rightmargin - 5px ;
+    height: ~'calc(100% - @{desktopapp-header-height})';
+    transform: translate(100%, 0);
+    -webkit-transform: translate(100%, 0);
+    -moz-transform: translate(100%, 0);
+    -ms-transform: translate(100%, 0);
+    z-index: 500;
+    background: @white;
+    box-shadow: -2px 2px 2px rgba(0,0,0,.15);
+    text-align:right;
+    transition: transform 0.35s;
+}
+
+.ws-mac .profile-dropdown-desktopapp-container {
+    top: @desktopapp-header-height + @mac-toolbar-height;
+    @mac-desktopapp-header-height: @desktopapp-header-height + @mac-toolbar-height;
+    height: ~'calc(100% - @{mac-desktopapp-header-height})';
+}
+
+.is-active .profile-dropdown-desktopapp-container {
+    right:0;
+    transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+}
+
+//account
+.setting-desktop-profile-container {
+    margin-bottom: 30px;
+    font-size: 15px;
+    position: relative;
+
+    h2 {
+        font-family: 'Open Sans Semibold', sans-serif;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    p {
+        margin-bottom:10px;
+    }
+
+    .desktop-profile-avatar-container	{
+        width: 64px;
+        height: 64px;
+        margin-bottom:20px;
+    }
+
+    .profile-label {
+        display: block;
+        font-size:13px;
+        width: 100%;
+        opacity: @light-text-opacity;
+        .single-line-ellipsis();
+    }
+
+    .profile-content {
+        font-size:14px;
+        margin-top: 20px;
+        width:100%;
+    }
+
+    .section-divider {
+        margin-top: 20px;
+    }
+
+    .password-change {
+        font-family: "Open Sans Regular";
+        color: @highlightblue;
+        font-size: 15px;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+}
+
+.settings-detail-title-desktopapp {
+    font-family: "Open Sans Semibold", sans-serif;
+    font-size:14px;
+
+    .password-change {
+        font-size: 13px;
+        font-family: "Open Sans Regular";
+        color: @highlightblue;
+        cursor: pointer;
+    }
+}

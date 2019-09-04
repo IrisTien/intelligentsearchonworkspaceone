@@ -1,0 +1,14 @@
+<div modal-new="modal-confirmation">
+    <section class="dialog">
+        <header class="dialog-header">
+            <h3>{{ ::'app.logout.title' | i18n }}</h3>
+        </header>
+        <div class="dialog-body">
+            <p>{{ ::'app.logout.confirm.msg' | i18n }}</p>
+        </div>
+        <footer class="dialog-actions">
+            <button class="button-action secondary-action" ng-click="$modal.cancel();"> {{::'button.cancel' | i18n }}</button>
+            <button class="button-action primary-action" ng-click="appCenterCtrl.continueSignout($event);">{{ ::'userInfo.signout' | i18n }}</button>
+        </footer>
+    </section>
+</div>

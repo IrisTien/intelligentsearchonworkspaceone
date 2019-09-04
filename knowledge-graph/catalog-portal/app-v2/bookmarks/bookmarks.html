@@ -1,0 +1,55 @@
+<div ng-show="bookmarksCtrl.isLoading" class="apps-loading">
+    <div ng-include="'app-v2/common/spinner.html'"></div>
+</div>
+<article id="bookmarks-container" class="bookmarks content-container-scrollable" infinite-scroll onend="bookmarksCtrl.getNextPage()" ng-class="{'disable-scroll': appCenterCtrl.$state.current.activeTab == 'details'}">
+    <div class="content width-boundary">
+        <section ng-if="appCenterCtrl.isAWJadeMobile && !appCenterCtrl.isAWJadeDocked && bookmarksCtrl.showBookmarksTooltip && !bookmarksCtrl.showNoAppsMsg" class="coachmarks">
+            <h3 class="coachmark-header">{{::'app.coachmarks.bookmarkTitle' | i18n }}</h3>
+            <p class="coachmark-message">{{::'app.coachmarks.bookmarkMessage' | i18n }}</p>
+            <div class="coachmark-button-container">
+                <a class="coachmark-button primary" ng-click="::bookmarksCtrl.closeTooltip()">{{::'app.coachmarks.buttonText' | i18n }}</a>
+            </div>
+        </section>
+
+        <section class="sort-container content-body" id="sort-button" ng-if="!bookmarksCtrl.excludeThinApps" ng-show="bookmarksCtrl.visibleLauncherApps.length > 1">
+
+            <div class="sort-help-text branding-portal-text" ng-show="!bookmarksCtrl.sortableOptions.disabled && bookmarksCtrl.isTouchEnabled">{{::'app.bookmarking.touch.disabled'  | i18n}}</div>
+            <div class="sort-section branding-portal-text" ng-show="bookmarksCtrl.sortableOptions.disabled">
+                <div class="save-arrange" ng-click="bookmarksCtrl.enableSorting()">
+                    <svg svg-symbol="icon-rearrange" class="icon-rearrange" ng-show="bookmarksCtrl.sortType.model === 'custom'"></svg>
+                    <span ng-show="bookmarksCtrl.sortType.model === 'custom'">
+                    {{::'appCenter.nav.arrange' | i18n}}
+                </span>
+                </div>
+                <div dropdown-list class="dropdown-toggle-sort">
+                    <span class="sort-label branding-portal-text">{{bookmarksCtrl.sortType.text}}</span>
+                    <svg svg-symbol="icon-down-caret" class="sort-down-caret"></svg>
+                    <div dropdown-panel-body class="sort-dropdown-container branding-portal-text" id= "pt-sort-dropdown" ng-include="'app-v2/common/sortOrder.html'">
+                    </div>
+                </div>
+            </div>
+            <div class="sort-section" ng-hide="bookmarksCtrl.sortableOptions.disabled || bookmarksCtrl.savingBookmark">
+                <span class="sort-action sort-cancel" ng-click="bookmarksCtrl.cancelSorting()">{{::'button.cancel' | i18n}}</span>
+                <span class="sort-action sort-save" ng-click="bookmarksCtrl.saveCustomView()">{{::'button.save' | i18n}}</span>
+            </div>
+            <div class="sort-section" ng-show="bookmarksCtrl.savingBookmark">
+                <span class="sort-action" ng-click="bookmarksCtrl.saveCustomView()">{{::'appCenter.nav.arrange.saving' | i18n}}</span>
+            </div>
+        </section>
+
+        <section class="content-body" ng-class="{'grid-sortable': !bookmarksCtrl.sortableOptions.disabled}" pull-to-refresh="bookmarksCtrl.clearCache()" scroll-container=".bookmarks.content-container-scrollable">
+            <div class="grid-container" ui-sortable="bookmarksCtrl.sortableOptions" ng-model="bookmarksCtrl.visibleLauncherApps">
+                <div bookmark-item ng-repeat="app in bookmarksCtrl.visibleLauncherApps" class="grid-item"
+                     ng-class="{'disabled-thin-app': app.disabledThinApps}"></div>
+                <div ng-repeat="item in bookmarksCtrl.emptyFillers" class="grid-item-empty"></div>
+                <div ng-class="{'empty-bookmarkmsg-show': bookmarksCtrl.showNoAppsMsg}" class="bookmark-empty-message-container">
+                    <ng-include src="'app-v2/svgincludes/illo-empty-bookmark.html'" class="illo-empty-bookmark"></ng-include>
+                    <p ng-if="!bookmarksCtrl.hideCatalogTab" class="bookmark-empty-message">{{::'myapps.bookmarks.empty.message' | i18n }}</p>
+                    <p ng-if="bookmarksCtrl.hideCatalogTab" id="hide-catalog-no-bookmarks" class="bookmark-empty-message">{{::'myapps.bookmarks.empty.hidecatalog.message' | i18n }}</p>
+                    <a ng-if="!bookmarksCtrl.hideCatalogTab" class="bookmark-empty-add" ng-href="#/catalog">{{::'myapps.bookmarks.empty.addbookmarks' | i18n }}</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</article>
+<div ng-show="appCenterCtrl.$state.current.activeTab == 'details'" class="content-container app-details" ui-view></div>

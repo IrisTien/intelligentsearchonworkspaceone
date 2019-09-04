@@ -1,0 +1,17 @@
+<div modal-new class="modal-fullscreen adaptive-management mobile-slide-modal tunnel-modal">
+    <div class="adaptive-management-header">
+        <svg class="icon-modal-fullscreen-close" svg-symbol="icon-close" ng-click="modal.cancel()"></svg>
+    </div>
+    <div class="adaptive-management-content">
+        <div class="adaptive-management-content-scrollable">
+            <div class="tunnel-app-body">
+                <svg class="tunnel-svg" svg-symbol="illo-vpn-tunnel"></svg>
+                <p class="tunnel-app-text">{{ ::'app.tunnel.text.line1' | i18n }} <span class="tunnel-app-name" id="pt-tunnel-app-name">{{::name}}</span></p>
+                <p class="tunnel-app-text">{{ ::'app.tunnel.text.line2' | i18n }}</p>
+            </div>
+        </div>
+    </div>
+    <button class="adaptive-management-footer" type="button" role="button" id="adaptive-management-footer" ng-click="modal.close(true)">
+        {{ ::'app.tunnel.continue' | i18n }}
+    </button>
+</div>

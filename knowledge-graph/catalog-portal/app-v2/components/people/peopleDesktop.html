@@ -1,0 +1,43 @@
+<header class="breadcrumb-container">
+    <breadcrumb></breadcrumb>
+</header>
+<div ng-if="peopleCtrl.isLoading" class="loading-people-container">
+    <div ng-include="'app-v2/components/people/peopleDesktopPreview.html'"></div>
+</div>
+<section class="content-container people" ng-if="!peopleCtrl.isLoading">
+    <article class="content-container-scrollable people">
+        <div class="content">
+            <!-- people team section -- peers -->
+            <div class="people-team-section people-peer-panel" ng-if="peopleCtrl.peers.length">
+                <h2 class="section-headline-style2 people-team-header">{{::'hub.people.labels.mypeers'  | i18n }}</h2>
+                <div class="grid-container">
+                    <people-item user="peer" category="'team'" class="grid-item people-team-item" ng-repeat="peer in peopleCtrl.peers track by $index+peer.id"></people-item>
+                    <div ng-repeat="item in peopleCtrl.emptyFillers" class="grid-item-empty"></div>
+                </div>
+            </div>
+
+            <!-- people team section -- direct reports -->
+            <div class="people-team-section people-directreport-panel" ng-if="peopleCtrl.directReports.length">
+                <h2 class="section-headline-style2 people-team-header">{{::'hub.people.labels.directreports'  | i18n }}</h2>
+                <div class="grid-container">
+                    <people-item user="directReport" category="'team'" class="grid-item people-team-item"
+                                 ng-repeat="directReport in peopleCtrl.directReports track by $index+directReport.id"></people-item>
+                    <div ng-repeat="item in peopleCtrl.emptyFillers" class="grid-item-empty"></div>
+                </div>
+            </div>
+
+            <!-- people team section -- manager -->
+            <div class="people-team-section people-manager-panel" ng-if="peopleCtrl.managers.length">
+                <h2 class="section-headline-style2 people-team-header">{{::'hub.people.labels.manager'  | i18n }}</h2>
+                <div class="grid-container">
+                    <people-item user="manager" category="'team'" class="grid-item people-team-item"
+                                 ng-repeat="manager in peopleCtrl.managers track by $index+manager.id"></people-item>
+                    <div ng-repeat="item in peopleCtrl.emptyFillers" class="grid-item-empty"></div>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+
+<!-- people detail page -->
+<div ui-view></div>

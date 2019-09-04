@@ -1,0 +1,20 @@
+<div class="app-list">
+    <header class="masthead-mobile">
+        <masthead sub-page="true" title="appListCtrl.appListLabel | i18n" search-path="'apps.search'"
+                  hide-avatar="true"></masthead>
+    </header>
+    <div ng-show="appListCtrl.isLoading" class="loading-app-details-container">
+        <spinner-loading></spinner-loading>
+    </div>
+    <section class="content-container">
+        <div class="content-container-scrollable" infinite-scroll onend="appListCtrl.getNextPage()"
+             ng-class="{'scroll-disabled': appListCtrl.scrollDisabled}">
+            <div class="content">
+                <app-list-item ng-repeat="app in appListCtrl.visibleApps" app="app" class="app-list-item" favorite-enabled="appListCtrl.favoriteEnabled && appListCtrl.app.isBookmarkableApp"
+                               ng-click="appListCtrl.hubListGoToDetails(app.appId)"></app-list-item>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div ui-view></div>

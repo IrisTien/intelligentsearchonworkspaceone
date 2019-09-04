@@ -1,0 +1,112 @@
+// This is the search input shared by both app and people search in used in the search module
+@search-input-bar-padding: 30px;
+@mobile-input-icon-size: 24px;
+@search-input-field-border-radius: 4px;
+
+@search-results-top-position-s: @ribbon-height-s + @search-form-height + @list-item-padding-h * 2 + 4px;
+@search-results-top-position-m: @ribbon-height-m + @search-form-height + @list-item-padding-h * 2 + 4px;
+
+@search-module-max-width: 750px;
+
+@applist-inline-left-half-width: @applist-inline-left/2;
+
+.search-input-bar {
+    width: 100%;
+    height: 100%;
+    max-width: @search-module-max-width;
+    position: relative;
+    margin: 0 auto;
+
+    label, button {
+        position: absolute;
+        height: 100%;
+        top: 4px;
+        z-index:200;
+    }
+
+    label {
+        left: 0;
+        padding: 0 2px;
+        color: @search-placeholder-text-color;
+    }
+
+    .icon-input-searchglass {
+        width: @mobile-input-icon-size;
+        height: @mobile-input-icon-size;
+        margin: 4px 1px;
+    }
+
+    .search-clear-button {
+        height: @mobile-input-icon-size;
+        right: 4px;
+    }
+}
+
+.search-inputfield {
+    display: inline-block;
+    width: 100%;
+    height: @search-form-height;
+    border: 0;
+    background: @white;
+    border-radius: @search-input-field-border-radius;
+    padding: 6px @search-input-bar-padding;
+    font-size: 15px;
+    box-shadow: 0 2px 2px rgba(0,0,0,.15);
+    position:relative;
+    z-index: 150;
+}
+
+.search-results-scrim {
+    position: fixed;
+    // To make the scrim larger than all screen sizes to ensure it is covered
+    width: 10000px;
+    height: 3000px;
+    background: rgba(86,86,86,.75);
+    top: 0;
+    left: 0;
+    // content-container z-index is 0, it needs to height than that but lower than the ribbon z-index
+    z-index: 100;
+}
+
+.search-results {
+    width: 100%;
+    position: fixed;
+    padding: 0 @list-item-padding-h;
+    left: 0;
+    top: @search-results-top-position-s;
+    height: ~ 'calc(100% - @{search-results-top-position-s} - 4px)';
+    // needs to be higher than search-results-scrim z-index
+    z-index: 200;
+
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+        top: @search-results-top-position-m;
+        left: @left-panel-width - 10px;
+        width: ~ 'calc(100% - @{left-panel-width} + 10px)';
+        height: ~ 'calc(100% - @{search-results-top-position-m} - 4px)';
+    }
+
+    @media (min-width: @browser-category-transition) {
+        width: @content-max-width - @applist-inline-left - 2px;
+        left: 50%;
+        margin-left: -270px;
+    }
+}
+
+.apps-landing .content.no-category .search-results {
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+        position: fixed;
+        padding: 0;
+        width: @search-module-max-width;
+        left: 50%;
+        margin-left: -@search-module-max-width/2 - 8px;
+    }
+}
+
+.search-results-content {
+    background: @white;
+    max-height: 100%;
+    border-radius: @search-input-field-border-radius;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}

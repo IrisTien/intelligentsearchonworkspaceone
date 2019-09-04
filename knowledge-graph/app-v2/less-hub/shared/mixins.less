@@ -1,0 +1,214 @@
+@fullscreen-bg: @gb-fullscreen-bg;
+
+@profile-tablet-width:150px;
+@profile-desktop-width-min:160px;
+@profile-desktop-width:240px;
+@caret-pos-x: 7px;
+@profile-caret-height: 8px;
+@profile-border-color: #cdd0d3;
+@profile-dropdown-list-fontsize: 13px;
+
+// text-minix classes
+// ---------------------------------------
+.caret-basic-style() {
+  content: '';
+  position:absolute;
+  width: 0;
+  height: 0;
+}
+
+.up-caret-before(@pos-x, @pos-y) {
+  @top-y:-(@pos-y)-2px;
+  top: @top-y;
+  right: @pos-x;
+  border-left: @profile-caret-height+2px solid transparent;
+  border-right: @profile-caret-height+2px solid transparent;
+  border-bottom: (@profile-caret-height+2px) solid @profile-border-color;
+}
+
+.up-caret-after(@pos-x, @pos-y) {
+  @top-y: -(@pos-y);
+  @border-bottom-height:@profile-caret-height+1px;
+  top: @top-y;
+  right: @pos-x+1px;
+  border-left: @border-bottom-height solid transparent;
+  border-right: @border-bottom-height solid transparent;
+  border-bottom: @border-bottom-height solid @white;
+}
+// This one update the notificaiton caret on different viewport
+.update-caret-pos-x (@new-pos-x) {
+  right: @new-pos-x;
+}
+
+.down-caret-before(@pos-x, @pos-y) {
+  @top-y:(@pos-y);
+  top: @top-y;
+  right: @pos-x;
+  border-left: @profile-caret-height+2px solid transparent;
+  border-right: @profile-caret-height+2px solid transparent;
+  border-top: (@profile-caret-height+2px) solid #ccc;
+}
+
+.down-caret-after(@pos-x, @pos-y) {
+  @top-y: (@pos-y)-2px;
+  top: @top-y;
+  right: @pos-x+2px;
+  border-left: @profile-caret-height solid transparent;
+  border-right: @profile-caret-height solid transparent;
+  border-top:@profile-caret-height solid @vmwareheadercolor;
+}
+
+// This is a base text style, you can use it in the text.less or directly use it in any module.less
+.base-text-style(@fontSize, @fontWeight) {
+  font-size: @fontSize;
+  font-weight: @fontWeight;
+}
+
+// User avatar styles
+// ---------------------------------------
+// Layout mixins
+.full-screen(@zIndex: 0; @screenBg: @fullscreen-bg; @textColor: @fullscreen-default-text-color) {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: @zIndex;
+    background: @screenBg;
+    color: @textColor;
+}
+
+.avatar-background (@color1, @color2) {
+  background: @color1; // Possible need this for Android 4.4 webview in case it does now support gradient
+  background: linear-gradient(to right, @color1 0%, @color2 100%);
+  background: -webkit-linear-gradient(left, @color1 0%, @color2 100%);
+}
+
+// User avatar
+// ---------------------------------------
+.user-avatar-style(@avatarSize, @avatarBorderRadius, @avatarBg, @avatarRimWidth) {
+  width: @avatarSize;
+  height: @avatarSize;
+  border-radius: @avatarBorderRadius;
+  background: @avatarBg;
+  background-size: contain;
+  background-image: url(../app-v2/graphics/icon-profile.svg);
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: 1px 1px 6px 3px @gb-user-team-item-box-shadow, -1px -1px 6px 3px @gb-user-team-item-box-shadow;
+  border: solid @avatarRimWidth @user-team-item-avatar-bg;
+}
+
+.user-team-item-initial-style(@initialFontSize, @initialLineHeight, @initialColor) {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 50%;
+  line-height: @initialLineHeight;
+  font-size: @initialFontSize;
+  color: @initialColor;
+  text-transform: uppercase;
+}
+
+// Apps module mixin classes
+// ---------------------------------------
+
+
+.app-icon-background {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-image: url(../app-v2/graphics-hub/app-icon-placeholder.svg);
+}
+
+.app-icon (@iconSize, @iconTop: 8px, @iconLeft: @list-item-padding-h, @iconPadding: 8px, @iconRadius: 8px) {
+    width: @iconSize;
+    height: @iconSize;
+    position: absolute;
+    top: @iconTop;
+    left: @iconLeft;
+    padding: @iconPadding;
+    border-radius: @iconRadius;
+    .app-icon-background();
+    border: solid 1px @list-item-divider-bg;
+
+    img {
+        transform: translate(0, -50%);
+        -webkit-transform: translate(0, -50%);
+        position: relative;
+        top: 50%;
+        width: 100%;
+        border-radius: 4px;
+    }
+}
+
+// This one is static position with auto margin
+.app-icon2 (@iconSize, @iconPadding: 8px, @iconRadius: 4px) {
+  width: @iconSize;
+  height: @iconSize;
+  margin: 0 auto;
+  padding: @iconPadding;
+  border-radius: @iconRadius;
+  .app-icon-background();
+  border: solid 1px @list-item-divider-bg;
+
+  img {
+    transform: translate(0, -50%);
+    -webkit-transform: translate(0, -50%);
+    position: relative;
+    top: 50%;
+    width: 100%;
+    border-radius: 4px;
+  }
+}
+
+.text-link-style {
+  font-size: 17px;
+  font-weight: 400;
+}
+
+// List item border style
+.list-item-divider-mixin(@dividerColor, @listPadding: @list-item-padding-h) {
+    &:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        left: @listPadding;
+        background: @dividerColor;
+    }
+}
+
+// used for the apps-module divider
+.list-item-divider-mixin2(@dividerColor, @listPadding: @list-item-padding-h) {
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: ~ 'calc(100% - 32px)';
+    height: 1px;
+    left: @listPadding;
+    background: @dividerColor;
+  }
+}
+
+.list-item-right-arrow-image-mixin {
+    background-image: @list-item-right-arrow-image;
+    background-position: right 2px center;
+    background-repeat: no-repeat;
+    background-size: 32px 32px;
+}
+
+// Notification mixin classes
+// ---------------------------------------
+
+.notification-count-size (@size) {
+  min-width: @size;
+  height: @size;
+}
+
+.notification-icon (@size) {
+  width: @size;
+  height: @size;
+}

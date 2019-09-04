@@ -1,0 +1,83 @@
+<section class="content-container details-notifications">
+    <div class="page-breadcrumb-bar">
+        <div class="content">
+            <h2 class="page-breadcrumb-text">
+                <a ui-sref="notifications" class="notification-link">{{::'hub.nav.label.notification' | i18n}}</a>
+                &#47; {{ ::notificationCardCtrl.title }}
+            </h2>
+        </div>
+    </div>
+    <a ng-if="notificationCardCtrl.isAWJadeDesktop" ui-sref="notifications" class="app-detail-dismiss-button"><svg svg-symbol="icon-back"></svg> {{::'hub.people.notifications.back' | i18n}}</a>
+    <div class="content-container-scrollable">
+        <div class="content">
+            <div class="notifications-header-container hub-long-card-notifications-header-container section-container">
+                <div ng-if="notificationCardCtrl.image" class="hub-long-card-icon image-holder" image-load>
+                    <img class="icon-notification-image" ng-src="{{notificationCardCtrl.image}}"/>
+                </div>
+                <svg ng-if="!notificationCardCtrl.isNewAppNotification && !notificationCardCtrl.image"
+                     svg-symbol="icon-notification-default"
+                     class="hub-long-card-icon icon-default-notification"></svg>
+                <div class="hub-long-notifications-timestamp">{{ notificationCardCtrl.date }}</div>
+                <div ng-if="notificationCardCtrl.titleAndSubtitle">
+                    <h2 class="notifications-title-with-subtitle">{{ notificationCardCtrl.title }}</h2>
+                    <span class="notifications-subtitle" ng-if="notificationCardCtrl.subtitle">{{ notificationCardCtrl.subtitle }}</span>
+                </div>
+                <div ng-if="notificationCardCtrl.actions.length"
+                     class="hub-long-card-notifications-actions-container header-actions">
+                    <div class="hub-action-container" ng-class="notificationCardCtrl.getHubLabelClass(action)"
+                         ng-repeat="action in notificationCardCtrl.actions">
+                        <div class="notification-button"
+                             ng-click="notificationCardCtrl.performAction(action, true)"
+                             ng-class="notificationCardCtrl.getLabelClass(action)"
+                             ng-bind="notificationCardCtrl.getHubLabel(action)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="notifications-body-container hub-long-card-notifications-body-container">
+                <section class="section-container" ng-if="notificationCardCtrl.message">
+                    <h2 class="section-headline-style2 description-header">{{::'hub.long.card.description' | i18n}}</h2>
+                    <div>
+                        <div class="description-content" ng-if="::notificationCardCtrl.message">
+                            <div ng-bind-html="::notificationCardCtrl.message"></div>
+                        </div>
+                    </div>
+                </section>
+                <section class="section-container" ng-if="notificationCardCtrl.additionalBodySection">
+                    <div ng-repeat="app in notificationCardCtrl.newApps"
+                         class="notification-new-app-icon-container">
+                        <img ng-src={{app.iconUrl}} class="icon-additional-body-icons">
+                    </div>
+                    <p ng-if="notificationCardCtrl.excessIconsMessage"
+                       class="notification-extra-icon-text">{{::notificationCardCtrl.excessIconsMessage }}</p>
+                </section>
+                <section class="section-container" ng-if="notificationCardCtrl.bodyFieldsSection">
+                    <p class="notifications-body-text field-body-text">{{::notificationCardCtrl.cardBodyFieldTitle }}</p>
+                    <p class="notifications-body-text field-body-text">{{::notificationCardCtrl.cardBodyFieldDescription }}</p>
+                    <div ng-repeat="(key, value) in notificationCardCtrl.cardBodyFieldContent"
+                         class="notification-card-body-fields-content">
+                        <p class="key">{{::key }}</p>
+                        <p class="value">{{::value }}</p>
+                    </div>
+                </section>
+                <section class="section-container" ng-if="notificationCardCtrl.bodyFields.length > 1">
+                    <div ng-repeat="fields in notificationCardCtrl.bodyFields | filter:{type : 'GENERAL'}"
+                         class="notification-card-body-fields-content">
+                        <p class="key">{{::fields.title }}</p>
+                        <p class="value">{{::fields.description }}</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div ng-if="notificationCardCtrl.actions.length"
+         class="hub-long-card-notifications-actions-container footer-actions">
+        <div class="hub-action-container" ng-class="notificationCardCtrl.getHubLabelClass(action)"
+             ng-repeat="action in notificationCardCtrl.actions">
+            <div class="notification-button" ng-click="notificationCardCtrl.performAction(action, true)"
+                 ng-class="notificationCardCtrl.getLabelClass(action)"
+                 ng-bind="notificationCardCtrl.getHubLabel(action)">
+            </div>
+        </div>
+    </div>
+</section>

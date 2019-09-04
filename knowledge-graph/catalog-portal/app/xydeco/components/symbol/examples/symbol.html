@@ -1,0 +1,15 @@
+<p style="color: blue">
+    Symbols such as this one
+    <svg class="symbol"><use xlink:href="#svg-symbol-circle" /></svg>
+    take on the color of the surrounding text.
+</p>
+
+
+<!-- the symbol can be defined anywhere in the DOM: -->
+<svg style="display: none">
+    <defs>
+        <symbol id="svg-symbol-circle" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45"/>
+        </symbol>
+    </defs>
+</svg>

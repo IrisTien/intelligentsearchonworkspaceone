@@ -1,0 +1,271 @@
+@catalog-filter-padding: 12px;
+@sticky-filter-top: @masthead-height + 16px;
+@scollableFilterMarginOffset: 20px;
+@category-filter-border-color:#e4e5e7;
+@categoryMobileListHeight: 46px;
+@category-mobile-filter-anim-time: 0.35s;
+@coachmark-height: 80px;
+@category-desktop-fixed-list-height: 40px;
+@coachmark-height-desktop: 80px;
+
+.categories-filter-desktop {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 24px;
+    display: none;
+    position: fixed;
+    top: @masthead-height;
+    overflow: hidden;
+
+    .categories-filter {
+        height: ~ "calc(100% - @{masthead-height})";
+        padding-top: 16px;
+    }
+
+    .categories-separator {
+        height: 0;
+        border-bottom: solid 1px @category-filter-border-color;
+    }
+
+    @media (min-width: @desktopM) {
+        display: block;
+        left: auto;
+        width: 160px;
+    }
+}
+// We use the .categories-filter-desktop iPad Pro there is a bottomnav so we need to consider the height of the bottomnav
+
+.ws-shell .categories-filter-desktop {
+    padding-bottom: @bottom-nav-height;
+}
+
+.ws-shell .coachmarks-on .categories-filter-desktop{
+    top: 165px;
+}
+
+.categories-filter {
+    // to ensure the scroll bars not showing on the scrollale section
+    margin-right: -@scollableFilterMarginOffset;
+    padding-right: @scollableFilterMarginOffset;
+
+    li {
+        font-size: 14px;
+        display: block;
+        height: 48px;
+        line-height: 24px;
+        position: relative;
+        cursor: pointer;
+        padding: 12px 16px 12px 32px;
+
+        // generated divider for phone view
+        &:after {
+            content: '';
+            position:absolute;
+            bottom:0;
+            left: 16px;
+            width: 100%;
+            height:1px;
+            background: @category-filter-border-color;
+
+            @media(min-width: @browser-transition-point) {
+                display: none;
+            }
+        }
+
+        &:hover {
+            background: @list-hover-color;
+        }
+
+        @media(min-width: @browser-transition-point) {
+            height: 24px;
+            line-height: 24px;
+            padding: 0 0 0 8px;
+            margin: 20px 0 20px 8px;
+            // use this to prevent vertical margin-collapse
+        }
+
+        &.is-selected {
+            font-family: 'Open Sans Semibold', sans-serif;
+
+            &:before {
+                content: '';
+                position:absolute;
+                top:12px;
+                width:2px;
+                height:24px;
+                background: @highlightblue;
+                display: none;
+
+                @media(min-width: @browser-transition-point) {
+                    top:0;
+                    left: 0;
+                    display: block;
+                }
+            }
+        }
+    }
+
+    // This is for browser desktop view
+    &.scrollable {
+        @media(min-width: @browser-transition-point) {
+            overflow-y: auto;
+            -ms-overflow-style: none;
+        }
+
+        li:last-child {
+            border:0;
+            margin-bottom: @category-desktop-fixed-list-height;
+        }
+    }
+
+    span {
+        display: inline-block;
+        width:100%;
+        .single-line-ellipsis();
+
+        @media(min-width: @browser-transition-point) {
+            width: 180px; //increasing from 170px to 180px to accommodate longest string in RU language
+        }
+
+        @media(min-width: @desktopM) {
+            width: 140px;
+        }
+    }
+}
+
+.ws-shell .coachmarks-on .categories-filter {
+    &.scrollable {
+        //This is for iPad pro large tablet
+        @scrollable-filter-height-withcoachmark: @sticky-filter-top + @coachmark-height + @category-desktop-fixed-list-height;
+        @media(min-width: @browser-transition-point) {
+            height: ~ 'calc(100% - @{scrollable-filter-height-withcoachmark})';
+            overflow-y: auto;
+            -ms-overflow-style: none;
+        }
+
+    }
+}
+
+.categories-filter-mobile {
+    position: fixed;
+    top: 100%;
+    left: 0;
+    color:@mediumgrey;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0;
+    background: @paleblue;
+    box-shadow: 0 1px 1px rgba(0,0,0,.3);
+    transition: top @category-mobile-filter-anim-time, opacity @category-mobile-filter-anim-time*.5 @category-mobile-filter-anim-time*.2, z-index 0s @category-mobile-filter-anim-time/5;
+    -moz-transition: top @category-mobile-filter-anim-time, opacity @category-mobile-filter-anim-time*.5 @category-mobile-filter-anim-time*.2, z-index 0s @category-mobile-filter-anim-time/5;
+    -webkit-transition: top @category-mobile-filter-anim-time, opacity @category-mobile-filter-anim-time*.5 @category-mobile-filter-anim-time*.2, z-index 0s @category-mobile-filter-anim-time/5;
+    -ms-transition: top @category-mobile-filter-anim-time, opacity @category-mobile-filter-anim-time*.5 @category-mobile-filter-anim-time*.2, z-index 0s @category-mobile-filter-anim-time/5;
+
+
+    @media(min-width: @browser-transition-point) {
+        background: @white;
+        top: @masthead-height;
+        width: 210px; //increasing from 200px to 210px to accommodate longest string in RU language
+    }
+
+    @media(min-width: @desktopM) {
+        display: none;
+    }
+}
+
+.filter-open .categories-filter-mobile {
+    background:@white;
+    z-index: 600;
+    top:0;
+    opacity:1;
+    transition: top @category-mobile-filter-anim-time, opacity @category-mobile-filter-anim-time/2;
+    -moz-transition: top @category-mobile-filter-anim-time, opacity @category-mobile-filter-anim-time/2;
+    -webkit-transition: top @category-mobile-filter-anim-time, opacity @category-mobile-filter-anim-time/2;
+    -ms-transition: top @category-mobile-filter-anim-time, opacity @category-mobile-filter-anim-time/2;
+
+    @media(min-width: @phoneL) {
+        top: @masthead-height;
+        z-index: 400;
+        transition: opacity .15s;
+        -moz-transition: opacity .15s;
+        -webkit-transition: opacity .15s;
+        -ms-transition: opacity .15s;
+    }
+}
+
+.mobile-catalog-filter-header {
+    width: 100%;
+    height: @header-height;
+    padding: 0 32px;
+    background: @white;
+    position: absolute;
+    top:0;
+    left:0;
+    border-bottom: solid 1px @category-filter-border-color;
+    .single-line-ellipsis();
+
+    @media (min-width: @browser-transition-point) {
+        display: none;
+    }
+
+    h2 {
+        font-family: "Open Sans Semibold", sans-serif;
+        width: 100%;
+        font-size: @mobile-header-font-size;
+        height: @header-height;
+        line-height: @header-height;
+        text-align: center;
+        color:inherit;
+        position: relative;
+    }
+
+    .icon-mobile-filter-close-button {
+        position: absolute;
+        top:0;
+        left:0;
+        width: 50px;
+        height:@header-height;
+        cursor: pointer;
+        z-index:100;
+
+        svg {
+            width:42px;
+            height:42px;
+            margin: (@header-height - 42px)/2 4px;
+        }
+    }
+}
+
+.categories-fillter-mobile-content {
+    width: 100%;
+    height:100%;
+    padding-top: @header-height;
+
+    @media (min-width: @browser-transition-point) {
+        padding-top: 0;
+        height: ~ "calc(100% - @{masthead-height})";
+    }
+}
+
+.categories-fillter-mobile-content-scrollable {
+    height:100%;
+    width: 100%;
+    overflow-y: auto;
+    // since we declared 16px margin for the li so there is extra space horizontally we need to hide
+    overflow-x: hidden;
+    -webkit-overflow-scrolling:touch;
+
+    @media (min-width: @browser-transition-point) {
+        -webkit-overflow-scrolling:auto;
+    }
+
+    .default-filter-list-mobile {
+        border-bottom: 2px solid @category-filter-border-color;
+
+        li:last-child:after {
+            content: none;
+        }
+    }
+}

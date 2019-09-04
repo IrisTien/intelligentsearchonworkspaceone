@@ -1,0 +1,7 @@
+<div class="message" ng-class="message.type + '-'">
+    <i ng-show="message.type === 'info'" class="message-icon"></i>
+    <button ng-show="message.type === 'info'" class="close- button" ng-click="close($index)"></button>
+    <div class="message-body typography">
+        <p>{{message.text}}</p>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div ng-show="appCenterCtrl.brandingAvailable" class="main-desktopapp-header branding-portal-header-background branding-portal-header-text" ng-class="{'settings-style': appCenterCtrl.$state.current.activeTab == 'settings'}">
+    <div class="header-left-desktopapp"  >
+        <nav class="top-nav-tabs-desktopapp" ng-if="appCenterCtrl.showTabsSection" ng-hide="(appCenterCtrl.isAWJadeWithNativenav || appCenterCtrl.isAWJadeWindowsWithNativenav) && (appCenterCtrl.$state.current.activeTab == 'details' || appCenterCtrl.$state.current.activeTab == 'people' || appCenterCtrl.$state.current.activeTab == 'peopleDetails') " ng-class="{'top-nav-catalog': appCenterCtrl.$state.current.activeTab == 'catalog'}">
+            <a ng-click="appCenterCtrl.bookmark()" ng-if="appCenterCtrl.showBookmarksTab" class= "bookmark-nav" ng-class="{'selected': appCenterCtrl.$state.current.activeTab == 'bookmarks'}">
+                <svg svg-symbol="icon-bookmark" class="icon-desktopapp-bookmark"></svg>
+                <span>{{::'app.nav.tab.bookmark' | i18n }}</span>
+            </a>
+            <a ng-click="appCenterCtrl.catalog()" ng-if="appCenterCtrl.showCatalogTab"  class="catalog-nav" ng-class="{'selected': appCenterCtrl.$state.current.activeTab == 'catalog'}">
+                <svg svg-symbol="icon-apps" class="icon-desktopapp-apps"></svg>
+                <span>{{::'app.nav.tab.catalog' | i18n }}</span>
+            </a>
+
+            <a ng-click="appCenterCtrl.smartSearch()" class="people-nav capsule-text-color" ng-class="{'selected': appCenterCtrl.$state.current.activeTab == 'smartSearch'}">smart search</a>
+            <a ng-if="appCenterCtrl.showPeopleTab" ng-hide = "appCenterCtrl.isAWJadeWithNativenav || appCenterCtrl.isAWJadeDocked || appCenterCtrl.isAWJadeWindowsWithNativenav" ng-click="appCenterCtrl.peopleSearch()" class="people-nav capsule-text-color" ng-class="{'selected': appCenterCtrl.$state.current.activeTab == 'people'}">
+                <svg svg-symbol="icon-people"></svg>
+                <span>{{::'app.nav.tab.people' | i18n }}</span>
+            </a>
+        </nav>
+        <a class="desktopapp-details-back-button" id="pt-details-masthead-backbutton" ng-if="appCenterCtrl.$state.current.activeTab == 'details' || appCenterCtrl.$state.current.activeTab == 'peopleDetails'" ng-click="appCenterCtrl.backAction()">
+            <svg svg-symbol="icon-detail-back" class="icon-setting-close-button"></svg>
+            <span>{{'app.settings.link.back' | i18n}}</span>
+        </a>
+        <a class="people-home" ng-click="appCenterCtrl.peopleSearch()" ng-if="appCenterCtrl.$state.current.activeTab == 'peopleDetails'">
+            <svg svg-symbol="icon-people" class="icon-people-home"></svg>
+        </a>
+    </div>
+
+    <div class="header-right-desktopapp">
+        <div ng-if="appCenterCtrl.$state.current.activeTab == 'bookmarks' || appCenterCtrl.$state.current.activeTab == 'catalog'" class="search-form desktopapp-search branding-portal-text" search-input search-controller="SearchController" template-url="app-v2/search/search-input.html" is-active="appCenterCtrl.searchFieldOn" control="appCenterCtrl.searchFieldToggle">
+        </div>
+        <div ng-if="appCenterCtrl.showPeopleTab && appCenterCtrl.$state.current.activeTab == 'people' || appCenterCtrl.$state.current.activeTab == 'peopleDetails'" class="search-form branding-portal-text"
+             search-input search-controller="PeopleSearchController" template-url="app-v2/people/people-search-input.html"  is-active="appCenterCtrl.showRecentSearch" control="appCenterCtrl.searchFieldToggle">
+        </div>
+        <div ng-if="appCenterCtrl.$state.current.activeTab == 'bookmarks' || appCenterCtrl.$state.current.activeTab == 'catalog' || appCenterCtrl.$state.current.activeTab == 'people' || appCenterCtrl.$state.current.activeTab == 'peopleDetails'" class="desktopapp-header-button desktopapp-refresh-button" id="desktopapp-refresh-button" ng-click="appCenterCtrl.desktopRefresh(appCenterCtrl.$state.current.activeTab)">
+            <svg svg-symbol="icon-refresh" ng-class="{'icon-windows-refresh': appCenterCtrl.isDesktopAppRefreshing}"></svg>
+        </div>
+        <div ng-if="appCenterCtrl.isAWJadeDesktop" class="desktopapp-header-button" id="desktopapp-install-button" ng-click="appCenterCtrl.showAppInstall()">
+            <svg svg-symbol="icon-install" class="icon-windows-install"></svg>
+        </div>
+        <section dropdown-list="{ closeOnClick: false}" class="notification-desktop-container desktopapp desktopapp-header-button" dropdown-control='appCenterCtrl.isNotificationDropdownActive' id="notification-button" ng-if="appCenterCtrl.appsLoaded && appCenterCtrl.inAppNotificationEnabled" ng-show="!appCenterCtrl.searchFieldOn || appCenterCtrl.$state.current.activeTab === 'people' || appCenterCtrl.$state.current.activeTab === 'peopleDetails'" >
+            <div class="notification-bell-button desktopapp dropdown-toggle">
+                <svg svg-symbol="icon-bell" class="icon-bell"></svg>
+                <div notification-count></div>
+            </div>
+            <div dropdown-panel-body class="notification-dropdown-container branding-portal-text" id= "pt-notification-dropdown" ng-include="'app-v2/notifications/notificationDesktop.html'">
+            </div>
+        </section>
+    </div>
+    <div class="sorting-overlay-desktop" ng-hide="appCenterCtrl.sortingDisabled"></div>
+</div>

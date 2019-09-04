@@ -1,0 +1,28 @@
+/** @pattern .symbol
+
+A repeated graphical element, such as an icon.  Sourced in SVG,
+symbols are injected into the DOM as `<symbol>`s and then
+referenced with `<use>`.  Standard symbols may be written
+directly into the HTML by the server; alternatively symbols may
+be loaded dynamically by using the `symbol` directive.
+
+@example [symbol.html] An example of a symbol
+
+The symbol directive provides a nicer syntax and also takes
+care of dynamically loading SVG files.
+
+@example [symbol-directive.html] The symbol directive
+**/
+
+.symbol,
+[symbol] {
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    vertical-align: top;
+}
+
+svg.symbol {
+    fill: currentColor;
+    stroke: currentColor;
+}

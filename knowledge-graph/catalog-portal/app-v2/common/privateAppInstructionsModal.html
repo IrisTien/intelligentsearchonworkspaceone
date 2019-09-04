@@ -1,0 +1,60 @@
+<div modal-new class="modal-fullscreen private-app-instructions" stop-event="click">
+    <section class="dialog-container">
+        <header class="dialog-header">
+            <div class="app-instructions-back" ng-click="$modal.close()">
+                {{'appCenter.internalApp.installtionModalTitle' | i18n}}
+            </div>
+        </header>
+        <div class="dialog-body">
+            <p class="instructionsTitle">
+                {{'appCenter.internalApp.installationStepTitle' | i18n}}
+            </p>
+            <div class="stepper">
+                <div class="step">
+                    <div>
+                        <div class="circle">1</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="body">{{'appCenter.internalApp.step1' | i18n}}</div>
+                </div>
+                <div class="step">
+                    <div>
+                        <div class="circle">2</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="body">{{'appCenter.internalApp.step2' | i18n}}</div>
+                </div>
+                <div class="step">
+                    <div>
+                        <div class="circle">3</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="body">{{'appCenter.internalApp.step3' | i18n}}</div>
+                </div>
+                <div class="step">
+                    <div>
+                        <div class="circle">4</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="body">{{'appCenter.internalApp.step4' | i18n}}</div>
+                </div>
+                <div class="step">
+                    <div>
+                        <div class="circle">5</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="body">{{'appCenter.internalApp.step5' | i18n}}</div>
+                </div>
+            </div>
+            <p class="tutorialLink" ng-click="modal.open('app-v2/common/privateAppTutorialModal.html', { modal: modal, modalOverAModal: true })">{{'appCenter.internalApp.watchTutorial' | i18n}}</p>
+        </div>
+        <footer class="dialog-actions two-action">
+            <button class="button-action secondary-action" ng-click="modal.cancel()">
+                {{ 'appCenter.cancel' | i18n }}
+            </button>
+            <button class="button-action primary-action" ng-click="modal.close(true)">
+                {{ 'appCenter.install' | i18n }}
+            </button>
+        </footer>
+    </section>
+</div>

@@ -1,0 +1,5 @@
+<svg id="icon-notify-warning"  xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    <path d="M16,17.47a.75.75,0,0,1-.75-.75v-5a.75.75,0,0,1,1.5,0v5A.75.75,0,0,1,16,17.47Z" stroke-width="0"/>
+    <circle cx="16" cy="20.03" r="1" stroke-width="0"/>
+    <circle cx="16" cy="16" r="10.5" fill="none"  stroke-miterlimit="10" stroke-width="1.5"/>
+</svg>

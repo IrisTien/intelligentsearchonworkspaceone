@@ -1,0 +1,14 @@
+<div class="categories-filter-desktop">
+    <ul class="categories-filter scrollable" prevent-parent-scroll>
+        <li class="categories-default-filter" ng-repeat="label in catalogCtrl.defaultLabels"
+            ng-class="[label.type, {'is-selected':catalogCtrl.appCenterContext.selectedCategory.name == label.name}]">
+            <a title="{{::label.name}}"
+               ng-click="catalogCtrl.filterByLabel(label);"><span>{{::label.name}}</span></a>
+        </li>
+        <li class="categories-separator"></li>
+        <li ng-repeat="category in catalogCtrl.appCategories"
+            ng-class="{'is-selected':catalogCtrl.appCenterContext.selectedCategory.name == category.name}" title="{{::category.name}}" ng-click="catalogCtrl.filterByLabel(category)">
+            <span>{{::category.name}}</span>
+        </li>
+    </ul>
+</div>

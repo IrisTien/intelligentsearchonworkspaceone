@@ -1,0 +1,109 @@
+/* .primary-button and .secondary-button is used in settings
+aka preferences.html and changePassword.html and changePasswordMobile.html
+*/
+
+@primary-button-bg-color: @highlightblue;
+@primary-button-text-color: @highlightblue;
+@secondary-button-bg-color: #F7F9FA;
+@secondary-button-active-bg-color: #d8f3ff;
+@secondary-button-border-color: #cdd0d3;
+@primary-button-disabled-bg-color:#d2d8df;
+@primary-button-hover-bg-color:#1da1df;
+@primary-button-active-bg-color:#1a91c8;
+
+.primary-button {
+    .button-text();
+    color:@white;
+    position: relative;
+    background: @primary-button-bg-color;
+    border: solid 1px @primary-button-bg-color;
+
+    &:hover {
+        background: @primary-button-hover-bg-color;
+    }
+
+    &:active {
+        background: @primary-button-active-bg-color;
+    }
+}
+
+.secondary-button {
+    .button-text();
+    color: #7f868e;
+    background: @secondary-button-bg-color;
+    border: solid 1px @secondary-button-border-color;
+
+    &:hover {
+        border: solid 1px @primary-button-bg-color;
+        color: @primary-button-bg-color;
+    }
+
+    &:active {
+        background: @secondary-button-active-bg-color;
+    }
+}
+
+/* .primary-action and .secondary-action are used in modal-dialogs
+    it looks like settings button in desktop view but
+    differ in smaller viewport sizes
+*/
+
+.primary-action {
+    .button-text();
+    color:@primary-button-text-color;
+
+    @media (min-width: @desktopM) {
+        color:@white;
+        position: relative;
+        background: @primary-button-bg-color;
+        border: solid 1px @primary-button-bg-color;
+
+        &:hover {
+            background: @primary-button-hover-bg-color;
+        }
+
+        &:active {
+            background: @primary-button-active-bg-color;
+        }
+
+        &[disabled] {
+            background: @primary-button-disabled-bg-color;
+            border: solid 1px @secondary-button-border-color;
+        }
+
+        &.mdm-signout-button {
+            margin-top: 10px;
+        }
+    }
+}
+.secondary-action {
+    .button-text();
+    color:#7f868e;
+
+    @media (min-width: @desktopM) {
+        background: @secondary-button-bg-color;
+        // needs !important to override the border:0 defined in modal-dialog
+        border: solid 1px @secondary-button-border-color!important;
+
+        &:hover {
+            border: solid 1px @primary-button-bg-color!important;
+            color: @primary-button-bg-color;
+        }
+
+        &:active {
+            background: @secondary-button-active-bg-color;
+        }
+    }
+}
+
+// links inside the modal-dialog
+.dialog-body {
+    a {
+        text-decoration: none;
+        color: @highlightblue;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

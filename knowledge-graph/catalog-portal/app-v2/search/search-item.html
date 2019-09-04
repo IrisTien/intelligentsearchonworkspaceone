@@ -1,0 +1,18 @@
+<div class="search-results-header" ng-if="app.isCategory">
+    <p><span ng-bind-html="app.categoryName | highlight:ctrl.query.name"/> <span class="search-category-length" ng-bind="app.length"/></p>
+</div>
+<div class="search-item" ng-if="!app.isCategory">
+    <div ng-click="ctrl.details(app)" class="search-item-image" icon url="app._links.icon.href"></div>
+    <div ng-click="ctrl.details(app)" class="search-item-body" ng-show="app.name">
+        <p class="search-item-name" ng-bind-html="app.name | highlight:ctrl.query.name"></p>
+        <p class="search-item-type">
+            <svg ng-if="app.isHorizonResource || app.isHorizonAirResource" svg-symbol="icon-horizon-watermark"></svg>
+            {{::app.appTypeDisplayVal}}
+        </p>
+        <p class="search-item-vpn-required-message" ng-if="app.isTunnelRequired">
+            <svg svg-symbol="icon-tunnel" class="catalog-tunnel-icon-mobile"></svg>
+            {{ ::'app.tunnel.header' | i18n }}
+        </p>
+    </div>
+    <div class="search-item-actions branding-icon-primary" catalog-item-actions app="app" current-view="'SEARCH'" stop-event="click"></div>
+</div>

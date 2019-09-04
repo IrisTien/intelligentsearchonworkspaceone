@@ -1,0 +1,40 @@
+<div ng-click="userDetails(user)">
+    <div class="user-details-section" ng-class="{'reduce-card-width-on-hover': user.email && !user.isCopied}">
+        <div class="user-team-item-avatar" image-load>
+            <span ng-if="user.initial" class="user-detail-initial">{{user.initial}}</span>
+            <img ng-show="user.avatar" ng-src="{{user.avatar}}"/>
+        </div>
+        <div ng-if="!user.isCopied">
+            <p class="user-team-item-name">{{::user.userName}}</p>
+            <p class="user-team-item-title">{{::user.title}}</p>
+        </div>
+        <div class="email-details-copied" ng-if="user.isCopied">
+            <p class="copied-email-highlight">
+                <span>{{user.email}}</span>
+            </p>
+            <p class="email-copied-text">
+                <svg svg-symbol="icon-messaging-check" class="icon-check branding-icon-primary"></svg>
+                <span>
+                    {{ ::'app.peopleSearch.emailCopied' | i18n }}
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="copy-email-section" ng-if="user.email">
+        <div ng-if="!user.isCopied" class="copy-icon-placeholder">
+            <div ng-if="::copyEmailSupported">
+                <a role="button" aria-label="copyEmailButtonLabel" ng-click="copyEmail(user)" stop-event="click">
+                    <svg svg-symbol="icon-copy-email" class="people-search-item-copy-email-icon branding-icon-primary"></svg>
+                </a>
+                <div class="copy-email-tooltip" tooltip tooltiptext="app.tooltip.copyEmail"
+                     triggerelement="copy-email-section"></div>
+            </div>
+            <div ng-if="::nativeEmailClientSupported">
+                <a role="button" aria-label="openEmailButtonLabel" ng-click="openEmail(user.email)" stop-event="click">
+                    <svg svg-symbol="icon-email" class="people-search-item-email-icon branding-icon-primary"></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

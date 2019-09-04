@@ -1,0 +1,7 @@
+<div class="search-people-item-avatar" image-load>
+    <p ng-if="user.initial" class="search-people-avatar-initial"><span>{{user.initial}}</span></p>
+    <img ng-if="user.avatar" ng-src="{{user.avatar}}" class="user-avatar-img-style"/>
+</div>
+<p class="search-people-item-name" ng-bind-html="user.userName | highlight:ctrl.query.name"></p>
+<p class="search-people-item-title" ng-bind-html="user.title"></p>
+

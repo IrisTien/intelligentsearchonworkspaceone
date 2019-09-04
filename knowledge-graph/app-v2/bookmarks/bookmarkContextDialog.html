@@ -1,0 +1,71 @@
+<section class="bookmark-contextdialog-container" ng-controller="BookmarkItemContextDialogController as dialogCtrl">
+    <!--previously the scrim is wrapped inside the button tag and use the contextDialogDirective to close it-->
+    <!--this cause some issue in mobile safari and chrome, the long-press activated the close action -->
+    <div class="bookmark-contextdialog-scrim" ></div>
+    <div class="bookmark-contextdialog-content">
+
+        <button class="bookmark-contextdialog-close-button-container">
+            <svg svg-symbol="icon-close" class="close-button-icon"></svg>
+        </button>
+
+        <div class="bookmark-contextdialog-header">
+            <div class="bookmark-contextdialog-app-icon" ng-style="{'background-image':('url('+ app.icon+')')}"></div>
+            <h2 class="bookmark-contextdialog-app-name">{{app.name}}</h2>
+            <p class="bookmark-contextdialog-app-types">{{'app.details.label.type.'+app.subType | i18n}}</p>
+
+            <p class="bookmark-contextdialog-app-description">{{::dialogCtrl.appDescription}}</p>
+
+            <p ng-if="app.categories.length > 0" class="bookmark-contextdialog-app-category">
+                <span class="category-label">{{::'app.details.label.category' | i18n}}</span>
+                <span ng-repeat="category in app.categories"><span>{{category}}</span>{{$last ? '' : ', '}}</span>
+            </p>
+        </div>
+        <div class="bookmark-contextdialog-actions">
+            <ul class="bookmark-contextdialog-actions-list">
+                <li ng-if="app.viewClientLaunchEnabled">
+                    <a ng-click="bookmarkItemCtrl.openWithViewClient(bookmarkItemCtrl.app, $event)">
+                        <svg svg-symbol="icon-horizon-small" class="branding-icon-primary"></svg>
+                        <span>{{::'myapps.dialog.openAppWithViewClient' | i18n}}</span>
+                    </a>
+                </li>
+                <li ng-if="app.viewBrowserLaunchEnabled">
+                    <a ng-click="bookmarkItemCtrl.openWithBrowser(bookmarkItemCtrl.app, $event)" ng-show="bookmarkItemCtrl.isViewOptionSupported(bookmarkItemCtrl.app, 'BROWSER')">
+                        <svg svg-symbol="icon-horizon-browser" class="branding-icon-primary"></svg>
+                        <span>{{::'myapps.dialog.openAppWithBrowser' | i18n}}</span>
+                    </a>
+                </li>
+                <li ng-if="app.isViewResourceEnabled">
+                    <a class="launchApp" id="pt-launchapp-link" ng-click="bookmarkItemCtrl.launchApp(bookmarkItemCtrl.app, $event)">
+                        <svg svg-symbol="icon-openapp-small" class="branding-icon-primary"></svg>
+                        <span ng-if="app.type === 'WEB'">{{::'myapps.dialog.openAppWithBrowser' | i18n}}</span>
+                        <span ng-if="app.type !== 'WEB'">{{::'myapps.dialog.openApp' | i18n}}</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="detailLink" id="pt-detail-link" ng-click="dialogCtrl.appDetails(app);">
+                        <svg svg-symbol="icon-show-details" class="branding-icon-primary"></svg>
+                        <span>{{::'app.details.label.seeFullDetails' | i18n}}</span>
+                    </a>
+                </li>
+                <li ng-if="!bookmarksCtrl.hideCatalogTab">
+                    <a class="hideApp" id="pt-removeapp-link" ng-click="dialogCtrl.hideApp(app, bookmarksCtrl.visibleLauncherApps, $index, $event);">
+                        <svg svg-symbol="icon-trash" class="branding-icon-primary"></svg>
+                        <span>{{::'app.details.label.removeBookmark' | i18n}}</span>
+                    </a>
+                </li>
+                <li ng-if="app.resetAllowed">
+                    <a class="resetDesktop" ng-click="resetDesktop(app, $event)">
+                        <svg svg-symbol="icon-power" class="branding-icon-primary"></svg>
+                        <span>{{::'app.details.label.resetDektop' | i18n}}</span>
+                    </a>
+                </li>
+                <li ng-if="app.usePerAppPassword" class="bookmark-contextdialog-action-setapppassword">
+                    <a ng-click="openSetAppPasswordDialog(app, $event)">
+                        <svg svg-symbol="icon-set-password" class="set-app-password-icon branding-icon-primary"></svg>
+                        <span>{{::'app.details.label.setAppPassword' | i18n}}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,64 @@
+@category-header-height: 44px;
+@category-list-item-height: 52px;
+@category-list-item-height-android: 48px;
+
+
+.category {
+    background: @gb-category-content-bg;
+    box-shadow: 0 0 12px 0 @masthead-box-shadow-color;
+    margin-bottom: 16px;
+}
+
+.android .category {
+    margin-bottom: 0;
+    padding-bottom: 16px;
+}
+
+.android .category-default-items {
+    padding-bottom: 8px;
+    border-bottom: solid 1px @list-item-divider-bg;
+    margin-bottom: 8px;
+}
+
+.category-custom-items {
+    border-top: solid 2px @list-item-divider-bg;
+}
+
+.android .category-custom-items {
+    border-top: 0;
+}
+
+.category-header {
+    line-height: @category-header-height;
+    padding: 20px @list-item-padding-h;
+}
+
+.category-list-item {
+    position: relative;
+    height: @category-list-item-height;
+    line-height: @category-list-item-height;
+    padding: 0 40px 0 @list-item-padding-h;
+    .category-item-text();
+    .list-item-right-arrow-image-mixin();
+    .list-item-divider-mixin(@list-item-divider-bg);
+    .single-line-ellipsis;
+}
+
+.android .category-list-item {
+    height: @category-list-item-height-android;
+    line-height: @category-list-item-height-android;
+    background-image: none;
+}
+
+// Show the last-item divider all the way to the end
+.category-list-item:last-child:before {
+    left: 0;
+}
+
+.android .category-list-item:before {
+    display: none!important;
+}
+
+.android .category-list-item:before {
+    left: 0;
+}

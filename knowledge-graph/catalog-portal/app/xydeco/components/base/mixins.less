@@ -1,0 +1,320 @@
+/*
+ * Project Horizon
+ * (c) 2013-2014 VMware, Inc. All rights reserved.
+ * VMware Confidential.
+ */
+
+// LESS Mixins
+
+// .clearfix
+// Clear all floats at the end of the current element
+.clearfix {
+  &:after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+
+// CSS3 compatibility mixins (prefixing and fallbacks)
+
+// .background-color
+// Add a (possibly RGBA) background color, with fallback for IE8
+.background-color (@color, @fallback) when (alpha(@color) < 1) {
+    /* IE8 fallback: */
+    background-color: @fallback;
+}
+.background-color (@color, @fallback) {
+    background-color: @color;
+}
+
+// If no fallback given, compute lightness from alpha
+.solid-background-color (@color) {
+    @rgb: fade( @color, 100% );
+    @alpha: 100% * alpha( @color );
+    background-color: mix( @rgb, #fff, @alpha );
+}
+.background-color (@color) when (alpha(@color) < 1) {
+    .solid-background-color(@color);
+}
+.background-color (@color) {
+    background-color: @color;
+}
+
+// Background Gradients
+// .background-gradient( @direction, @start, @end )
+// Gradient background from one color to another
+.background-gradient ( vertical, @color1, @color2 ) {
+    background-image: -webkit-linear-gradient( top, @color1, @color2 );
+    background-image: -moz-linear-gradient( top, @color1, @color2 );
+    background-image: -ms-linear-gradient( top, @color1, @color2 );
+    background-image: linear-gradient( to bottom, @color1, @color2 );
+}
+
+.background-gradient ( horizontal, @color1, @color2 ) {
+    background: -webkit-linear-gradient( left, @color1, @color2 );
+    background: -moz-linear-gradient( left, @color1, @color2 );
+    background: -ms-linear-gradient( left, @color1, @color2 );
+    background: linear-gradient( to right, @color1, @color2 );
+}
+
+.background-gradient ( diagonal, @color1, @color2 ) {
+    background-image: -webkit-linear-gradient( top left, @color1, @color2 );
+    background-image: -moz-linear-gradient( top left, @color1, @color2 );
+    background-image: -ms-linear-gradient( top left, @color1, @color2 );
+    background-image: linear-gradient( top left, @color1, @color2 );
+}
+
+.background-gradient ( radial, @center, @color1, @radius1, @color2, @radius2 ) {
+    background: -webkit-radial-gradient( @center, @color1 @radius1, @color2 @radius2
+ );
+    background: -moz-radial-gradient( @center, @color1 @radius1, @color2 @radius2 );
+    background: -ms-radial-gradient( @center, @color1 @radius1, @color2 @radius2 );
+    background: radial-gradient( @center, @color1 @radius1, @color2 @radius2 );
+}
+
+.background-gradient ( none ) {
+    background-image: none;
+}
+
+// Stripes using background-gradient
+.background-stripes ( diagonal, @color1, @color2, @tile: 32px ) {
+    background-image: -webkit-linear-gradient( top left,
+        @color1 0, @color1 25%, @color2 25%, @color2 50%,
+        @color1 50%, @color1 75%, @color2 75%, @color2 100%);
+    background-image: -moz-linear-gradient( top left,
+        @color1 0, @color1 25%, @color2 25%, @color2 50%,
+        @color1 50%, @color1 75%, @color2 75%, @color2 100%);
+    background-image: -ms-linear-gradient( top left,
+        @color1 0, @color1 25%, @color2 25%, @color2 50%,
+        @color1 50%, @color1 75%, @color2 75%, @color2 100%);
+    background-image: linear-gradient( top left,
+        @color1 0, @color1 25%, @color2 25%, @color2 50%,
+        @color1 50%, @color1 75%, @color2 75%, @color2 100%);
+    background-attachment: fixed;
+    background-size: @tile @tile;
+}
+
+// Background size
+
+.background-size (@s) {
+    background-size: @s;
+}
+
+// Border radius
+
+.border-radius (@r) {
+    border-radius: @r;
+}
+
+// Box sizing
+.box-sizing (@keyword) {
+    -moz-box-sizing: @keyword;  // Firefox < 29
+         box-sizing: @keyword;
+}
+
+// 2D Transforms
+
+// .transform-origin( @x, @y )
+// Set the origin for all transforms
+.transform-origin( @x, @y ) {
+  -webkit-transform-origin: @x @y;
+     -moz-transform-origin: @x @y;
+      -ms-transform-origin: @x @y;
+       -o-transform-origin: @x @y;
+          transform-origin: @x @y;
+}
+
+.transform( @spec ) {
+  -webkit-transform: @spec;
+     -moz-transform: @spec;
+      -ms-transform: @spec;
+       -o-transform: @spec;
+          transform: @spec;
+}
+
+.transform-style( @spec ) {
+  -webkit-transform-style: @spec;
+     -moz-transform-style: @spec;
+      -ms-transform-style: @spec;
+       -o-transform-style: @spec;
+          transform-style: @spec;
+}
+
+// .translate{X|Y|Z}( @distance )
+.translateX(@x) {
+    .transform( translateX(@x) );
+}
+.translateY(@y) {
+    .transform( translateY(@y) );
+}
+.translateZ(@z) {
+    .transform( translateZ(@z) );
+}
+
+// .translate( @x, @y )
+// .translate( @x, @y, @z )
+.translate(@x, @y) {
+    .transform( translate(@x, @y));
+}
+.translate(@x, @y, @z) {
+    .transform( translate(@x, @y, @z));
+}
+
+// .rotate( @angle )
+// Rotate in XY plane
+.rotate( @angle ) {
+  -webkit-transform: rotate(@angle);
+     -moz-transform: rotate(@angle);
+      -ms-transform: rotate(@angle);
+       -o-transform: rotate(@angle);
+          transform: rotate(@angle);
+}
+
+// Transitions
+
+// .transition( @spec )
+// Set all properties of the transition
+.transition( @spec ) {
+  -webkit-transition: @spec;
+     -moz-transition: @spec;
+       -o-transition: @spec;
+          transition: @spec;
+}
+
+.transition(@prop, @t, @f: ease) when (@prop = transform) {
+  //TODO: add other prefixed properties above
+  -webkit-transition: ~"-webkit-@{prop}" @t @f;
+     -moz-transition: ~"-moz-@{prop}" @t @f;
+       -o-transition: ~"-o-@{prop}" @t @f;
+          transition: ~"-ms-@{prop}" @t @f;
+          transition: @prop @t @f;
+}
+
+.transition( @prop, @t, @f: ease) when not (@prop = transform) {
+  -webkit-transition: @prop @t @f;
+     -moz-transition: @prop @t @f;
+       -o-transition: @prop @t @f;
+          transition: @prop @t @f;
+}
+
+// .transition-duration( @time )
+// Set the duration of the transition
+.transition-duration( @t ) {
+  -webkit-transition-duration: @t;
+     -moz-transition-duration: @t;
+       -o-transition-duration: @t;
+          transition-duration: @t;
+}
+
+// .transition-property( @property )
+// Set the property which is being transitioned
+.transition-property(@prop) when (@prop = transform) {
+  //TODO: add other prefixed properties above
+  -webkit-transition-property: ~"-webkit-@{prop}";
+     -moz-transition-property: ~"-moz-@{prop}";
+       -o-transition-property: ~"-o-@{prop}";
+          transition-property: ~"-ms-@{prop}";
+          transition-property: @prop;
+}
+.transition-property(@prop) when not (@prop = transform) {
+  -webkit-transition-property: @prop;
+     -moz-transition-property: @prop;
+       -o-transition-property: @prop;
+          transition-property: @prop;
+}
+
+// .transition-timing-function( @function )
+// Set the timing function to a CSS3-defined function or bezier curve
+.transition-timing-function(@f) {
+  -webkit-transition-timing-function: @f;
+     -moz-transition-timing-function: @f;
+       -o-transition-timing-function: @f;
+          transition-timing-function: @f;
+}
+
+// .animation( @spec )
+// Set an animation.  Note that the @keyframes will also need prefixing.
+.animation( @spec ) {
+  -webkit-animation: @spec;
+    -moz-animation: @spec;
+          animation: @spec;
+}
+
+// .animation-name( @name )
+.animation-name( @name ) {
+  -webkit-animation-name: @name;
+     -moz-animation-name: @name;
+          animation-name: @name;
+}
+
+// .animation-delay( @t )
+.animation-delay( @t ) {
+  -webkit-animation-delay: @t;
+     -moz-animation-delay: @t;
+          animation-delay: @t;
+}
+
+// .keyframes( @name; @block )
+.keyframes(@name; @block) {
+	@-moz-keyframes @name { @block(); }
+	@-webkit-keyframes @name { @block(); }
+	@keyframes @name { @block(); }
+}
+
+// .scrollbar-style( @width, @fg, @bg )
+// For webkit, minimal scrollbar styling
+.scrollbar-style( @width: 12px, @fg: rgba(200,200,200,0.8), @bg: #fff ) {
+    &::-webkit-scrollbar {
+        width: @width;
+        height: @width; // applies to horizontal scrollbars
+    }
+    &::-webkit-scrollbar-thumb {
+        background: @fg;
+        box-shadow: inset 0 0 1px rgba(0,0,0,0.2);
+        border: 2px solid @bg;
+        border-radius: @width/2;
+    }
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-corner {
+        background: @bg
+    }
+}
+
+// CSS Visual debugging tools:
+
+@uxcl-debug: uxcl-debug;
+
+@uxcl-warn:  uxcl-warn;
+@uxcl-warn:  1;
+
+@uxcl-debug-rules: { /*debug*/ outline: 1px solid rgba(0,255,255,.5); /* debug */ };
+@uxcl-warn-rules: { outline: 1px solid rgba(255,255,.5); };
+
+#uxcl {
+    // Mixins for managing the UXCL library itself
+
+    // Conditionally insert rules, with compile-time and run-time (selector) flags.
+    .rules( @rules, 0 )  {
+    }
+    .rules( @rules, 1 ) {
+        /*conditional*/
+        @rules();
+    }
+    .rules( @rules, @flag ) when (iskeyword(@flag)) {
+        html.@{flag} & {
+            /*conditional*/
+            @rules();
+        }
+    }
+
+    // Debugging rules
+    .debug( @rules: @uxcl-debug-rules, @flag: @uxcl-debug ) {
+        #uxcl > .rules( @rules, @flag );
+    }
+
+    // Warning rules (e.g., to highlight pattern misuse)
+    .warn( @rules: @uxcl-warn-rules, @flag: @uxcl-warn ) {
+        #uxcl > .rules( @rules, @flag );
+    }
+}

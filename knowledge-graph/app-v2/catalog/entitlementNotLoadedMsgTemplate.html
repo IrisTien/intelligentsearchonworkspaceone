@@ -1,0 +1,21 @@
+<div ng-controller="EntitlementErrorController as entitlementErrCtr" class="notify-message-container" ng-class="message.type + '-'">
+    <button class="notify-close-button" ng-click="close($index)">
+        <svg svg-symbol="icon-notify-close" class="message-icon"></svg>
+    </button>
+
+
+    <div id="more-details-error-info" ng-switch="message.argument" class="message-body entitlement-notloaded">
+        <p ng-if="entitlementErrCtr.hideDetail">{{::message.text}}
+            <br/>
+            <a class="link" id="more-details-link" ng-click="entitlementErrCtr.hideDetail=!entitlementErrCtr.hideDetail">{{ ::'appCenter.device.moreDetails' | i18n }}</a>
+        </p>
+        <p ng-switch-when="MDM_DEVICE_NOT_ENROLLED" ng-if="!entitlementErrCtr.hideDetail && !(entitlementErrCtr.isAndroid && entitlementErrCtr.isAWJade2_0)">{{::entitlementErrCtr.detail}}
+            <br/>
+            <a class="link" ng-click="entitlementErrCtr.enroll($event, $index)">{{::'appCenter.device.register' | i18n}}</a>
+        </p>
+        <p ng-switch-default ng-if="!entitlementErrCtr.hideDetail">{{::entitlementErrCtr.detail}}
+        </p>
+    </div>
+
+</div>
+

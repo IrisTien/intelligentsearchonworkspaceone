@@ -1,0 +1,17 @@
+<div modal="modal-alert" class="footered- mini- modal">
+    <section class="dialog">
+        <header class="dialog-header" ng-show="title">
+            <h4 ng-show="title">{{ title | i18n }}</h4>
+        </header>
+        <div class="dialog-body typography">
+            <p ng-show="message">{{ message | i18n }}</p>
+        </div>
+        <footer class="dialog-actions">
+            <ul class="right-to-left- actions">
+                <li><button class="primary- button" ng-click="$modal.close()">
+                    {{ ok | i18n }}
+                </button></li>
+            </ul>
+        </footer>
+    </section>
+</div>

@@ -1,0 +1,44 @@
+<article class="support content-container-scrollable">
+    <div class="content width-boundary">
+        <section class="content-body">
+            <section id="self-service" ng-if="appCenterCtrl.passwordChangeEnabled || !supportCtrl.hideDevicesTab">
+                <p class="section-title">{{'appCenter.support.selfservice' | i18n}}</p>
+                <a ng-href="#/support/change-password" class="support-item change-password" ng-if="appCenterCtrl.passwordChangeEnabled">
+                    <svg svg-symbol="icon-caret-right"></svg>
+                    <p class="support-item-title">{{::'appCenter.support.managepassword' | i18n}}</p>
+                    <p class="support-item-desc">{{::'appCenter.support.managepasswordtext' | i18n}}</p>
+                </a>
+                <a ng-href="#/support/devices" class="support-item manage-devices" ng-if="!supportCtrl.hideDevicesTab">
+                    <svg svg-symbol="icon-caret-right"></svg>
+                    <p class="support-item-title">{{::'appCenter.support.managedevices' | i18n}}</p>
+                    <p class="support-item-desc">{{::'appCenter.support.managedevicestext' | i18n}}</p>
+                </a>
+            </section>
+
+            <section id="get-help">
+                <p class="section-title">{{::'appCenter.support.gethelp' | i18n}}</p>
+                <a ng-href="#/support/tips-mobile" class="support-item app-tips" id="pt-support-apptips">
+                    <svg svg-symbol="icon-caret-right"></svg>
+                    <p class="support-item-title">{{::'userInfo.tips' | i18n}}</p>
+                    <p class="support-item-desc">{{::'userInfo.tips.intro' | i18n}}</p>
+                </a>
+                <a ng-href="#/support/report-problems" class="support-item report-problems" id="send-report" ng-if="supportCtrl.isIOS">
+                    <svg svg-symbol="icon-caret-right"></svg>
+                    <p class="support-item-title">{{::'appCenter.support.sendReportTitle' | i18n}}</p>
+                    <p class="support-item-desc">{{::'appCenter.support.sendReportDetails' | i18n}}</p>
+                </a>
+            </section>
+        </section>
+    </div>
+</article>
+
+<!--in order to get the 100% height from the device, and also to animate from right without shifting the content container, the detail panels will have to be outside of the content-container
+     This make it difficult to use a directive and use ng-transclent-->
+<div class="support-details-container">
+    <section class="settings-detail support-change-password" ng-include="'app-v2/support/changePasswordMobile.html'" ng-class="{'is-selected': supportCtrl.settingActiveTab == 'change-password'}"></section>
+    <section class="settings-detail support-devices" ng-include="'app-v2/common/devices.html'"  ng-class="{'is-selected': supportCtrl.settingActiveTab == 'devices'}"></section>
+    <section class="settings-detail support-app-tips" ng-include="'app-v2/support/tipsMobileApp.html'" ng-class="{'is-selected': supportCtrl.settingActiveTab == 'tips-mobile'}"></section>
+    <section class="settings-detail support-report-problems" ng-include="'app-v2/support/reportProblems.html'" ng-class="{'is-selected': supportCtrl.settingActiveTab == 'report-problems'}"></section>
+</div>
+
+

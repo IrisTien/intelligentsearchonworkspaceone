@@ -1,0 +1,287 @@
+@preference-browser-default-border-color: #cdd0d3;
+@preference-browser-default-bg: #cdd0d3;
+@preference-browser-hover-bg: #a5a7a9;
+@preference-browser-selected-bg: #a5a7a9;
+@preference-icon-text-color: #000;
+@preference-error-color: #F54F47;
+
+.preferences-container {
+  background: @white;
+  padding-top: 15px;
+  margin-top: 15px;
+  font-size: 15px;
+  box-shadow: 1px 1px 6px 3px rgba(188,188,188,.15), -1px -1px 6px 3px rgba(188,188,188,.15);
+
+  @media (min-width: @browser-hamburger-ribbon-transition) {
+    padding-top: 25px;
+  }
+}
+
+.preference-title-left-container {
+  padding: 0 15px;
+  display: block;
+  width: 100%;
+
+  @media (min-width: @browser-hamburger-ribbon-transition) {
+    display: inline-block;
+    width: 250px;
+    padding-left: @list-item-padding-h;
+  }
+}
+
+.preference-selection-container {
+  padding: 0 15px;
+  display: block;
+
+  @media (min-width: @browser-hamburger-ribbon-transition) {
+    display: inline-block;
+    vertical-align: text-top;
+    padding-left: @list-item-padding-h;
+  }
+
+  p {
+    color: @preference-icon-text-color;
+  }
+}
+
+.preference-actions {
+  margin-top: 40px;
+  border-top: solid 1px @profile-border-color;
+  padding: 20px;
+  text-align: right;
+}
+
+.preference-instruction {
+  font-size: 15px;
+  font-weight: bold;
+  color: @preference-icon-text-color;
+  line-height: 20px;
+  margin-bottom: 10px;
+}
+
+.setting-button {
+  font-size: 15px;
+  height: 36px;
+  line-height: 32px;
+  border-radius: 2px;
+  padding: 0 16px;
+  margin: 0 4px;
+  display: inline-block;
+}
+
+.preference-options-container {
+  text-align: center;
+  padding: 20px 0;
+  color: @preference-icon-text-color;
+
+  p {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .preference-option-radio-input {
+    display: none;
+  }
+
+  label {
+    font-size: 15px;
+  }
+
+  @media (min-width: @browser-hamburger-ribbon-transition) {
+    text-align: left;
+  }
+}
+
+.preference-option-container {
+  width: 120px;
+  height: 92px;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  vertical-align: top;
+
+  .preference-option-icon {
+    width: 92px;
+    height: 92px;
+    padding: 3px;
+    border: solid 2px @preference-browser-default-bg;
+    border-radius: 2px;
+    margin-bottom: 12px;
+
+    &.horizon {
+      opacity: 0.7;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.browser {
+      fill: @preference-browser-default-bg;
+
+      &:hover {
+        fill: @preference-browser-hover-bg;
+      }
+    }
+  }
+
+  .preference-checked {
+    position: absolute;
+    bottom: -10px;
+    right: 0;
+    display: none;
+  }
+}
+
+//Checked/ Active option style
+.preference-option-radio-input:checked + .preference-option-container {
+
+  .preference-option-icon {
+    opacity: 1;
+    border: solid 2px @primary-text-color;
+
+    &.browser {
+      fill: @preference-browser-selected-bg;
+    }
+  }
+
+  .preference-checked {
+    display: inline-block;
+  }
+
+  a {
+    text-decoration: underline;
+    margin-top: 5px;
+    display: inline-block;
+    font-size: 14px;
+  }
+}
+
+.preferences-update-button {
+  background: @primary-text-color;
+  height: 30px;
+  max-width: 240px;
+  line-height: 30px;
+}
+
+.preference-notifications {
+  margin-top: 40px;
+  border-top: solid 1px @profile-border-color;
+  padding: 20px 0;
+  display: block;
+
+  .preference-selection-container {
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+      width: calc(100% - 255px);
+    }
+
+    > div {
+      overflow: hidden;
+      height: 40px;
+      line-height: 40px;
+      color: @preference-icon-text-color;
+    }
+  }
+
+  .preference-in-progress {
+    position: relative;
+    width: 35px;
+    height: 35px;
+  }
+
+  .preference-pending-user {
+    width: 15px;
+    height: 15px;
+    background: @preference-error-color;
+    cursor: pointer;
+    border-radius: 50%;
+    margin: 10px;
+  }
+
+  .preference-name {
+    &.preview-animating-bg {
+      height: 20px;
+      width: 200px;
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+
+  .preference-instruction {
+    &.preview-animating-bg {
+      height: 20px;
+      width: 200px;
+    }
+  }
+
+  .preference-toggle {
+    float: right;
+
+    &.preview-animating-bg {
+      width: 30px;
+      height: 16px;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 30px;
+      height: 16px;
+      vertical-align: middle;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: @white;
+      border: 1px solid @preference-browser-default-border-color;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 12px;
+      width: 12px;
+      left: 2px;
+      bottom: 1px;
+      background-color: @preference-browser-default-border-color;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked + .slider {
+      background-color: @gb-primary-interactive-color;
+      border: 1px solid @gb-primary-interactive-color;
+    }
+
+    input:checked + .slider:before {
+      -webkit-transform: translateX(12px);
+      -ms-transform: translateX(12px);
+      transform: translateX(12px);
+      background-color: @white;
+    }
+
+    /* Rounded sliders */
+
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+<div modal class="headered- footered- modal medium-max-">
+    <section class="dialog">
+        <header class="dialog-header">
+            <h3>{{ 'app.logout.title' | i18n }}</h3>
+        </header>
+        <div class="dialog-body">
+            <p>{{ 'app.logout.confirm.msg' | i18n }}</p>
+        </div>
+        <footer class="dialog-actions">
+            <button class="primary- button large-" ng-click="appCenterCtrl.continueSignout($event);">{{ 'userInfo.signout' | i18n }}</button>
+            <button ng-click="$modal.cancel();" class="link- button"> {{'button.cancel' | i18n }}</button>
+        </footer>
+    </section>
+</div>

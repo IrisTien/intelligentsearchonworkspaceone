@@ -1,0 +1,44 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-size: 1rem;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+}
+
+:focus {
+    outline: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+button {
+    border: 0;
+    padding:0;
+    background: transparent;
+    cursor: pointer;
+}
+
+input {
+    font-size: 14px;
+    -webkit-user-select: auto !important;
+    -webkit-appearance: none;
+
+    // get rid of the windows10 search "x" button
+    &::-ms-clear {
+        display: none;
+    }
+}

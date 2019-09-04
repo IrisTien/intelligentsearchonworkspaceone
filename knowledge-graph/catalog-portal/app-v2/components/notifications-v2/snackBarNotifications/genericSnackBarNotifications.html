@@ -1,0 +1,14 @@
+<div ng-controller="SnackBarNotificationsController as ctr" class="snack-bar-container"
+     ng-click="ctr.goToNotification();close($index);">
+    <div class="alert-icon">
+        <svg svg-symbol="snack-bar-alert"></svg>
+    </div>
+    <div class="message">
+        <div class="title">{{::'hub.snack.bar.generic.message' | i18n : ctr.notificationLength}}</div>
+        <div class="sub-title" ng-if="ctr.isAWJadeMobile">{{::'hub.snack.bar.mobile.generic.action' | i18n}}</div>
+        <div class="sub-title" ng-if="!ctr.isAWJadeMobile">{{::'hub.snack.bar.browser.generic.action' | i18n}}</div>
+    </div>
+    <div class="close" ng-click="close($index)">
+        <svg svg-symbol="icon-close"></svg>
+    </div>
+</div>

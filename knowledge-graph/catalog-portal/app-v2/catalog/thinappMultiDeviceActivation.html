@@ -1,0 +1,41 @@
+<div modal-new="modal-confirmation" class="modal-thinapps-in-package modal-thinapp-devices">
+    <section class="dialog-container" ng-controller="ThinappMultiDeviceActivationController as ctrl">
+        <header class="dialog-header">
+            <h2>{{app.name}}</h2>
+            <p class="thinapp-info"><span>{{::'app.thinappMultiDeviceAct.heading' | i18n:ctrl.app.name}} </span>
+        </header>
+        <div class="dialog-body">
+            <div class="empty-devices-message" ng-if="ctrl.deviceReqs.length < 1 && !ctrl.isLoading">
+                <ng-include src="'app-v2/svgincludes/illo-empty-device.html'" class="illo-empty-device"></ng-include>
+                <p>{{::'app.devices.emptyDeviceListMessage' | i18n}}</p>
+            </div>
+            <ul class="thinapp-device-list" ng-if="ctrl.deviceReqs.length > 0 && !ctrl.isLoading">
+                <li class="thinapp-device-heading">
+                    <span class="thinapp-device-heading-name">{{::'app.thinappMultiDeviceAct.tableColumn.deviceName' | i18n }}</span>
+                    <span class="thinapp-device-heading-time"> {{::'app.thinappMultiDeviceAct.tableColumn.requestStatus' | i18n}}</span>
+                </li>
+
+                <li ng-repeat="device in ctrl.deviceReqs track by $index">
+                    <span class="thinapp-device-name">{{::device.machineName}}</span>
+                    <span class="thinapp-device-req-msg">
+                        {{::ctrl.getThinappRequestStatusMsg(device)}}
+                    </span>
+                    <span class="thinapp-device-req-action" ng-show="ctrl.isRequestable(device)">
+                        <a ng-click="ctrl.requestThinAppOnADevice(device.userDeviceId)">
+                            {{::'app.thinappMultiDeviceAct.button.request' | i18n }}
+                        </a>
+                    </span>
+                    <span class="thinapp-device-req-check" ng-show="!ctrl.isRequestable(device)">
+                        <svg svg-symbol="icon-check"></svg>
+                    </span>
+
+                </li>
+            </ul>
+        </div>
+        <footer class="dialog-actions two-action">
+            <div class="thinapps-buttons-container">
+                <button class="setting-button secondary-button thinapp-done-btn" ng-click="$modal.close()">{{::'app.thinappsInPackage.button.done' | i18n}}</button>
+            </div>
+        </footer>
+    </section>
+</div>

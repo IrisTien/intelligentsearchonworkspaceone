@@ -1,0 +1,25 @@
+<div class="catalogitem" ng-click="catalogItemCtrl.details(catalogItemCtrl.app.appId)">
+    <div class="box-module">
+        <div ng-if="catalogItemCtrl.app.mgmtRequired" class="catalogitem-mgmtrequired-desktop">
+            <svg symbol="lock"></svg>
+        </div>
+        <div class="simple- emblem">
+            <div ng-show="catalogItemCtrl.app.imageLoaded" class="emblem-image" ng-style="{'background-image': catalogItemCtrl.app.backgroundImage,'background-size': catalogItemCtrl.app.backgroundSize}"></div>
+        </div>
+        <dl class="catalogitem-info">
+            <dd class="catalogitem-name">
+                <a>
+                    <p line-clamp content="::catalogItemCtrl.app.name" lines="2"></p>
+                </a>
+            </dd>
+            <dd class="catalogitem-type">
+                {{::catalogItemCtrl.app.typeName | i18n:catalogItemCtrl.app.platformName}}
+            </dd>
+            <dd ng-if="catalogItemCtrl.app.mgmtRequired" class="catalogitem-mgmtrequired-mobile" id="mgmtRequired">
+                <svg symbol="lock"></svg>
+            </dd>
+        </dl>
+        <div install-button app="catalogItemCtrl.app" is-loading="catalogItemCtrl.isLoading"
+             modal-obj="catalogItemCtrl.modal" device-status="catalogItemCtrl.deviceStatus"></div>
+    </div>
+</div>

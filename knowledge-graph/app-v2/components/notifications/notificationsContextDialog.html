@@ -1,0 +1,29 @@
+<section class="appitem-contextdialog-container" ng-controller="NotificationController as notificationCtrl">
+    <!-- scrim to dismiss the dialog box -->
+    <button class="appitem-contextdialog-scrim nativenav-hide"></button>
+
+    <div class="appitem-contextdialog-content">
+        <div class="appitem-contextdialog-actions">
+            <ul class="appitem-contextdialog-actions-list">
+                <li>
+                    <a class="hub-notifications-see-archived" id="pt-notifications-see-archived-link" ng-click="notificationCtrl.hubGoToArchived($event)">
+                        <span class="nativenav-hide">{{::'app.notification.see.archived' | i18n}}</span>
+                    </a>
+                </li>
+                <li ng-if="notificationCtrl.notifications.length">
+                    <a class="hub-notifications-archive-all" id="pt-notifications-archived-link" ng-click="notificationCtrl.archiveAll($event)">
+                        <span class="nativenav-hide">{{::'app.notification.archive.all' | i18n}}</span>
+                    </a>
+                </li>
+            </ul>
+            <!-- Only iOS has the cancel button -->
+            <ul ng-if="notificationCtrl.isIOS" class="appitem-contextdialog-actions-list cancel-action">
+                <li>
+                    <a>
+                        <span class="nativenav-hide">{{::'button.cancel' | i18n}}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

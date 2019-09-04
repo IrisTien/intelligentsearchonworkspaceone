@@ -1,0 +1,21 @@
+<div modal-new class="modal-fullscreen mobile-slide-modal hub-tunnel-error-modal">
+    <div class="dialog-header">
+        <div class="tunnel-modal-close" ng-click="modal.cancel()">
+            <svg svg-symbol="icon-close-android" class="icon-modal-fullscreen-close"></svg>
+        </div>
+    </div>
+    <div class="dialog-body tunnel-modal-content">
+        <h2 class="tunnel-app-header">{{ ::'app.tunnel.installHelpText' | i18n }}</h2>
+        <p class="tunnel-app-text">
+            <a id="tunnelApp" ng-click="catalogService.handleTunnelRedirect(tunnelUrl)">
+                {{ ::'app.tunnel.installStep1' | i18n:tunnelAppName }} </a>
+        </p>
+        <p class="tunnel-app-text">
+            <a id="dependentApp" ng-click="catalogService.installDependentApp(dependentApp)">
+                {{ ::'app.tunnel.installStep2' | i18n:dependentApp.name }} </a>
+        </p>
+        <button class="tunnel-modal-button primary-btn" type="button" role="button" id="tunnel-error-footer" ng-click="modal.close(true)">
+            {{ ::'button.close' | i18n }}
+        </button>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<div modal-new="modal-errormessage">
+    <section class="dialog-container">
+        <header class="dialog-header" ng-show="title">
+            <svg class="modal-warning-message-icon-desktop" svg-symbol="icon-error-big"></svg>
+             <h2 ng-show="title">{{ title | i18n }}</h2>
+        </header>
+        <div class="dialog-body">
+            <svg class="modal-error-message-icon" svg-symbol="icon-error-big"></svg>
+             <p ng-show="message">{{ message | i18n }}</p>
+        </div>
+        <footer class="dialog-actions one-action">
+             <button class="button-action" ng-click="$modal.close()">
+                  {{ ok | i18n }}
+             </button>
+        </footer>
+    </section>
+</div>

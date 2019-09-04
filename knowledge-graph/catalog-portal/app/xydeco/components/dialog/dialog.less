@@ -1,0 +1,58 @@
+// Project Horizon
+// (c) 2013-2014 VMware, Inc. All rights reserved.
+// VMware Confidential.
+
+@import "../typography/typography";
+@import "../grid/grid";
+
+@dialog-paddingHorizontal: @grid-modulus/2;
+@dialog-paddingVertical: 20px;
+@dialog-actions-height: 72px;
+@dialog-header-height: 72px;
+
+.dialog {
+    /** An interaction which presents some small amount of information
+    and then requests the user respond by choosing between one or more actions.
+
+    @example [basic-dialog.html]
+
+    Dialogs often occur within modals.
+    */
+
+    @vpad: @dialog-paddingVertical;
+    @hpad: @dialog-paddingHorizontal;
+
+    .dialog-header { /** The heading or title at the top of the dialog. */
+        padding: @vpad @hpad;
+        .typography > .use( headings );
+        .avatar {
+            vertical-align: top;
+            margin-right: 20px;
+        }
+        height: @dialog-header-height;
+    }
+
+    .dialog-body { /** The main information presente in the dialog. */
+        padding: @vpad @hpad;
+    }
+
+    .dialog-header + .dialog-body {
+        // remove top padding if there was a header
+        padding: 0 @hpad @vpad @hpad;
+    }
+
+    .dialog-footer { /** A footer for dialogs that don't have actions. */
+        padding: 0 @hpad @vpad @hpad;
+    }
+
+    .dialog-actions { /** The place where the user may choose which action
+        to take (usually by clicking a button). */
+        padding: @vpad @hpad;
+        text-align: right;
+        height: @dialog-actions-height;
+    }
+
+    &.centered- {
+      text-align: center;
+    }
+}

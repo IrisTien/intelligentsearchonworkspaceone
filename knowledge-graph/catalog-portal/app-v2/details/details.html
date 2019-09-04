@@ -1,0 +1,81 @@
+<article class="details content-container-scrollable">
+    <div id="details-spinner-container" class="apps-loading spinner-foreground" style="display: none;">
+        <div ng-include="'app-v2/common/spinner.html'"></div>
+    </div>
+    <div class="content width-boundary" id="detail-content">
+        <section class="content-body" ng-if="!detailsCtrl.isLoading">
+            <div ng-hide= "appCenterCtrl.isAWJadeDesktop || appCenterCtrl.isAWJadeDocked" class="details-back-button" id="pt-details-content-backbutton" ng-click="::detailsCtrl.backBtnAction()">
+                <svg svg-symbol="icon-detail-back" class="icon-setting-close-button"></svg>
+                <span>{{'app.settings.link.back' | i18n}}</span>
+            </div>
+            <section class="detail-page-header">
+                    <div class="detail-page-header-content">
+                        <div class="detail-page-header-icon" ng-style="{'background-image':('url('+ detailsCtrl.iconStyle+')')}"></div>
+                        <div class="detail-page-header-description">
+                            <p class="detail-page-app-title">{{ ::detailsCtrl.name }}</p>
+                            <ul class="detail-page-app-type">
+                                <li>
+                                    <svg ng-if="detailsCtrl.app.isHorizonResource || detailsCtrl.app.isHorizonAirResource" svg-symbol="icon-horizon-watermark"></svg>
+                                    {{::detailsCtrl.app.appTypeDisplayVal}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="details-header-message details-wsservice-required" ng-if="detailsCtrl.app.isWorkspaceServiceRequired">
+                            <svg svg-symbol="icon-info-wsservice" class="icon-detail-ws-required" ></svg>
+                            <p>{{ ::'app.details.wsrequired.msg' | i18n }}</p>
+                        </div>
+                        <div class="details-header-message details-vpn-required" ng-if="detailsCtrl.app.isTunnelRequired">
+                            <svg svg-symbol="icon-tunnel" class="icon-detail-tunnel" ></svg>
+                            <p>{{ ::'app.tunnel.message' | i18n }}</p>
+                        </div>
+                    </div>
+
+                    <div class="details-common-actions branding-icon-primary" catalog-item-actions app="detailsCtrl.app" stop-event="click" current-view="APP_DETAILS"></div>
+            </section>
+            <section ng-if="::detailsCtrl.showMissingInfoMsg" class="details-missing-info-msg">
+                <div class="details-missing-info-msg-content">
+                    <svg svg-symbol="icon-notify-info" class="details-missing-info-icon"></svg>
+                    <span>
+                        {{'app.details.info.msg.missingInfo' | i18n}}
+                    </span>
+                </div>
+            </section>
+            <section ng-if="::detailsCtrl.screenshots.length" class="detail-page-screenshots" id="screenshots" >
+                <p class="detail-page-subtitle">{{::'app.details.label.screenshots' | i18n}}</p>
+                <ul rn-carousel-control rn-carousel class="detail-page-screenshot-carousel" rn-carousel-index="carouselIndex">
+                    <li class="detail-page-screenshot-container" ng-repeat="item in ::detailsCtrl.screenshots">
+                        <img class="detail-page-screenshot" ng-src="{{item.href}}" ng-swipe-left="swiping=true" ng-swipe-right="swiping=true" ng-click="swiping ? ( swiping = false ) : detailsCtrl.openZoomedImageCarousel($index)">
+                    </li>
+
+                </ul>
+            </section>
+
+            <section class="detail-page-description" >
+                <p ng-if="::detailsCtrl.descriptionHTML" class="detail-page-subtitle">{{::'app.details.label.description' | i18n}}</p>
+                <div ng-if="::detailsCtrl.descriptionHTML" class="detail-page-description-text-container">
+                    <div class="detail-page-description-text">
+                        <div id="description" ng-bind-html="::detailsCtrl.descriptionHTML"></div>
+                    </div>
+                </div>
+                <div class="detail-page-description-meta-data-container">
+                    <ul class="detail-page-description-meta-data">
+                        <li ng-if="::detailsCtrl.categories.length" class="detail-page-meta-data-item" >
+                            <p class="meta-data-title">{{::'app.details.label.category' | i18n}}</p>
+                            <!-- Class "clickable" can be applied to the ul to change style once flow from UX is confirmed-->
+                            <ul class="meta-data-value">
+                                    <li ng-repeat="cat in ::detailsCtrl.categories">{{cat}}{{$last ? '' : ', '}} </li>
+                            </ul>
+                        </li>
+                        <li ng-if="::detailsCtrl.version" class="detail-page-meta-data-item">
+                            <p class="meta-data-title">{{::'app.details.label.version' | i18n}}</p>
+                            <p class="meta-data-value ">{{::detailsCtrl.version}}</p>
+                        </li>
+                    </ul>
+                </div> 
+            </section>
+        </section>
+    </div>
+</article>
+
+
+

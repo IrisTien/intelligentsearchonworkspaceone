@@ -1,0 +1,59 @@
+<article class="settings-desktopapp" id="settings-desktopapp"  ng-controller="SettingsController as settingsCtrl">
+    <button class="settings-desktop-close-button">
+        <svg svg-symbol="icon-close" class="icon-close-desktopapp-settings"></svg>
+    </button>
+    <tabs>
+        <pane datalabel="{{'app.desktopapp.settings.title.account' | i18n}}" id="pt-desktopapp-account">
+            <div class="setting-desktop-profile-container">
+                <h2 class="settings-detail-title">{{::'userInfo.profile' | i18n}}</h2>
+                <div class="desktop-profile-avatar-container profile-avatar" image-load>
+                    <img ng-src="{{appCenterCtrl.user.imageURL}}" ng-show="appCenterCtrl.user.imageURL" class="desktopapp-profile-image"/>
+                </div>
+                <p class="settings-profile-name">
+                    <span class="profile-label">{{::'userInfo.profile.name' | i18n}} </span>
+                    <span class="profile-content">{{'fullname' | i18n : appCenterCtrl.user.firstName : appCenterCtrl.user.lastName}}</span>
+                </p>
+                <p class="settings-profile-username"><span class="profile-label">{{::'userInfo.profile.username' | i18n}} </span>
+                    <span class="profile-content">{{::appCenterCtrl.user.userName}}</span>
+                </p>
+                <p class="settings-profile-email"><span class="profile-label">{{::'userInfo.profile.email' | i18n}} </span>
+                    <span class="profile-content">{{::appCenterCtrl.user.emailAddress}}</span>
+                </p>
+            </div>
+
+            <div ng-if="::appCenterCtrl.passwordChangeEnabled">
+                <h2 class="settings-detail-title-desktopapp">{{::'userInfo.profile.password' | i18n}}
+                    <span class="password-change" ng-click="::settingsCtrl.openPasswordDialog()">{{::'userInfo.profile.passwordchange' | i18n}}</span>
+                </h2>
+                <p>{{::'userInfo.profile.passwordprompt' | i18n}}</p>
+            </div>
+
+        </pane>
+        <pane displaycheck="appCenterCtrl.mdmOnlyWS1" datalabel="{{'app.desktopapp.settings.title.devices' | i18n}}" id="pt-desktopapp-devices">
+            <div class="device-list-desktopapp-container" ng-include="'app-v2/common/deviceList-desktopapp.html'" ng-controller="DevicesController as devicesCtrl">
+            </div>
+        </pane>
+    </tabs>
+
+    <section class="settings-desktopapp-footer" >
+        <ul class="settings-desktopapp-footer-list">
+            <li class="nav-about-native-link" ng-click="::settingsCtrl.nativeAbout()" id="pt-desktopapp-native-about">
+                <svg class="settings-footer-icon " svg-symbol="icon-about"></svg>
+                <div tooltip tooltiptext="userInfo.about" arrow="bottom" triggerelement="nav-about-native-link"></div>
+            </li>
+            <li class="nav-termsofuse-link" ng-if="appCenterCtrl.isTermsOfUseEnabled" ng-click="settingsCtrl.termsOfUseForDesktopApp()" id="pt-desktopapp-native-termsofuse">
+                <svg class="settings-footer-icon" svg-symbol="icon-termsofuse"></svg>
+                <div tooltip tooltiptext="userInfo.termsofuse" arrow="bottom" triggerelement="nav-termsofuse-link"></div>
+            </li>
+            <li class="nav-signout-link align-right" ng-if="appCenterCtrl.isAWJadeDesktop" ng-click="appCenterCtrl.signout($event)" id="pt-desktopapp-native-signout">
+                <svg class="settings-footer-icon" svg-symbol="icon-signout"></svg>
+                <span>{{'userInfo.signout' | i18n}}</span>
+            </li>
+            <li class="nav-removeaccount-link align-right" ng-if="appCenterCtrl.isAWJadeMobile && appCenterCtrl.isAWJadeDocked" ng-click="appCenterCtrl.unEnrollConfirm($event)" id="pt-docked-native-removeaccount">
+                <svg class="settings-footer-icon" svg-symbol="icon-signout"></svg>
+                <span>{{'userInfo.removeAccount'| i18n}}</span>
+            </li>
+        </ul>
+    </section>
+</article>
+

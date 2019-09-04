@@ -1,0 +1,317 @@
+@header-side-offset-mobile: 45px;
+@header-side-offset-desktop: 55px;
+@notification-badge-height: 14px;
+@mobile-icon-anim-time: 0.35s;
+
+.masthead {
+    position: fixed;
+    /* masthead must to be above the bottom-nav to hide it when search dropdown is opened. */
+    z-index: 600;
+    height: auto;
+    width: 100%;
+    background: @white;
+}
+
+.topnav-hide .header-container {
+    border-bottom: solid 1px @catalog-border-color;
+}
+
+//in regular browser view, in phone size transparent bg, but in larger viewport it it will take masthead back
+.masthead.settings-style .header-container{
+    border-bottom: 0;
+    background: transparent;
+}
+
+.masthead.people-style .header-container{
+    background: transparent;
+}
+
+// In WS1 app the settings page will always have transparent header
+.ws-shell .masthead.settings-style .header-container, .ws-shell .masthead.people-style .header-container{
+    border-bottom: 0!important;
+    background: transparent!important;
+}
+
+.masthead.settings-style .header-container h2{
+    opacity: 0;
+}
+
+.masthead.recommendedapps-style {
+    display: none;
+}
+
+.header-content {
+    position: relative;
+    @media(min-width: @desktopM) {
+        padding: 0 40px;
+    }
+}
+
+.ws-shell .header-content.width-boundary {
+    max-width:100%;
+}
+
+.header-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: @header-height;
+    opacity: 1;
+    z-index: 100;
+
+    @media(min-width: @tabletS) {
+        left: @header-side-offset-mobile;
+    }
+
+    .branding-logo {
+        display: none;
+        margin-top: (@header-height - @topnav-tabs-height)/2;
+        @media(min-width: @tabletS) {
+            display: block;
+            width: 175px;
+            left: @header-side-offset-desktop;
+            height: 40px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-image: url(../app-v2/graphics/logo-ws1.png);
+        }
+    }
+
+    .page-back-button {
+        width: 40px;
+        height: @header-height;
+
+        svg.icon-page-back {
+            margin: (@header-height - @mobile-default-taparea-size)/2 6px;
+            display: none;
+        }
+
+        svg.icon-page-back.page-back-show {
+            display: block;
+
+            @media(min-width: @tabletS) {
+                display: none;
+            }
+        }
+    }
+}
+
+.topnav-hide .header-left .branding-logo {
+    margin-top: (@header-height - @topnav-tabs-height)/2 - 2px;
+}
+
+// In the WS1 app we always show this .page-back-button to go back
+@media(min-width: @tabletS) {
+    .ws-shell  .header-left svg.icon-page-back.page-back-show {
+        display: block;
+    }
+}
+
+.ws-shell .branding-logo {
+    display: none;
+}
+
+.header-center {
+    width: 100%;
+    height: @header-height;
+    position: relative;
+}
+
+.header-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: @header-height;
+    font-size: 0;
+    text-align: right;
+    white-space: nowrap;
+
+    * {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    @media(min-width: @tabletS) {
+        width: @profile-tablet-width;
+        right: @header-side-offset-desktop/2;
+    }
+
+    @media(min-width: @desktopM) {
+        width: @profile-desktop-width;
+        right: @header-side-offset-desktop;
+    }
+
+    .icon-show-notifications-context{
+        margin: 5px;
+    }
+}
+
+.ws-shell .header-right {
+    @media(min-width: @tabletS) {
+        width: auto;
+        right: 0;
+    }
+    @media(min-width: @desktopM) {
+        width: auto;
+        right: 0;
+    }
+}
+
+.mobile-search-button {
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: @header-height;
+    line-height: @header-height;
+    transition: all @mobile-icon-anim-time;
+    z-index: 1000;
+    text-align: center;
+    cursor: pointer;
+
+    @media (min-width: @browser-transition-point) {
+        display: none;
+    }
+
+    .search-cancel {
+        text-align: center;
+        padding-right: 30px;
+        font-size: 12px;
+        width: 96px;
+        display: none;
+        .single-line-ellipsis();
+    }
+}
+
+.searchform-show {
+    // the original mobile search button width is 50px, and the cancel is 90px, so we need to move 40px;
+    .mobile-search-button {
+        margin-right: 40px;
+
+        @media (min-width: @phoneS) {
+            margin-right: 45px;
+        }
+
+        @media (min-width: @browser-transition-point) {
+            margin-right: 50px;
+        }
+
+        @media (min-width: @tabletS) {
+            margin-right: 44px;
+        }
+
+        @media (min-width: @desktopM) {
+            margin-right: 100px;
+        }
+
+        .search-cancel {
+            display: inline-block;
+        }
+    }
+}
+.ws-shell .mobile-search-button {
+    @media (min-width: @browser-transition-point) {
+        display: inline-block;
+    }
+}
+
+.mobile-title-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    line-height: @header-height;
+
+    h2 {
+        width: 100%;
+        font-family: "Open Sans Semibold", sans-serif;
+        padding: 0 40px;
+        font-size: @mobile-header-font-size;
+        .single-line-ellipsis();
+    }
+
+    @media (min-width: @browser-transition-point){
+        display: none;
+    }
+}
+
+.ws-shell .mobile-title-container {
+    @media (min-width: @browser-transition-point){
+        display: block;
+    }
+}
+
+.category-filter-back-button {
+    position: absolute;
+    top:0;
+    left:0;
+    display: inline-block;
+    width: 80px;
+    height:@header-height;
+    pointer:cursor;
+
+    &:before {
+        .inline-block-vertical-align-helper(@header-height);
+        @media (min-width: @phoneL){
+            .inline-block-vertical-align-helper(@top-nav-height);
+        }
+    }
+
+    @media (min-width: @phoneL){
+        height: @top-nav-height;
+        top: @header-height;
+    }
+
+    @media (min-width: @tabletS){
+        left:-20px;
+    }
+
+    @media (min-width: @desktopM){
+        display: none;
+    }
+}
+
+.category-filter-back-text {
+    display: inline-block;
+    position: relative;
+    left:-6px;
+    heigth:@header-side-offset-mobile;
+    vertical-align: middle;
+    .single-line-ellipsis();
+}
+
+.spinner-overlay {
+    background-color: white;
+    opacity: 0.5;
+    z-index: 1250;
+    pointer-events: none;
+}
+
+.apps-loading, .tou-loading{
+    top:50%;
+    z-index: 1250;
+    .spinner-class();
+}
+
+//overlay to disable header when app re-ordering is enabled
+.sorting-overlay, .sorting-overlay-desktop{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: @header-height + @top-nav-height;
+    z-index: 100;
+    background: rgba(255,255,255, .5);
+}
+
+.topnav-hide .sorting-overlay {
+    height: @header-height;
+}
+
+.sorting-overlay-desktop{
+    height: @desktopapp-header-height;
+}
+
+.ws-mac .sorting-overlay-desktop{
+    height: @desktopapp-header-height + @mac-toolbar-height;
+}

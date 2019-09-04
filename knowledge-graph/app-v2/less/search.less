@@ -1,0 +1,427 @@
+@search-placeholder-text-color: #c0c5c9;
+@search-item-height: 72px;
+@search-empty-result-font-color: #6C747D;
+@search-input-height: @topnav-tabs-height - 2px;
+
+.search-form {
+    position: relative;
+    width:100%;
+    height: @header-height;
+    font-size: 16px;
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.25s;
+    padding-top: (@header-height - @search-input-height)/2;
+
+    @media(min-width: @browser-transition-point) {
+        text-align: center;
+        z-index: 51;
+        opacity: 1;
+        display: block;
+        margin: 0 auto;
+        width: 60%;
+    }
+    @media(min-width: @tabletS) {
+        width: 55%;
+    }
+
+    //.search-input-bar contains the input filed, the search glass label and the clear search button
+    .search-input-bar {
+        position: relative;
+        display: block;
+        width: 70%;
+        height: @search-input-height;
+        margin: 0 15px;
+        font-size: 14px;
+        color: inherit;
+
+        @media(min-width: @phoneS) {
+            width: 72%;
+        }
+
+        @media(min-width: @phoneM) {
+            width: 75%;
+        }
+
+        @media(min-width: @browser-transition-point) {
+            margin:0 auto;
+            width: 80%;
+            max-width: 420px;
+        }
+
+        @media(min-width: @tabletS) {
+            width: 70%;
+            max-width: 600px;
+        }
+
+        label, button {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            color: inherit;
+        }
+
+        button.search-clear-button {
+            top:-3px;
+        }
+
+        // Change placeholder text color to light grey -- use opacity on placeholder would cause the whole input field has opacity on IE11
+        ::placeholder {
+            color: @search-placeholder-text-color;
+            font-family: "Open Sans Regular", sans-serif;
+        }
+        ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            color: @search-placeholder-text-color;
+            font-family: "Open Sans Regular", sans-serif;
+            // Safari placeholder text was slightly lower so use line-height to adjust
+            line-height: 16px;
+        }
+        ::-moz-placeholder { /* Firefox 19+ */
+            color: @search-placeholder-text-color;
+            font-family: "Open Sans Regular", sans-serif;
+            opacity: 1;
+        }
+        :-ms-input-placeholder { /* IE 10+ */
+            color: @search-placeholder-text-color;
+            font-family: "Open Sans Regular", sans-serif;
+        }
+
+        label {
+            left: 0;
+            padding: 0 2px;
+            color: @search-placeholder-text-color;
+
+            svg {
+                width:24px;
+                height:24px;
+                margin:1px;
+            }
+        }
+
+        button {
+            width:32px;
+            height: 32px;
+            right: 0;
+            opacity: 0.5;
+        }
+
+        input {
+            width: 100%;
+            height: 100%;
+            border: solid 1px #d7dee2;
+            border-radius: 4px;
+            padding: 0 @search-input-height;
+            color: inherit;
+
+            &::-ms-clear {
+                display: none;
+            }
+        }
+    }
+}
+
+// Throught the WS apps, the UX does not want the search-bar to show at all viewport size
+.ws-shell .search-form {
+    z-index: -1;
+    opacity: 0;
+
+    @media(min-width: @browser-transition-point) {
+        width: 80%;
+        max-width:600px;
+    }
+
+    @media(min-width: @tabletS) {
+        width: 90%;
+        max-width:768px;
+    }
+    .search-input-bar {
+        @media(min-width: @tabletS) {
+            width: 86%;
+        }
+    }
+}
+
+.ws-desktop .search-form {
+    padding-top: (@desktopapp-header-height - @search-input-height)/2 + 4px;
+}
+
+.searchform-show .search-form {
+    z-index: 101;
+    opacity: 1;
+    transition: all 0.25s;
+    padding-top: (@header-height - @search-input-height)/2;
+}
+
+.ws-shell .searchform-show .search-form {
+    @media(min-width: @browser-transition-point) {
+        z-index: 101;
+        opacity: 1;
+        transition: all 0.25s;
+    }
+}
+
+.search-results-placeholder {
+    position: fixed;
+    top: @header-height;
+    bottom: 0;
+    left:0;
+    right:0;
+    overflow-y: auto;
+    text-align: center;
+    padding-top: 40px;
+    background-color: @paleblue;
+    display: none;
+
+    .icon-start-search svg {
+        width: 120px;
+        height: 120px;
+        margin-bottom:20px;
+
+        @media (min-width: @browser-transition-point) {
+            width: 160px;
+            height: 160px;
+        }
+    }
+}
+
+.searchform-show .search-results-placeholder {
+    display: block;
+    @media (min-width: @browser-transition-point) {
+        display: none;
+    }
+}
+
+.ws-shell .searchform-show .search-results-placeholder {
+    @media (min-width: @browser-transition-point) {
+        display: block;
+    }
+}
+
+.search-result-scrim {
+    //Make sure the scrim is in lower z-index than the search-results
+    position: fixed;
+    top: @masthead-height;
+    bottom: 0;
+    right: 0;
+    width: 10000px;
+    height: 10000px;
+    z-index: 5;
+    left: 50%;
+    margin-left: -5000px;
+    background-color: @white;
+
+    @media(min-width: @browser-transition-point) {
+        background: @scrim-color;
+    }
+}
+
+.topnav-hide .search-result-scrim, .topnav-nolaunchableapps .search-result-scrim {
+    top: @header-height;
+}
+
+.ws-shell .search-result-scrim {
+    top: @header-height;
+    background: @white;
+}
+
+.search-results {
+    position: fixed;
+    top: @header-height;
+    width: 100%;
+    height: ~ "calc(100% - @{header-height})";
+    overflow-y: auto;
+    background: @white;
+    z-index:100;
+    -webkit-overflow-scrolling: touch;
+    text-align: left;
+
+    @media(min-width: @browser-transition-point) {
+        top: @header-height - 5px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        width: 80%;
+        left: 50%;
+        margin-left: -40%;
+        //max-height is 90% viewport height - @header-height, this leaves some margin in the bottom make it look nicer
+        max-height: ~ "calc(90% - @{header-height})";
+        overflow-y: auto;
+        height:auto;
+    }
+
+    @media(min-width: @tabletS) {
+        width: 600px;
+        left: 50%;
+        margin-left: -300px;
+    }
+}
+
+.ws-shell .search-results {
+    max-height: ~ "calc(100% - @{header-height})";
+    @media(min-width: @browser-transition-point) {
+        top: @header-height;
+        box-shadow: none;
+    }
+    @media(min-width: @tabletS) {
+        width: 768px;
+        margin-left: -384px;
+    }
+}
+
+.search-item {
+    padding: 12px;
+    border-bottom: solid 1px @catalog-border-color;
+    height: @search-item-height;
+    position: relative;
+}
+
+.search-item-image {
+    width:40px;
+    height:40px;
+    margin-top: 4px;
+    float: left;
+}
+
+.search-item-body {
+    width:100%;
+    padding: 4px 110px 0 56px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.search-item-name {
+    width:100%;
+    font-family: "Open Sans Semibold", sans-serif;
+    .single-line-ellipsis();
+}
+
+.search-item-type {
+    text-transform: none;
+    .single-line-ellipsis();
+    opacity: @light-text-opacity;
+    .svg-symbol {
+        width: 15px;
+        height: 15px;
+    }
+}
+
+.search-item-vpn-required-message {
+    @media (min-width: @browser-transition-point) {
+        display: none;
+    }
+    .svg-symbol {
+        height: 14px;
+        width: 14px;
+    }
+}
+.search-item-actions {
+    position: absolute;
+    top:12px;
+    right: 0;
+    width: 108px;
+    height: @search-item-height - 24px;
+    // Use the same rules as the catalog-actions to make sure it is right align when there is only one button
+    text-align: right;
+    padding-right:4px;
+    //ensure the action buttons always stay on top of the search item
+    z-index: 100;
+    line-height: @search-item-height - 24px;
+
+    .catalog-button {
+        line-height: 44px;
+    }
+
+    .icon-bookmark .icon-openapp {
+        display: inline-block;
+    }
+
+    .action-text {
+        display: none;
+    }
+}
+
+.search-results-header {
+    height: 38px;
+    line-height: 38px;
+    padding: 0 16px;
+    background-color: #f5f7f8;
+    font-size: 13px;
+    font-family: 'Open Sans Semibold', sans-serif;
+}
+
+.search-results-header, .search-item-body .search-item-name {
+    em {
+        border-bottom: 1px dashed @lightgray;
+        display: inline-block;
+        line-height: 1.2;
+    }
+}
+.search-empty-result {
+    padding: 40px;
+    font-size:15px;
+    text-align: center;
+
+    .illo-empty-search svg {
+        width: 120px;
+        height: 100px;
+        margin-bottom: 20px;
+
+        @media(min-width: @browser-transition-point) {
+            width: 160px;
+            height: 133px;
+        }
+    }
+}
+
+.search-category-length {
+    display: inline-block;
+    font-size: 13px;
+    height: 18px;
+    line-height: 18px;
+    color: @white;
+    text-align: center;
+    margin: 0 4px;
+    min-width: 28px;
+    border-radius: 10px;
+    background: rgba(157, 162, 168, 0.6);
+}
+// search bar on thin app modal
+.modal-thinapp.search-form {
+    position: absolute;
+    right: 0;
+    bottom: 15px;
+    width: 50%;
+    opacity:1;
+    z-index:50;
+    padding-top:25px;
+
+    .search-input-bar.search-thinapp {
+        width: 80%;
+        margin-right: 24px;
+
+        label {
+            position: absolute;
+            top:0;
+            left:0;
+            z-index:50;
+            svg {
+                margin:4px 2px;
+                vertical-align: top;
+            }
+        }
+        input {
+            position: absolute;
+            top:0;
+            right:0;
+        }
+
+        button.search-clear-button {
+            top:-3px;
+            right:0;
+            z-index:50;
+
+            svg {
+                vertical-align: top;
+            }
+        }
+
+    }
+}

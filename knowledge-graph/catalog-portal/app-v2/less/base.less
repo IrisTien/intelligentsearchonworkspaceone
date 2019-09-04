@@ -1,0 +1,130 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-size: 1rem;
+    overflow: hidden;
+    font-family: 'Open Sans Regular', sans-serif;
+    color: transparent;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+}
+
+
+@media(max-width: @desktopM){
+    ::-webkit-scrollbar {
+        width: 4px;
+        background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #999;
+    }
+}
+
+:focus {
+    outline: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+button {
+    border: 0;
+    padding:0;
+    background: transparent;
+    cursor: pointer;
+}
+/*!!important, otherwise on touch screen when tap there is a grey background */
+/* disallow user select images or paragraph */
+input, select, textarea, button, a, div, p, h1, h2,li, img {
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+
+input {
+    font-size: 14px;
+    -webkit-user-select: auto !important;
+    -webkit-appearance: none;
+}
+
+// Move the capsule related visual properties to a few class for later on easy branding
+.capsule-border {
+    border-width: 1px;
+    border-style:solid;
+    border-color: @highlightblue;
+
+    @media(min-width: @browser-transition-point) {
+        border-width: 0;
+        border-color: transparent;
+    }
+}
+
+.ws-shell .capsule-border {
+    @media(min-width: @browser-transition-point) {
+        border-width: 1px;
+        border-color: @highlightblue;
+    }
+}
+
+.capsule-text-color {
+    color: @highlightblue;
+
+    @media(min-width: @browser-transition-point) {
+        color:@mediumgrey;
+        opacity: @light-text-opacity;
+    }
+
+    &.selected {
+        color: @white;
+
+        @media(min-width: @browser-transition-point) {
+            color:@mediumgrey;
+            opacity:1;
+        }
+    }
+}
+
+.ws-shell .capsule-text-color {
+    color:@highlightblue;
+    @media(min-width: @browser-transition-point) {
+        opacity: 1;
+    }
+}
+
+.ws-shell .capsule-text-color.selected{
+    color: @white;
+}
+
+// base classes for the highlight colors
+.branding-icon-primary {
+    color: @highlightcolor;
+
+    svg {
+        stroke: @highlightcolor;
+        fill: @highlightcolor;
+    }
+}
+
+//IE11 issue with svg click HW-94396.
+//https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events
+use {
+    pointer-events: none;
+}

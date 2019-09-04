@@ -1,0 +1,120 @@
+@app-section-height: 36px;
+@app-section-label-size: 14px;
+@app-section-svg-size: 15px;
+@no-app-label-width: 270px;
+
+@app-section-tablet-height: 44px;
+@app-section-label-tablet-size: 18px;
+@app-section-svg-tablet-size: 20px;
+
+@apps-section-header-height: 40px;
+@apps-section-header-svg-size: 22px;
+
+@apps-section-header-seeall-width: 120px;
+@no-app-text-font-size: 14px;
+
+.apps-module {
+    position: relative;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+    display: block;
+    .list-item-divider-mixin(@list-item-divider-bg);
+
+    &:first-child {
+        padding-top: 16px;
+    }
+
+    &:last-of-type {
+        margin-bottom: 8px;
+    }
+}
+
+.android .apps-module:before {
+  left:0;
+}
+
+.apps-module:last-child:before {
+    display: none;
+}
+
+.apps-module-header {
+    position: relative;
+    height: @apps-section-header-height;
+    padding: 0 @list-item-padding-h;
+}
+
+.apps-module-headline {
+    padding: 0 @apps-section-header-seeall-width 0 0;
+    line-height: @apps-section-header-height;
+}
+
+.apps-module-content {
+    margin-top: -8px;
+}
+
+.carousel-section {
+    overflow: hidden;
+    position: relative;
+    height: @app-tile-width-s + @app-label-height-s + 40; //30 for margin, added another 6px vertical margin for the grid-item-carousel so it is not so clase to the headline
+
+    @media (min-width: @phoneS) {
+        height: @app-tile-width-m + @app-label-height-s + 40;
+    }
+
+    @media (min-width: @phoneM) {
+        height: @app-tile-width-l + @app-label-height-s + 40;
+    }
+
+    @media (min-width: @tabletS) {
+        height: @app-tile-width-xl + @app-label-height-s + 40;
+    }
+
+    // Carousel container is an ng-class now so use the grid-container
+    .grid-container {
+        overflow-x: auto;
+        height: 210px; //let the carousel go beyond it's parent so that the scroll bar won't appear
+    }
+}
+
+.icon-apps-section-favorite {
+    margin: 8px 4px 0 0;
+    stroke: #ffc521;
+    fill: #ffc521;
+    width: @apps-section-header-svg-size;
+    height: @apps-section-header-svg-size;
+}
+
+.apps-module-see-all {
+    position: absolute;
+    top: 11px;
+    right: 14px;
+    text-align: right;
+    width: @apps-section-header-seeall-width;
+}
+
+.android .apps-module-see-all {
+    font-size: 14px;
+    top: 13px;
+    text-transform: uppercase;
+}
+
+// No apps section
+//---------------------------------------
+.apps-empty {
+    padding: @list-item-padding-h;
+    margin: 40px 0 0;
+    text-align: center;
+}
+
+.hub-no-apps {
+    text-align: center;
+    margin: 30px auto;
+    width: 200px;
+    height: 200px;
+}
+
+.no-apps-text {
+    .base-text-style(@no-app-text-font-size, 400);
+    line-height: 1.4;
+    opacity: @light-text-opacity;
+}

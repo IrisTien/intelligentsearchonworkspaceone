@@ -1,0 +1,22 @@
+<div ng-class="{'tooltip': appItemCtrl.app.disabledThinApps && !appItemCtrl.app.thinappPackage}"
+     data-tooltip="{{ ::'appCenter.nav.arrange.tooltip' | i18n }}">
+    <div class="app-tile" ng-if="!appItemCtrl.app.thinappPackage"
+         ng-class="{'disable-app': appItemCtrl.app.disabledThinApps}"
+         ng-click="appItemCtrl.launchApp(appItemCtrl.app, $event)">
+        <div class="app-icon" image-load>
+            <img ng-src="{{::appItemCtrl.app.icon}}">
+        </div>
+    </div>
+    <div class="app-tile" ng-if="appItemCtrl.app.thinappPackage"
+         ng-click="appItemCtrl.openThinAppPackageModal(appItemCtrl.app, $event)">
+        <div class="app-icon" image-load>
+            <img ng-src="{{::appItemCtrl.app.icon}}">
+        </div>
+    </div>
+</div>
+<div class="app-label-container">
+    <p class="app-label" line-clamp3 lines="2" content="::appItemCtrl.app.name" >
+    </p>
+    <div class="app-item-actions" contextdialog="{uris:{'contextdialogTemplate':(true)}, scope:{app:appItemCtrl.app, favoriteEnabled: appItemCtrl.favoriteEnabled}}"
+         contextdialogTemplate="app-v2/components/appItem/appItemContextDialogBrowser.html"></div>
+</div>

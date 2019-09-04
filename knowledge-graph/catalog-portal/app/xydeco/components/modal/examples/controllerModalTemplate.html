@@ -1,0 +1,17 @@
+<div modal class="headered- footered- modal">
+    <section class="dialog typography" ng-controller="InnerController as inner">
+        <header class="dialog-header">
+            <h3>Modal Dialog</h3>
+        </header>
+        <div class="dialog-body">
+            <p>{{ demo.messages[demo.counter] }}</p>
+            <p>Outer controller count: {{ demo.counter }}</p>
+            <p>Inner controller count: {{ inner.counter }} (resets on modal.open)</p>
+        </div>
+        <footer class="dialog-actions">
+            <button class="link- button" ng-click="$modal.close()">Cancel</button>
+            <button class="safe- button" ng-click="inner.increment()">Increment</button>
+            <button class="primary- button" ng-click="$modal.close(true)">Ok</button>
+        </footer>
+    </section>
+</div>

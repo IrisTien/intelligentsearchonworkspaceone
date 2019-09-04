@@ -1,0 +1,9 @@
+    <button class="full-width- button catalogitem-action installButton" type="button"
+        ng-click="installAppCtrl.activateApp(installAppCtrl.app)"
+        ng-disabled = "!installAppCtrl.app.appNeedToActivated && !installAppCtrl.app.isMdmApp"
+        ng-class="{ 'hollow-' : !installAppCtrl.app.appNeedToActivated || installAppCtl.app.isMdmApp,
+    'add-': installAppCtrl.app.appNeedToActivated && installAppCtrl.app.installStatus != 'UPDATE',
+    'update-': installAppCtrl.app.installStatus == 'UPDATE' }"
+        stop-event="click">
+        <span class="catalogitem-actiontext">{{ installAppCtrl.app.installAction | i18n }}</span>
+    </button>

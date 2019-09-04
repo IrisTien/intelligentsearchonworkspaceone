@@ -1,0 +1,800 @@
+@user-details-avatar-size-s: 48px;
+@user-org-avatar-font-size: 18px;
+@user-item-title-font:14px;
+@user-profile-lable-font-size: 13px;
+@user-profile-content-font-size: 16px;
+
+@user-header-tabs-height: 44px;
+@user-header-height-s: 240px;
+@user-header-height-m: @user-header-height-s - @user-header-tabs-height;
+@user-header-height-s-collapsed: @user-header-tabs-height + @header-height;
+@user-header-height-m-collapsed: 78px;
+@user-header-height-desktopapp-m: 160px;
+@user-profile-tab-font-size: 14px;
+@user-profile-header-avatar-s: 72px;
+@user-profile-header-avatar-font-size-s: 28px;
+@user-profile-section-width: 60%;
+@user-org-section-width: 100% - @user-profile-section-width;
+@user-profile-header-font-size: 16px;
+@user-details-content-padding-s: 12px;
+@scrollbar-width-m: 24px;
+@user-item-tree-width: 12px;
+@user-item-tree-border-width: 1px;
+@user-org-section-name-font-size: 16px;
+@icon-people-home-margin-left: 14px;
+@user-email-copied-font-size: 13px;
+@email-copied-notification-message-width: 220px;
+@user-header-height-anim-time: 0.15s;
+@profile-content-max-width: 800px;
+
+@user-action-icon-right-offset: 16px;
+
+.people-details {
+
+  // Needs override from detials.less for the desktopM version of hte back button
+  .details-back-button {
+      @media (min-width: @browser-transition-point) {
+          display: none;
+      }
+
+      @media (min-width: @desktopM) {
+        display: block;
+      }
+  }
+
+  .details-back-button span {
+
+      &.people-home {
+          @media (min-width: @browser-transition-point) {
+              margin-left: @icon-people-home-margin-left;
+              padding: 0 0 0 10px;
+              border-left: solid @user-item-tree-border-width @catalog-border-color;
+          }
+      }
+  }
+
+  .header-left {
+      color: @mediumgrey;
+      width: 100px;
+
+      .people-home, .page-back-button {
+          display: inline-block;
+          vertical-align: top;
+
+          @media (min-width: @desktopM) {
+              display: none;
+          }
+      }
+
+      .page-back-button {
+          svg.icon-page-back.page-back-show {
+              display: inline-block;
+
+              @media (min-width: @desktopM) {
+                display: none;
+              }
+          }
+      }
+
+      .people-home {
+          padding: (@header-height - @mobile-default-taparea-size)/2 0;
+      }
+
+      // Need to hide the logo etc for the new UX change
+      .branding-logo {
+          display: none!important;
+
+          @media (min-width: @desktopM) {
+                display: block!important;
+          }
+      }
+  }
+
+  .header-right .profile-container {
+      display: none;
+
+      @media (min-width: @desktopM) {
+          display: inline-block;
+      }
+  }
+
+  .header-left-desktopapp {
+      .people-home {
+          border-left: @user-item-tree-border-width solid @catalog-border-color;
+          display: inline-block;
+          margin-left: @icon-people-home-margin-left;
+          padding-left: 10px;
+      }
+  }
+
+  .mobile-search-button {
+      display: inline-block;
+      width: 40px;
+
+      @media (min-width: @desktopM) {
+          display: none;
+      }
+  }
+
+  .searchform-show .header-left {
+      display: none;
+
+      @media (min-width: @desktopM) {
+          display: block;
+      }
+  }
+
+  .masthead {
+      background: transparent;
+      @media (min-width: @desktopM) {
+          background: @white;
+      }
+  }
+
+  .header-container {
+      border-bottom: 0;
+      @media (min-width: @desktopM) {
+          border-bottom: solid 1px @catalog-border-color;
+      }
+  }
+
+  .ie-header-background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      stroke: @white;
+  }
+
+  // This is general rules about the ui-view user-details
+  .user-details {
+      top: 0;
+      position: fixed;
+      //IE11 fix
+      position: -ms-device-fixed;
+      .details {
+          height: 100%;
+      }
+  }
+
+  .user-details.content-container {
+      padding-top: 0;
+
+      @media (min-width: @desktopM) {
+          padding-top: @header-height;
+      }
+  }
+}
+
+// This section deals with the loaded container rules
+.user-details-loaded-container {
+  background: @paleblue;
+  height: 100%;
+  //any rules directly related to the namespace class in a different viewport size go at the top
+  @media (min-width: @desktopM) {
+      background: @white;
+  }
+
+  .content-container-scrollable {
+      height: ~ "calc(100% - @{user-header-height-s})";
+
+      @media (min-width: @desktopM) {
+          height: ~ "calc(100% - @{user-header-height-m})";
+      }
+
+      .content {
+          height: 100%;
+      }
+  }
+}
+
+.ws-desktop .user-details-loaded-container {
+    .content-container-scrollable {
+        // Need to use the desktopapp height which is 160px instead of 196px
+        @media (min-width: @desktopM) {
+            height: ~ "calc(100% - @{user-header-height-desktopapp-m})";
+        }
+    }
+}
+
+// This is for the header-collpased overrides
+.user-details-loaded-container.header-collapsed {
+  .content-container-scrollable {
+      height: ~ "calc(100% - @{user-header-height-s-collapsed})";
+
+      @media (min-width: @desktopM) {
+          height: ~ "calc(100% - @{user-header-height-m-collapsed})";
+      }
+  }
+}
+
+// This section deals with the user profile header in EXPANDED state
+.user-detail-page-header {
+  background: @vmwareheadercolor url('../app-v2/graphics/user-header-background.svg');
+  background-position: bottom;
+  background-size: cover;
+  height:@user-header-height-s;
+  position: relative;
+  transition: height @user-header-height-anim-time ease-out;
+
+  // For desktop browser layout, it does not have the tabs
+  @media (min-width: @desktopM) {
+      height: @user-header-height-m;
+  }
+
+  .content {
+      height: 100%;
+  }
+
+  .user-profile-tab {
+      height: @user-header-tabs-height;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+
+      @media (min-width: @desktopM) {
+          display: none;
+      }
+  }
+
+  .user-profile-nav-item {
+      width: 50%;
+      height: 44px;
+      display: inline-block;
+      float: left;
+      text-align: center;
+      font-size: @user-profile-tab-font-size;
+      line-height: @user-header-tabs-height;
+      cursor: pointer;
+
+      @media (min-width: @browser-transition-point) {
+          font-size: @user-profile-tab-font-size + 2px;
+      }
+
+      &.selected {
+          font-family: "Open Sans Semibold", sans-serif;
+          border-bottom: 2px solid @highlightblue;
+      }
+  }
+
+  .user-detail-header-body {
+      padding-top: @header-height;
+
+    // For desktop browser layout the header content is left aligned
+      @media (min-width: @desktopM) {
+          padding: @header-height + 32px 20px 0;
+      }
+  }
+
+  .user-detail-header-avatar-container {
+      width: @user-profile-header-avatar-s;
+      height: @user-profile-header-avatar-s;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto;
+      position: relative;
+      color: @white;
+      overflow: hidden;
+      opacity:1;
+      background-size: contain;
+      background-image: url(../app-v2/graphics/icon-profile.svg);
+      animation: avatar-reverse-fadedin-expand .35s ease-in;
+      -webkit-animation: avatar-reverse-fadedin-expand 0.35s  ease-in;
+      -moz-animation: avatar-reverse-fadedin-expand .35s  ease-in;
+      -ms-animation: avatar-reverse-fadedin-expand .35s ease-in;
+
+
+      // For desktop browser layout the header content is left aligned
+      @media (min-width: @desktopM) {
+          float: left;
+          margin: 0;
+      }
+
+      img {
+          width: 100%;
+          height: 100%;
+          border-radius: @user-avatar-border-radius;
+          position: absolute;
+          top: 0;
+          left: 0;
+      }
+
+      .user-detail-initial {
+          font-size: @user-profile-header-avatar-font-size-s;
+          line-height: @user-profile-header-avatar-s;
+      }
+  }
+
+  .user-detail-header-labels {
+      text-align: center;
+      font-size: 14px;
+
+      @media (min-width: @desktopM) {
+          padding-left: @user-profile-header-avatar-s + 16px;
+          text-align: left;
+          font-size: 16px;
+      }
+  }
+
+  .user-detail-header-name {
+      font-size: 16px;
+      line-height: 24px;
+      padding: 12px 16px 0;
+      position: relative;
+      font-family: "Open Sans Semibold", sans-serif;
+      .single-line-ellipsis();
+      opacity: 1;
+
+      @media (min-width: @desktopM) {
+          margin-bottom:4px;
+          font-size: 20px;
+          padding:0;
+      }
+  }
+
+  .user-detail-header-text {
+      padding: 0 16px;
+      lin-height: 1.4;
+      .single-line-ellipsis();
+
+      @media (min-width: @desktopM) {
+          padding:0;
+      }
+  }
+}
+
+// This section deals with the user profile header in COLLAPSED state (when content overflows)
+.header-collapsed .user-detail-page-header {
+    height: @user-header-height-s-collapsed;
+    transition: height @user-header-height-anim-time ease-in;
+
+    @media (min-width: @desktopM) {
+        height: @user-header-height-m-collapsed;
+    }
+
+    .user-detail-header-avatar-container {
+        width:0;
+        height:0;
+        opacity: 0;
+
+        @media (min-width: @desktopM) {
+            width: 40px;
+            height: 40px;
+            top: -64px;
+            left: 60px;
+            opacity: 1;
+            transition: top 0.25s ease-in, left 0.25s ease-in;
+        }
+
+        .user-detail-initial {
+            @media (min-width: @desktopM) {
+                font-size: 16px;
+                line-height: 40px;
+            }
+        }
+    }
+
+    .user-detail-header-name {
+        font-size: 20px;
+        top: -37px;
+        // Need to make sure not to overlap with the icons on header
+        padding: 0 80px;
+        opacity: 1;
+        transition: top 0.25s ease-in, left 0.25s ease-in;
+
+        @media (min-width: @desktopM) {
+            top: -58px;
+            left: 30px;
+            padding: 0;
+            line-height: 28px;
+        }
+    }
+
+    .user-detail-header-text {
+        display: none;
+    }
+}
+
+// User details profile content two section rules goes here
+.user-details-content-body {
+    text-align: left;
+    overflow: hidden;
+    height: 100%;
+
+    .user-profile-section {
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+
+        // New UX design have it around 60%, slightly off center
+        @media (min-width: @desktopM) {
+            width: @user-profile-section-width;
+        }
+    }
+
+    .user-org-section {
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+
+        @media (min-width: @desktopM) {
+            width: @user-org-section-width;
+        }
+    }
+
+    .user-details-profile-header {
+        display: none;
+
+        @media (min-width: @desktopM) {
+            font-family: "Open Sans Semibold", sans-serif;
+            font-size: @user-profile-header-font-size;
+            padding: 6px 0 16px;
+            display: block;
+        }
+
+        &.header-org {
+            padding-left: 10px;
+        }
+    }
+
+    .tab-hidden {
+        display: none;
+        @media (min-width: @desktopM) {
+          display: inline-block;
+        }
+    }
+
+    // This rule is to hide the native scrollbar
+    .scroll-hidden {
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 100%;
+        width: 100%;
+        padding: @user-details-content-padding-s;
+
+        @media (min-width: @desktopM) {
+            position: absolute;
+            right: -@scrollbar-width-m;
+            width: ~ 'calc(100% + @{scrollbar-width-m})';
+            padding: @scrollbar-width-m @scrollbar-width-m @scrollbar-width-m 0;
+        }
+    }
+
+    // Make the profile section more padding on the right to leave room for the tooltip
+    .user-profile-section .scroll-hidden {
+
+        @media (min-width: @desktopM) {
+            width: 100%;
+            padding: @scrollbar-width-m @scrollbar-width-m + 30px @scrollbar-width-m 0;
+        }
+
+        .tooltip {
+            text-align: center;
+            top: 36px;
+            font-size: 13px;
+            min-width: 100px;
+            max-width: 110px;
+            min-height: 25px;
+            bottom: auto;
+        }
+    }
+
+    .user-details-org-content {
+        background: @white;
+        margin: 0 auto;
+        max-width: @profile-content-max-width;
+        padding: 16px 2px;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px rgba(0,0,0,.15);
+
+        @media (min-width: @desktopM) {
+            padding: 0;
+            box-shadow: 0 0 0 rgba(0,0,0,0);
+        }
+
+        .user-team-item-avatar {
+            top: 16px;
+            width: @user-details-avatar-size-s;
+            height: @user-details-avatar-size-s;
+
+            .user-detail-initial {
+                line-height: @user-details-avatar-size-s;
+                font-size: @user-org-avatar-font-size;
+            }
+        }
+
+        .people-team-item {
+            &:after {
+                content: '';
+                height: 32px;
+                position: absolute;
+                border-left: @user-item-tree-border-width solid @bordergrey;
+                left: 40px;
+                top: 64px;
+            }
+
+            &:last-child:after {
+                display: none;
+            }
+
+            // Make sure no cursor pointer on the current user as the current user is not clickable
+            &.current-user {
+                cursor: default;
+            }
+        }
+
+        .manager-collapsed .people-team-item {
+            &:nth-last-child(2):after {
+                height: 28px;
+            }
+        }
+
+        .current-user .user-team-item-avatar {
+            &:before {
+                content: '';
+                border: solid 2px @highlightcolor;
+                border-radius: @user-avatar-border-radius;
+                width: @user-details-avatar-size-s + 10;
+                height: @user-details-avatar-size-s + 10;
+                display: inline-block;
+                margin: -5px;
+            }
+        }
+
+        .user-team-item-name {
+            margin-top:4px;
+            font-size: @user-org-section-name-font-size;
+            line-height: 1.6;
+            padding-left: 64px;
+            .single-line-ellipsis();
+        }
+
+        .user-team-item-title {
+            font-size: @user-item-title-font;
+            padding-left: 64px;
+            .single-line-ellipsis();
+        }
+    }
+
+    .people-team-item {
+        position: relative;
+        padding: 12px;
+        height: 80px!important;
+    }
+
+    .manager-collapsed {
+        margin-bottom: 24px;
+    }
+
+    .user-org-manager-section .collapse-panel-header:not(.collapsed) {
+        display: none;
+    }
+
+    .user-org-reportee-section {
+        .collapse-panel-content {
+            padding-left: 36px;
+        }
+        .people-team-item {
+            &:before {
+                content: '';
+                width: @user-item-tree-width;
+                position: absolute;
+                border-top: @user-item-tree-border-width solid @bordergrey;
+                left: 4px;
+                top: 40px;
+            }
+
+            &:after {
+                content: '';
+                height: @people-item-height-m;
+                position: absolute;
+                border-left: @user-item-tree-border-width solid @bordergrey;
+                left: 4px;
+                top: 0;
+            }
+
+            &:last-child:after {
+                display: block;
+                height: 40px;
+            }
+        }
+    }
+
+    .user-details-profile-content {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+        // box-shadow is not working on IE 11 needs this rule to make it work
+        border-collapse: separate;
+        border: 0;
+        background: @white;
+        border: 1px solid @bordergrey;
+        margin: 0 auto;
+        margin-bottom: 16px;
+        max-width: @profile-content-max-width;
+
+        .allow-user-select {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+    }
+
+  .user-details-profile-item {
+      border-bottom: 1px solid @bordergrey;
+      padding: 10px 16px;
+      min-height: 72px;
+      position: relative;
+
+      &:last-child {
+          border-bottom: 0;
+      }
+
+      .message-icon-spacing {
+          margin-right: 10px;
+      }
+  }
+
+  .user-details-profile-item-label {
+      font-size: @user-profile-lable-font-size;
+      line-height: 2;
+      opacity: .7;
+  }
+
+  .user-details-profile-item-label-content {
+      font-size: @user-profile-content-font-size;
+      margin-right: 70px;
+      margin-bottom: 0;
+
+      .single-line-ellipsis();
+
+      &.no-ellipsis {
+          white-space: unset;
+      }
+  }
+
+  .user-profile-action-icon {
+      position: absolute;
+      top: 30%;
+      right: @user-action-icon-right-offset;
+      cursor: pointer;
+
+      a {
+          display: inline-block;
+      }
+  }
+
+  .user-profile-email-copied-notification {
+      position: absolute;
+      top: 24px;
+      right: 0;
+      width: @email-copied-notification-message-width;
+      padding: 0 8px;
+      text-align: right;
+      background: rgba(255,255,255, 0.64);
+
+      .icon-check {
+          width: 20px;
+          height: 20px;
+      }
+
+      .user-search-email-copied {
+          display: inline-block;
+          vertical-align: middle;
+          font-size: @user-email-copied-font-size;
+          padding-left: 6px;
+
+          .single-line-ellipsis();
+      }
+  }
+}
+
+.ws-shell {
+    .people-details {
+        .user-details.content-container {
+            padding-top: 0;
+        }
+
+        .header-left {
+            .people-home, .page-back-button {
+              display: inline-block;
+            }
+
+            svg.icon-page-back.page-back-show {
+                @media (min-width: @desktopM) {
+                    display: inline-block;
+                }
+            }
+        }
+
+        .branding-logo {
+            //Ipad Pro
+            @media (min-width: @desktopM) {
+                display: none!important;
+            }
+        }
+
+
+        .masthead {
+            background: transparent;
+        }
+
+        .mobile-search-button{
+            display: inline-block!important;
+        }
+
+        .profile-container {
+            @media (min-width: @desktopM) {
+                display: none!important;
+            }
+        }
+
+        .header-collapsed .user-detail-page-header {
+            .user-detail-header-name {
+                font-size:20px;
+                top: -37px;
+
+                @media (min-width: @desktopM) {
+                    top: -75px;
+                    left: auto;
+                    text-align: center;
+                    line-height: 28px;
+                }
+            }
+            .user-detail-header-avatar-container {
+                @media (min-width: @desktopM) {
+                  display: none;
+                }
+            }
+        }
+    }
+}
+
+.ws-desktop {
+    .people-details {
+        .masthead {
+            background: @white;
+        }
+        .header-collapsed .user-detail-page-header .content-body {
+            height:100%;
+        }
+
+        .user-detail-page-header {
+            @media (min-width: @desktopM) {
+                height: @user-header-height-desktopapp-m;
+            }
+        }
+
+        .header-collapsed .user-detail-page-header {
+            @media (min-width: @desktopM) {
+                height: @user-header-height-m-collapsed;
+            }
+        }
+
+        .user-detail-header-body {
+            padding: 44px 20px;
+        }
+
+        .header-collapsed .user-detail-page-header {
+            .user-detail-header-avatar-container {
+                @media (min-width: @desktopM) {
+                    display: block;
+                    top: -25px;
+                    left:0;
+                }
+            }
+            .user-detail-header-name {
+                top: -30px;
+
+                @media (min-width: @desktopM) {
+                    top: -20px;
+                    left: -30px;
+                    text-align: left;
+                    line-height: 28px;
+                }
+            }
+        }
+    }
+}

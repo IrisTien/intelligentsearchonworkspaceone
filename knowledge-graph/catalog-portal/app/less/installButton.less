@@ -1,0 +1,43 @@
+.installButton {
+
+    @add-button-color: #6fb246;
+    @update-button-color: #3A87C5;
+    @primary-text-color: #FFFFFF;
+
+    cursor: pointer;
+
+    @media @page-LP {
+        &.add- {
+          color: @add-button-color;
+          border-color: @add-button-color;
+          background-color: @primary-text-color;
+        }
+
+        &.update- {
+          color: @update-button-color;
+          border-color: @update-button-color;
+          background-color: @primary-text-color;
+        }
+    }
+
+    &.add- {
+      color: @add-button-color;
+    }
+
+    &.add-:hover {
+      background-color: @add-button-color;
+      border-color: @add-button-color;
+      color: @primary-text-color;
+    }
+
+    &.update- {
+      color: @update-button-color;
+    }
+
+    &.update-:hover {
+      background-color: @update-button-color;
+      border-color: @update-button-color;
+      color: @primary-text-color;
+    }
+
+}

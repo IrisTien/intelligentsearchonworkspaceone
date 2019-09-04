@@ -1,0 +1,442 @@
+@contextdialog-app-icon-size: 56px;
+@contextdialog-headertext-padding: 74px;
+@bookmark-item-contextdialog-scrim-animtime:0.15s;
+@bookmark-item-contextdialog-delay: 0.25s;
+@bookmark-item-contextdialog-content-slide-animtime: 0.35s;
+@bookmark-item-ws-delay: 0.45s;
+@bookmark-item-actions-width-m: 120px;
+@bookmark-item-contextdialog-content-tablet: 380px;
+@bookmark-item-contextdialog-width-desktop: 180px;
+@grid-gutter:24px;
+
+.bookmark-item-actions {
+    width: 36px;
+    height:24px;
+    position:absolute;
+    top:0;
+    right:0;
+    text-align: right;
+    display: none;
+
+    svg.icon-bookmark-context-trigger {
+        opacity: @light-text-opacity;
+        width: 24px;
+        height: 24px;
+        z-index: 100;
+    }
+}
+
+.bookmark-app-item:hover .bookmark-item-actions {
+    display: block;
+}
+
+// On long-press in ws-shell do not show the hover state, except when it is docked
+.ws-shell:not(.ws-desktop) .bookmark-app-item:hover .bookmark-item-actions {
+    display: none;
+}
+
+// Through WS1app standalone devices we always hide "..." and use long-press to trigger context
+// To work in the browser view and tweak the sliding up contextDialog, you can comment out the display: none
+.ws-shell .bookmark-item-actions {
+    display: none;
+}
+
+// Always show dots on desktopapp windows or mac
+.ws-desktop .bookmark-item-actions {
+    display: block;
+}
+
+// Also on all Windows browser touch devices hover will not work neither is long-press, so show the dots by default
+.dots-windows .bookmark-item-actions {
+    display: block;
+}
+
+.dots-nowindows-mobile .bookmark-item-actions {
+    display: none;
+
+    @media (min-width: @browser-transition-point) {
+        display: block;
+    }
+}
+
+// In browser view, the action trigger is stays on when the in-situ contextDialog is active
+.contextmenu-on .bookmark-item-actions {
+    display: none;
+
+    @media (min-width: @browser-transition-point) {
+        display: inline-block;
+    }
+}
+
+.bookmark-contextdialog-close-button-container {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top:0;
+    right:0;
+    cursor: pointer;
+    opacity: 0.5;
+
+    @media (min-width: @browser-transition-point) {
+        display: none;
+    }
+}
+
+.ws-shell .bookmark-contextdialog-close-button-container {
+    @media (min-width: @browser-transition-point) {
+        display: block;
+    }
+}
+
+.bookmark-contextdialog-container {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    //need to be higher than footer and header
+    z-index:1000;
+
+    // changes from sliding up context to in-situ context in browser view
+    @media (min-width: @browser-transition-point) {
+        position: absolute;
+        // need to define the width for contextdialog to set direction
+        min-width: @bookmark-item-contextdialog-width-desktop;
+        top:auto;
+        left: auto;
+        bottom: auto;
+        background: none;
+
+        &.north, &.northeast, &.northwest {
+            bottom: @grid-gutter/2;
+            top:auto;
+        }
+
+        &.south, &.southeast, &.southwest {
+            top: 32px;
+        }
+
+        &.northeast, &.southeast {
+            left: 12px;
+        }
+
+        &.northwest, &.southwest {
+            right: @grid-gutter/2;
+        }
+        &.north, &.south {
+            left: 50%;
+            transform: translate( -50%, 0 );
+            -moz-transform: translate( -50%, 0 );
+            -webkit-transform: translate( -50%, 0 );
+            -ms-transform: translate( -50%, 0 );
+        }
+    }
+}
+
+// in WS1 app, the contextDialog box will be always append to the global-container
+.ws-shell .bookmark-contextdialog-container {
+    @media (min-width: @browser-transition-point) {
+        position: fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+    }
+}
+
+// Scrim is inside a button which on click will dismiss the whole contextDialog
+.bookmark-contextdialog-scrim {
+    position: fixed;
+    display: block;
+    width: 100%;
+    height:100%;
+    bottom: -100%;
+    background: @scrim-color;
+    opacity: 0;
+    z-index:0;
+    transition: opacity @bookmark-item-contextdialog-scrim-animtime @bookmark-item-contextdialog-delay;
+    -moz-transition: opacity @bookmark-item-contextdialog-scrim-animtime @bookmark-item-contextdialog-delay;
+    -webkit-transition: opacity @bookmark-item-contextdialog-scrim-animtime @bookmark-item-contextdialog-delay;
+    -ms-transition: opacity @bookmark-item-contextdialog-scrim-animtime @bookmark-item-contextdialog-delay;
+
+    @media (min-width: @browser-transition-point) {
+        display: none;
+    }
+}
+
+.bookmark-contextdialog-on .bookmark-contextdialog-scrim {
+    opacity: 1;
+    bottom:0;
+    transition: opacity @bookmark-item-contextdialog-scrim-animtime*0.33 @bookmark-item-contextdialog-content-slide-animtime;
+    -moz-transition: opacity @bookmark-item-contextdialog-scrim-animtime*0.33 @bookmark-item-contextdialog-content-slide-animtime;
+    -webkit-transition: opacity @bookmark-item-contextdialog-scrim-animtime*0.33 @bookmark-item-contextdialog-content-slide-animtime;
+    -ms-transition: opacity @bookmark-item-contextdialog-scrim-animtime*0.33 @bookmark-item-contextdialog-content-slide-animtime;
+}
+
+.ws-shell .bookmark-contextdialog-scrim {
+    @media (min-width: @browser-transition-point) {
+        display: block;
+        bottom:0;
+    }
+}
+
+.bookmark-contextdialog-content{
+    padding: 0;
+    z-index: 100;
+    opacity:0;
+    position: absolute;
+    bottom:-100%;
+    width: 100%;
+    height: auto;
+    left:0;
+    text-align: left;
+    background: @white;
+    font-size: 13px;
+    line-height: 19px;
+    //make sure the transition of the  top and left and transform is delay until the bottom animation finishes
+    transition: bottom @bookmark-item-contextdialog-content-slide-animtime,left 0s @bookmark-item-ws-delay, top 0s @bookmark-item-ws-delay, transform 0s @bookmark-item-ws-delay, opacity 0s @bookmark-item-ws-delay;
+    -moz-transition: bottom @bookmark-item-contextdialog-content-slide-animtime,left 0s @bookmark-item-ws-delay, top 0s @bookmark-item-ws-delay, transform 0s @bookmark-item-ws-delay, opacity 0s @bookmark-item-ws-delay;
+    -webkit-transition: bottom @bookmark-item-contextdialog-content-slide-animtime,left 0s @bookmark-item-ws-delay, top 0s @bookmark-item-ws-delay,transform 0s @bookmark-item-ws-delay, opacity 0s @bookmark-item-ws-delay;
+    -ms-transition: bottom @bookmark-item-contextdialog-content-slide-animtime,left 0s @bookmark-item-ws-delay,top 0s @bookmark-item-ws-delay, transform 0s @bookmark-item-ws-delay, opacity 0s @bookmark-item-ws-delay;
+
+    @media (min-width: @browser-transition-point) {
+        border-radius: 2px;
+    }
+}
+
+.ws-desktop .bookmark-contextdialog-content{
+    //make sure there is no slide up glitch by removing the delaytime in transition
+    transition: opacity 0s 0s;
+    -moz-transition: opacity 0s 0s;
+    -webkit-transition: opacity 0s 0s;
+    -ms-transition: opacity 0s 0s;
+}
+// inside native apps, the contextDialog initially sit below the screen but centered in the middle
+.ws-shell .bookmark-contextdialog-content {
+    font-size: 15px;
+    line-height: 22px;
+    @media (min-width: @browser-transition-point) {
+        bottom: -100%;
+        width: @bookmark-item-contextdialog-content-tablet;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        -moz-transform: translate(-50%, 50%);
+        -webkit-transform: translate(-50%, 50%);
+        -ms-transform: translate(-50%, 50%);
+    }
+}
+
+// Adding this .bookmark-contextdialog-on class enable the context dialog box to slide up in smal viewports and through WS1 APP
+.bookmark-contextdialog-on .bookmark-contextdialog-content {
+    bottom:0;
+    opacity:1;
+    height:auto;
+    transition: bottom @bookmark-item-contextdialog-content-slide-animtime;
+    -moz-transition: bottom @bookmark-item-contextdialog-content-slide-animtime;
+    -webkit-transition: bottom @bookmark-item-contextdialog-content-slide-animtime;
+    -ms-transition: bottom @bookmark-item-contextdialog-content-slide-animtime;
+
+    @media (min-width: @browser-transition-point) {
+        min-width: @bookmark-item-contextdialog-width-desktop;
+        width: auto;
+        max-width: @bookmark-item-contextdialog-width-desktop + 40px;
+        // this one ensures the in-situ contextDialog has no bottom transition
+        transition: opacity 0s 0.15s, bottom 0s;
+        -moz-transition: opacity 0s 0.15s, bottom 0s;
+        -webkit-transition: opacity 0s 0.15s, bottom 0s;
+        -ms-transition: opacity 0s 0.15s, bottom 0s;
+        bottom: auto;
+        box-shadow: 0 1px 1px rgba(0,0,0,.25), 0 -1px 1px rgba(0,0,0,.15);
+    }
+}
+
+.ws-shell .bookmark-contextdialog-on .bookmark-contextdialog-content {
+
+    @media (min-width: @browser-transition-point) {
+        width: @bookmark-item-contextdialog-content-tablet;
+        max-width: @bookmark-item-contextdialog-content-tablet;
+        bottom: 50%;
+        transition: bottom @bookmark-item-contextdialog-content-slide-animtime;
+        -moz-transition: bottom @bookmark-item-contextdialog-content-slide-animtime;
+        -webkit-transition: bottom @bookmark-item-contextdialog-content-slide-animtime;
+        -ms-transition: bottom @bookmark-item-contextdialog-content-slide-animtime;
+    }
+}
+
+.bookmark-contextdialog-header {
+    padding: 20px 24px 0;
+    @media (min-width: @browser-transition-point) {
+        display: none;
+        bottom: auto;
+    }
+}
+
+.ws-shell .bookmark-contextdialog-header {
+    @media (min-width: @browser-transition-point) {
+        display: block;
+    }
+}
+.bookmark-contextdialog-app-name {
+    font-family: "Open Sans Semibold", sans-serif;
+    padding-left:@contextdialog-headertext-padding;
+    width:100%;
+    font-size: 17px;
+    height:32px;
+    line-height:32px;
+    .single-line-ellipsis();
+}
+
+.bookmark-contextdialog-app-icon {
+    width: @contextdialog-app-icon-size;
+    height: @contextdialog-app-icon-size;
+    position: absolute;
+    top: 20px;
+    left:20px;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.bookmark-contextdialog-app-types {
+    width: 100%;
+    padding-left: @contextdialog-headertext-padding;
+    vertical-align: top;
+    text-align: left;
+    height: 25px;
+    font-size:0;
+    opacity: @light-text-opacity;
+    font-size:14px;
+    .single-line-ellipsis();
+}
+
+.bookmark-contextdialog-app-category {
+    width:100%;
+    text-align: left;
+    margin-top:10px;
+    height: 20px;
+    font-size: 15px;
+    .single-line-ellipsis();
+
+    .category-label {
+        opacity: @light-text-opacity;
+
+        &:after {
+            content: ":";
+            margin-right: 6px;
+        }
+    }
+}
+
+.bookmark-contextdialog-app-description {
+    margin-top: 12px;
+    line-height: 20px;
+    width:100%;
+    height: 40px;
+    overflow: hidden;
+    white-space: normal;
+    font-size: 15px;
+    .multi-line-ellipsis(2);
+}
+
+.bookmark-contextdialog-actions-divider {
+    width: ~ "calc(100% -20px)";
+    height: 1px;
+    background: #d8dbde;
+    margin: 0 10px 0;
+
+    @media (min-width: @browser-transition-point) {
+        display: none;
+    }
+}
+.ws-shell .bookmark-contextdialog-actions-divider {
+    @media (min-width: @browser-transition-point) {
+        display: block;
+        width: @bookmark-item-contextdialog-content-tablet - 20px;
+    }
+}
+
+.bookmark-contextdialog-actions {
+    width: 100%;
+    padding: 10px 0 24px;
+
+    @media (min-width: @browser-transition-point) {
+        padding: 10px 0;
+    }
+
+    li {
+
+        width: 100%;
+        padding: 0 24px;
+        font-size: 15px;
+        height: 48px;
+        line-height: 48px;
+        .single-line-ellipsis();
+
+        @media (min-width: @browser-transition-point) {
+            font-size:13px;
+            height: 35px;
+            line-height: 35px;
+            padding: 0 12px;
+            position:relative;
+            color: inherit;
+        }
+
+        &:hover {
+            background: rgba(0,0,0,.06);
+            color: @highlightblue;
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            top:0;
+            left:0;
+            height: 35px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        a {
+            color: inherit;
+            display: inline-block;
+            vertical-align: middle;
+            width:100%;
+            height:100%;
+            cursor: pointer;
+            .single-line-ellipsis();
+        }
+
+        svg {
+            width:24px;
+            height:24px;
+            position: relative;
+            margin-right:6px;
+            top: -2px;
+        }
+    }
+
+    @media (min-width: @browser-transition-point) {
+        margin-top: 0;
+    }
+}
+
+.ws-shell .bookmark-contextdialog-actions {
+    @media (min-width: @browser-transition-point) {
+        margin-top: 0;
+    }
+
+    li {
+        width: 100%;
+        padding: 0 24px;
+        font-size: 15px;
+        height: 48px;
+        line-height: 48px;
+        .single-line-ellipsis();
+
+        a {
+            @media (min-width: 540px){
+                width: 100%;
+            }
+        }
+    }
+}

@@ -1,0 +1,42 @@
+<div modal-new="modal-confirmation" class="hub-modal-container view-preference-modal">
+    <section class="dialog-container" ng-controller="ViewDesktopLaunchController as preferencesCtrl">
+        <header class="dialog-header">
+            <h3 class="modal-title" ng-bind-html="app.name"></h3>
+        </header>
+        <div class="dialog-body">
+            <p class="modal-content-text">
+                {{::'hub.preferences.launch.question' | i18n}}&nbsp;
+                {{::'myapps.launch.view.preferredClient.changeLaunchPrefTip' | i18n }}
+            </p>
+            <fieldset class="preference-options-container">
+                <label>
+                    <input type="radio" value="NATIVE" id="native" class="preference-option-radio-input"
+                           ng-model="preferencesCtrl.preferredClient"
+                           ng-class="{'native-selected' : preferencesCtrl.preferredClient === 'NATIVE'}"/>
+                    <div class="preference-option-container">
+                        <svg class="preference-option-icon horizon" svg-symbol="icon-horizonclient-green" ></svg>
+                        <svg class="preference-checked primary-icon-color" svg-symbol="icon-preference-checkmark" ></svg>
+                    </div>
+                    <p class="preference-option-text">{{::'myapps.launch.view.preferredClient.horizonView' | i18n }}</p>
+                    <a class="primary-link-color" target="_blank" ng-show = "preferencesCtrl.preferredClient === 'NATIVE'" ng-href="{{::preferencesCtrl.installLink }}">{{::'appCenter.action.install' | i18n }}</a>
+                </label>
+                <label>
+                    <input type="radio" value="BROWSER" id="browser" class="preference-option-radio-input"
+                           ng-model="preferencesCtrl.preferredClient"
+                           ng-class="{'browser-selected' : preferencesCtrl.preferredClient === 'BROWSER'}"/>
+                    <div class="preference-option-container">
+                        <svg class="preference-option-icon browser" svg-symbol="icon-browser"></svg>
+                        <svg class="preference-checked primary-icon-color" svg-symbol="icon-preference-checkmark" ></svg>
+                    </div>
+                    <p class="preference-option-text">{{::'myapps.launch.view.preferredClient.browser' | i18n }}</p>
+                </label>
+            </fieldset>
+            <p class="launch-requirement" ng-if="preferencesCtrl.preferredClient === 'BROWSER'">{{::'myapps.launch.view.preferredClient.byBrowser.description' | i18n }}</p>
+            <p class="launch-requirement" ng-if="preferencesCtrl.showInstallViewClientMsg()" ng-bind-html="preferencesCtrl.byViewClientDescription"></p>
+        </div>
+        <footer class="dialog-actions two-action">
+            <button class="button-action secondary-action modal-button-secondary" ng-click="$modal.close()">{{::'appCenter.cancel' | i18n }}</button>
+            <button class="button-action primary-action modal-button-primary" ng-click="preferencesCtrl.launchByPreference()"> {{::'app.details.action.open' | i18n }}</button>
+        </footer>
+    </section>
+</div>

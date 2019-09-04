@@ -1,0 +1,22 @@
+<svg class="spinner" width="100" height="100" viewBox="0 0 100 100" version="1.1"
+    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <g id="svgdef-spinner-blade">
+            <rect width="6" height="32" y="-48" x="-3"/>
+        </g>
+    </defs>
+    <g transform="translate(50,50)" stroke="none">
+        <use xlink:href="#svgdef-spinner-blade"/>
+        <use xlink:href="#svgdef-spinner-blade" transform="rotate(30)"/>
+        <use xlink:href="#svgdef-spinner-blade" transform="rotate(60)"/>
+        <use xlink:href="#svgdef-spinner-blade" transform="rotate(90)"/>
+        <use xlink:href="#svgdef-spinner-blade" transform="rotate(120)"/>
+        <use xlink:href="#svgdef-spinner-blade" transform="rotate(150)"/>
+        <use xlink:href="#svgdef-spinner-blade" transform="rotate(180)"/>
+        <use xlink:href="#svgdef-spinner-blade" transform="rotate(210)"/>
+        <use xlink:href="#svgdef-spinner-blade" transform="rotate(240)"/>
+        <use xlink:href="#svgdef-spinner-blade" transform="rotate(270)"/>
+        <use xlink:href="#svgdef-spinner-blade" transform="rotate(300)"/>
+        <use xlink:href="#svgdef-spinner-blade" transform="rotate(330)"/>
+    </g>
+</svg>

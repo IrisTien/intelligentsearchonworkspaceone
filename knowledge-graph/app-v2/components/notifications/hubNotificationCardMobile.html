@@ -1,0 +1,49 @@
+<div id="{{ notificationCardCtrl.id }}" class="hub-notifications-card-container hub-notifications-card-container-mobile">
+    <svg ng-if="!notificationCardCtrl.notification.read_at" svg-symbol="icon-close-popup" class="notifications-close-button" ng-click="notificationCardCtrl.dismissNotification()"></svg>
+    <div class="notifications-content">
+        <div class="notifications-header-container" ng-class="{'priority-background':notificationCardCtrl.isPriority && !notificationCardCtrl.read_at}">
+            <svg ng-if="notificationCardCtrl.isNewAppNotification" svg-symbol="icon-notification-new-apps" class="icon-notifications-ws1 icon-new-app-notification"></svg>
+            <div ng-if="notificationCardCtrl.image" class="icon-notifications-ws1 image-holder" image-load>
+                <img class="icon-notification-image" ng-src="{{notificationCardCtrl.image}}"/>
+            </div>
+            <svg ng-if="!notificationCardCtrl.isNewAppNotification && !notificationCardCtrl.image" svg-symbol="icon-notification-default" class="icon-notifications-ws1 icon-default-notification"></svg>
+            <div ng-if="!notificationCardCtrl.titleAndSubtitle">
+                <h2 class="notifications-title">{{ notificationCardCtrl.title }}</h2>
+            </div>
+            <div ng-if="notificationCardCtrl.titleAndSubtitle">
+                <h2 class="notifications-title-with-subtitle">{{ notificationCardCtrl.title }}</h2>
+                <span class="notifications-subtitle">{{ notificationCardCtrl.subtitle }}</span>
+            </div>
+        </div>
+        <div class="notifications-body-container">
+            <p class="notifications-body-text" ng-bind-html="notificationCardCtrl.message"></p>
+            <div ng-if="notificationCardCtrl.additionalBodySection" class="notifications-additional-body-section">
+                <div ng-repeat="app in notificationCardCtrl.newApps" class="notification-new-app-icon-container">
+                    <img ng-src={{app.iconUrl}} class="icon-additional-body-icons"
+                         ng-class="{'notification-img-invert': (notificationCardCtrl.hideVirtualApp && app.appType === 'VIRTUAL')}">
+                </div>
+                <p ng-if="notificationCardCtrl.excessIconsMessage" class="notification-extra-icon-text">{{::notificationCardCtrl.excessIconsMessage }}</p>
+            </div>
+            <div ng-if="notificationCardCtrl.bodyFieldsSection" class="notifications-card-body-fields-section">
+                <p class="notifications-body-text field-body-text">{{::notificationCardCtrl.cardBodyFieldTitle }}</p>
+                <p class="notifications-body-text field-body-text">{{::notificationCardCtrl.cardBodyFieldDescription }}</p>
+                <div ng-repeat="(key, value) in notificationCardCtrl.cardBodyFieldContent" class="notification-card-body-fields-content">
+                    <p class="key">{{::key }}</p>
+                    <p class="value">{{::value }}</p>
+                </div>
+            </div>
+            <div class="hub-notifications-date" ng-if="!notificationCardCtrl.read_at">{{ notificationCardCtrl.date }}</div>
+        </div>
+        <div class="notifications-archived-text primary-text-color" ng-if="notificationCardCtrl.showArchivedMessage()">
+            <p class="left">{{::'hub.notifications.archived.label' | i18n}}</p>
+            <p class="timestamp" ng-bind="notificationCardCtrl.archivedTimeLabel()"></p>
+        </div>
+        <div ng-if="notificationCardCtrl.actions.length" class="notifications-actions-container">
+            <div class="hub-action-container" ng-class="notificationCardCtrl.getHubLabelClass(action)" ng-repeat="action in notificationCardCtrl.actions">
+                <div class="notification-button" ng-click="notificationCardCtrl.performAction(action, true)"
+                     ng-class="notificationCardCtrl.getLabelClass(action)" ng-bind="notificationCardCtrl.getHubLabel(action)">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

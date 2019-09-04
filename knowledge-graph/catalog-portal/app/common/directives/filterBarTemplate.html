@@ -1,0 +1,19 @@
+<div class="mobileFilterBar" ng-class="{'starred-': $filterBar.config.favEnabled}">
+    <div class="filterFavorite" ng-show="$filterBar.config.favEnabled" ng-click="$filterBar.toggleFavorite()"
+         ng-class="{ 'is-active' : $filterBar.config.isFavorited}" >
+        <svg symbol="star"></svg>
+    </div>
+    <div ng-class="{ 'dropdown': $filterBar.config.isDesktop, 'is-active': !isClosed }" ng-click="$filterBar.toggle()" class="filterDropdown">
+        <div class="filterName">
+            <span>{{$filterBar.selectedItem}}</span>
+        </div>
+        <div class="filterIcon">
+            <a class="iconic- link- button" ng-if="!$filterBar.config.isDesktop">
+                <svg symbol="carat-right"></svg>
+            </a>
+            <a class="iconic- link- button" ng-if="$filterBar.config.isDesktop">
+                <svg symbol="carat-down"></svg>
+            </a>
+        </div>
+    </div>
+</div>

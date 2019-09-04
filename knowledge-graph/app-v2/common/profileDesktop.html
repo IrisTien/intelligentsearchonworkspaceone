@@ -1,0 +1,11 @@
+<ul class="profile-list">
+	<li ng-show="!appCenterCtrl.isAWJade && appCenterCtrl.user.adminUser">
+		<a ng-click="appCenterCtrl.adminConsole($event)">{{'userInfo.adminConsole' | i18n}}</a>
+	</li>
+	<li class="desktopOnly ">
+		<a ng-href="#/settings/account" class="profile-account-link" id="pt-profile-settings">{{'userInfo.settings' | i18n}}</a>
+	</li>
+	<li id="pt-profile-signout" class="border-top signout-link" ng-show="appCenterCtrl.isBrowser" ng-click="appCenterCtrl.signout($event)">
+		<a>{{'userInfo.signout' | i18n}}</a>
+	</li>
+</ul>

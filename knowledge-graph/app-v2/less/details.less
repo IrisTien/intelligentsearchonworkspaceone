@@ -1,0 +1,428 @@
+@app-icon-size-mobile: 60px;
+@app-icon-size-desktop: 72px;
+@app-icon-margin-mobile: 12px;
+@app-icon-margin-desktop: 20px;
+@detail-page-header-actions-height: 68px;
+@detail-page-header-action-padding: 8px;
+@detail-page-divider-color: #cdd0d3;
+
+@user-recommendation-profile-picture-size: 34px;
+
+@no-descritpion-image-size: 88px;
+
+.app-details{
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.app-details.content-container{
+    z-index: 1000;
+}
+
+.details.content-container-scrollable {
+    background: @white;
+}
+
+.icon-detail-bookmarking {
+    width: 32px;
+    height: 32px;
+    background-repeat: no-repeat;
+    background-image: url(../app-v2/graphics/icon-bookmarks-loading.gif);
+    background-size: 60%;
+    background-position: center;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.detail-page-header {
+    background: @white;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0,0,0,.15);
+    border-bottom: 12px solid @paleblue;
+
+    @media (min-width: @browser-transition-point) {
+        margin-top: 40px;
+        margin-bottom: 0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0);
+        padding: 0 0 10px;
+        border-bottom: 0;
+
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left:16px;
+            width: ~ 'calc(100% - 32px)';
+            height: 1px;
+            background: @detail-page-divider-color;
+        }
+    }
+}
+
+.ws-desktop.ws-mac .detail-page-header{
+    @media (min-width: @browser-transition-point) {
+        padding: @mac-toolbar-height 0 10px;
+    }
+}
+
+.ws-shell .detail-page-header {
+    @media (min-width: @browser-transition-point) {
+        margin-top: 0;
+    }
+}
+
+.detail-page-header-content{
+    padding: @app-icon-margin-mobile;
+
+    @media (min-width: @browser-transition-point) {
+        padding: @app-icon-margin-desktop @app-icon-margin-desktop 0 @app-icon-margin-desktop;
+    }
+}
+
+.detail-page-header-icon{
+    position:absolute;
+    width: @app-icon-size-mobile;
+    height: @app-icon-size-mobile;
+    margin-right: @app-icon-margin-mobile;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+
+    @media (min-width: @browser-transition-point) {
+        margin-right: @app-icon-margin-desktop;
+        width: @app-icon-size-desktop;
+        height: @app-icon-size-desktop;
+    }
+}
+
+.detail-page-header-description {
+    margin-left: @app-icon-size-mobile + @app-icon-margin-mobile;
+    min-height: @app-icon-size-mobile + @app-icon-margin-mobile;
+    text-align: left;
+
+    @media (min-width: @browser-transition-point) {
+        min-height: 20px;
+        margin-left: @app-icon-size-desktop + @app-icon-margin-desktop;
+    }
+}
+
+.detail-page-app-title {
+    font-size: 17px;
+    line-height: 22px;
+    @media (min-width: @browser-transition-point) {
+        font-size: 20px;
+        line-height: 30px;
+    }
+}
+
+.detail-page-app-type{
+    font-size: 15px;
+    line-height: 24px;
+    margin-bottom: 4px;
+    opacity: @light-text-opacity;
+
+    li {
+        display: inline-block;
+
+        svg {
+            width: 15px;
+            position:relative;
+            top: -2px;
+        }
+    }
+}
+
+.catalog-item-actions-app-details {
+    display: table;
+    width: 100%;
+    padding: 10px 0;
+    table-layout: fixed;
+    border-top: solid 1px @detail-page-divider-color;
+
+    @media (min-width: @browser-transition-point) {
+        display: inline-block;
+        text-align: left;
+        padding: 0 0 0 106px;
+        border-top: 0;
+    }
+
+    .catalog-action {
+        display: table-cell;
+        text-align: center;
+        border-right: solid 1px @profile-border-color;
+
+        &:last-child {
+            border-right:0;
+        }
+
+        @media (min-width: @browser-transition-point) {
+            display: inline-block;
+            text-align: left;
+            padding-right: 15px;
+            border-right: 0;
+            width: auto;
+        }
+    }
+
+    .action-text {
+        display: inline-block;
+        font-size: 13px;
+        width: 100%;
+        padding: 0 8px;
+        color: @highlightblue;
+        .single-line-ellipsis();
+
+        @media (min-width: @browser-transition-point) {
+            width: auto;
+            line-height: 32px;
+            max-width: 180px;
+            vertical-align: middle;
+            display: inline-block;
+            padding: 0;
+        }
+    }
+}
+
+.details-back-button{
+    cursor: pointer;
+    text-align: left;
+    height: 40px;
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 0;
+    z-index: 100;
+
+    @media (min-width: @browser-transition-point) {
+        display: block;
+    }
+
+    @media (min-width: @desktopM) {
+        left: -60px;
+    }
+
+    span {
+        font-size: 15px;
+        display: inline-block;
+        line-height: @mobile-default-taparea-size;
+        vertical-align: middle;
+    }
+}
+
+// In the WS app we always use the page-back-button in masthead to go back
+.ws-shell .details-back-button {
+    @media (min-width: @browser-transition-point) {
+        display: none;
+    }
+}
+
+.detail-page-screenshots{
+    text-align: left;
+    padding: 16px 16px 24px 16px;
+    @media (min-width: @browser-transition-point) {
+        overflow-x: auto;
+        padding: 16px;
+    }
+    &::-webkit-scrollbar{
+        height: 0;
+    }
+    .carousel{
+        height: 288px;
+    }
+}
+
+ul[rn-carousel].detail-page-screenshot-carousel {
+    width: 100%;
+    height:auto;
+    min-height: 140px;
+    overflow-x:hidden;
+}
+
+ul[rn-carousel] li.detail-page-screenshot-container {
+    position: relative;
+    height: auto;
+    width: 40%;
+    // CSS trick to get ng-carousel dynamic height
+    //https://github.com/revolunet/angular-carousel/issues/309
+    position: relative;
+    margin-left: -40%;
+
+    &:first-child {
+        margin-left: 0;
+    }
+
+    @media (min-width: @browser-transition-point) {
+        width: 280px;
+        margin-left: -280px;
+    }
+
+    img.detail-page-screenshot {
+        width: 92%;
+        max-width:240px;
+    }
+}
+
+.detail-page-description{
+    background: @white;
+    text-align: left;
+    font-size: 15px;
+    clear: both;
+    padding: 16px 16px 12px 16px;
+
+    @media (min-width: @browser-transition-point) {
+        padding: 16px 16px 40px 16px;
+    }
+    .detail-page-description-text{
+        transition: all .25s;
+        overflow: hidden;
+        line-height: 20px;
+    }
+    .detail-page-description-show-more{
+        margin-top: 10px;
+        color: @highlightblue;
+        cursor: pointer;
+    }
+
+    .no-description-text {
+        font-size: 14px;
+        display: inline-block;
+        vertical-align: top;
+        color: inherit;
+        opacity: @light-text-opacity;
+    }
+
+    .detail-page-description-meta-data{
+        padding: 24px 0 0 0;
+        .detail-page-meta-data-item{
+            margin-bottom: 12px;
+
+           .meta-data-title{
+               display: inline-block;
+               width: 80px;
+               font-size: 14px;
+               color: inherit;
+               opacity: @light-text-opacity;
+            }
+
+           .meta-data-value {
+                display: inline-block;
+                margin-left: 10px;
+                font-size: 14px;
+                color: @gray;
+                text-transform: capitalize;
+
+               @media (min-width: @browser-transition-point) {
+                    display: block
+               }
+
+                &.clickable{
+                    color: @highlightblue;
+                }
+
+                li {
+                    display: inline-block;
+                    margin-right: 5px;
+                }
+           }
+        }
+    }
+    //Change style of detail page description for desktop
+    @media (min-width: @browser-transition-point) {
+        .detail-page-description-meta-data{
+            padding: 0;
+            .detail-page-meta-data-item{
+                .meta-data-title,.meta-data-value{
+                    margin: 0;
+                }
+            }
+        }
+        .detail-page-description-text-container {
+            display: inline-block;
+            vertical-align: top;
+            width: 68%;
+            padding-right: 2%;
+        }
+        .detail-page-description-meta-data-container {
+            display: inline-block;
+            vertical-align: top;
+            width: 30%;
+        }
+    }
+}
+
+.details-header-message {
+    line-height: 20px;
+    opacity: @light-text-opacity;
+    font-size: 14px;
+    text-align: left;
+
+    @media (min-width: @browser-transition-point) {
+        margin: 0 16px 8px 92px;
+    }
+    .svg-symbol {
+        float:left;
+        height: 24px;
+        width: 24px;
+        padding-right: 6px;
+        margin: -2px 0 0;
+    }
+
+    p {
+        margin-bottom:12px;
+    }
+}
+
+.detail-page-subtitle {
+    margin-bottom: 8px;
+    font-size: 16px;
+    line-height: 30px;
+    font-weight: 600;
+    color: inherit;
+    @media (min-width: @browser-transition-point) {
+        margin-bottom: 16px;
+        font-size: 18px;
+    }
+}
+
+.details .rn-carousel-control {
+    background: rgba(255,255,255, 0.85);
+}
+
+.ws-desktop .detail-page-header {
+    @media (min-width: @browser-transition-point) {
+        margin-top:0;
+    }
+}
+
+.desktopapp-details-back-button {
+    display: inline-block;
+    width: 40px;
+    height: @desktopapp-header-height;
+    padding: 12px;
+}
+
+.disable-scroll{
+    overflow: hidden;
+}
+
+.details-missing-info-msg {
+    display:inline-block;
+    width:100%;
+    margin-top:5px;
+    font-size:14px;
+    text-align:left;
+    padding:16px;
+
+    .details-missing-info-msg-content {
+        background-color: @paleblue;
+        padding: 10px 1px;
+    }
+
+    .details-missing-info-icon {
+        stroke: @highlightblue;
+        fill: @highlightblue;
+        height:20px;
+        float: left;
+    }
+}

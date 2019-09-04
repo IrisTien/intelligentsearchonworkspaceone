@@ -1,0 +1,16 @@
+<div modal>
+    <div class="dialog centered-" ng-controller="DesktopLaunchController as ctrl">
+        <div class="dialog-body typography">
+            <div class="dialog-info-icon">
+                <svg symbol="info"></svg>
+            </div>
+            <h3>{{'myapps.launch.openApp' | i18n:app.name}}</h3>
+            <p ng-bind-html="ctrl.byViewClientDescription"></p>
+            <p>
+                <button class="link- button" ng-click="$modal.close(true);">{{'button.cancel' | i18n }}</button>
+                <button ng-click="ctrl.launchByViewClient();" class="primary- button"> {{'button.openHorizonView' | i18n }}</button>
+            </p>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,21 @@
+<div modal-new>
+    <section class="dialog-container app-install-modal" stop-event="click">
+        <header class="dialog-header app-install-modal-header">
+            <svg svg-symbol="icon-notify-info" class="icon-appinstall-confirm"></svg>
+            <h3>{{ ::title }}</h3>
+        </header>
+        <div class="dialog-body">
+            <div>
+                <h2>{{ ::name }}</h2>
+                <p ng-if="size"> {{ ::sizeMessage }}</p>
+                <p ng-if="price">{{ 'app.details.label.price' + ':' + price }}</p>
+                <p>{{ ::installMessage }}</p>
+            </div>
+        </div>
+        <footer class="dialog-actions two-action">
+            <button class="button-action secondary-action" ng-click="modal.cancel()">{{ ::'appCenter.cancel' | i18n }}</button>
+            <button class="button-action primary-action" ng-click="modal.close(true)" ng-if="ok">{{ ok | i18n }}</button>
+            <button class="button-action primary-action" ng-click="modal.close(true)" ng-if="!ok">{{ ::'appCenter.install' | i18n }}</button>
+        </footer>
+    </section>
+</div>

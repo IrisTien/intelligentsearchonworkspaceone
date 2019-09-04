@@ -1,0 +1,19 @@
+<div modal class="headered- footered- modal medium-max-">
+    <section class="dialog typography">
+        <header class="dialog-header">
+            <h3>{{ title }}</h3>
+        </header>
+        <div class="dialog-body">
+            <p>{{ 'installStatus.enrollDevice' | i18n:name }}</p>
+            <a href class="link- privacy-page-text" ng-click="appCenterCtrl.openPrivacyPage($event, privacyUrl)">{{ 'installStatus.enrollDevice.learnMore' | i18n }} <svg class="symbol" symbol="carat-down"></svg></a>
+        </div>
+        <footer class="dialog-actions">
+            <button class="link- button installPrompt-action" ng-click="modal.cancel()">
+                <span class="button-text">{{ 'appCenter.cancel' | i18n }}</span>
+            </button>
+            <button class="primary- button installPrompt-action" ng-click="modal.close(true)">
+                <span class="button-text">{{ 'appCenter.proceed' | i18n }}</span>
+            </button>
+        </footer>
+    </section>
+</div>

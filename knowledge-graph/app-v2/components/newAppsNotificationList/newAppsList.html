@@ -1,0 +1,24 @@
+<div class="app-list">
+    <div ng-show="newAppsListCtrl.isLoading" class="loading-container">
+        <spinner-loading></spinner-loading>
+    </div>
+    <header class="masthead-mobile">
+        <masthead sub-page="true" title="newAppsListCtrl.newAppsLabel | i18n" search-path="'apps.search'"
+                  hide-search="true" hide-avatar="true"></masthead>
+        <div class="masthead-mobile-right" actionsheet="{uris:{'contextdialogTemplate':(true)}}"
+             contextdialogTemplate="app-v2/components/notifications/newAppsContextDialog.html" >
+            <svg svg-symbol="icon-dots" class="notifications-overflow-menu" ></svg>
+        </div>
+    </header>
+    <section class="content-container">
+        <div class="content-container-scrollable">
+            <div class="content">
+                <app-list-item ng-repeat="app in newAppsListCtrl.newApps" app="app" hide-virtual-app="newAppsListCtrl.hideVirtualApp"
+                               favorite-enabled="newAppsListCtrl.favoriteEnabled" class="app-list-item new-app"
+                               ng-click="newAppsListCtrl.goToAppDetails(app.appId)"></app-list-item>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div ui-view></div>

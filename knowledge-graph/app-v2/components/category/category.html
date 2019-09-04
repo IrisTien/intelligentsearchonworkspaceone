@@ -1,0 +1,17 @@
+<section class="category category-mobile">
+    <h2 class="section-headline-style2 category-header">{{::'hub.apps.categories' | i18n}}</h2>
+    <ul class="category-default-items">
+        <li class="category-list-item" ng-repeat="label in categoryCtrl.defaultLabel"
+            title="{{label.name}}"
+            ui-sref="apps.list({ type: '{{label.type}}' })">
+            <span>{{label.name}}</span>
+        </li>
+    </ul>
+    <ul class="category-custom-items">
+        <li class="category-list-item" ng-repeat="category in categoryCtrl.category"
+            title="{{category.name}}"
+            ng-click="categoryCtrl.getAppsByCategory(category)">
+            <span>{{category.name}}</span>
+        </li>
+    </ul>
+</section>

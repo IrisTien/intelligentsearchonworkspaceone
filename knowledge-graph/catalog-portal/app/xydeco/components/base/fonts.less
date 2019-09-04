@@ -1,0 +1,288 @@
+/*
+ * Project Horizon
+ * (c) 2013-2014 VMware, Inc. All rights reserved.
+ * VMware Confidential.
+ */
+
+/* `Font` is a package of mixins for specifying the font.  Use these mixins
+   for consistency instead of directly manipulating the CSS font properties.
+*/
+
+@font-family-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+@font-weight-body: normal;
+
+@font-family-heading: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+@font-weight-heading: bold;
+
+@font-family-monospace: 'Lucida Console', Monaco, monospace;
+@font-weight-monospace: normal;
+
+@font-family-symbol: 'Symbol', symbol;
+@font-weight-symbol: normal;
+
+
+.font {
+
+    .config() {
+        // mixin to bring font config constants into (any) scope.
+        @base: 14;
+        @scale: (16/14);
+
+        @size-tiny:   1px * ceil( @base / pow( @scale, 3 ) );
+        @size-xsmall: 1px * ceil( @base / pow( @scale, 2 ) );
+        @size-small:  1px * ceil( @base / @scale );
+        @size-normal: 1px * @base;
+        @size-large:  1px * floor( @base * @scale );
+        @size-xlarge: 1px * floor( @base * pow( @scale, 2 ) );
+        @size-giant:  1px * floor( @base * pow( @scale, 3 ) );
+    }
+
+    .config();
+
+    // Use numeric font weights as follows:
+
+    .weight () {
+        .weight( normal );
+    }
+
+    .weight ( thin ) {
+        font-weight: 100;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .weight ( light ) {
+        font-weight: 300;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .weight ( normal ) {
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .weight ( semi-bold ) {
+        font-weight: 500;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .weight ( bold ) {
+        font-weight: 600;
+    }
+
+    .weight ( heavy ) {
+        font-weight: 900;
+    }
+
+    .weight ( inherit ) {
+        font-weight: inherit;
+    }
+
+
+    // Setting family and weight at once gives us the opportunity to adjust the weight
+    // for each family.  Also, typically we want to reset the weight when we change
+    // font families.
+
+    .family () {
+        .family( body );
+        .weight( normal );
+    }
+
+    .family ( body, @wt: @font-weight-body ) {
+        //font-family: 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
+        font-family: @font-family-body;
+        .weight( @wt );
+    }
+
+    .family ( heading, @wt: @font-weight-heading ) {
+        font-family: @font-family-heading;
+        .weight( @wt );
+    }
+
+    .family ( label, @wt: bold ) {
+        .family( heading, @wt );
+    }
+
+    .family ( nav, @wt: semi-bold ) {
+        .family( heading, @wt );
+    }
+
+    .family ( chart, @wt: normal ) {
+        .family( heading, @wt );
+    }
+
+    .family ( code, @wt: @font-weight-monospace ) {
+        font-family: @font-family-monospace;
+        .weight( @wt );
+    }
+
+    .family ( symbol, @wt: @font-weight-symbol ) {
+        font-family: @font-family-symbol;
+        .weight( @wt );
+    }
+
+    .family ( inherit, @wt: inherit ) {
+        font-family: inherit;
+        .weight( @wt );
+    }
+
+    // Variants
+
+    .variant ( small-caps ) {
+        font-variant: small-caps;
+    }
+
+    // Modular font sizes
+
+    .size () {
+        .size( normal );
+    }
+
+    .size ( tiny ) {
+        font-size: @size-tiny;
+    }
+
+    .size ( xsmall ) {
+        font-size: @size-xsmall;
+    }
+
+    .size ( small ) {
+        font-size: @size-small;
+    }
+
+    .size ( normal ) {
+        font-size: @size-normal;
+    }
+
+    .size ( large ) {
+        font-size: @size-large;
+    }
+
+    .size ( xlarge ) {
+        font-size: @size-xlarge;
+    }
+
+    .size ( giant ) {
+        font-size: @size-giant;
+    }
+
+    // Relative font sizes (note: may result in non-integer sizes)
+
+    .size ( way-smaller ) {
+        font-size: ( 100% / pow(@scale, 2) );
+    }
+
+    .size ( smaller ) {
+        font-size: ( 100% / @scale );
+    }
+
+    .size ( larger ) {
+        font-size: ( 100% * @scale );
+    }
+
+    .size ( way-larger ) {
+        font-size: ( 100% * pow(@scale, 2) );
+    }
+
+    .size ( inherit ) {
+        font-size: inherit;
+    }
+
+    .size ( @dimension ) when ( isnumber(@dimension) ) {
+        font-size: @dimension;
+    }
+
+    // Font colors.
+
+    .color ( normal ) {
+        color: @text-color;
+    }
+
+    .color( grey ) {
+        color: @greytext-color;
+    }
+
+    .color( disabled ) {
+        color: @disabled-text-color;
+    }
+
+    .color( light ) {
+        color: @light-greytext-color;
+    }
+
+    .color( dark ) {
+        color: @dark-text-color;
+    }
+
+    .color( inherit ) {
+        color: inherit;
+    }
+
+    .color ( @color ) when ( iscolor(@color) ) {
+        color: @color;
+    }
+
+    // Font style.  nothing really to do here, but this gives us a hook
+
+    .style ( @style ) {
+        font-style: @style;
+    }
+
+    // Tracking is done using CSS letter-spacing
+
+    .tracking ( tight ) {
+        letter-spacing: -0.05em;
+    }
+
+    .tracking ( normal ) {
+        letter-spacing: 0;
+    }
+
+    .tracking ( semi-loose ) {
+        letter-spacing: 0.01em;
+    }
+
+    .tracking ( loose ) {
+        letter-spacing: 0.05em;
+    }
+
+    .tracking ( very-loose ) {
+        letter-spacing: 0.15em;
+    }
+
+    .tracking ( inherit ) {
+        letter-spacing: inherit;
+    }
+
+    // Leading is specified as an integer, with 0 being no leading.  By default, leading
+    // is a percentage of the font-size, and adjusts with font-size.
+
+    .leading ( @num, @unit: 1 ) when (isnumber(@num)) {
+        line-height: @unit * pow( @scale, @num );
+    }
+
+    .leading ( none, @unit: 1 ) {
+        .leading( 0, @unit );
+    }
+
+    .leading ( tight, @unit: 1 ) {
+        .leading( 1, @unit );
+    }
+
+    .leading ( normal, @unit: 1 ) {
+        .leading( 2, @unit );
+    }
+
+    .leading ( loose, @unit: 1 ) {
+        .leading( 3, @unit );
+    }
+
+    .leading ( inherit ) {
+        line-height: inherit;
+    }
+
+    // Fixed leading uses the current font-size to set the leading for all sizes of font.
+
+    .fixed-leading ( @value ) {
+        .leading( @value, 1em );
+    }
+}

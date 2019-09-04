@@ -1,0 +1,10 @@
+<ul class="menu">
+    <li ng-show="!appCenterCtrl.isAWJade && appCenterCtrl.user.adminUser" class="desktopOnly"><a ng-click="appCenterCtrl.adminConsole($event)">{{'userInfo.adminConsole'  | i18n}}</a></li>
+    <li class="desktopOnly"><a ng-click="appCenterCtrl.about($event, true)">{{'userInfo.about'  | i18n}}</a></li>
+    <li class="mobileOnly"><a ng-click="appCenterCtrl.about($event, false)">{{'userInfo.about'  | i18n}}</a></li>
+    <li ng-show="!appCenterCtrl.isAWJade"><a ng-click="appCenterCtrl.preferences($event)">{{'userInfo.preferences'  | i18n}}</a></li>
+    <li><a ng-click="appCenterCtrl.openDevices($event)">{{'userInfo.devices'  | i18n}}</a></li>
+    <li ng-show="appCenterCtrl.showRemoveAccountLink"><a ng-click="appCenterCtrl.unEnrollConfirm($event)">{{'userInfo.removeAccount' | i18n}}</a></li>
+    <li class="desktopOnly account-link"><a ng-click="appCenterCtrl.openProfile($event)">{{'userInfo.account' | i18n}}</a></li>
+    <li ng-show="appCenterCtrl.passwordChangeEnabled" class="mobileOnly password-link"><a ng-click="appCenterCtrl.changePassword($event)">{{'userInfo.password' | i18n}}</a></li>
+</ul>

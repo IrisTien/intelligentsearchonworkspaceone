@@ -1,0 +1,153 @@
+@app-tile-width-xs: 84px;
+@app-tile-width-s: 94px;
+@app-tile-width-m: 100px;
+@app-tile-width-l: 108px;
+
+@app-icon-size-xs: 52px;
+@app-icon-size-s: 58px;
+@app-icon-size-m: 62px;
+@app-icon-size-l: 66px;
+
+@app-tile-border-radius-s: 8px;
+@app-tile-border-radius-m: 8px;
+
+@app-label-height-s: 24px;
+@app-dots-width: 16px;
+@app-dots-height: 24px;
+
+@app-label-font-size-s: 11px;
+@app-label-font-size-m: 12px;
+
+@app-tile-offset: 2px;
+@app-spinner-background: rgba(255,255,255,0.7);
+
+// This is the app tiles for the landing page, the sub pages are list view how should we do it? -- adding a class .app-tile-listview??
+.app-tile {
+    margin: 10px auto;
+    width: @app-tile-width-xs;
+    height: @app-tile-width-xs;
+    border-radius: @app-tile-border-radius-s;
+    padding: (@app-tile-width-xs - @app-icon-size-xs)/2;
+    background: @app-tile-bg-color;
+    box-shadow: 0 0 6px 0 @app-tile-shadow-color;
+    cursor: pointer;
+
+    // The grid-item is with fixible width using calc, adding another stop for tiles
+    @media (min-width: 360px) {
+        width: @app-tile-width-s;
+        height: @app-tile-width-s;
+        padding: (@app-tile-width-s - @app-icon-size-s)/2;
+    }
+
+    @media (min-width: @phoneS) {
+        width: @app-tile-width-m;
+        height: @app-tile-width-m;
+        padding: (@app-tile-width-m - @app-icon-size-m)/2;
+    }
+
+    @media (min-width: @phoneM) {
+        width: @app-tile-width-l;
+        height: @app-tile-width-l;
+        padding: (@app-tile-width-l - @app-icon-size-l)/2;
+    }
+
+    &.disable-app {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.app-favorites-edit .app-tile {
+    width: @app-tile-width-s;
+    height: @app-tile-width-s;
+
+    @media (min-width: @phoneM) {
+        width: @app-tile-width-m;
+        height: @app-tile-width-m;
+    }
+}
+
+.app-icon {
+    width: @app-icon-size-xs;
+    height: @app-icon-size-xs;
+    margin: auto;
+    .app-icon-background();
+
+    @media (min-width: 360px) {
+        width: @app-icon-size-s;
+        height: @app-icon-size-s;
+    }
+
+    @media (min-width: @phoneS) {
+        width: @app-icon-size-m;
+        height: @app-icon-size-m;
+    }
+
+    @media (min-width: @phoneM) {
+        width: @app-icon-size-l;
+        height: @app-icon-size-l;
+    }
+
+    img {
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        position: relative;
+        top: 50%;
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 6px;
+        background: @white;
+    }
+}
+
+.app-favorites-edit .app-icon {
+    width: @app-icon-size-s;
+    height: @app-icon-size-s;
+}
+
+.app-label-container {
+    width: 100%;
+    height: 28px;
+    line-height: 14px;
+    padding: 0 (@app-dots-width + @app-tile-offset) 0 (@app-dots-width/2 - @app-tile-offset);
+    position: relative;
+    .base-text-style(@app-label-font-size-s, 600);
+    text-align: left;
+    white-space: normal;
+    background-image: url(../app-v2/graphics-hub/icon-dots-black.svg);
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-size: 16px 24px;
+
+    @media (min-width: @phoneS) {
+        height: 32px;
+        line-height: 16px;
+        font-size: @app-label-font-size-m;
+    }
+
+    &.edit-mode {
+        background-image: none;
+    }
+}
+
+.app-label {
+    .multi-line-ellipsis(2);
+}
+
+.app-item-actions {
+    position: absolute;
+    width: @mobile-default-taparea-size - 6px;
+    height: @mobile-default-taparea-size - 4px;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+.icon-app-label-more {
+    position: absolute;
+    top:0;
+    right: @app-tile-offset;
+    width: @app-dots-width;
+    height: @app-dots-height;
+    opacity: @light-text-opacity;
+}

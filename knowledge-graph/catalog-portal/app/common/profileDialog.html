@@ -1,0 +1,68 @@
+<div modal class="headered- footered- new medium-max-">
+    <div class="change-password-popup" ng-controller="ChangePasswordController as ctrl">
+        <section class="dialog">
+                <header class="dialog-header">
+                    <div class="form-row">
+                        <h3>{{:: 'userInfo.account' | i18n}}</h3>
+                    </div>
+                    <button class="form-row right-icon button link-" ng-click="ctrl.closePasswordForm()">
+                        <svg class="close-ico" symbol="close"></svg>
+                    </button>
+                </header>
+                <section class="dialog-body">
+                    <div class="left-container" ng-class="{'reduce-width' : ctrl.showPasswordForm}">
+                        <div class="profile-container">
+                            <p class="user-name profile-value">{{:: ctrl.userInfo.firstName }}&nbsp;{{:: ctrl.userInfo.lastName }}</p>
+                            <p ng-if="ctrl.userInfo.emailAddress">
+                                <span class="label">{{:: 'app.changePassword.label.email' | i18n}}</span>
+                                <span class="profile-value">{{:: ctrl.userInfo.emailAddress }}</span></p>
+                            <p ng-if="ctrl.userInfo.phoneNumber">
+                                <span class="label">{{:: 'app.changePassword.label.phone' | i18n}}</span>
+                                <span class="profile-value">{{:: ctrl.userInfo.phoneNumber }}</span></p>
+                            <p>
+                                <a ng-if="ctrl.userInfo.changePasswordAllowed" class="iconic- link- button change-password-link" ng-click="ctrl.togglePasswordForm()">
+                                    <span>{{::'app.changePassword.title' | i18n}}</span>
+                                </a>
+                            </p>
+                        </div>
+                        <div ng-show="ctrl.showPasswordForm && ctrl.policies" class="policy-container">
+                            <div class="password-policy">
+                                <p>{{:: 'app.passwordPolicy.passwordRequirements' | i18n}}</p>
+                                <p ng-bind-html="ctrl.policyString"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="ctrl.showPasswordForm" class="password-container">
+                        <form name="changePasswordForm" novalidate>
+                            <div class="error-messages">
+                                <svg ng-show="ctrl.showErrors || ctrl.errorMessage" class="warning-ico" symbol="warning"></svg>
+                                <div>
+                                    <span class="server-errors" ng-show="ctrl.showErrors" ng-repeat="error in ctrl.errorMessages">{{ error.description }}&nbsp;</span>
+                                    <span class="mismatch-error" ng-show="ctrl.errorMessage">{{ctrl.errorMessage}}</span>
+                                </div>
+                            </div>
+                            <div class="divider">
+                                <div class="form-fields-holder">
+                                    <input class="form-row input-field" type="password" ng-model="ctrl.currentPassword" placeholder="{{:: 'app.changePassword.enterCurrentPassword' | i18n}}" required>
+                                </div>
+                                <div class="form-fields-holder new-password-label">
+                                    <p>NEW</p>
+                                </div>
+                                <div class="form-fields-holder">
+                                    <input class="form-row input-field" ng-class="{'error' : ctrl.errorMessage}" type="password" ng-model="ctrl.newPassword" placeholder="{{:: 'app.changePassword.enterNewPassword' | i18n}}" required>
+                                </div>
+                                <div class="form-fields-holder no-margin">
+                                    <input class="form-row input-field" ng-class="{'error' : ctrl.errorMessage}" type="password" ng-model="ctrl.confirmNewPassword" placeholder="{{:: 'app.changePassword.confirmNewPassword' | i18n}}" required>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+                <footer class="dialog-actions">
+                    <button class="button link- close-button" ng-class="{'move-left' : ctrl.showPasswordForm}" ng-click="ctrl.closePasswordForm()">{{:: 'button.close' | i18n }}</button>
+                    <button class="button link- password-save-button" ng-show="ctrl.showPasswordForm" ng-click="ctrl.changePasswordConfirm($event)" ng-disabled="changePasswordForm.$invalid">{{:: 'button.save' | i18n }}</button>
+                </footer>
+        </section>
+        <div spinner ng-show="ctrl.isLoading"></div>
+    </div>
+</div>

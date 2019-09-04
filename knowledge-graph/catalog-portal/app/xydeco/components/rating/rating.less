@@ -1,0 +1,34 @@
+/*
+ * Project Horizon
+ * (c) 2013-2015 VMware, Inc. All rights reserved.
+ * VMware Confidential.
+ */
+
+ /** @pattern .rating
+
+A visual indicator of a user rating (i.e., one to five stars).
+
+ @example[rating.html]
+
+ **/
+
+ @rating-fill-color: #FFC20E;
+ @rating-stroke-color: #9B9B9B;
+
+.rating {
+    white-space: nowrap;
+    color: @rating-stroke-color;
+
+    > .symbol {
+        fill: none;
+
+        &.filled- {
+            fill: @rating-fill-color;
+            stroke: none;
+        }
+    }
+
+    > .symbol + .symbol {
+        margin-left: .25em;
+    }
+}

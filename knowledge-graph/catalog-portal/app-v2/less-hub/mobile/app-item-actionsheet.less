@@ -1,0 +1,147 @@
+@appitem-contextdialog-scrim-animtime: 0.15s;
+@appitem-contextdialog-delay: 0.25s;
+@appitem-contextdialog-content-animtime: 0.35s;
+@grid-gutter: 24px;
+
+// styles for iOS
+@ios-actionsheet-gutter: 8px;
+@ios-action-sheet-broder-radius: 13px;
+@ios-action-sheet-item-height: 58px;
+// These colors are not going to change so stays here
+@ios-action-sheet-text-color: #0079ff;
+@ios-actionsheet-bg: rgba(241,241,241, 1);
+@ios-action-sheet-item-border-color: rgba(199,199,199,.78);
+@ios-action-sheet-scrim-bg: rgba(0,0,0,.4);
+@ios-action-sheet-font-size: 20px;
+@ios-action-sheet-max-width: 432px;
+
+// Android actionsheet style
+@android-action-sheet-font-size: 16px;
+@android-action-sheet-item-height: 48px;
+@android-action-sheet-text-color: #696969;
+
+.appitem-contextdialog-container {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    //need to be higher than footer and header
+    z-index:1000;
+}
+
+// Scrim is inside a button which on click dismisses the whole contextDialog
+.appitem-contextdialog-scrim {
+    position: fixed;
+    display: block;
+    width: 100%;
+    height:100%;
+    bottom: -100%;
+    background: rgba(0,0,0, .4);
+    opacity: 0;
+    z-index:0;
+    transition: opacity @appitem-contextdialog-scrim-animtime @appitem-contextdialog-delay;
+    -webkit-transition: opacity @appitem-contextdialog-scrim-animtime @appitem-contextdialog-delay;
+}
+
+.actionsheet-on .appitem-contextdialog-scrim {
+    opacity: 1;
+    bottom: 0;
+    transition: opacity @appitem-contextdialog-scrim-animtime * 0.67 @appitem-contextdialog-delay;
+    -webkit-transition: opacity @appitem-contextdialog-scrim-animtime * 0.67 @appitem-contextdialog-delay;
+}
+
+.appitem-contextdialog-content {
+    width: 100%;
+    padding: 0;
+    z-index: 100;
+    position: absolute;
+    bottom: -100%;
+    height: auto;
+    opacity: 0;
+    left: 0;
+    text-align: center;
+    padding: @ios-actionsheet-gutter;
+    transition: bottom @appitem-contextdialog-content-animtime, opacity 0s @appitem-contextdialog-delay;
+    -webkit-transition: bottom @appitem-contextdialog-content-animtime, opacity 0s @appitem-contextdialog-delay;
+
+    @media (min-width: @phoneL) {
+        width: @ios-action-sheet-max-width;
+        left: 50%;
+        margin-left: -@ios-action-sheet-max-width/2;
+    }
+}
+
+.android .appitem-contextdialog-content {
+    background: @white;
+    text-align: left;
+    padding: 0 0 8px 0;
+}
+
+// Adding this .bookmark-contextdialog-on class enable the context dialog box to slide up in smal viewports and through WS1 APP
+.actionsheet-on .appitem-contextdialog-content {
+    bottom: 0;
+    opacity: 1;
+    height: auto;
+    transition: bottom @appitem-contextdialog-content-animtime;
+    -webkit-transition: bottom @appitem-contextdialog-content-animtime;
+}
+
+.appitem-contextdialog-actions {
+    width: 100%;
+    margin: 0 auto;
+}
+
+// This class can be reused for the any catalog app item actions in the list view
+.appitem-contextdialog-actions-list {
+    background: @ios-actionsheet-bg;
+    border-radius: @ios-action-sheet-broder-radius;
+    margin-top: @ios-actionsheet-gutter;
+    color: @ios-action-sheet-text-color;
+
+    li {
+        .base-text-style(@ios-action-sheet-font-size, 400);
+        height: @ios-action-sheet-item-height;
+        line-height: @ios-action-sheet-item-height - 2px;
+        border-bottom: solid 1px @ios-action-sheet-item-border-color;
+        .single-line-ellipsis();
+
+        &:last-child {
+            border-bottom: 0;
+        }
+
+        a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        // ensure the event target is the same as the link
+        span {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &.cancel-action {
+        background: #fff;
+
+        li {
+            .base-text-style(@ios-action-sheet-font-size, 500);
+        }
+    }
+}
+
+.android .appitem-contextdialog-actions-list {
+    background: transparent;
+    color: @android-action-sheet-text-color;
+
+    li {
+        .base-text-style(@android-action-sheet-font-size - 2px, 500);
+        width: 100%;
+        padding: 0 @list-item-padding-h;
+        height: @android-action-sheet-item-height;
+        line-height: @android-action-sheet-item-height;
+        border-bottom: 0;
+    }
+}

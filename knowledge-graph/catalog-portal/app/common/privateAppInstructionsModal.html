@@ -1,0 +1,65 @@
+<div modal class="footered- modal medium-max-">
+    <section class="dialog typography">
+        <div class="dialog-body">
+            <p class="instructionsTitle">
+                {{'appCenter.internalApp.installationStepTitle' | i18n}}
+            </p>
+            <div class="stepper">
+                <div class="step">
+                    <div>
+                        <div class="circle">1</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="body">{{'appCenter.internalApp.step1' | i18n}}</div>
+                </div>
+                <div class="step">
+                    <div>
+                        <div class="circle">2</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="body">{{'appCenter.internalApp.step2' | i18n}}</div>
+                </div>
+                <div class="step">
+                    <div>
+                        <div class="circle">3</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="body">{{'appCenter.internalApp.step3' | i18n}}</div>
+                </div>
+                <div class="step">
+                    <div>
+                        <div class="circle">4</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="body">{{'appCenter.internalApp.step4' | i18n}}</div>
+                </div>
+                <div class="step">
+                    <div>
+                        <div class="circle">5</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="body">{{'appCenter.internalApp.step5' | i18n}}</div>
+                </div>
+            </div>
+            <p class="tutorialLink" ng-click="modal.open('app/common/privateAppTutorialModal.html', { modal: modal })">{{'appCenter.internalApp.watchTutorial' | i18n}}</p>
+        </div>
+        <footer class="dialog-actions">
+            <button class="link- button installPrompt-action" ng-click="modal.cancel()">
+                <span class="button-text">{{ 'appCenter.cancel' | i18n }}</span>
+            </button>
+            <button class="primary- button installPrompt-action" ng-click="modal.close(true)">
+                <span class="button-text">{{ 'appCenter.install' | i18n }}</span>
+            </button>
+        </footer>
+    </section>
+</div>
+<style type="text/css">
+    .instructionsTitle {
+        font-weight: bold;
+        padding-bottom: 15px;
+    }
+    .tutorialLink {
+        text-align: center;
+        color: #4990C2;
+    }
+</style>

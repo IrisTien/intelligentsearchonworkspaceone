@@ -1,0 +1,17 @@
+<div class="settings-detail-content-container">
+    <div class="settings-detail-mobile-header">
+        <div class="settings-back" id="pt-support-devices-button" ng-if="settingsCtrl"
+             ng-click="settingsCtrl.dismissSettingsDetail()">
+            <svg svg-symbol="icon-page-back" class="icon-page-back"></svg>
+        </div>
+        <div class="settings-back" id="pt-support-devices-button" ng-if="supportCtrl"
+             ng-click="supportCtrl.dismissSupportDetail()">
+            <svg svg-symbol="icon-page-back" class="icon-page-back"></svg>
+        </div>
+        <h2>{{::'userInfo.devices' | i18n}}</h2>
+    </div>
+    <div class="settings-detail-content-scrollable device-page">
+        <div class="settings-detail-content" ng-include="'app-v2/common/deviceList.html'" ng-controller="DevicesController as devicesCtrl">
+        </div>
+    </div>
+</div>

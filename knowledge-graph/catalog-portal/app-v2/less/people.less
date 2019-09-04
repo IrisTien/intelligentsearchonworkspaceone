@@ -1,0 +1,218 @@
+@collapse-panel-anim-time: 0.35s;
+@user-avatar-size-s: 48px;
+@user-avatar-size-m: 64px;
+@people-item-padding: 16px;
+@people-team-header-font-size: 16px;
+@user-team-item-name-font-size: 16px;
+@user-team-item-title-font-size: 14px;
+@user-avatar-border-radius: 50%;
+@people-team-section-user-initial-font-size: 18px;
+@people-content-padding: 24px;
+@collapse-panel-margin: 10px;
+
+@team-section-user-initial-font-size:12px;
+
+.people.content-container-scrollable {
+    padding: 0;
+
+    @media (min-width: @browser-transition-point) {
+        padding: @people-content-padding 0;
+    }
+}
+.people-search-illo-header {
+    margin-bottom: 20px;
+}
+
+.illo-people-search-start {
+    svg {
+        display: block;
+        width: 120px;
+        height: 96px;
+        margin: 10px auto;
+    }
+}
+
+.search-for-people-text {
+    font-size: 15px;
+    text-align: center;
+}
+
+.people .collapse-panel-container {
+    margin: @collapse-panel-margin 0;
+}
+
+.people-team-section {
+    background: @white;
+    padding: 20px 0;
+    @media (min-width: @browser-transition-point) {
+        padding:0;
+        background: none;
+    }
+
+    .people-team-item {
+        .user-details-section {
+            display: inline-block;
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        .copy-icon-placeholder {
+            position: absolute;
+            right: 15px;
+            top: 30%;
+        }
+    }
+
+    // per UX discussion, for localization concerns use 2 lines for longer string
+    .copy-email-tooltip .tooltip {
+        text-align: center;
+        top: 36px;
+        font-size: 13px;
+        min-width: 100px;
+        max-width: 110px;
+        min-height: 25px;
+        bottom: auto;
+    }
+}
+
+body:not(.ws-shell) .people-team-section {
+    .people-team-item:hover {
+        .user-details-section.reduce-card-width-on-hover {
+            width: ~ 'calc(100% - 48px)';
+        }
+
+        .copy-email-section {
+            display: inline-block;
+        }
+    }
+}
+
+.people-team-header {
+    font-family: @item-header-text;
+    font-size: @people-team-header-font-size;
+    line-height: 2;
+    text-align: left;
+}
+
+.people-team-item {
+    padding: (@people-item-padding - 4px) @people-item-padding;
+    text-align: left;
+    cursor: pointer;
+
+    @media (min-width: @browser-transition-point) {
+        padding: @people-item-padding;
+    }
+
+    .copy-email-section {
+        display: none;
+        width: 48px;
+    }
+}
+
+.user-team-item-name {
+    font-family: @item-header-text;
+    font-size: @user-team-item-name-font-size - 2px;
+    line-height: 1.8;
+    width: 100%;
+    padding-left: @user-avatar-size-s + 12px;
+    margin-top: 2px;
+    .single-line-ellipsis();
+
+    @media (min-width: @desktopM) {
+        margin-top: 6px;
+        font-size: @user-team-item-name-font-size;
+        padding-left: @user-avatar-size-m + 16px;
+    }
+}
+
+.user-team-item-title {
+    font-size: @user-team-item-title-font-size - 2px;
+    opacity:@light-text-opacity;
+    line-height: 1.8;
+    width: 100%;
+    padding-left: @user-avatar-size-s + 12px;
+    .single-line-ellipsis();
+
+    @media (min-width: @desktopM) {
+        font-size: @user-team-item-title-font-size;
+        padding-left: @user-avatar-size-m + 16px;
+    }
+}
+
+.user-team-item-avatar {
+    position: absolute;
+    top: (@people-item-padding - 4px);
+    left: @people-item-padding;
+    border-radius: @user-avatar-border-radius;
+    background-size: contain;
+    width: @user-avatar-size-s;
+    height: @user-avatar-size-s;
+    color: @white;
+    background-image: url(../app-v2/graphics/icon-profile.svg);
+
+    @media (min-width: @browser-transition-point) {
+        top: @people-item-padding;
+    }
+
+    @media (min-width: @desktopM) {
+        top: @people-item-padding;
+        width: @user-avatar-size-m;
+        height: @user-avatar-size-m;
+    }
+
+    img {
+        border-radius: @user-avatar-border-radius;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+.user-detail-initial {
+    font-family: "Open Sans Regular", sans-serif;
+    font-size: @people-team-section-user-initial-font-size;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: inline-block;
+    position: absolute;
+    background: @lightgray;
+    border-radius: @user-avatar-border-radius;
+    line-height: @user-avatar-size-s;
+    top: 0;
+    left: 0;
+    text-transform: uppercase;
+
+    @media (min-width: @desktopM) {
+        font-size:24px;
+        line-height: 64px;
+    }
+}
+
+.user-details-section {
+    .email-details-copied {
+        line-height: 1.6;
+        margin-left: 60px;
+        font-size: 14px;
+        .single-line-ellipsis();
+
+        @media (min-width: @desktopM) {
+            line-height: 2;
+            margin-left: @user-avatar-size-m + 16px;
+        }
+
+        .email-copied-text {
+            font-size: @user-team-item-title-font-size;
+            opacity:@light-text-opacity;
+            line-height: 1.6;
+            .icon-check {
+                width: 20px;
+                height: 20px;
+                vertical-align: text-top;
+            }
+        }
+    }
+}

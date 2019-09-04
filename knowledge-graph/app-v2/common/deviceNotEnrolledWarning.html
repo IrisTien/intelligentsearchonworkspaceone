@@ -1,0 +1,12 @@
+<div modal-new>
+    <section class="dialog-container">
+        <div class="dialog-body">
+            <svg class="modal-warning-message-icon" svg-symbol="icon-warning-big"></svg>
+            <p>{{ 'appCenter.mdm.device.poll.error' | i18n}}</p>
+        </div>
+        <footer class="dialog-actions two-action">
+            <button class="button-action secondary-action" ng-click="$modal.cancel()">{{ 'userInfo.signout' | i18n }}</button>
+            <button class="button-action primary-action" ng-click="$modal.close()">{{ 'userInfo.tryAgain' | i18n }}</button>
+        </footer>
+    </section>
+</div>

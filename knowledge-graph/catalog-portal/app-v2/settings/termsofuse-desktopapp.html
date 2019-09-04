@@ -1,0 +1,17 @@
+<div modal-new class="modal-termsofuse">
+    <section class="dialog-container">
+        <header class="dialog-header no-symbol">
+            <h2>{{::'userInfo.termsofuse' | i18n}}</h2>
+            <svg svg-symbol="icon-close-popup" class="modal-popup-close-icon" ng-click="$modal.close()"></svg>
+        </header>
+
+        <div class="dialog-body">
+            <div id="tou-data" class="tou-values tou-data" ng-if="appCenterCtrl.touContent">
+                <p class="tou-content" ng-bind-html="appCenterCtrl.touContent"></p>
+            </div>
+        </div>
+    </section>
+    <div ng-show="!appCenterCtrl.touContent" class="tou-loading">
+        <div ng-include="'app-v2/common/spinner.html'"></div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<section class="content-container details-apps">
+    <div class="page-breadcrumb-bar"></div>
+    <div class="content-container-scrollable" scroll-check currentview="details-apps" elemclass=".details-apps">
+        <div class="content details-apps-content">
+            <!-- details-page-header section -->
+            <section class="details-page-header">
+                <div class="preview-details-app-tile"></div>
+
+                <h2 class="preview-detail-page-app-title preview-animating-bg"></h2>
+                <p class="preview-detail-page-app-type preview-animating-bg"></p>
+
+                <div class="app-details-action">
+                    <span class="preview-app-button preview-animating-bg"></span>
+                    <span class="preview-app-button preview-animating-bg"></span>
+                </div>
+            </section>
+
+            <!--<section class="section-container app-rating-container" ng-if= "::detailsCtrl.isAppRatingsEnabled">-->
+            <section class="section-container preview-app-rating-container">
+                <p class="preview-apps-rating preview-animating-bg"></p>
+                <p class="preview-apps-rating preview-animating-bg"></p>
+            </section>
+
+            <section class="detail-page-description section-container" >
+                <h2 class="section-headline-style2 preview-description-header"></h2>
+                <div class="detail-page-description-text-container">
+                    <p class="preview-detail-page-description-line"></p>
+                    <p class="preview-detail-page-description-line"></p>
+                    <p class="preview-detail-page-description-line short"></p>
+                </div>
+            </section>
+
+            <section class="section-container detail-page-categories" ng-if="::detailsCtrl.categories.length">
+                <h2 class="section-headline-style2 preview-categories-header"></h2>
+                <ul class="categories-content">
+                    <li class="preview-details-category-item1"></li>
+                    <li class="preview-details-category-item2"></li>
+                </ul>
+            </section>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,50 @@
+<div class="settings-detail-content-container">
+    <div class="settings-detail-mobile-header">
+        <div class="settings-back settings-preferences-button" ng-click="::settingsCtrl.dismissSettingsDetail()">
+            <svg svg-symbol="icon-page-back" class="icon-page-back"></svg>
+        </div>
+        <h2>{{::'userInfo.preferences' | i18n}}</h2>
+    </div>
+    <div class="settings-detail-content-scrollable">
+        <div class="settings-detail-content">
+            <h2 class="settings-detail-title">{{'myapps.launch.view.selectPreferredLaunchClientTitle' | i18n }}</h2>
+            <p class="preference-instruction">{{'myapps.launch.view.selectPreferredLaunchClientText' | i18n }}</p>
+            <p class="preference-instruction">{{'myapps.launch.view.selectPreferredLaunchClientText2' | i18n }}</p>
+            <fieldset class="preference-options-container" ng-init="preferencesCtrl.preferredClientTemp = preferencesCtrl.preferredClient">
+
+                <label>
+                    <input type="radio" ng-model="preferencesCtrl.preferredClientTemp" value="NATIVE" id="native" class="preference-option-radio-input"  />
+                    <div class="preference-option-container">
+                        <svg class="preference-option-icon horizon" svg-symbol="icon-horizonclient-green" ></svg>
+                        <svg class="preference-checked" svg-symbol="icon-preference-checkmark" ></svg>
+                        <p class="preference-option-text">{{'myapps.launch.view.preferredClient.horizonView' | i18n }}</p>
+                        <a target="_blank" ng-show = "preferencesCtrl.preferredClientTemp === 'NATIVE'" ng-href="{{ preferencesCtrl.installLink }}">{{'appCenter.action.install' | i18n }}</a>
+                    </div>
+                </label>
+
+                <label>
+                    <input type="radio" ng-model="preferencesCtrl.preferredClientTemp" value="BROWSER" id="browser" class="preference-option-radio-input" />
+                    <div class="preference-option-container">
+                        <svg class="preference-option-icon browser" svg-symbol="icon-browser"></svg>
+                        <svg class="preference-checked" svg-symbol="icon-preference-checkmark" ></svg>
+                        <p class="preference-option-text">{{'myapps.launch.view.preferredClient.browser' | i18n }}</p>
+                    </div>
+                </label>
+            </fieldset>
+
+            <div ng-if="preferencesCtrl.showActions" class="preference-actions">
+                <a class="setting-button cancel-preference secondary-button" ng-click="preferencesCtrl.cancelPreferenceChange();"> {{'button.cancel' | i18n }}</a>
+                <a class="setting-button save-button primary-button" ng-click="preferencesCtrl.saveLaunchDesktopPreference();"> {{'button.save' | i18n }}</a>
+            </div>
+
+            <div class="pv-preference-container" id="pt-pv-preference" ng-if="preferencesCtrl.showPVPreference">
+                <h2>{{ 'app.passwordVault.preference.title' | i18n}}</h2>
+                <p>{{ 'app.passwordVault.preference.instruction' | i18n}}</p>
+                <a id="pt-pv-storelink" ng-click="preferencesCtrl.installPasswordVaultPlugin()">
+                    <svg svg-symbol="icon-ws1-lockup"></svg>
+                    <span>{{ 'app.passwordVault.preference.getextension' | i18n}}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

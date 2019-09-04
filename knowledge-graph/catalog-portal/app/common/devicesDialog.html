@@ -1,0 +1,83 @@
+<div modal class="thinapp-devices footered- modal scrollable- fullscreen-mobile-">
+    <section class="dialog" ng-controller="DevicesController as ctrl">
+        <div class="dialog-body typography userDevices">
+            <h3>{{'app.devices.heading' | i18n }}</h3>
+            <div class="desktopOnly">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>{{'app.devices.tableColumn.deviceName' | i18n }}</th>
+                        <th>{{'app.devices.tableColumn.lastLoginTime' | i18n }}</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="ctrl.devices.length > 0 && !ctrl.isLoading" ng-repeat="device in ctrl.devices">
+                        <tr>
+                            <td><img ng-if="device.iconName != ''" class="device-icon" src="app/graphics/{{device.iconName}}">&nbsp;&nbsp;{{device.machineName}}</td>
+                            <td>{{device.lastLoginTime | date:'medium'}}</td>
+                            <td>
+                                <button ng-click="ctrl.unlinkDevice(device, $event)" class="small- primary- button" ng-show="device.osFamily == 'Windows'"> {{'app.devices.unlinkDevice' | i18n }}</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody ng-if="ctrl.devices.length < 1 && !ctrl.isLoading" >
+                    <tr>
+                        <td colspan="3">
+                            <div class="text-center">
+                                <br/><br/><br/>
+                                <strong>{{"app.devices.emptyDeviceListTitle" | i18n}}</strong>
+                                <br/><br/>
+                                <p>{{'app.devices.emptyDeviceListMessage' | i18n}}</p>
+                                <br/><br/><br/><br/><br/><br/>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mobileOnly">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>{{'app.devices.tableColumn.deviceName' | i18n }}</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="ctrl.devices.length > 0 && !ctrl.isLoading" ng-repeat="device in ctrl.devices">
+                        <tr>
+                            <td>
+                                <div>
+                                    <div>
+                                        <img ng-if="device.iconName != ''" class="device-icon" src="app/graphics/{{device.iconName}}">&nbsp;&nbsp;{{device.machineName}}
+                                    </div>
+                                    <div>
+                                        <span class="lastLoginTimeLabel">{{'app.devices.tableColumn.lastLoginTime' | i18n }}:</span>{{device.lastLoginTime | date:'medium'}}
+                                    </div>
+                                    <div class="unlinkDeviceBtn">
+                                        <button ng-click="ctrl.unlinkDevice(device, $event)" class="small- primary- button" ng-show="device.osFamily == 'Windows'"> {{'app.devices.unlinkDevice' | i18n }}</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody ng-if="ctrl.devices.length < 1 && !ctrl.isLoading" >
+                    <tr>
+                        <td>
+                            <div class="text-center">
+                                <br/><br/><br/>
+                                <strong>{{"app.devices.emptyDeviceListTitle" | i18n}}</strong>
+                                <br/><br/>
+                                <p>{{'app.devices.emptyDeviceListMessage' | i18n}}</p>
+                                <br/><br/><br/><br/><br/><br/>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div spinner ng-show="ctrl.isLoading" ></div>
+        </div>
+        <footer class="dialog-actions">
+            <button class="link- button large-" ng-click="$modal.close(true);">{{ 'button.cancel' | i18n }}</button>
+        </footer>
+    </section>
+</div>

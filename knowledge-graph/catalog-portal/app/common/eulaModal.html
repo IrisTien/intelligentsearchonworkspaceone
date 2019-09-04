@@ -1,0 +1,14 @@
+<div modal class="headered- footered- modal scrollable- fullscreen-mobile-">
+    <section class="dialog typography">
+        <header class="dialog-header">
+            <h3>{{ title }}</h3>
+        </header>
+        <div class="dialog-body">
+            <p ng-bind-html="message"></p>
+        </div>
+        <footer class="dialog-actions">
+            <button class="link- button large-" ng-click="modal.cancel()">{{ 'decline' | i18n }}</button>
+            <button class="primary- button large-" ng-click="modal.close(true)">{{ 'accept' | i18n }}</button>
+        </footer>
+    </section>
+</div>

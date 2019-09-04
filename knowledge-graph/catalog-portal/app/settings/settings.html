@@ -1,0 +1,43 @@
+<div class="usersettings headered- view- frame">
+    <div spinner ng-show="settingsCtrl.isLoading"></div>
+    <div class="frame-header">
+        <div class="theme-portal-masthead">
+            <div class="mobile- masthead">
+                <div class="masthead-left">
+                    <a class="iconic- link- button" ng-click="::settingsCtrl.backAction()">
+                        <svg symbol="mobile-back-arrow"></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="vertically- scrollable- backdrop- pane">
+        <div class="page">
+            <article>
+                <header>
+                    <div class="usersettings-title">{{::'app.settings.label.settings' | i18n}}</div>
+                </header>
+                <section>
+                    <div class="media">
+                        <div class="media-image">
+                            <svg symbol="avatar"></svg>
+                        </div>
+                        <div class="media-body">
+                            <ul>
+                                <li class="usersettings-name">{{ settingsCtrl.firstName + ' ' +settingsCtrl.lastName}}</li>
+                                <li class="usersettings-email">{{::settingsCtrl.emailAddress}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <nav>
+                    <ul class="menu">
+                        <li>
+                            {{::'app.settings.managedDevices' | i18n }} ({{::settingsCtrl.numOfManagedDevices}})
+                        </li>
+                    </ul>
+                </nav>
+            </article>
+        </div>
+    </div>
+</div>

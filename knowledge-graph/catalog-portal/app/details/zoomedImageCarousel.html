@@ -1,0 +1,21 @@
+<div modal class="modal fixed-height- fullscreen-mobile- medium-desktop- zoomedImageCarousel">
+    <section class="dialog typography">
+        <div class="dialog-body">
+            <div class="carouselHeader theme-portal-masthead">
+                <a class="iconic- link- button" ng-click="modal.close()">
+                    {{ ::'appCenter.done' | i18n }}
+                </a>
+            </div>
+            <div class="zoomedImageCarouselSlides">
+                <ul rn-carousel rn-carousel-index="carouselIndex">
+                    <li ng-repeat="image in screenshots">
+                        <div class="slide-img" ng-style="{'background-image' : 'url(' + image.href + ')'}"></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="carouselFooter">
+                <div rn-carousel-indicators ng-if="screenshots.length > 1" slides="screenshots" rn-carousel-index="carouselIndex"></div>
+            </div>
+        </div>
+    </section>
+</div>

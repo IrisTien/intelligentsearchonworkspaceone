@@ -1,0 +1,15 @@
+<div modal-new="modal-zommed-image-carousel" class="hub-modal-details-screenshots-zoomed">
+    <svg svg-symbol="icon-close-popup" class="modal-popup-close-icon" ng-click="$modal.close()"></svg>
+    <section class="dialog-container modal-zommed-image-carousel">
+        <div class="dialog-body">
+            <ul rn-carousel rn-carousel-index="carouselIndex" class="zoomed-image-carousel-list">
+                <li ng-repeat="image in screenshots">
+                    <img class="zoomed-image-carousel-item" ng-src="{{image.href }}" >
+                </li>
+            </ul>
+        </div>
+        <footer class="dialog-actions">
+            <div rn-carousel-indicators ng-if="screenshots.length > 1" slides="screenshots" rn-carousel-index="carouselIndex"></div>
+        </footer>
+    </section>
+</div>

@@ -1,0 +1,43 @@
+<div ng-controller="DropdownMenuDemo as demo" class="dropdownExample">
+    <div class="typography">
+      <p>Second dropdown has closeOnClick false, so the dropdown panel does not close when clicked inside it.</p>
+      <p>
+          Dropdown can be programatically toggled by registering a model property to the dropdown.
+          This is done by passing the model property to the dropdown-control attribute on dropdown directive.
+      </p>
+    </div>
+
+    <div dropdown>
+        <button><%= btn %></button>
+        <ul class="menu" dropdown-panel>
+          <li><%= phr[0] %></li>
+          <li><%= phr[1] %></li>
+          <li><%= phr[2] %></li>
+        </ul>
+    </div>
+
+    <div dropdown="demo.config" dropdown-control='demo.isOpen'>
+        <button><%= btn %></button>
+        <ul class="menu" dropdown-panel>
+          <svg class="border" symbol="components/dropdown/graphics/arrow.svg"></svg>
+          <svg class="bg" symbol="components/dropdown/graphics/arrow.svg"></svg>
+          <li>Menu item 1</li>
+          <li>Menu item 2</li>
+          <li>Menu item 3</li>
+        </ul>
+    </div>
+
+    <div>
+        <button ng-click="demo.toggle()">Toggle second dropdown</button>
+    </div>
+</div>
+
+<style>
+    .dropdown{
+        display: inline-block;
+    }
+
+    .dropdownExample div{
+      margin: 10px;
+    }
+</style>

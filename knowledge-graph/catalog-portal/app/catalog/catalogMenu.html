@@ -1,0 +1,19 @@
+<ul class="menu">
+    <li class="menu-title theme-portal-text">
+        <span>
+            <svg symbol="browse"></svg>
+        </span>
+        <span class="menu-title-text">{{::'appCenter.nav.browseBy'|i18n}}</span>
+    </li>
+    <li ng-repeat="label in catalogCtrl.defaultLabels"
+        ng-class="{'is-selected':catalogCtrl.appCenterContext.selectedCategory.name == label.name}" class="theme-portal-text">
+        <a title="{{::label.name}}"
+            ng-click="catalogCtrl.filterByLabel(label);">{{::label.name}}</a>
+    </li>
+    <li class="menu-hrule"></li>
+    <li ng-repeat="category in catalogCtrl.appCategories"
+        ng-class="{'is-selected':catalogCtrl.appCenterContext.selectedCategory.name == category.name}" class="theme-portal-text">
+        <a title="{{::category.name}}"
+            ng-click="catalogCtrl.filterByLabel(category);">{{::category.name}}</a>
+    </li>
+</ul>

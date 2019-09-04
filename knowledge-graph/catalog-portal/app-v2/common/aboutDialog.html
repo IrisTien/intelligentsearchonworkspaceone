@@ -1,0 +1,14 @@
+<div modal class="dialog centered-">
+    <div class="dialog-body typography">
+        <h3>{{ 'app.about.heading' | i18n }}</h3>
+        <p>
+            {{'app.about.copyright' | i18n }}
+        </p>
+        <p>
+            <button ng-click="$modal.close(true);" class="link- button"> {{'button.cancel' | i18n }}</button>
+            <a target="_blank" ng-href="{{'app.about.patentsLink' | i18n}}" class="primary- button"> {{'app.about.button.label.patents' | i18n }}</a>
+            <a ng-if="isOnPrem" target="_blank" ng-href="{{'app.about.licenseAgreementLink' | i18n}}" class="primary- button"> {{'app.about.button.label.licenseAgreement' | i18n }}</a>
+            <a ng-if="!isOnPrem" target="_blank" ng-href="{{'app.about.saasLicenseAgreementLink' | i18n}}" class="primary- button"> {{'app.about.button.label.licenseAgreement' | i18n }}</a>
+        </p>
+    </div>
+</div>

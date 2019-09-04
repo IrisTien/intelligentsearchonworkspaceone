@@ -1,0 +1,122 @@
+<div class="settings-detail-content-container">
+    <div class="settings-detail-mobile-header">
+        <div class="settings-back settings-account-button" ng-click="::settingsCtrl.dismissSettingsDetail()" id="pt-settings-about-app-tips-back">
+            <svg svg-symbol="icon-page-back" class="icon-page-back"></svg>
+        </div>
+        <h2>{{::'userInfo.tips' | i18n}}</h2>
+    </div>
+    <div class="settings-detail-content-scrollable" ng-controller="AppTipsController as appTipsCtrl">
+        <div class="settings-detail-content setting-app-tips-content">
+            <!-- this section serves desktop browser and mobile tablet browser excluding phones -->
+            <div ng-hide="appTipsCtrl.device =='phone'" class="setting-tips-desktop">
+                <div class="section-container">
+                    <h2 class="settings-detail-title">{{::'userInfo.tips.title' | i18n}}</h2>
+                    <p>{{::'userInfo.tips.intro' | i18n}}</p>
+                    <h3>{{::'userInfo.tips.bookmarks' | i18n}}</h3>
+
+                    <div class="subsection-container" ng-hide="appTipsCtrl.device =='non-windows-tablet-browser'">
+                        <p class="tips-section-header">{{::'userInfo.tips.desktop' | i18n}}</p>
+                        <p>{{::'userInfo.tips.bookmarks.desktop1' | i18n}}</p>
+                        <p>{{::'userInfo.tips.bookmarks.desktop2' | i18n}}</p>
+                        <p ng-include="'app-v2/svgincludes/tips-bookmarks-desktop.html'" class="illo-tips-bookmarks-desktop"></p>
+                    </div>
+
+                    <div class="subsection-container desktop-rearrange" id="pt-tips-bookmark-reordering" ng-hide="appTipsCtrl.device =='non-windows-tablet-browser'">
+                        <p class="tips-section-header">
+                            {{::'userInfo.tips.reordering.title' | i18n}}
+                        </p>
+                        <p>{{::'userInfo.tips.reordering.text1' | i18n}}</p>
+                        <p>{{::'userInfo.tips.reordering.text2' | i18n}}</p>
+                        <p>{{::'userInfo.tips.reordering.text3' | i18n}}</p>
+                        <p class="tips-desktop-rearrange">
+                            <ng-include src="'app-v2/svgincludes/tips-rearrange.html'" class="illo-tips-rearrange"></ng-include>
+                            <ng-include src="'app-v2/svgincludes/tips-rearrange2.html'" class="illo-tips-rearrange"></ng-include>
+                            <ng-include src="'app-v2/svgincludes/tips-rearrange3.html'" class="illo-tips-rearrange"></ng-include>
+                        </p>
+                    </div>
+
+                    <div class="subsection-container">
+                        <p class="tips-section-header mobile-devices">{{::'userInfo.tips.mobile' | i18n}}</p>
+                        <p>{{::'userInfo.tips.bookmarks.mobile' | i18n}}</p>
+                        <p class="tips-device tips-mobile-bookmarks">
+                            <ng-include src="'app-v2/svgincludes/tips-bookmarks-phone.html'" class="illo-tips-bookmarks-phone" ng-hide="appTipsCtrl.device =='non-windows-tablet-browser'"></ng-include>
+                            <ng-include src="'app-v2/svgincludes/tips-bookmarks-tablet.html'" class="illo-tips-bookmarks-tablet"></ng-include>
+                        </p>
+                    </div>
+
+                    <h3>{{::'userInfo.tips.catalog' | i18n}}</h3>
+
+                    <div class="subsection-container" ng-hide="appTipsCtrl.device =='non-windows-tablet-browser'">
+                        <p class="tips-section-header">{{::'userInfo.tips.desktop' | i18n}}</p>
+                        <p ng-bind-html="::appTipsCtrl.tipsDesktopCatalogText1"></p>
+                        <p>{{::'userInfo.tips.catalog.desktop2' | i18n}}</p>
+                        <ng-include src="'app-v2/svgincludes/tips-catalog-desktop.html'" class="illo-tips-catalog-desktop"></ng-include>
+                    </div>
+
+                    <div class="subsection-container tips-catalog-mobile">
+                        <p class="tips-section-header mobile-devices">{{::'userInfo.tips.mobile' | i18n}}</p>
+                        <p ng-bind-html="::appTipsCtrl.tipsDesktopCatalogMobileText1"></p>
+                        <p ng-bind-html="::appTipsCtrl.tipsDesktopCatalogMobileText2"></p>
+                        <p ng-bind-html="::appTipsCtrl.tipsDesktopCatalogMobileText3 "></p>
+                        <p class="tips-device" id="pt-illo-catalog-phone" ng-hide="appTipsCtrl.device =='non-windows-tablet-browser'">
+                            <ng-include src="'app-v2/svgincludes/tips-catalog-actions-phone.html'" class="illo-tips-catalog-phone"></ng-include>
+                            <ng-include src="'app-v2/svgincludes/tips-catalog-install-phone.html'" class="illo-tips-catalog-phone"></ng-include>
+                        </p>
+                        <p class="tips-device" id="pt-illo-catalog-tablet">
+                            <ng-include src="'app-v2/svgincludes/tips-catalog-actions-tablet.html'" class="illo-tips-catalog-tablet"></ng-include>
+                            <ng-include src="'app-v2/svgincludes/tips-catalog-install-tablet.html'" class="illo-tips-catalog-tablet"></ng-include>
+                        </p>
+                    </div>
+
+                    <div ng-if="appCenterCtrl.showPeopleTab">
+                        <h3><svg svg-symbol="icon-newtips" class="tips-inlineicon"></svg> {{::'userInfo.tips.people' | i18n}}</h3>
+
+                        <div class="subsection-container" ng-hide="appTipsCtrl.device =='non-windows-tablet-browser'">
+                            <p class="tips-section-header">{{::'userInfo.tips.desktop' | i18n}}</p>
+                            <p ng-bind-html="::appTipsCtrl.tipsDesktopPeopleMobileText1" class="text-inline-svg"></p>
+                            <p ng-include="'app-v2/svgincludes/tips-people-desktop.html'" class="illo-tips-people-desktop"></p>
+                        </div>
+
+                        <div class="subsection-container tips-people-mobile">
+                            <p class="tips-section-header mobile-devices">{{::'userInfo.tips.mobile' | i18n}}</p>
+                            <p ng-bind-html="::appTipsCtrl.tipsDesktopPeopleMobileText1" class="text-inline-svg"></p>
+                            <p class="tips-device">
+                                <ng-include src="'app-v2/svgincludes/tips-people-phone.html'" class="illo-tips-bookmarks-phone" ng-hide="appTipsCtrl.device =='non-windows-tablet-browser'"></ng-include>
+                                <ng-include src="'app-v2/svgincludes/tips-people-tablet.html'" class="illo-tips-bookmarks-tablet"></ng-include>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div ng-if="appCenterCtrl.inAppNotificationEnabled">
+                        <h3><svg svg-symbol="icon-newtips" class="tips-inlineicon"></svg> {{::'userInfo.tips.notification' | i18n}}</h3>
+
+                        <div class="subsection-container" ng-hide="appTipsCtrl.device =='non-windows-tablet-browser'">
+                            <p class="tips-section-header">{{::'userInfo.tips.desktop' | i18n}}</p>
+                            <p ng-bind-html="::appTipsCtrl.tipsDesktopNotificationMobileText1" class="text-inline-svg"></p>
+                            <p ng-include="'app-v2/svgincludes/tips-notification-desktop.html'" class="illo-tips-notification-desktop"></p>
+                        </div>
+
+                        <div class="subsection-container tips-notification-mobile">
+                            <p class="tips-section-header mobile-devices">{{::'userInfo.tips.mobile' | i18n}}</p>
+                            <p ng-bind-html="::appTipsCtrl.tipsDesktopNotificationMobileText1" class="text-inline-svg"></p>
+                            <p class="tips-device">
+                                <ng-include src="'app-v2/svgincludes/tips-notification-phone.html'" class="illo-tips-bookmarks-phone" ng-hide="appTipsCtrl.device =='non-windows-tablet-browser'"></ng-include>
+                                <ng-include src="'app-v2/svgincludes/tips-notification-tablet.html'" class="illo-tips-bookmarks-tablet"></ng-include>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- this section serves mobile phone browsers -->
+            <div ng-if="appTipsCtrl.device =='phone'" class="tips-mobile-phone-browser">
+                <ul rn-carousel rn-carousel-controls class="settings-tips-carousel-phone">
+                    <li class="apptips-item" ng-repeat= "tip in carouselPhoneImages" ng-class="{'active': carouselIndex === $index}">
+                        <ng-include src="tip.svglink"></ng-include>
+                        <h3>{{tip['header'] | i18n}}</h3>
+                        <p ng-bind-html="tip['message']" class="text-inline-svg"></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

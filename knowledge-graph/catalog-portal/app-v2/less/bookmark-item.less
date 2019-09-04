@@ -1,0 +1,108 @@
+@app-icon-size-s: 44px;
+@app-icon-size-m: 52px;
+@app-icon-size-l: 60px;
+@app-icon-border-radius:2px;
+
+@app-icon-margin-top-s: 14px;
+@app-icon-margin-top-m: 18px;
+@app-icon-margin-top-l: 24px;
+
+.bookmark-app-item {
+    width:100%;
+    height:100%;
+    padding-top:24px;
+    color:inherit;
+    cursor: pointer;
+    position: relative;
+    border-radius: @app-icon-border-radius;
+    box-shadow: 0 1px 2px rgba(0,0,0,.15);
+    // for long press
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    transition: top 0.25s ease-out;
+}
+
+.grid-sortable .bookmark-app-item {
+    box-shadow: 1px 2px 5px rgba(0,0,0,.25);
+}
+
+.ws-shell .bookmark-app-item{
+    overflow: hidden;
+}
+
+.bookmark-app-item.contextmenu-on:hover {
+    top: 0;
+    box-shadow: 0 1px 2px rgba(0,0,0,.15);
+    transition: none;
+}
+
+.bookmark-app-icon {
+    width: @app-icon-size-s;
+    height: @app-icon-size-s;
+    margin:0 auto;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image:url("../app-v2/graphics/app-icon-placeholder.svg");
+
+    img{
+        transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        position: relative;
+        top: 50%;
+        width: 100%;
+    }
+
+    @media(min-width:@phoneS) {
+        top: @app-icon-margin-top-m;
+        width: @app-icon-size-m;
+        height: @app-icon-size-m;
+    }
+
+    @media(min-width:@phoneL) {
+        top: @app-icon-margin-top-l;
+        width: @app-icon-size-l;
+        height: @app-icon-size-l;
+    }
+}
+
+.bookmark-app-caption {
+    width:100%;
+    height:32px;
+    font-size: 12px;
+    text-align: left;
+    height:32px;
+    line-height: 16px;
+    padding: 0 6px;
+    margin-top:10px;
+    white-space: normal;
+    text-align: center;
+    white-space: normal;
+    .multi-line-ellipsis(2);
+
+    @media(min-width:@phoneM) {
+        padding: 0 8px;
+        font-size: 13px;
+        height:40px;
+        line-height: 20px;
+        height:40px;
+    }
+
+    @media(min-width:@tabletS) {
+        padding: 0 10px;
+    }
+}
+
+.bookmark-item-actions-icon {
+    position:absolute;
+    top:5px;
+    right:5px;
+    width:10px;
+    height:10px;
+    display: none;
+
+    @media(min-width:@tabletS) {
+        display: block;
+    }
+}

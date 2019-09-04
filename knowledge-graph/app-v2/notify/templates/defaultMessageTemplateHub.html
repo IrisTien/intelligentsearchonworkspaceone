@@ -1,0 +1,8 @@
+<div class="notify-message-container" ng-class="message.type">
+    <div class="message-body">
+        <div class="message-text">{{message.text}}</div>
+        <button ng-show="message.type === 'info' || message.type === 'error'" class="notify-close-button" ng-click="close($index)">
+            <svg svg-symbol="icon-notify-close"></svg>
+        </button>
+    </div>
+</div>

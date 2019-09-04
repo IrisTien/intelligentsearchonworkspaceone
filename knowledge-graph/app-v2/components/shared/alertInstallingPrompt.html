@@ -1,0 +1,14 @@
+<div modal-new class="hub-modal-installing-popup hub-modal-container">
+    <section class="dialog-container" stop-event="click">
+        <section class="modal-body">
+            <div class="dialog-body">
+                <p class="hub-install-confirm-modal-title modal-content-text">{{ ::title }}</p>
+                <h3 class="install-app-name no-ellipsis">{{ ::name }}</h3>
+                <p class="modal-content-text">{{ ::message }}</p>
+            </div>
+        </section>
+        <footer class="dialog-actions one-action">
+            <div class="button-action primary-action modal-button-primary" ng-click="$modal.close()">{{ ::'ok' | i18n }}</div>
+        </footer>
+    </section>
+</div>

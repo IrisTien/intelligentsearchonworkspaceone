@@ -1,0 +1,354 @@
+// Project Horizon
+// (c) 2013-2015 VMware, Inc. All rights reserved.
+// VMware Confidential.
+
+/** @pattern .modal
+
+The `modal` dialog may be defined anywhere within the `modal-context`.  A modal
+may be opened by calling the `$modal.open` function from anywhere inside the
+`modal-context`, and passing any scope values required by the `modal` template.
+
+An inline modal dialog is given a name by assigning to the `modal` attribute.
+
+@example [inline-modal.html, modal-demo.js] Modal dialog defined inline HTML
+
+The dialog may also be defined in an external template file.
+
+@example [external-modal.html, modal-demo.js, modalTemplate.html] Modal dialog defined in template
+
+A modal dialog can also be opened from a controller inside the `modal-context`.
+In such cases, it is also possible to pass the controller's scope to the modal
+instead of passing parameters into the modal's scope.
+
+@example [controller-modal.html, controller-modal.js, controllerModalTemplate.html] Open modal dialog from controller
+
+A modal dialog may "return" a value to the controller via the promise returned by
+`$modal.open`.
+
+@example [promise-modal.html, promise-modal.js, promiseModalTemplate.html] Using the modal's promise
+
+Confirmation dialogs are a common use case of modals.  There is a standard
+confirmation dialog available which can be opened using `$modal.confirm`.
+
+@example [confirm-modal.html, confirm-modal.js] Confirmation dialog
+
+If a modal raises a message, that message will appear on top of the modal.
+
+@example [message-modal.html, message-modal.js, messageModalTemplate.html] Modal opening a message
+
+**/
+
+@import "../base/mixins";
+@import "../dialog/dialog";
+@import "../grid/grid";
+@import "../page/page";
+@import "../typography/typography";
+
+@modal-columns: 15; // number of grids in modal
+@modal-mini-columns: 5;
+@modal-medium-columns: 9;
+@modal-marginBottom: 5%; // space on bottom of modal dialog
+@modal-borderWidth: 1px;
+@modal-borderColor: #ccc;
+@modal-border-radius: 2px;
+@modal-bg-color: #fff;
+@modal-actions-bg-color: #f0f0f0;
+@modal-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+@modal-overlay-color: rgba(200, 200, 200, 0.4);
+@modal-z-index: 100; // needs to be higher than most things, but lower than messages
+@modal-transition-in-duration: 1s;
+@modal-transition-out-duration: 0.2s;
+@modal-easing-function: cubic-bezier(.26, .99, .54, .99);
+
+[modal],
+.modal {
+    display: none;
+}
+
+.modal {
+    @actions-height: @dialog-actions-height;
+    @header-height: @dialog-header-height;
+    @footer-borderWidth: 1px;
+
+    .typography > .use( font );
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: @modal-z-index;
+
+    &.is-active {
+        /** The state of the modal when it is visible. */
+        display: block;
+    }
+
+    .modal-window-overlay {
+      /** This is transparent overlay that covers entire browser window */
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: transparent;
+    }
+
+    .modal-overlay { /** @member */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: @modal-overlay-color;
+        overflow: hidden; // clip the modal-dialog as it animates in/out
+    }
+
+    .modal-frame {
+        /** A frame in which to display the modal. */
+        position: absolute;
+        left: 50%;
+        .translate(-50%, 0);
+        min-height: 20%;
+        max-width: 100%;
+        overflow: hidden;
+        .grid > .width( @modal-columns, 2*@modal-borderWidth );
+        border: @modal-borderWidth solid @modal-borderColor;
+        border-top: none;
+        border-radius: 0 0 @modal-border-radius @modal-border-radius;
+        box-shadow: @modal-box-shadow;
+        background: @modal-bg-color;
+    }
+
+    .modal-pane {
+        /** The content of the modal. */
+        position: relative;
+    }
+
+    &.mini- .modal-frame {
+        .grid > .width( @modal-mini-columns, 2*@modal-borderWidth );
+        // mini modals may not have headers, and don't scroll
+        padding-top: 0;
+        .dialog-header {
+            position: static;
+            height: auto;
+        }
+    }
+
+    //Responsive modal of medium size for tablets/desktop and small size for phones/phablets
+    &.medium-max- .modal-frame {
+        @media @page-LP{
+            .grid > .width( @modal-mini-columns, 2*@modal-borderWidth );
+        }
+        @media @page-at-least-S {
+            .grid > .width( @modal-medium-columns, 2*@modal-borderWidth );
+        }
+    }
+
+    &.headered- .modal-frame {
+        padding-top: @header-height; // space reserved for header
+    }
+
+    &.footered- {
+        .modal-frame {
+            padding-bottom: @actions-height; // space reserved for actions
+        }
+        .modal-pane {
+            border-bottom: @footer-borderWidth solid @modal-borderColor;
+        }
+    }
+
+    .dialog-header,
+    .wizard-header {
+        // position dialog-header relative to the modal-pane
+        position: absolute;
+        left: 0;
+        bottom: 100%; // bottom of header at top of modal-pane
+        width: 100%;
+        height: @header-height;
+        overflow: hidden;
+    }
+
+    .dialog-actions,
+    .wizard-actions {
+        // position dialog-actions relative to the modal-frame
+        position: absolute;
+        left: 0;
+        top: 100%; // top of footer at bottom of modal-pane
+        width: 100%;
+        height: @actions-height;
+        overflow: hidden;
+        background: @modal-actions-bg-color;
+    }
+
+    .wizard {
+        // don't position wizard-actions relative to the wizard,
+        // position them relative to the modal-frame.
+        position: static; // let modal-frame be the positioning context for wizard-actions
+        padding-bottom: 0;
+        overflow: visible; // the header and actions are positioned outside the wizard
+    }
+
+    &.fixed-height-,
+    &.scrollable- {
+        .modal-frame {
+            height: 100% - @modal-marginBottom;
+        }
+
+        .modal-pane {
+            // we need to set every nested container to 100%
+            height: 100%;
+        }
+
+        .dialog-body {
+            // Absolute position the dialog body make it 100% of the modal-pane.
+            // Works around the problem of intervening divs that aren't height 100%.
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    &.fixed-height-,
+    &.scrollable- { /** Make the modal as tall as it can be. */
+
+        // TODO: try to decouple fixed-height- modal from dialog and wizard
+
+        .wizard,
+        .wizard-sequence,
+        .wizard-state {
+            // maintain height: 100% through the floats and clearfix of the wizard
+            height: 100%;
+        }
+
+        .wizard-state {
+            &:extend( .frame );
+            > .wizard-body {
+                &:extend( .pane, .pane.scrollable-, .pane.scrollable-.vertically- );
+            }
+            .wizard-body {
+                padding: 0;
+            }
+            .dialog-body {
+                position: static;
+                &.full-height- {
+                    position: absolute;
+                }
+            }
+        }
+    }
+
+    &.scrollable- {
+    /**
+       Makes the modal scrollable, if its content does not fit in the allocated
+       area.
+
+       By default, the height of a modal depends on the content of the modal,
+       which means it is possible for modals to be taller than the context area,
+       which may introduce scrolling in the parent context, which is usually not
+       what's intended.
+
+       Scrollable modals will always be smaller than the context area.  A scrollbar
+       will be added to the modal itself, if the content overflows the modal.
+
+       In the case of a modal dialog, the header and body of the dialog
+       will scroll, but space is reserved for the header at the top
+       and action buttons at the bottom of the modal will always be visible.
+
+       @example [scroll-modal.html, modal-demo.js] A modal with scrolling content
+    */
+
+        .dialog-body {
+            overflow-x: hidden;
+            overflow-y: auto;
+            .scrollbar-style();
+        }
+    }
+
+    // ngAnimate animations based on `is-active` state
+
+    &.is-active-add {
+        @t: @modal-transition-in-duration;
+        @easing: @modal-easing-function;
+        // initial state of animation for adding is-active
+
+        display: block;
+        .transition( all @t linear );
+
+        .modal-frame {
+            .translate( -50%, -100% );
+            .transition( transform, @t, @easing );
+        }
+
+        .modal-overlay {
+            background-color: transparent;
+            .transition( background-color @t linear );
+        }
+
+        &.is-active-add-active {
+            // final state of animation
+            .modal-frame {
+                .translate( -50%, 0 );
+            }
+            .modal-overlay {
+                background-color: @modal-overlay-color;
+            }
+        }
+    }
+
+    &.is-active-remove {
+        @t: @modal-transition-out-duration;
+        // initial state of animation for removing is-active
+
+        display: block;
+        .transition( all @t linear );
+
+        .modal-frame {
+            .translate( -50%, 0 );
+            .transition( transform, @t, ease-in );
+        }
+
+        .modal-overlay {
+            background-color: @modal-overlay-color;
+            .transition( background-color @t linear );
+        }
+
+        &.is-active-remove-active {
+            // final state of animation
+            .modal-frame {
+                .translate( -50%, -100% );
+            }
+            .modal-overlay {
+                background-color: transparent;
+            }
+        }
+    }
+}
+
+.modal-context { /** @helper
+    Provides a context relative to which the modal will be opened.  When opened,
+    the modal is positioned relative to, and on top of, its context.  The context
+    is often a `pane`.
+
+    The `modal-context` directive defines the area covered by the modal.  Usually, this
+    will be applied to the entire app, but there may be situations (e.g., in multi-pane apps)
+    when the modal is intended to cover only a portion of the screen.
+
+    In addition to defining a rectangular region, `modal-context`
+    establishes a stacking context, which means that elements outside the `modal-context`
+    but positioned over the `modal-context` will not be covered by the modal overlay.
+
+    In the following example, the `modal-context` covers the right half of the pane.
+    The element outside the modal context is not obscured by modal overlay even though
+    the overlay has a higher `z-index`.  If this is not intended, the solution is to
+    add a positive `z-index` value to the `modal-context` itself.
+
+    @example [contextual-modal.html, modal-demo.js, modalTemplate.html] Local modal context and stacking
+    */
+
+    position: relative; // positioning context for overlay
+    z-index: 0;         // stacking context
+}

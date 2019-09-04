@@ -1,0 +1,441 @@
+@settings-header-height: 44px;
+@settings-list-item-height: 52px;
+@settings-list-item-height-android: 48px;
+
+@settings-left-panel-width: 235px;
+// To hide the scroll bar
+@settings-padding-offset: 20px;
+@settings-download-banner-offset: 30px;
+@settings-download-banner-font-color: #ffffff;
+@promotion-banner-background-color: #0081A7;
+
+@settings-inline-left: @category-left-panel-width + 10px;
+
+@settings-account-label-font-size: 13px;
+@settings-account-content-font-size: 17px;
+@settings-account-user-name-font-size: 21px;
+@settings-user-position-subtitle: #696969;
+@button-background-black: #000000;
+
+@change-password-scrim-color: rgba(86, 86, 86, .85);
+@change-password-split-section-height: 66px;
+
+@user-name-font-size: 21px;
+
+.content-container.hub-browser-settings {
+    background: @white;
+}
+
+.settings-content {
+    padding: @list-item-padding-h;
+    margin-bottom: 24px;
+
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+        padding: @list-item-padding-h 100px;
+    }
+}
+
+.user-details-container {
+    padding: @list-item-padding-h 0;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 24px;
+    min-height: 110px;
+    float: left;
+    border-bottom: solid 1px @list-item-divider-bg;
+}
+
+// rules for account page
+.profile-avatar {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    position: relative;
+    background-size: contain;
+    background-image: url(../app-v2/graphics/icon-profile.svg);
+    margin: 0 auto 15px;
+    box-shadow: 1px 1px 6px 3px rgba(188,188,188,.15), -1px -1px 6px 3px rgba(188,188,188,.15);
+
+    img {
+        width: 100%;
+        height: 100%;
+        top:0;
+        left:0;
+        border-radius: 50%;
+        position: absolute;
+    }
+
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+        float: left;
+    }
+}
+
+.profile-detail-initial {
+    .avatar-background(@avatar-gradient-color1, @avatar-gradient-color2);
+    @user-team-item-initial-line-height-s: @user-avatar-width-s  - 2 * @user-team-avatar-rim-width-s;
+    .user-team-item-initial-style(@user-detail-header-initial-size, @user-team-item-initial-line-height-s, @user-team-item-initial-color);
+}
+
+.user-name-details {
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+        display: table-cell;
+        height: 84px;
+        vertical-align: middle;
+        padding: 0 @list-item-padding-h;
+        text-align: left;
+    }
+}
+
+.user-name {
+    font-size: @user-name-font-size;
+    font-weight: 600;
+    margin: 12px 0;
+}
+
+.user-details {
+    margin-bottom: 8px;
+}
+
+.account-item {
+    margin-bottom: 16px;
+}
+
+.account-label {
+    display: block;
+    font-size: @settings-account-label-font-size;
+}
+
+.account-content {
+    display: block;
+    font-size: @settings-account-content-font-size;
+    font-weight: bold;
+}
+
+.about-copyright {
+    margin: 16px 0;
+    line-height: 20px;
+}
+
+.about-sublink {
+    display: block;
+    line-height: 26px;
+
+    svg {
+        height: 24px;
+        width: 24px;
+        margin-right: 5px;
+    }
+}
+
+.about-content-container {
+    padding-top: 24px;
+
+    .about-content {
+        display: inline-block;
+        width: 100%;
+        font-size: 15px;
+    }
+
+    .about-links {
+        display: inline-block;
+        font-size: 14px;
+        vertical-align: top;
+    }
+
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+        .about-content {
+            width: 65%;
+        }
+
+        .about-links {
+            margin-top: 15px;
+            margin-left: 40px;
+        }
+    }
+}
+
+.hub-download-banner {
+    text-align: center;
+    color: @settings-download-banner-font-color;
+    margin-bottom: @settings-download-banner-offset;
+    margin-right: -@list-item-padding-h;
+    margin-left: -@list-item-padding-h;
+    // The div before it had float on it
+    clear: both;
+
+    .download-image {
+        width: 100%;
+        height: 100%;
+        background: @promotion-banner-background-color url(../app-v2/graphics-hub/promotion-background-three.svg) no-repeat;
+        position: relative;
+        background-size: cover;
+        padding: 0 @list-item-padding-h;
+    }
+
+    .download-title {
+        font-size: 30px;
+        font-weight: 300;
+        letter-spacing: 0.75px;
+        padding: 24px 0 @list-item-padding-h 0;
+    }
+
+    .download-subtitle {
+        font-size: 15px;
+        padding-bottom: @settings-download-banner-offset;
+    }
+
+    .download-button {
+        height: @settings-download-banner-offset;
+        line-height: @settings-download-banner-offset;
+        margin-bottom: 24px;
+        background: @button-background-black;
+        text-transform: unset;
+        font-weight: normal;
+    }
+}
+
+/* Change Password styles */
+.user-change-password {
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+.modal-changepassword {
+    .modal-overlay {
+        background: none;
+
+        @media (min-width: @browser-hamburger-ribbon-transition) {
+            background: @change-password-scrim-color;
+        }
+    }
+
+    .modal-content {
+        width: 100%;
+        height: 100%;
+        @media (min-width: @browser-hamburger-ribbon-transition) {
+            width: 80%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        @media(min-width: @browser-category-transition) {
+            width: 748px;
+            min-height: 360px;
+        }
+    }
+
+    .dialog-container {
+        padding: (@change-password-split-section-height + 16px) 0 0;
+        text-align: left;
+
+        @media (min-width: @browser-hamburger-ribbon-transition) {
+            padding: (@dialog-header-height + 30px) 0 (@dialog-actions-height + 20x);
+        }
+    }
+
+    .dialog-header {
+        padding-left:0;
+        height:@change-password-split-section-height;
+        font-size:20px;
+        border-bottom: solid 1px @list-item-divider-bg;
+
+        h2 {
+            width: 200px;
+            height: @change-password-split-section-height;
+            line-height: @change-password-split-section-height;
+            padding: 0 10px;
+            .single-line-ellipsis();
+
+            @media (min-width: @browser-hamburger-ribbon-transition) {
+                padding: 0 24px;
+                width:  ~ 'calc(100% - 256px)';
+                //200px max-width + 56px includes button margin and padding
+            }
+        }
+        
+        .mobile-subpage-back-button {
+            float: left;
+            height: @change-password-split-section-height;
+            margin-left: 10px;
+
+            @media (min-width: @browser-hamburger-ribbon-transition) {
+                display: none;
+            }
+        }
+
+        .change-password-page {
+            div {
+                height: @change-password-split-section-height;
+                line-height: @change-password-split-section-height;
+            }
+
+            svg {
+                vertical-align: middle;
+                line-height: 24px;
+            }
+        }
+
+        .editmode-close-button {
+            display: none;
+
+            @media (min-width: @browser-hamburger-ribbon-transition) {
+                display: block;
+            }
+        }
+
+        .header-actions {
+            display: block;
+            position: absolute;
+            top: 5px;
+            right: 12px;
+            z-index: 50;
+
+            @media (min-width: @browser-hamburger-ribbon-transition) {
+                display: none;
+            }
+
+            .sort-action {
+                max-width: 110px;
+            }
+        }
+    }
+
+    .dialog-body {
+        @dialog-paddings: (@change-password-split-section-height + 16px) + 20px;
+        max-height: ~'calc(100vh - @{dialog-paddings})';
+
+        @media (min-width: @browser-hamburger-ribbon-transition) {
+            @dialog-paddings: (@dialog-header-height + 30px) + (@dialog-actions-height + 20x) + 20px;
+            max-height: ~'calc(100vh - @{dialog-paddings})';
+        }
+    }
+
+    .dialog-actions {
+        display: none;
+
+        @media (min-width: @browser-hamburger-ribbon-transition) {
+            display: block;
+        }
+    }
+
+    .right-container {
+        width: 100%;
+        margin-top: 25px;
+        padding: 0 20px;
+
+        @media (min-width: @browser-hamburger-ribbon-transition) {
+            padding-right: 20px;
+            float: left;
+            width: 220px;
+        }
+
+        @media (min-width: @browser-category-transition) {
+            min-width: 300px;
+        }
+    }
+
+    .password-container {
+        padding: 0 10px;
+
+        @media (min-width: @browser-hamburger-ribbon-transition) {
+            float: left;
+        }
+    }
+
+    input {
+        width: 100%;
+        display: block;
+        height: 34px;
+        margin: 10px 0 24px;
+        border-radius: 2px;
+        padding: 4px 12px;
+        border: none;
+        border-bottom: 1px solid #ccc;
+
+        @media (min-width: @browser-hamburger-ribbon-transition) {
+            width: 300px;
+            border: solid 1px #ccc;
+        }
+
+        &:focus {
+            border: none;
+            border-bottom: solid 1px #07a9ed;
+
+            @media (min-width: @browser-hamburger-ribbon-transition) {
+                border: solid 1px #07a9ed;
+            }
+        }
+    }
+
+    .password-save-button {
+
+        &.enabled-state {
+            opacity: 1;
+            z-index: 100;
+        }
+    }
+}
+
+.error-messages {
+    color: rgba(217, 84, 30, 1);
+    font-size:13px;
+    line-height: 18px;
+    margin-bottom:25px;
+
+    svg {
+        width: 24px;
+        height: 24px;
+    }
+    span {
+        vertical-align: middle;
+    }
+}
+
+.password-requirement-title {
+    font-family: "Open Sans Semibold", sans-serif;
+    margin-bottom:15px;
+}
+
+.password-requirement-text {
+    font-size:13px;
+
+    @media(min-width: @desktopM) {
+        font-size:15px;
+    }
+}
+
+.input-placeholder-animate {
+    position: relative;
+    margin: 10px 0;
+
+    input {
+        margin-bottom: 30px;
+    }
+
+    label {
+        color: #999;
+        font-weight: normal;
+        position: absolute;
+        pointer-events: none;
+        left: 10px;
+        top: 7px;
+        transition: 0.2s ease all;
+        -moz-transition: 0.2s ease all;
+        -webkit-transition: 0.2s ease all;
+        -ms-transition: 0.2s ease all;
+    }
+
+    input:focus ~ label, input:valid ~ label {
+        top: -20px;
+        font-size: 13px;
+        color: #697785;
+        left: 0;
+    }
+    .reveal-password-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #ccc;
+    }
+}

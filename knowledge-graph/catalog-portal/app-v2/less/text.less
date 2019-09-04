@@ -1,0 +1,39 @@
+.single-line-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+// TODO probably use javascript as the cross-browser support for multiline ellipsis is ppor
+.multi-line-ellipsis(@line-no) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: @line-no;
+  -webkit-box-orient: vertical;
+}
+
+.content-header-text {
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 24px;
+}
+
+.item-caption-title {
+  font-family: 'Open Sans Regular', sans-serif;
+  font-size: 18px;
+}
+
+.dialog-header-title {
+  font-family: 'Open Sans Semibold', sans-serif;
+  font-size: 20px;
+}
+.dialog-body-text {
+  font-size: 15px;
+}
+
+.button-text {
+  font-family: 'Open Sans Semibold', sans-serif;
+  font-size: 15px;
+}
+.modal-small-text {
+  font-size: 12px;
+}
+

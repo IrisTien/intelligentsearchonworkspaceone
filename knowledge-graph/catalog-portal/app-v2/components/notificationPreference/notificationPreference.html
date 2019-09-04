@@ -1,0 +1,19 @@
+<div ng-if="notificationPreferenceCtrl.loading">
+    <div ng-include="'app-v2/components/notificationPreference/notificationPreferencePreview.html'"></div>
+</div>
+<div class="preference-title-left-container" ng-if="!notificationPreferenceCtrl.loading">
+    <p class="preference-instruction">{{::'hub.nav.label.notification' | i18n }}</p>
+</div>
+<div class="preference-selection-container">
+    <div ng-repeat="connector in notificationPreferenceCtrl.connectors">
+        <span>{{connector.name}}</span>
+        <div class="preference-toggle" ng-if="connector.status === 'REGISTERED' || connector.status === 'UNREGISTERED'">
+            <label class="switch">
+                <input type="checkbox" ng-model="connector.status" ng-change="notificationPreferenceCtrl.updatePreference(connector.id)" ng-true-value="'REGISTERED'" ng-false-value="'UNREGISTERED'">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div class="preference-toggle preference-pending-user" ng-if="connector.status === 'PENDING_USER_ACTION'"><div></div></div>
+        <div class="preference-toggle preference-in-progress" ng-if="connector.status === 'IN_PROGRESS'"><spinner-loading></spinner-loading></div>
+    </div>
+</div>

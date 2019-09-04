@@ -1,0 +1,14 @@
+<div modal class="headered- footered- modal medium-max-">
+    <section class="dialog">
+        <header class="dialog-header">
+            <h3>{{ 'appCenter.device.unEnrollWarningTitle' | i18n}}</h3>
+        </header>
+        <div class="dialog-body">
+            <p>{{ 'appCenter.device.mdmUnEnrollMessage' | i18n}}</p>
+        </div>
+        <footer class="dialog-actions">
+            <button class="link- button" ng-click="$modal.cancel()">{{ 'appCenter.cancel' | i18n }}</button>
+            <button class="primary- button" ng-click="appCenterCtrl.unEnrollCallback();$modal.close(true)">{{ 'appCenter.proceed' | i18n }}</button>
+        </footer>
+    </section>
+</div>

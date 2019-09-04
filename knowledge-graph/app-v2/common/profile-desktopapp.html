@@ -1,0 +1,9 @@
+<div dropdown-list="false" id="profile-sidepanel-button">
+	<div class="dropdown-toggle dropdown-toggle-desktopapp">
+		<div class="profile-avatar-container profile-avatar" image-load>
+			<img ng-src="{{appCenterCtrl.user.imageURL}}" ng-show="appCenterCtrl.user.imageURL" class="icon-profile-desktopapp"/>
+		</div>
+	</div>
+	<div dropdown-panel-body class="profile-dropdown-desktopapp-container branding-portal-text" id= "pt-profile-dropdown" ng-include="'app-v2/settings/settings-desktopapp.html'">
+	</div>
+</div>

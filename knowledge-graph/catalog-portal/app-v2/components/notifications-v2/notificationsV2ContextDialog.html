@@ -1,0 +1,9 @@
+<section class="hub-notification-dialog-container" ng-controller="NotificationV2ContextDialogController as notificationDialogCtrl">
+    <ul class="hub-notification-actions-list">
+        <li ng-repeat="filter in notificationDialogCtrl.filtersList">
+            <a class="browser-open-link" ng-click="notificationDialogCtrl.goToFilter(filter.filterName)">
+                <span ng-class="{'notifications-menu-item-selected-text' : notificationDialogCtrl.filter === filter.filterName}" id="hub-notifications-filter-{{filter.filterName}}" ng-bind="filter.label" class="nativenav-show"></span>
+            </a>
+        </li>
+    </ul>
+</section>

@@ -1,0 +1,105 @@
+/** @pattern .pane
+
+A rectangular region of the screen, which holds content.
+
+@example
+<div class="pane typography">
+  <h1><%= h %></h1>
+  <p><%= p.1 %>
+  <p><%= p.2 %>
+  <p><%= p.3 %>
+</div>
+
+**/
+
+.pane {
+    position: relative; // any positioning inside should be relative to the pane
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    .box-sizing( border-box );
+    z-index: 0; // establish a new stacking context for content inside the pane
+
+    &.has-overflow {
+        /**
+           If a pane contains elements which overflow,
+           adding this class will allow them to be visible.
+           */
+        overflow: visible;
+        z-index: auto; // avoid making a stacking context for the pane
+    }
+
+    &.backdrop- {
+        /**
+        A pane that has a solid background on top of which pages are displayed.
+        */
+        padding-bottom: 20px;
+        background-color: @body-background-color;
+    }
+
+    &.scrollable- {
+        /** A pane with scrolling content (in both directions).
+            @example Scrolling in both directions
+            <div class="scrollable- pane typography">
+              <h1><%= h %></h1>
+              <p><%= p.1 %>
+              <p><%= p.2 %>
+              <p><%= p.3 %>
+              <p><%= p.4 %>
+              <p><%= p.5 %>
+              <p><%= p.6 %>
+              <p><%= p.7 %>
+              <p><%= p.8 %>
+              <p><%= p.9 %>
+              <p><%= p.10 %>
+              <p><%= p.11 %>
+              <p><%= p.12 %>
+            </div>
+            <!-- demo style -->
+            <style> p { width: 200%; } </style>
+        **/
+        overflow-x: auto;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        &.vertically- {
+            /** A pane with vertically scrolling content.
+                @example Vertical scrolling
+                <div class="vertically- scrollable- pane typography">
+                  <h1><%= h %></h1>
+                  <p><%= p.1 %>
+                  <p><%= p.2 %>
+                  <p><%= p.3 %>
+                  <p><%= p.4 %>
+                  <p><%= p.5 %>
+                  <p><%= p.6 %>
+                  <p><%= p.7 %>
+                  <p><%= p.8 %>
+                  <p><%= p.9 %>
+                  <p><%= p.10 %>
+                  <p><%= p.11 %>
+                  <p><%= p.12 %>
+                </div>
+             */
+            overflow-x: hidden;
+        }
+        &.horizontally- {
+            /** A pane with horizontally scrolling content.
+                @example Horizontal scrolling
+                <div class="horizontally- scrollable- pane typography">
+                  <h1><%= h %></h1>
+                  <p><%= p.1 %>
+                  <p><%= p.2 %>
+                  <p><%= p.3 %>
+                </div>
+                <!-- demo style -->
+                <style> p { width: 200%; } </style>
+             */
+            overflow-y: hidden;
+        }
+    }
+
+    > .grid:first-child:last-child {
+        // if a pane only contains a grid, make that grid at least the full height
+        min-height: 100%;
+    }
+}

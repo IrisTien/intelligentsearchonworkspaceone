@@ -1,0 +1,63 @@
+@bottom-nav-tabs-no: 3;
+@bottom-nav-border: #CDD0D3;
+//This is the point on mobile brwoser the bottom-nav shows up and dropdown profile dissappears
+
+.bottom-nav-container{
+    position: fixed;
+    bottom: 0;
+    z-index: 500;
+    width: 100%;
+    background: @white;
+    border-top: solid 1px @bottom-nav-border;
+    height: @bottom-nav-height;
+    transition: all @topnav-anim-time @topnav-anim-time/2;
+    font-size: 0;
+    text-align: center;
+    display: table;
+    table-layout: fixed;
+    color: @mediumgrey;
+
+
+    &.hide-bottom-nav{
+        display:none;
+    }
+
+    @media(min-width: @browser-transition-point) {
+        display: none;
+    }
+
+    a {
+        display: table-cell;
+
+        p {
+            font-size:11px;
+            position:relative;
+            top:-3px;
+        }
+    }
+}
+
+.ws-shell .bottom-nav-container {
+    @media(min-width: @browser-transition-point) {
+        display: table;
+    }
+
+    a {
+        @media(min-width: @browser-transition-point) {
+            display: table-cell;
+            width: 20%;
+        }
+
+        @media(min-width: @desktopM) {
+            display: table-cell;
+            width: 15%;
+            max-width:200px;
+        }
+    }
+}
+
+
+//hide footer in app details/people details page
+.footer-hidden .bottom-nav-container, .ws-shell .footer-hidden .bottom-nav-container{
+  display: none;
+}

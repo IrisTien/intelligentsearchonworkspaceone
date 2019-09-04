@@ -1,0 +1,27 @@
+<div class="mobile-catalog-filter-header">
+    <div id="mobile-filter-close-button" class="icon-mobile-filter-close-button" ng-click="appCenterCtrl.closeMobileFilter()">
+        <svg svg-symbol="icon-close"></svg>
+    </div>
+    <h2>{{::'myapp.nav.mobile.filter.pagetitle' | i18n }}</h2>
+</div>
+<div class="categories-fillter-mobile-content">
+    <div class="categories-fillter-mobile-content-scrollable">
+    <ul class="categories-filter default-filter-list-mobile">
+        <li class="categories-default-filter"
+            ng-repeat="label in catalogCtrl.defaultLabels"
+            ng-class="[label.type, {'is-selected':catalogCtrl.appCenterContext.selectedCategory.name == label.name}]"
+            id="mobile-categories-all"
+            ng-click="catalogCtrl.filterByLabel(label);">
+            <span>{{::label.name}}</span>
+            <svg svg-symbol="icon-check" class="icon-category-filter-check branding-icon-primary"></svg>
+        </li>
+    </ul>
+    <ul class="categories-filter">
+        <li ng-repeat="category in catalogCtrl.appCategories"
+            ng-class="{'is-selected':catalogCtrl.appCenterContext.selectedCategory.name == category.name}" title="{{::category.name}}" ng-click="catalogCtrl.filterByLabel(category)">
+            <span>{{::category.name}}</span>
+            <svg svg-symbol="icon-check" class="icon-category-filter-check branding-icon-primary"></svg>
+        </li>
+    </ul>
+    </div>
+</div>

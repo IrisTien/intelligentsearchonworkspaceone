@@ -1,0 +1,14 @@
+<div ng-controller="SnackBarNotificationsController as ctr" class="snack-bar-container"
+     ng-click="ctr.goToNotification(ctr.notificationId);close($index);">
+    <div class="alert-icon">
+        <svg svg-symbol="snack-bar-alert"></svg>
+    </div>
+    <div class="message">
+        <div class="title">{{ctr.title}}</div>
+        <div class="sub-title" ng-if="ctr.subTitle">{{ctr.subTitle}}</div>
+        <div class="sub-title description" ng-if="!ctr.subTitle && ctr.description">{{ctr.description}}</div>
+    </div>
+    <div class="close" ng-click="close($index)">
+        <svg svg-symbol="icon-close"></svg>
+    </div>
+</div>

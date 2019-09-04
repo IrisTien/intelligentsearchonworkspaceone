@@ -1,0 +1,432 @@
+@modal-content-width-ios: 270px;
+@modal-content-width-android: 280px;
+@modal-z-index: 2000;
+@modal-overlay-scrim-color: rgba(0,0,0,0.4);
+@modal-header-font-size-ios: 17px;
+@modal-header-font-size-android: 21px;
+
+@modal-border-radius-ios: 12px;
+@modal-android-border-radius: 2px;
+@modal-box-shadow-android: 0 0 24px 0 rgba(0, 0, 0, 0.22), 0 24px 24px 0 rgba(0, 0, 0, 0.3);
+
+@modal-dialog-body-font-size-ios: 13px;
+@modal-dialog-body-font-size-android: 16px;
+@modal-change-password-input-height-ios: 22px;
+@modal-change-password-input-height-android: 28px;
+@modal-change-password-input-bg-ios: #fff;
+@modal-change-password-input-border-color-ios: #dad9db;
+@modal-change-password-input-border-color-android: #4794c4;
+@input-error-text-color: #fe3a2e;
+
+@dialog-header-height: 46px;
+@dialog-actions-height: 46px;
+@dialog-h-padding: 16px;
+
+@modal-tunnel-header-font-size: 21px;
+@modal-tunnel-text-font-size: 17px;
+
+@zoomedImage-mobile-width: 240px;
+@zoomedImage-desktop-width: 360px;
+
+// Modal dialog
+//-------------------------------------------
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: -1;
+
+    &.is-active {
+        opacity: 1;
+        z-index: @modal-z-index;
+    }
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: @modal-overlay-scrim-color;
+}
+
+.modal-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    width: @modal-content-width-ios;
+    min-height: 80px;
+    max-height: 100%;
+    background: #fff;
+    border-radius: @modal-border-radius-ios;
+    text-align: center;
+    overflow-y: auto;
+
+    a {
+        cursor: pointer;
+        color: @primary-link-color;
+        text-decoration: underline;
+    }
+
+    h3 {
+        .base-text-style(@modal-header-font-size-ios, 500);
+        .single-line-ellipsis();
+
+        &.no-ellipsis {
+            white-space: normal;
+            overflow: visible;
+        }
+    }
+}
+
+.android .modal-content {
+    width: @modal-content-width-android;
+    border-radius: @modal-android-border-radius;
+    box-shadow: @modal-box-shadow-android;
+    text-align: left;
+
+    h3 {
+        font-size: @modal-header-font-size-android;
+        line-height: 1.4;
+    }
+}
+
+// Full screen modal
+//-----------------------------------------------
+.modal-fullscreen {
+    .modal-content {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        overflow: hidden;
+        padding: @dialog-header-height 0 0;
+        text-align: center;
+    }
+
+    .dialog-body {
+        max-height: 100%;
+    }
+}
+
+.modal-fullscreen.mobile-slide-modal {
+    transform: translate3d(100%, 0, 0);
+    -webkit-transform: translate3d(100%, 0, 0);
+    // make sure to delay the modal opacity and z-index change to see the reverse animation
+    transition: transform 0.35s, opacity 0s 0.35s, z-index 0s 0.35s;
+    -webkit-transition: transform 0.35s, opacity 0s 0.35s, z-index 0s 0.35s;
+}
+
+.is-active.modal-fullscreen.mobile-slide-modal {
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    transition: transform 0.35s;
+    -webkit-transition: transform 0.35s;
+}
+
+.dialog-container {
+    padding: @dialog-header-height @dialog-h-padding @dialog-actions-height + 12px;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.no-header .dialog-container {
+    padding: @list-item-padding-h @dialog-h-padding @dialog-actions-height + 12px;
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+    .install-app-name {
+        margin-bottom: 8px;
+    }
+}
+
+.android .dialog-container {
+    padding: @list-item-padding-h + 4px @dialog-h-padding + 8px @dialog-actions-height + 12px;
+}
+
+.dialog-header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    height: @dialog-header-height;
+    overflow: hidden;
+    padding: 0 @dialog-h-padding;
+    line-height: @dialog-header-height;
+
+    h3 {
+        .base-text-style(@modal-header-font-size-ios, 500);
+        .single-line-ellipsis();
+    }
+}
+
+.android .dialog-header {
+    padding: 0 @dialog-h-padding + 8px;
+}
+
+.dialog-body {
+    width: 100%;
+    // reserve 1 line text around 20px
+    min-height: 20px;
+    max-height: 400px;
+    font-size: @modal-dialog-body-font-size-ios;
+    overflow-y: auto;
+}
+
+.android .dialog-body {
+    p {
+        font-size: @modal-dialog-body-font-size-android;
+        line-height: 1.6;
+        opacity: @light-text-opacity;
+    }
+}
+
+.dialog-actions {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 50;
+    width: 100%;
+    height: @dialog-actions-height;
+    overflow: hidden;
+    border-top: solid 1px @modal-button-border-color-ios;
+    text-align: left;
+    border-bottom-left-radius: @modal-border-radius-ios;
+    border-bottom-right-radius: @modal-border-radius-ios;
+}
+
+.android .dialog-actions {
+    padding: 0 @dialog-h-padding;
+    border-top: 0;
+    text-align: right;
+}
+
+// This is for the details page screenshot do not remove
+.hub-modal-details-screenshots-zoomed {
+    .modal-content {
+        width: 80%;
+
+        // New iPhoneMax width
+        @media (min-width: 414px) {
+            width: 320px;
+            max-height: 560px;
+        }
+
+        @media (min-width: @phoneL) {
+            width: 360px;
+            max-height: 640px;
+        }
+
+        @media (min-width: @tabletS) {
+            width: 420px;
+            max-height: 720px;
+        }
+    }
+
+    .modal-popup-close-icon {
+        position: absolute;
+        top: 0;
+        right:0;
+        opacity: @light-text-opacity;
+        padding: 4px;
+        z-index: 100;
+    }
+
+    .dialog-container {
+        padding: 36px 24px 58px;
+    }
+
+    .dialog-body {
+        max-height: 480px;
+
+        @media (min-width: @phoneS) {
+            max-height: 520px;
+        }
+
+        @media (min-width: @phoneM) {
+            max-height: 560px;
+        }
+
+        @media (min-width: @phoneL) {
+            max-height: 640px;
+        }
+    }
+
+    .dialog-actions {
+        text-align: center;
+    }
+
+    .rn-carousel-indicator span {
+        font-size: 10px;
+        padding: 0 2px;
+        &.active {
+            color: #0F91C6;
+        }
+    }
+}
+
+ul.zoomed-image-carousel-list[rn-carousel] {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+
+    @media (min-width: @tabletS) {
+        width: @zoomedImage-desktop-width;
+        margin-left: -@zoomedImage-desktop-width;
+        margin: 0 auto;
+    }
+}
+
+ul.zoomed-image-carousel-list[rn-carousel] > li {
+    width: 100%;
+    height: auto;
+    //Need to override the angular carousel default position: absolute so the image will take on its nature height
+    position: relative;
+    margin-left: -100%;
+    padding: 0 10px;
+
+    &:first-child {
+        margin-left: 0;
+    }
+
+    img.zoomed-image-carousel-item {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+// mdm error modals
+.modal-mdm-error {
+    .modal-overlay {
+        background-color: #fff;
+    }
+
+    .modal-content {
+        border: 0;
+        box-shadow: none;
+        text-align: center;
+    }
+
+    .modal-mdm-error-icon {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+    }
+}
+
+.modal-mdm-register {
+    .modal-content {
+        text-align: center;
+    }
+}
+
+// Styling for hub-launch-password-dialog
+//-----------------------------------------
+.hub-launch-password-dialog, .hub-setapp-password-dialog {
+    .error-text {
+        margin-top: 8px;
+        color: @input-error-text-color;
+    }
+
+    input {
+        width: 100%;
+        border: solid 1px @modal-change-password-input-border-color-ios;
+        margin-top: 12px;
+        height: @modal-change-password-input-height-ios;
+        line-height: @modal-change-password-input-height-ios;
+        padding: 4px;
+        background: @modal-change-password-input-bg-ios;
+    }
+
+    ::-webkit-input-placeholder {
+        color: @modal-change-password-input-border-color-ios;
+    }
+}
+
+.android .hub-launch-password-dialog, .android .hub-setapp-password-dialog {
+    input {
+        font-size: @modal-dialog-body-font-size-android;
+        height: @modal-change-password-input-height-android;
+        margin-top: 24px;
+        padding: 4px 0;
+        border-top: 0;
+        border-right: 0;
+        border-left: 0;
+        border-bottom: solid 1px @modal-change-password-input-border-color-android;
+    }
+
+    ::-webkit-input-placeholder {
+        color: @modal-change-password-input-border-color-ios;
+    }
+}
+
+// The tunnel modal
+//----------------------------------
+.tunnel-modal-close {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 100;
+}
+
+.hub-tunnel-required {
+    svg {
+        width: 180px;
+
+        @media (min-width: @phoneS) {
+            width: 240px;
+        }
+    }
+}
+
+.hub-tunnel-error-modal .tunnel-modal-content {
+    margin-top: 40px;
+}
+
+.tunnel-app-header {
+    width: 270px;
+    .base-text-style(@modal-tunnel-header-font-size - 4px, 600);
+    line-height: 26px;
+    margin: 0 auto 10px;
+
+    @media (min-width: @phoneS) {
+        font-size: @modal-tunnel-header-font-size;
+        margin: 0 auto 20px;
+    }
+}
+
+.tunnel-app-text {
+    width: 270px;
+    .base-text-style(@modal-tunnel-text-font-size - 4px, 400);
+    opacity: @light-text-opacity;
+    line-height: 21px;
+    margin: 0 auto 10px;
+
+    @media (min-width: @phoneS) {
+        font-size: @modal-tunnel-text-font-size!important;
+        margin: 0 auto 20px;
+    }
+}
+
+// Confirm Installation modal
+.android .hub-modal-install-confirmation {
+    .dialog-body p {
+        margin-top: 8px;
+    }
+}
+
+.hub-modal-install-confirmation, .hub-modal-installing-popup {
+    .dialog-container {
+        padding-top: 20px;
+    }
+}

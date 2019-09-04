@@ -1,0 +1,10 @@
+<div ng-controller="AppBannerController as appBannerCtrl" class="message" ng-class="message.type + '-'">
+    <button class="close- button" ng-click="close($index)"></button>
+    <div class="message-body typography">
+        <p>
+            <img src="app/graphics/logo_white.svg" class="appstore-banner"/>
+            <a class="button small-" ng-href="{{::appBannerCtrl.appStoreInstallLink}}">{{ ::'app.banner.install' | i18n }}</a>
+            <a ng-if="appBannerCtrl.showOpen" class="button small-" href="javascript:;" ng-click="appBannerCtrl.openWorkspaceOneApp()">{{ ::'app.banner.open' | i18n }}</a>
+        </p>
+    </div>
+</div>

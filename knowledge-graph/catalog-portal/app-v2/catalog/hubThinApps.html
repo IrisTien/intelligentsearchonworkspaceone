@@ -1,0 +1,46 @@
+<div modal-new="modal-confirmation" class="hub-modal-thinapps-in-package hub-modal-container">
+    <section class="dialog-container" ng-controller="ThinappsInPackageController as ctrl">
+        <header class="dialog-header">
+            <div class="left-panel">
+                <h3 class="modal-title">{{::app.name}}</h3>
+                <p class="thinapp-info modal-content-text"><span>{{::'app.thinappsInPackage.info' | i18n}} </span>|  <span> {{'app.thinappsInPackage.noOfAppsInPackage' | i18n:ctrl.visibleCatalogApps.length}} </span></p>
+            </div>
+            <div class="search-form modal-thinapp right-panel">
+                <div class="search-input-bar search-thinapp">
+                    <label>
+                        <svg svg-symbol="icon-searchglass"></svg>
+                    </label>
+                    <input type="text"
+                           ng-model="ctrl.searchString"
+                           placeholder="{{ ::'app.thinappsInPackage.search.placeholder' | i18n }}"
+                           class="search-inputfield"
+                           autocorrect="off"
+                           autocapitalize="off" />
+                    <button class="search-clear-button" id="pt-search-clear-button" ng-click="ctrl.clearSearch()" ng-show="ctrl.searchString">
+                        <svg svg-symbol="icon-circle-x"></svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <div class="dialog-body">
+            <p class="thinapp-info filtered-thinapps-msg" ng-if="ctrl.searchString">{{'app.thinappsInPackage.noOfFilteredAppsInPackage' | i18n:searchResults.length}}</p>
+            <div class="apps-module-content">
+                <div class="grid-container">
+                    <app-item class="grid-item app-item"
+                              ng-repeat="app in ctrl.visibleCatalogApps | searchThinappPackageFor:ctrl.searchString as searchResults"
+                              app="app" modalobj="$modal" favorite-enabled="ctrl.favoritesEnabled"></app-item>
+                    <!-- Do not remove these still needed if the app count number small than the minSectionAppsCount -->
+                    <div class="grid-item-empty" ng-repeat="app in ctrl.emptyCatalogModalFillers"></div>
+                </div>
+            </div>
+        </div>
+        <footer class="dialog-actions">
+            <button class="button-action secondary-action modal-button-secondary" ng-click="$modal.close()">{{::'button.close' | i18n}}</button>
+            <button class="button-action primary-action modal-button-primary"
+                    ng-if="!ctrl.customizationLoadFromDbFailed"
+                    ng-click="ctrl.bookmarkAll();$modal.close()">
+                {{::'hub.thinAppsInPackage.button.favoriteAll' | i18n}}
+            </button>
+        </footer>
+    </section>
+</div>

@@ -1,0 +1,26 @@
+<div ng-if="appListCtrl.isLoading" class="loading-app-list-container">
+    <div ng-include="'app-v2/components/appList/appListBrowserPreview.html'"></div>
+</div>
+<section class="content-container app-list-browser">
+    <div class="page-breadcrumb-bar" ng-if="!appListCtrl.isAWJadeDesktop">
+        <div class="app-list-content">
+            <h2 class="page-breadcrumb-text"><a ui-sref="apps" class="app-list-apps-link">{{::'hub.nav.label.apps' | i18n}}</a> &#47; {{appListCtrl.appListLabel}}</h2>
+        </div>
+    </div>
+    <div class="apps-list-header" ng-if="appListCtrl.isAWJadeDesktop">
+        <h2 class="section-headline-style2">{{appListCtrl.appListLabel}}</h2>
+        <a ui-sref="apps" class="app-list-dismiss-button"><svg svg-symbol="icon-close-popup"></svg></a>
+    </div>
+    <div class="content-container-scrollable" infinite-scroll onend="appListCtrl.getNextPage()"
+         ng-class="{'scroll-disabled': appListCtrl.scrollDisabled}">
+        <div class="app-list-content">
+            <div class="app-list-wrapper">
+                <h2 class="app-list-section-header" ng-if="!appListCtrl.isAWJadeDesktop">{{appListCtrl.appListLabel}}</h2>
+                <app-list-item ng-repeat="app in appListCtrl.visibleApps" app="app" class="app-list-item" favorite-enabled="appListCtrl.favoriteEnabled"
+                               ng-click="appListCtrl.hubListGoToDetails(app.appId)"></app-list-item>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="details-uiview" ui-view></div>

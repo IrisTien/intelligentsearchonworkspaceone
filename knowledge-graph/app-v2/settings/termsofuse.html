@@ -1,0 +1,16 @@
+<div class="settings-detail-content-container">
+    <div class="settings-detail-mobile-header">
+        <h2>{{'userInfo.termsofuse' | i18n}}</h2>
+        <div class="settings-back settings-termsofuse-button" id="pt-settings-tou-back" ng-click="::settingsCtrl.dismissSettingsDetail()">
+            <svg svg-symbol="icon-page-back" class="icon-page-back"></svg>
+        </div>
+    </div>
+    <div class="settings-detail-content-scrollable">
+        <div class="settings-detail-content">
+            <div id="tou-header" class="tou-values tou-header">{{'userInfo.termsofuse' | i18n}}</div>
+            <div id="tou-data" class="tou-values tou-data" ng-if="settingsCtrl.touContent">
+                <p class="tou-content" ng-bind-html="::settingsCtrl.touContent"></p>
+            </div>
+        </div>
+    </div>
+</div>

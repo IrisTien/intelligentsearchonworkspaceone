@@ -1,0 +1,51 @@
+.ws-desktop .bookmarks {
+  .grid-container {
+    padding:12px 0;
+    margin: 0 auto;
+  }
+
+  .grid-item, .sort-placeholder, .grid-item-empty {
+    width: @bookmark-item-width-m!important;
+    height: @bookmark-item-height-l!important;
+    margin: @bookmark-item-margin-m!important;
+  }
+
+  .grid-item-empty {
+    height:0!important;
+  }
+  // Also some bookmark specified overrides
+  .bookmark-app-icon {
+    top: @app-icon-margin-top-l!important;
+    width: @app-icon-size-l!important;
+    height: @app-icon-size-l!important;
+  }
+}
+
+.ws-desktop .catalog {
+  .grid-item {
+    width:@catalog-item-width-m!important;
+    height: @catalog-item-height-m!important;
+    margin: @catalog-item-margin-y-s!important;
+
+
+    @media (min-width: @desktopM) {
+      width: @catalog-item-width-l!important;
+      height: @catalog-item-height-l!important;
+      margin: @catalog-item-margin-y-m!important;
+    }
+  }
+
+  .grid-item-empty  {
+    width:@catalog-item-width-m;
+    margin: 0 @catalog-item-margin-y-s!important;
+
+    @media (min-width: @desktopM) {
+      width: @catalog-item-width-l;
+      margin:0 @catalog-item-margin-y-m!important;
+    }
+  }
+}
+
+
+
+

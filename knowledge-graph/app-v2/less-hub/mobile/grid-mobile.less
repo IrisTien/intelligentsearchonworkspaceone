@@ -1,0 +1,243 @@
+// People grid variables
+// ---------------------------------------
+@gb-appmodule-item-no-s: 3;
+@gb-appmodule-item-no-m: 4;
+@gb-appmodule-item-no-l: 5;
+@gb-appmodule-item-no-xl: 6;
+@gb-appmodule-item-no-xxl: 7;
+
+@gb-appmodule-item-margin-h: 6px; // Horizontal margin
+@gb-appmodule-item-margin-v: 6px; // Vertical margin
+
+@gb-appmodule-item-width-s: 88px;
+@gb-appmodule-item-height-s: 140px;
+@gb-appmodule-item-width-m: 112px;
+@gb-appmodule-item-height-m: 160px;
+@gb-appmodule-item-width-l: 130px;
+@gb-appmodule-item-height-l: 180px;
+
+// People grid variables
+// ---------------------------------------
+@gb-people-item-no-s: 3;
+@gb-people-item-no-m: 4;
+@gb-people-item-no-l: 5;
+@gb-people-item-no-xl: 6;
+@gb-people-item-no-xxl: 7;
+@gb-people-item-no-xxxl: 8;
+
+@gb-people-item-margin-h: 10px; // Horizontal margin
+@gb-people-item-margin-v: 16px; // Vertical margin
+
+@gb-people-item-width-s: 88px;
+@gb-people-item-height-s: 120px;
+@gb-people-item-width-m: 110px;
+@gb-people-item-height-m: 180px;
+
+// MIXINS for the grids
+// ---------------------------------------
+.set-grid-item-flexible-width(@number-of-items, @grid-item-margin-x, @grid-item-margin-y) {
+    @margin-all: ((@number-of-items + 1) * @grid-item-margin-x * 2 );
+    @flex-width: ~ "calc((100% - @{margin-all})/ @{number-of-items})";
+    width: @flex-width;
+    margin: @grid-item-margin-y @grid-item-margin-x;
+}
+
+.set-grid-item-flexible-margin(@number-of-items, @item-width, @grid-item-margin-y) {
+    @width-all-tiles: (@item-width * @number-of-items);
+    @margin-no: @number-of-items * 2 + 2;
+    @flex-margin: ~ "calc((100% - @{width-all-tiles})/ @{margin-no})";
+    margin: @grid-item-margin-y @flex-margin;
+}
+
+.grid-container {
+    width: 100%;
+    font-size: 0; /*!important, please make sure to define font-size on grid-item immediate parent*/
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+
+    &.carousel-container {
+        text-align: left;
+        white-space: nowrap;
+    }
+}
+
+.grid-item, .grid-item-empty, .grid-item-carousel {
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    position: relative;
+}
+
+// Grid for the apps landing page, define the base grid structure
+.apps-module-content {
+    .grid-item {
+        width: @gb-appmodule-item-width-s; //Fallback width in calc does not work
+        min-height: @gb-appmodule-item-height-s;
+        height: auto;
+        .set-grid-item-flexible-width(@gb-appmodule-item-no-s, @gb-appmodule-item-margin-h, @gb-appmodule-item-margin-v);
+
+        // From 411px we set flexible margin
+        @media (min-width: @phoneM) {
+            width: @gb-appmodule-item-width-m;
+            margin: @gb-appmodule-item-margin-h; //Fallback margin in case calc does not work
+            .set-grid-item-flexible-margin(@gb-appmodule-item-no-s, @gb-appmodule-item-width-m, @gb-appmodule-item-margin-v);
+        }
+        // This number needs to be consistent with the number form viewportMinAppService return number
+        @media (min-width: 580px) {
+            .set-grid-item-flexible-margin(@gb-appmodule-item-no-m, @gb-appmodule-item-width-m, @gb-appmodule-item-margin-v);
+        }
+
+        @media (min-width: @tabletS) {
+            width: @gb-appmodule-item-width-l;
+            .set-grid-item-flexible-margin(@gb-appmodule-item-no-l, @gb-appmodule-item-width-l, @gb-appmodule-item-margin-v);
+        }
+
+        @media (min-width: 890px) {
+            .set-grid-item-flexible-margin(@gb-appmodule-item-no-xl, @gb-appmodule-item-width-l, @gb-appmodule-item-margin-v);
+        }
+
+        @media (min-width: @desktopM) {
+            .set-grid-item-flexible-margin(@gb-appmodule-item-no-xxl, @gb-appmodule-item-width-l, @gb-appmodule-item-margin-v);
+        }
+    }
+
+    // !!!This is used for one-line carousel look alike app module -- DO NOT Change
+    // The margin is hard coded for flexible to change, I just eyeballed in each viewport for alignment and best looks
+    .grid-item-carousel {
+        margin: @gb-appmodule-item-margin-v 2px;
+
+        @media (min-width: @phoneS) {
+            margin: @gb-appmodule-item-margin-v 2px;
+        }
+
+        @media (min-width: @phoneM) {
+            width: @gb-appmodule-item-width-m;
+            margin: @gb-appmodule-item-margin-v 5px;
+        }
+
+        @media (min-width: @tabletS) {
+            width: @gb-appmodule-item-width-l;
+            margin: @gb-appmodule-item-margin-v 6px;
+        }
+
+        @media (min-width: 890px) {
+            margin: @gb-appmodule-item-margin-v 6px;
+        }
+
+        @media (min-width: @desktopM) {
+            margin: @gb-appmodule-item-margin-v 5px;
+        }
+
+        &:first-child {
+            margin-left: 12px;
+
+            @media (min-width: @phoneM) {
+                margin-left: 18px;
+            }
+
+            @media (min-width: @desktopM) {
+                margin-left: 14px;
+            }
+        }
+
+        &:last-child {
+            margin-right: 12px;
+
+            @media (min-width: @phoneM) {
+                margin-right: 18px;
+            }
+
+            @media (min-width: @desktopM) {
+                margin-right: 14px;
+            }
+        }
+    }
+
+    .grid-item-empty {
+        width: @gb-appmodule-item-width-s; // Fallback width;
+        height: 0;
+        .set-grid-item-flexible-width(@gb-appmodule-item-no-s, @gb-appmodule-item-margin-h, 0);
+
+        @media (min-width: @phoneM) {
+            width: @gb-appmodule-item-width-m;
+            margin: @gb-appmodule-item-margin-h; //Fallback margin in case calc does not work
+            .set-grid-item-flexible-margin(@gb-appmodule-item-no-s, @gb-appmodule-item-width-m, 0);
+        }
+
+        @media (min-width: 580px) {
+            .set-grid-item-flexible-margin(@gb-appmodule-item-no-m, @gb-appmodule-item-width-m, 0);
+        }
+
+        @media (min-width: @tabletS) {
+            width: @gb-appmodule-item-width-l;
+            .set-grid-item-flexible-margin(@gb-appmodule-item-no-l, @gb-appmodule-item-width-l, 0);
+        }
+
+        @media (min-width: 890px) {
+            .set-grid-item-flexible-margin(@gb-appmodule-item-no-xl, @gb-appmodule-item-width-l,0);
+        }
+
+        @media (min-width: @desktopM) {
+            .set-grid-item-flexible-margin(@gb-appmodule-item-no-xxl, @gb-appmodule-item-width-l, 0);
+        }
+    }
+}
+
+// People Grid
+// ---------------------------------------
+.people {
+    .grid-container {
+        @media (min-width: 680px) {
+            text-align: left;
+        }
+    }
+
+    .grid-item {
+        width: @gb-people-item-width-s; //Fallback width in calc does not work
+        min-height: @gb-people-item-height-s;
+        height: auto;
+        .set-grid-item-flexible-width(@gb-people-item-no-s, @gb-people-item-margin-h, @gb-people-item-margin-v);
+
+        @media (min-width: @phoneM) {
+            width: @gb-people-item-width-m;
+            margin: @gb-people-item-margin-h; //Fallback margin in case calc does not work
+            .set-grid-item-flexible-margin(@gb-people-item-no-s, @gb-people-item-width-m, @gb-people-item-margin-v);
+        }
+        // Make this a little large solely based on the fit of the number of items
+        @media (min-width: @phoneL + 20px) {
+            width: @gb-people-item-width-m;
+            margin: @gb-people-item-margin-h;
+            .set-grid-item-flexible-margin(@gb-people-item-no-m, @gb-people-item-width-m, @gb-people-item-margin-v);
+        }
+
+        @media (min-width: 680px) {
+            width: @gb-people-item-width-m;
+            margin: @gb-people-item-margin-h;
+            .set-grid-item-flexible-margin(@gb-people-item-no-l, @gb-people-item-width-m, @gb-people-item-margin-v);
+        }
+
+        @media (min-width: @tabletS) {
+            width: @gb-people-item-width-m;
+            margin: @gb-people-item-margin-v 20px;
+        }
+    }
+
+    .grid-item-empty {
+        width: @gb-people-item-width-s; // Fallback width;
+        height: 0;
+        .set-grid-item-flexible-width(@gb-people-item-no-s, @gb-people-item-margin-h, 0);
+
+        @media (min-width: @phoneM) {
+            width: @gb-people-item-width-m;
+            margin: @gb-people-item-margin-h; //Fallback margin in case calc does not work
+            .set-grid-item-flexible-margin(@gb-people-item-no-s, @gb-people-item-width-m, 0);
+        }
+        // Make this a little large solely based on the fit of the number of items
+        @media (min-width: @phoneL + 20px) {
+            width: @gb-people-item-width-m;
+            margin: @gb-people-item-margin-h;
+            .set-grid-item-flexible-margin(@gb-people-item-no-m, @gb-people-item-width-m, 0);
+        }
+    }
+}

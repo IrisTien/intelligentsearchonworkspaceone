@@ -1,0 +1,31 @@
+<section class="content-container settings-subpage">
+    <div ng-include="'app-v2/components/settingSubpage/settingsBreadcrumb.html'"></div>
+    <div class="content-container-scrollable">
+        <div class="settings-content-wrapper">
+            <div class="settings-profile-container">
+
+                <div class="settings-profile-avatar-container profile-avatar" image-load>
+                    <img ng-src="{{::settingSubpageCtrl.user.imageURL}}" ng-show="settingSubpageCtrl.user.imageURL" class="settings-user-avatar"/>
+                </div>
+                <p class="account-item account-name">
+                    <span class="account-label">{{::'userInfo.profile.name' | i18n}} </span>
+                    <span class="account-content">{{::settingSubpageCtrl.user.firstName}} {{::hubSettingsCtrl.user.lastName}}</span>
+                </p>
+                <p class="account-item account-username">
+                    <span class="account-label">{{::'userInfo.profile.username' | i18n}} </span>
+                    <span class="account-content">{{::settingSubpageCtrl.user.userName}}</span>
+                </p>
+                <p class="account-item account-email">
+                    <span class="account-label">{{::'userInfo.profile.email' | i18n}} </span>
+                    <span class="account-content">{{::settingSubpageCtrl.user.emailAddress}}</span>
+                </p>
+            </div>
+            <div class="settings-password-container" ng-if="settingSubpageCtrl.user.changePasswordAllowed">
+                <h2>{{::'userInfo.profile.password' | i18n}}
+                    <span class="password-change" ng-click="::settingSubpageCtrl.openPasswordDialog()">{{::'userInfo.profile.passwordchange' | i18n}}</span>
+                </h2>
+                <p>{{::'userInfo.profile.passwordprompt' | i18n}}</p>
+            </div>
+        </div>
+    </div>
+</section>

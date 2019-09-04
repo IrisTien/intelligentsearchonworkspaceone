@@ -1,0 +1,8 @@
+<svg width="42px" height="42px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>hamburger</title>
+    <g stroke-width="2" fill-rule="evenodd" transform="translate(0,4)">
+        <path d="M0,1 L40,1"></path>
+        <path d="M0,17 L40,17"></path>
+        <path d="M0,33 L40,33"></path>
+    </g>
+</svg>

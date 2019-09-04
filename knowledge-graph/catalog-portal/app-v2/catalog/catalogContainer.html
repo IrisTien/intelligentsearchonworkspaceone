@@ -1,0 +1,30 @@
+<article id="catalog-container" class="catalog content-container-scrollable" infinite-scroll onend="catalogCtrl.getNextPage()" ng-class="{'recommended-apps': appCenterCtrl.directEnrollmentEnabled}">
+    <div class="content width-boundary">
+        <section ng-if="catalogCtrl.showCatalogTooltip" class="coachmarks">
+            <h3 class="coachmark-header">{{::'app.coachmarks.catalogTitle' | i18n }}</h3>
+            <p class="coachmark-message">{{::'app.coachmarks.catalogMessage' | i18n }}</p>
+            <div class="coachmark-button-container">
+                <a class="coachmark-button primary" ng-click="::catalogCtrl.closeTooltip()">{{::'app.coachmarks.buttonText' | i18n }}</a>
+            </div>
+        </section>
+
+        <section class="content-sidebar" ng-include="'app-v2/catalog/catalogFilterDesktop.html'" ng-class="{'coachmarks-on': catalogCtrl.showCatalogTooltip}">
+        </section>
+
+        <section class="content-body-with-sidebar" pull-to-refresh="catalogCtrl.clearCache()" scroll-container=".catalog.content-container-scrollable">
+            <div class="grid-container">
+                <p class="category-filter-name" ng-hide="catalogCtrl.appCenterContext.selectedCategory.type && catalogCtrl.appCenterContext.selectedCategory.type =='all'">{{catalogCtrl.appCenterContext.selectedCategory.name}} <span class="cagetory-filter-number">{{catalogCtrl.visibleCatalogApps.length}}</span></p>
+                <div catalog-item ng-repeat="app in catalogCtrl.visibleCatalogApps" class="grid-item" appdata="app"
+                     on-select-recommended-app="catalogCtrl.recommendedAppsStatusChanged()"></div>
+                <div ng-repeat="item in catalogCtrl.emptyFillers" class="grid-item-empty"></div>
+                <div ng-if="catalogCtrl.showNoResultsMsg" class="empty-catalog">
+                    <svg svg-symbol="illo-empty-search" class="icon-empty-search"></svg>
+                    <p>{{::'appCenter.catalog.empty' | i18n }}</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</article>
+
+<section class="categories-filter-mobile" ng-include="'app-v2/catalog/catalogFilterMobile.html'">
+</section>

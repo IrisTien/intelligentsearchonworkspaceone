@@ -1,0 +1,17 @@
+<a ng-click="::appCenterCtrl.gotoAppsFromFooter()" id="pt-bottomnav-apps" ng-class="{'active branding-icon-primary':appCenterCtrl.$state.current.activeTab == 'bookmarks' || appCenterCtrl.$state.current.activeTab == 'catalog'}">
+    <svg svg-symbol="icon-apps" class="bottom-nav-apps"></svg>
+    <p>{{::'app.nav.tab.apps' | i18n }}</p>
+</a>
+<a ng-if="appCenterCtrl.showPeopleTab" ng-click="::appCenterCtrl.gotoPeopleFromFooter()" id="pt-bottomnav-people" ng-class="{'active branding-icon-primary':appCenterCtrl.$state.current.activeTab == 'people'}">
+    <svg svg-symbol="icon-people" class="bottom-nav-people"></svg>
+    <p>{{::'app.nav.tab.people' | i18n }}</p>
+</a>
+<a ng-href="#/support" ng-if="appCenterCtrl.isAWJadeMobile" ng-class="{'active branding-icon-primary':appCenterCtrl.$state.current.activeTab == 'support'}" class="support-tab">
+    <svg svg-symbol="icon-support" class="bottom-nav-support"></svg>
+    <p>{{::'app.nav.tab.support' | i18n }}</p>
+</a>
+<a ng-href="#/settings" ng-class="{'active branding-icon-primary':appCenterCtrl.$state.current.activeTab == 'settings'}" class="settings-tab">
+    <svg svg-symbol="icon-setting-gear" class="bottom-nav-settings"></svg>
+    <p>{{::'app.nav.tab.settings' | i18n }}</p>
+</a>
+

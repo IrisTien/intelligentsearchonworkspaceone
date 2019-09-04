@@ -1,0 +1,14 @@
+<div modal class="dialog centered-">
+    <div class="dialog-body typography">
+        <div class="dialog-info-icon">
+            <svg symbol="info"></svg>
+        </div>
+        <h3>{{'myapps.launch.openApp' | i18n:app.name}}</h3>
+        <p ng-bind-html="description">
+        </p>
+        <p>
+            <button ng-click="$modal.close(true);" class="link- button"> {{'button.cancel' | i18n }}</button>
+            <button ng-click="launcherItemCtrl.appInstalled(app.subType);" class="primary- button"> {{'button.openApp' | i18n }}</button>
+        </p>
+    </div>
+</div>

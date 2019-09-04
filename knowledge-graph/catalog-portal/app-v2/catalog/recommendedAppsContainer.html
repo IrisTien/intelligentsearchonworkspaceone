@@ -1,0 +1,36 @@
+<header ng-if="catalogCtrl.visibleCatalogApps.length" class="recommended-apps-header header-container branding-portal-header-background branding-portal-header-text" ng-class="{'docked-style': appCenterCtrl.isAWJadeDocked}">
+    <div class="header-left branding-portal-header-text">
+        <div class="skip-button" ng-click="catalogCtrl.skipInstallRecommendedApps()">{{:: 'recommendedApps.skip' | i18n }}</div>
+    </div>
+    <div class="header-center">
+        <div class="mobile-title-container">
+            <h2>{{appCenterCtrl.$state.current.mobilePageTitle | i18n}}</h2>
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="recommended-apps-select-all" ng-click="catalogCtrl.toggleSelectAllRecommendedApps()" ng-class="{'select-all': catalogCtrl.selectAllRecommendedApps }">
+            <!-- because of the branding issue we use two svg to achieve the selected and not selected effect -->
+            <svg svg-symbol="icon-recommended-app-all" class="icon-recommended-app-all"></svg>
+            <svg svg-symbol="icon-recommended-app-selector" class="icon-recommended-app-selector"></svg>
+        </div>
+    </div>
+</header>
+<article ng-if="catalogCtrl.visibleCatalogApps.length" class="catalog content-container-scrollable recommended-apps" infinite-scroll onend="catalogCtrl.getNextPage()">
+    <div class="content width-boundary">
+        <section class="content-body">
+            <div class="help-content">
+                <svg svg-symbol="icon-recommended-apps" class="help-icon"></svg>
+                <p class="help-text">{{::'recommendedApps.text1' | i18n }}</p>
+                <p class="help-text">{{::'recommendedApps.text2' | i18n }}</p>
+            </div>
+            <div class="grid-container">
+                <div catalog-item ng-repeat="app in catalogCtrl.visibleCatalogApps" class="grid-item" appdata="app"
+                     on-select-recommended-app="catalogCtrl.recommendedAppsStatusChanged()"></div>
+                <div ng-repeat="item in catalogCtrl.emptyFillers" class="grid-item-empty"></div>
+            </div>
+        </section>
+    </div>
+</article>
+<div ng-if="catalogCtrl.visibleCatalogApps.length" class="recommended-apps-toolbar">
+    <div class="install-button" ng-class= "{'install-disabled': catalogCtrl.recommendedAppsCount == 0 }" ng-click="catalogCtrl.bulkInstall()" >{{::'recommendedApps.install' | i18n }} <span class="selected-appcount">{{catalogCtrl.recommendedAppsCount}}</span> {{::'recommendedApps.apps' | i18n }}</div>
+</div>

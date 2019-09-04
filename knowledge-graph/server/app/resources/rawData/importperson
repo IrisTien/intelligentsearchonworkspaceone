@@ -1,0 +1,23 @@
+
+
+
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:///euc3.csv" AS line
+CREATE (:Person {name: line.name,
+                 distinguishedName: line.distinguishedName,
+                 phoneNumber:line.phoneNumber,
+                 orgLink: line.orgLink,
+                 title: line.title,
+                 imageURL: line.imageURL,
+                 mobile: line.mobile,
+                 emailAddress: line.emailAddress,
+                 employeeNumber: line.employeeNumber,
+                 link: line.link,
+                 personId: line.personId,
+                 region: line.region,
+                 managerDN: line.managerDN})
+                 
+LOAD CSV with headers from 'file:///rel.csv' as line
+MATCH (employee:Person {distinguishedName:line.distinguishedName})
+MATCH (manager:Person {distinguishedName:line.managerDN})
+CREATE (employee)-[:reportTo]->(manager)

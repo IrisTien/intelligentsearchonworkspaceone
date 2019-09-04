@@ -1,0 +1,138 @@
+@action-button-height: 25px;
+@app-button-font-size: 13px;
+
+// These are os specific modal dialog button color, no branding so can be hard-coded
+@modal-content-bg-ios: #f9f9f9;
+@modal-action-button-text-color-ios: #0079ff;
+@modal-action-button-text-color-android: #4794c4;
+@modal-button-border-color-ios: #dadade;
+
+@modal-action-button-font-size-ios: 17px;
+@modal-action-button-font-size-android: 14px;
+
+@modal-tunnel-button-width: 220px;
+@modal-tunnel-button-height: 36px;
+@modal-tunnel-button-font-size: 13px;
+
+@button-background-black: #000000;
+
+// There is a difference between primary and secondary button
+// ---------------------------------------
+.app-button {
+  min-width: 90px;
+  max-width: 110px;
+  height: @action-button-height;
+  line-height: @action-button-height;
+  display: inline-block;
+  text-transform: uppercase;
+  text-align: center;
+  vertical-align: middle;
+  .base-text-style(@app-button-font-size, 600);
+  padding: 0 12px;
+  .single-line-ellipsis();
+}
+
+.android .app-button {
+  height: @action-button-height - 1px;
+  line-height: @action-button-height + 2px;
+}
+
+//TODO how localization work with a defined width?
+.app-un-favorite-button,
+.app-favorite-button,
+.app-favoriting-spinner {
+  width: 110px;
+}
+
+@media (min-width: @tabletS) {
+  .app-un-favorite-button,
+  .app-favorite-button,
+  .app-open,
+  .app-activate,
+  .app-install,
+  .app-managed,
+  .app-pending,
+  .app-installing,
+  .app-open,
+  .app-managed,
+  .app-re-install,
+  .app-update,
+  .app-view {
+    width: auto;
+    max-width: 160px;
+  }
+}
+
+// Modal button styles
+// button-action defines the layout of the button
+// text and background will be applied through .primary-action and .secondary-action
+// ---------------------------------------------------------
+.button-action {
+  height: @dialog-actions-height;
+  line-height: @dialog-actions-height;
+  font-size: @modal-action-button-font-size-ios;
+  padding: 0 8px;
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+  .single-line-ellipsis();
+}
+
+.android .button-action {
+  font-size: @modal-action-button-font-size-android;
+  text-transform: uppercase;
+}
+
+.one-action .button-action {
+  width: 100%;
+}
+
+.two-action .button-action {
+  width: 49%;
+
+  &:first-child {
+      border-right: solid 1px @modal-button-border-color-ios;
+  }
+}
+
+.android .two-action .button-action {
+    width: auto;
+    max-width: 45%;
+
+    &:first-child {
+      border-right: 0;
+    }
+}
+
+// These primary and secondary button do not need branding, we mimic the os colors
+.primary-action {
+  color: @modal-action-button-text-color-ios;
+  font-weight: 600;
+}
+
+.android .primary-action {
+  color: @modal-action-button-text-color-android;
+  font-weight: 500;
+}
+
+.secondary-action {
+  color: @modal-action-button-text-color-ios;
+  font-weight: 400;
+}
+
+.android .secondary-action {
+  color: @modal-action-button-text-color-android;
+  font-weight: 500;
+}
+
+.tunnel-modal-button {
+   width: @modal-tunnel-button-width;
+   height: @modal-tunnel-button-height;
+   .base-text-style(@modal-tunnel-button-font-size, 600);
+   text-transform: uppercase;
+   margin-top: 24px;
+
+  @media (min-width: @phoneS) {
+      Margin-top: 36px;
+  }
+}

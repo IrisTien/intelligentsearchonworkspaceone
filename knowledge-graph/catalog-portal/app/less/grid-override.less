@@ -1,0 +1,279 @@
+ /*Overriding grid*/
+
+  //VARIABLES
+  //Welcome Container
+  @welcome-font-size: 28px;
+  @welcome-line-height: 36px;
+    
+  //Launcher Variables
+  //Desktop
+  @l-tile-size: 120px;
+  @l-image-size: 76px; 
+  @l-tile-padding: 44px; 
+
+  //Mobile    
+  @l-tile-size-mobile: 86px;
+  @l-image-size-mobile: 58px;      
+  @l-tile-padding-mobile: 15px;
+  @mobile-filter-dropdown-container-margin: 16px;
+  
+  //Catalog Variables
+  //Desktop
+  @c-tile-width: 160px;
+  @c-image-size: 120px;
+  @c-tile-padding: 20px;
+  @c-image-top: 0px;
+  @title-info-margin: 10px 10px;
+  
+  //Mobile
+  @c-tile-width-mobile: 100%;
+  @c-tile-height-mobile: 80px;
+  @c-image-size-mobile: 52px;
+  @c-image-top-mobile: (@c-tile-height-mobile - @c-image-size-mobile)/2;  
+  @c-tile-padding-mobile: 15px;
+
+  @sidebar-width: 220px;
+
+  //Tile numbers
+  @l-number-tiles-MP: 3;
+  @l-number-tiles-LP: 4;
+  @l-number-tiles-S: 4;
+  @l-number-tiles-M: 6;
+  @l-number-tiles-L: 7;
+  @l-number-tiles-W: 8;
+
+  @c-number-tiles-LP: 2;
+  @c-number-tiles-S: 3; 
+  @c-number-tiles-M: 4;
+  @c-number-tiles-L: 5;
+  @c-number-tiles-W: 5;
+  
+  
+  
+  //MIXINS
+  //Used to set tile sizes
+  .set-box-size(@tile-size, @padding-size){
+     width: @tile-size;
+     padding: (@padding-size/2);
+  }  
+
+  //Sets launcher emblem size
+  .set-launcher-emblem-size(@tile-size, @image-size){
+     padding-top: @tile-size;
+     min-width: @tile-size;
+     &:before {
+        width: @tile-size;
+        height: @tile-size;
+     }> a {
+     .emblem-image {
+        width: @image-size;
+        height: @image-size;
+        top: (@tile-size - @image-size)/2;
+      }
+     }
+   }
+  
+   //Sets catalog emblem size
+   .set-catalog-emblem-size(@top, @image-size){        
+      top: @top;
+      height: @image-size;
+      width: @image-size;
+    }
+
+   //Function to calculate width of container (Based on accumulated launcher tile total width (including padding)
+   .calculate-grid-width(@tile-size, @tile-padding, @number-tiles) {
+         @width: (( @tile-size + @tile-padding) * @number-tiles ); 
+   }
+
+   //Sets both the launcher and catalog containers width as well as the welcome message containers on both pages using the above function
+   .set-grid(@l-tile-size, @l-tile-padding, @l-number-tiles){
+       .calculate-grid-width(@l-tile-size, @l-tile-padding, @l-number-tiles);
+       .base-.grid.launcher-items-container, .full-bleed-.page.catalog-items-container, .welcomeMessageContainer{
+             width:  @width;
+        }
+    }
+
+    //From Medium (980px) and above viewports the side bar is visible, so this mixin can be used to overwrite the above from M onwards as it accommodates for the side bar and sets both the width and position of the catalog grid and side bar.
+    .set-catalog-grid-w-sidebar(@l-tile-size, @l-tile-padding, @l-number-tiles, @c-number-tiles ){
+            //Calculate whole containers width based on launchers width
+            .calculate-grid-width(@l-tile-size, @l-tile-padding, @l-number-tiles); 
+            
+            //Set position of side bar to align to the left side of the container
+            .frame.balanced-.sidebarred- .frame-sidebar{
+                margin-left: -@width/2;
+            }
+        
+            //Calculate the catalog items container width accommodating for the sidebar size and subtracting it as well as the padding for alignment purposes
+            @c-width: @width - @sidebar-width - (@l-tile-padding/2);
+            
+            .full-bleed-.page.catalog-items-container {
+                width: @c-width;
+                margin-left: -@width/2 + @sidebar-width + (@l-tile-padding/2);//Sets the position of the catalog items container accommodating for the size of the size bar
+                padding-right: @l-tile-padding/2; //Uses launcher padding for alignment between pages
+                padding-left: ((@c-width - ((@c-tile-width + @c-tile-padding) * @c-number-tiles )) - @l-tile-padding/2 + @c-tile-padding); //Calculates the amount of padding needed to align the catalog item container to the right
+            }
+    }
+
+    //LAUNCHER & CATALOG
+    .launcher-main, .catalog-main{ 
+        
+        .mobileFilterBarContainer{   
+          padding: 0px (@l-tile-padding-mobile/2);
+        } 
+         
+        .page > .base-.grid{
+          margin-left: auto;
+          margin-right: auto;
+        } 
+        
+        //Sets both launcher and catalog grids at the various viewports using the respective tile sizes (Desktop and Mobile) and number of tile variables
+        .set-grid(@l-tile-size-mobile, @l-tile-padding-mobile, @l-number-tiles-MP);
+        
+        @media @page-at-least-LP{
+            .set-grid(@l-tile-size-mobile, @l-tile-padding-mobile, @l-number-tiles-LP);
+        }
+        
+        @media @page-at-least-S { 
+            .set-grid(@l-tile-size, @l-tile-padding, @l-number-tiles-S);  
+        }
+        
+        @media @page-at-least-M{
+            .set-grid(@l-tile-size, @l-tile-padding, @l-number-tiles-M);
+        }
+        
+         @media @page-at-least-L{
+            .set-grid(@l-tile-size, @l-tile-padding,  @l-number-tiles-L);
+        }
+        
+         @media @page-at-least-W{
+            .set-grid(@l-tile-size, @l-tile-padding,  @l-number-tiles-W);
+        }
+    }
+
+    //LAUNCHER
+    .launcher-main { 
+        //Set tile and icon size
+        .box.two-{ 
+            .set-box-size( @l-tile-size-mobile , @l-tile-padding-mobile); 
+        }
+        .emblem.large-{
+            .set-launcher-emblem-size(@l-tile-size-mobile, @l-image-size-mobile);
+        }
+        
+        //Resets the tile and icon sizes using the desktop variables/values
+        @media @page-at-least-S{
+            .box.two- { 
+                .set-box-size(@l-tile-size, @l-tile-padding);
+            } 
+            .emblem.large-{
+                .set-launcher-emblem-size(@l-tile-size, @l-image-size);
+            }
+        }
+    }
+
+    //CATALOG
+    .catalog-main{
+        //Sets tile and icon size
+        .box.three-{
+            .set-box-size(@c-tile-width-mobile, @c-tile-padding-mobile);
+        }
+        .emblem .emblem-image{
+            .set-catalog-emblem-size(@c-image-top-mobile, @c-image-size-mobile);
+        }
+        
+        //Overwrites the tile padding to ensure list view at Medium phone size (539px) and below
+        @media @page-at-most-MP{
+            .box.three- {
+                padding-bottom: 0;
+                padding-top: 0;    
+            }        
+        }
+        
+        //Resets the tile and icon sizes using desktop variables/values
+        @media @page-at-least-LP{ 
+            .box.three- {
+                .set-box-size(@c-tile-width, @c-tile-padding);
+            }
+            .catalogitem .box-module {
+                padding: 20px 0px 0px;
+            }
+            .emblem{
+                padding-top: @c-image-size;
+                .emblem-image{
+                    .set-catalog-emblem-size(@c-image-top, @c-image-size);
+                }
+            }
+        }
+        
+        //Sets padding for change in add button style
+        @media @page-LP-only{
+             .catalogitem .box-module {
+                padding: 20px 10px 10px 10px;
+            }
+        }
+        
+        @media @page-at-least-M{
+             //Sets side bar width and position as it is now visible from M viewport (980px)
+             .frame.balanced-.sidebarred- .frame-sidebar {
+                padding: 10px @l-tile-padding/2 0 @l-tile-padding/2;
+                width: @sidebar-width + @l-tile-padding/2;//Add padding for alignment
+            }
+            
+            //Set catalog item container/grid position that do not rely on width of other containers and viewports for alignment (Adjusted below)
+            .full-bleed-.page.catalog-items-container {
+                left: 50%;
+                margin: 0;
+                padding: 0px @c-tile-padding/2;
+            }
+            
+            //Set sidebar and catalog items container/grid width and postion. Calculates the catalog items container width accounting for the sidebar width and setting the padding to align the catalog items to the right of the overall containers width which is based on the width of the launcer grid (For alignment).
+            .set-catalog-grid-w-sidebar(@l-tile-size, @l-tile-padding, @l-number-tiles-M, @c-number-tiles-M );
+        }
+        
+        @media @page-at-least-L{
+            .set-catalog-grid-w-sidebar(@l-tile-size, @l-tile-padding,  @l-number-tiles-L, @c-number-tiles-L );
+        }
+        
+         @media @page-at-least-W{
+            .set-catalog-grid-w-sidebar(@l-tile-size, @l-tile-padding,  @l-number-tiles-W, @c-number-tiles-W );
+        }
+    }
+
+    //EXCEPTIONS
+    //3 Tiles
+    //Change padding of middle tile to fill remaining space and align items on the edge by filling container
+    @media @page-S-only{
+
+        //Get width of container
+        .calculate-grid-width(@l-tile-size, @l-tile-padding, @l-number-tiles-S);
+        
+        .catalog-main{
+            //Set padding to launcher padding so that the edges of the container align like the launcher items.
+            .box.three- {
+                padding: 10px (@l-tile-padding/2);
+            }
+            
+            //Calculate the remaining empty space for alignment by calculating the width of the container and subtracting the space taken by the items inside.
+            .box.three-:nth-child(3n+2){
+                @remaining-space: @width - ((@c-tile-width * @c-number-tiles-S)) - (@l-tile-padding * 2);
+                //Apply half the remaining space to each side of the middle tile.
+                padding: 10px (@remaining-space/2); 
+            }
+        }
+    }
+
+    //2 Tiles
+    //Similar to above but 2 tiles instead of 3. Change padding of both tiles on the respective side facing the center of the container to fill empty space in the container and align tiles to the edge
+    @media @page-LP-only{
+        .calculate-grid-width(@l-tile-size-mobile, @l-tile-padding-mobile, @l-number-tiles-LP);
+        
+         .catalog-main{
+           .box.three-:nth-child(odd){
+                padding-right: (((@width - (@c-tile-width * @c-number-tiles-LP)) - @c-tile-padding ) /2); 
+            }
+
+          .box.three-:nth-child(even){
+                padding-left: (((@width - (@c-tile-width * @c-number-tiles-LP)) - @c-tile-padding ) /2); 
+            }
+        }
+    }

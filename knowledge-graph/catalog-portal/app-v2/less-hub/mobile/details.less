@@ -1,0 +1,338 @@
+@details-page-bg: @fullscreen-bg;
+@details-font-color: @gb-fullscreen-default-text-color;
+
+@app-logo-small-header-size: 26px;
+@app-action-button-height: 24px;
+
+@small-header-icon-button-anim-time: 0.2s;
+
+@details-header-app-tile-s: 86px;
+@details-header-app-tile-m: 110px;
+
+@details-header-app-tile-logo-s: 58px;
+@details-header-app-tile-logo-m: 74px;
+
+@details-header-padding-left-s: @details-header-app-tile-s + @list-item-padding-h + 18px;
+@details-header-padding-left-m: @details-header-app-tile-m + @list-item-padding-h + 18px;
+
+@app-rating-text-font-size: 16px;
+
+// Details Apps page global container .details-apps
+.details-apps {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1250;
+    background: @details-page-bg;
+
+    p {
+        line-height: 1.5;
+    }
+}
+
+// Cleanup rules -- details masthead-mobile header section and scrolled item rules
+// ---------------------------------------
+.masthead-mobile.app-details-actions {
+    box-shadow: none;
+}
+
+.scrolled .masthead-mobile.app-details-actions {
+    box-shadow: 0 2px 4px 0 @masthead-box-shadow-color;
+}
+
+.app-details-close-button {
+   margin-left: 4px;
+}
+
+.app-logo-header {
+    position: absolute;
+    left: 50%;
+    width: @app-logo-small-header-size;
+    height: @app-logo-small-header-size;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-left: -@app-logo-small-header-size/2;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 0 rgba(125,125,125,0.5);
+    top: (@masthead-mobile-height-ios - @app-logo-small-header-size)/2;
+    opacity: 0;
+    transition: all @small-header-icon-button-anim-time ease-in;
+    -webkit-transition: all @small-header-icon-button-anim-time ease-in;
+}
+
+// Only need to animate opacity, no need for height animation, but kept it as the protractor checks the height
+.scrolled .app-logo-header, .scrolled .app-action-header {
+    opacity: 1;
+}
+
+.scrolled .app-action-header {
+    visibility: visible;
+}
+
+.android .app-logo-header {
+    top: (@masthead-mobile-height-android - @app-logo-small-header-size)/2;
+}
+
+.app-action-header {
+    position: absolute;
+    right: @list-item-padding-h;
+    top: (@masthead-mobile-height-ios - @app-action-button-height)/2;
+    opacity: 0;
+    transition: all @small-header-icon-button-anim-time ease-in;
+    -webkit-transition: all @small-header-icon-button-anim-time ease-in;
+    visibility: hidden;
+
+    .app-managed {
+        display: none;
+    }
+}
+
+.android .app-action-header {
+  top: (@masthead-mobile-height-android - @app-action-button-height)/2;
+}
+
+// Details sections general rules
+// ---------------------------------------
+.section-container {
+    position: relative;
+    padding: @list-item-padding-h;
+    .list-item-divider-mixin(@list-item-divider-bg);
+
+    &:last-child {
+        margin-bottom: 40px;
+    }
+}
+
+.android .section-container:before {
+    left: 0;
+}
+
+.details-apps-content .section-headline-style2 {
+    margin: @list-item-padding-h 0 @list-item-padding-h;
+}
+
+// Styles for the details header section
+// ---------------------------------------
+.details-page-header {
+    min-height: 140px;
+    padding: @list-item-padding-h @list-item-padding-h 24px @details-header-padding-left-s;
+    position: relative;
+    .list-item-divider-mixin(@list-item-divider-bg);
+
+    @media (min-width: @phoneS) {
+        padding-left: @details-header-padding-left-m;
+    }
+
+    .details-app-tile {
+        position: absolute;
+        left: @list-item-padding-h;
+        height: @details-header-app-tile-s;
+        width: @details-header-app-tile-s;
+        border-radius: 10px;
+        background-color: @app-tile-bg-color;
+        box-shadow: 0 1px 6px 0 @app-tile-shadow-color;
+        padding: (@details-header-app-tile-s - @details-header-app-tile-logo-s)/2;
+
+        @media (min-width: @phoneS) {
+            height: @details-header-app-tile-m;
+            width: @details-header-app-tile-m;
+            padding: (@details-header-app-tile-m - @details-header-app-tile-logo-m)/2;
+        }
+    }
+
+    .app-installed {
+        border: solid 1px @list-item-divider-bg;
+    }
+
+    .app-logo {
+        height: @details-header-app-tile-logo-s;
+        width: @details-header-app-tile-logo-s;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        border-radius: 6px;
+
+        @media (min-width: @phoneS) {
+            height: @details-header-app-tile-logo-m;
+            width: @details-header-app-tile-logo-m;
+            border-radius: 8px;
+        }
+    }
+
+    .detail-page-app-title {
+        margin-bottom: 4px;
+        .app-details-app-name-text();
+        .single-line-ellipsis();
+    }
+
+    .detail-page-app-version, .detail-page-app-type, .detail-page-app-size {
+        opacity: @light-text-opacity;
+        .app-details-content-text();
+        .single-line-ellipsis();
+    }
+
+    .details-page-app-not-available {
+        opacity: .7;
+        font-size: 15px;
+    }
+
+    .app-details-action {
+        margin-top: 12px;
+    }
+
+    .icon-horizon {
+        width: 14px;
+        height: 13px;
+        position: relative;
+        top: 6px;
+    }
+
+    .app-button {
+        margin: 0 4px 8px 0;
+        position: relative;
+    }
+
+    .app-managed {
+        position: static;
+        display: inline-block;
+        text-align: left;
+    }
+}
+
+.android .details-page-header:before {
+    left: 0;
+}
+
+// User ratings section
+// ---------------------------------------
+.user-rating-container {
+    position: absolute;
+    right: @list-item-padding-h;
+    bottom: @list-item-padding-h + 12px;
+
+    .thumbs-container {
+        display: inline-block;
+        height: @mobile-default-taparea-size;
+        line-height: @mobile-default-taparea-size;
+    }
+
+    .disable-thumbs-container {
+        pointer-events: none;
+        opacity: 0.7;
+    }
+
+    .is-rated .icon-thumbs {
+        fill: @app-rating-selected-color;
+        stroke: @app-rating-selected-color;
+    }
+
+    .icon-thumbs {
+        margin: 0 4px;
+        fill: transparent;
+        stroke: @app-rating-default-color;
+
+        &.icon-thumbs-down {
+            margin-top: 4px;
+            margin-left: 8px;
+        }
+    }
+
+    .reverse-icon {
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+    }
+
+    .rating-text {
+        color: #748490;
+        display: inline-block;
+        min-width:16px;
+        text-align: center;
+        .base-text-style(@app-rating-text-font-size, 600)
+    }
+
+    .is-rated .rating-text {
+        color: @primary-link-color;
+    }
+}
+
+// Details screenshot section rules
+// ---------------------------------------
+.detail-page-screenshots {
+    text-align: left;
+    padding-right: 0;
+
+    @media (min-width: @phoneL) {
+        overflow-x: auto;
+    }
+
+    &::-webkit-scrollbar{
+        height: 0;
+    }
+
+    .carousel {
+        height: 288px;
+    }
+}
+
+ul[rn-carousel].detail-page-screenshot-carousel {
+    width: 100%;
+    height:auto;
+    min-height: 140px;
+    overflow-x:hidden;
+}
+
+ul[rn-carousel] li.detail-page-screenshot-container {
+    position: relative;
+    height: auto;
+    width: 40%;
+    // CSS trick to get ng-carousel dynamic height
+    //https://github.com/revolunet/angular-carousel/issues/309
+    margin-left: -40%;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    @media (min-width: @phoneL) {
+      width: 280px;
+      margin-left: -280px;
+    }
+
+    img.detail-page-screenshot {
+      width: 92%;
+      max-width:240px;
+    }
+}
+
+// Details categories section
+.detail-page-categories li {
+    display: inline-block;
+    line-height: 1.6;
+}
+
+//Toast message
+.launch-message {
+    .notify-message-list {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        z-index: 1500;
+        top: @details-header-app-tile-m + 10;
+
+        .notify-message-container {
+            margin: 10px 16px;
+        }
+    }
+}
+
+.app-feedback {
+    .list-item-right-arrow-image-mixin();
+}
+
+// content as a lighter text color
+.categories-content, .description-content, .detail-support-text {
+    opacity: @light-text-opacity;
+}

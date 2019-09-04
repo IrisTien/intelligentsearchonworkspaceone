@@ -1,0 +1,14 @@
+<div modal-new class="vpp-registration-modal">
+    <section class="dialog-container">
+        <header class="dialog-header">
+            <h2>{{ ::title }}</h2>
+        </header>
+        <div class="dialog-body">
+            <p ng-bind-html="message"></p>
+        </div>
+        <footer class="dialog-actions two-action">
+            <button class="button-action secondary-action" ng-click="modal.cancel()">{{ ::'decline' | i18n }}</button>
+            <button class="button-action primary-action" ng-click="modal.close(true)">{{ ::'appCenter.acceptInvite' | i18n }}</button>
+        </footer>
+    </section>
+</div>

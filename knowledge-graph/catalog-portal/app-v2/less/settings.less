@@ -1,0 +1,939 @@
+@settings-nav-desktop-width:208px;
+@settings-nav-top-margin:60px;
+@settings-nav-desktopapp-list-height: 46px;
+@settings-nativenav-header-height: 210px;
+@settings-nativenav-header-background-color: #fafcfe;
+
+.settings {
+	&.content-container-scrollable {
+		@media (min-width: @browser-transition-point) {
+			position: relative;
+			z-index:200;
+			width:@settings-nav-desktop-width;
+		}
+
+		@media (min-width: @desktopM) {
+			margin: 0 auto;
+			// 1/2 of the desktop width 475px - 1/2 of the settings-nav 104px
+			left: -371px;
+		}
+	}
+
+	.content {
+		height: 100%;
+		position: relative;
+
+		@media (min-width: @browser-transition-point) {
+			width: @settings-nav-desktop-width;
+			height: auto;
+			margin:0;
+		}
+	}
+}
+// Overrides the previous browser viewport changes
+.ws-shell .settings.content-container-scrollable {
+	@media (min-width: @browser-transition-point) {
+		width: 100%;
+		z-index:0;
+		left:0;
+	}
+	@media (min-width: @desktopM) {
+		left: 0
+	}
+}
+.ws-shell .settings .content.width-boundary {
+	@media (min-width: @browser-transition-point) {
+		width:100%;
+		height:100%;
+		max-width:100%;
+	}
+}
+
+.settings-mobile-header {
+	width: 100%;
+	height: 180px;
+	font-size: 14px;
+	text-align: center;
+	background: @white;
+	border-bottom: solid 1px @profile-border-color;
+	position: relative;
+
+	@media(min-width: @browser-transition-point) {
+		display: none;
+	}
+
+	.mobile-avatar-container {
+		width:65px;
+		height:65px;
+		margin:0 auto 16px;
+		padding: 3px;
+		border: solid 1px @profile-border-color;
+		background-clip: content-box;
+		background-position: center;
+
+		@media(min-width: @tabletS) {
+			width:92px;
+			height:92px;
+		}
+
+		img {
+			padding: 3px;
+		}
+	}
+}
+
+.desktopapp-native-avatar-container {
+	width: 64px;
+	height: 64px;
+	margin:0 auto 16px;
+}
+
+.ws-shell .settings-mobile-header, .settings-nativenav .settings-mobile-header {
+	@media(min-width: @browser-transition-point) {
+		display: block;
+	}
+
+	@media(min-width: @tabletS) {
+		height:220px;
+	}
+}
+
+.settings-nativenav .settings-mobile-header {
+	background: @settings-nativenav-header-background-color;
+	height: @settings-nativenav-header-height;
+	padding: 26px 32px 16px;
+
+	svg {
+		width: 64px;
+		height: 64px;
+	}
+}
+
+.settings-nav {
+	width: 100%;
+	margin-top: @settings-nav-top-margin - 4px;
+	background: #ffffff;
+
+	@media(min-width: @browser-transition-point) {
+		width: @settings-nav-desktop-width - 30px;
+		margin-top:@settings-nav-top-margin - 8px;
+		position: absolute;
+		left:0;
+		top: 0;
+		z-index: 100;
+	}
+
+	@media(min-width: @tabletS) {
+		width: @settings-nav-desktop-width;
+	}
+
+
+	li {
+		width: 100%;
+		height: 46px;
+		line-height: 46px;
+		padding-left:10px;
+		border-left: solid 2px transparent;
+		cursor: pointer;
+		position: relative;
+		font-size: 15px;
+		background: @white;
+		border-bottom: solid 1px @profile-border-color;
+
+		@media(min-width: @browser-transition-point) {
+			width: 160px;
+			margin: 12px 0 0 8px;
+			height: 24px;
+			line-height: 24px;
+			background: transparent;
+			border-bottom: 0;
+		}
+
+		@media(min-width: @tabletS) {
+			width: 190px;
+		}
+
+		&:hover {
+			background: @list-hover-color;
+		}
+
+		svg {
+			position: absolute;
+			top: 6px;
+			right: 0;
+
+			@media(min-width: @browser-transition-point) {
+				display: none;
+			}
+		}
+	}
+
+	li.is-selected {
+		border-left: solid 2px transparent;
+		font-family: "Open Sans Semibold", sans-serif;
+
+		@media(min-width: @browser-transition-point) {
+			border-left: solid 2px @highlightblue;
+		}
+	}
+
+	li.nav-account-link {
+		display: none;
+		@media(min-width: @browser-transition-point) {
+			display: block;
+		}
+	}
+
+	li.nav-removeaccount-link {
+		color:@highlightblue;
+		margin-top: 20px;
+	}
+
+	p {
+		cursor: pointer;
+		.single-line-ellipsis();
+		width:90%;
+
+		@media(min-width: @browser-transition-point) {
+			width: 150px;
+		}
+
+		@media(min-width: @tabletS) {
+			width: 190px;
+		}
+	}
+}
+
+
+.ws-shell .settings-nav {
+	@media(min-width: @browser-transition-point) {
+		position: static;
+		width: 100%;
+		margin-top: 24px;
+	}
+
+	li {
+
+		@media(min-width: @browser-transition-point) {
+			width: 80%;
+			height: 60px;
+			margin: 0 auto;
+			line-height: 60px;
+			background: @white;
+			border-bottom: solid 1px @profile-border-color;
+		}
+
+		@media(min-width: @tabletS) {
+			height: 80px;
+			line-height: 80px;
+		}
+
+		svg {
+			@media(min-width: @browser-transition-point) {
+				top: 13px;
+				display: inline-block;
+			}
+
+			@media(min-width: @tabletS) {
+				top: 23px;
+			}
+		}
+
+		&:hover {
+			background: @white;
+		}
+	}
+
+	li.is-selected {
+		@media(min-width: @browser-transition-point) {
+			border-left: solid 2px transparent;
+		}
+	}
+
+	li.nav-account-link {
+		@media(min-width: @browser-transition-point) {
+			display: none;
+		}
+	}
+
+	li.nav-removeaccount-link {
+		margin-top: 24px;
+	}
+}
+
+.nativenav-settings-nav {
+	width: 100%;
+	max-width: 640px;
+	height: 200px;
+	margin: 0 auto;
+	background: @white;
+	padding: 24px 16px;
+
+	li {
+		width: 100%;
+		height: @settings-nav-desktopapp-list-height;
+		line-height: @settings-nav-desktopapp-list-height;
+		cursor: pointer;
+		position: relative;
+		font-size: 15px;
+		color: @highlightblue;
+	}
+}
+
+.notification-control-desktopapp {
+	font-size: 15px;
+}
+
+.settings-detail {
+	width: 100%;
+	height: 100%;
+	background:@white;
+	display: block;
+	z-index: -1;
+	opacity:0;
+	position:absolute;
+	top:0;
+	left:0;
+	padding-top: @header-height;
+	transform: translate3d(100%,0,0);
+	-ms-transform: translate3d(100%,0,0);
+	//delay the transition of z-index and opacity in order for reverse animation to happen
+	transition: transform 0.35s, z-index 0s 0.35s, opacity 0s 0.35s;
+
+	// once in tablet landscape and desktop, the panel fades in instead of sliding from the left
+	@media(min-width: @browser-transition-point) {
+		transform: translate3d(0,0,0);
+		-webkit-transform: translate3d(0,0,0);
+		-moz-transform: translate3d(0,0,0);
+		-ms-transform: translate3d(0,0,0);
+		transition: opacity 0s;
+		-webkit-transition: opacity 0s;
+		-moz-transition: opacity 0s;
+		-ms-transition: opacity 0s;
+	}
+}
+
+.ws-shell .settings-detail {
+	@media(min-width: @browser-transition-point) {
+		transform: translate3d(100%,0,0);
+		-webkit-transform: translate3d(100%,0,0);
+		-moz-transform: translate3d(100%,0,0);
+		-ms-transform: translate3d(100%,0,0);
+		transition: transform 0.35s, z-index 0s 0.35s, opacity 0s 0.35s;
+		-webkit-transition: transform 0.35s, z-index 0s 0.35s, opacity 0s 0.35s;
+		-moz-transition: transform 0.35s, z-index 0s 0.35s, opacity 0s 0.35s;
+		-ms-transition: transform 0.35s, z-index 0s 0.35s, opacity 0s 0.35s;
+	}
+}
+
+.settings-detail.is-selected {
+	display: block;
+	font-size: 14px;
+	text-align: left;
+	z-index: 10;
+	opacity:1;
+	transform: translate3d(0,0,0);
+	-webkit-transform: translate3d(0,0,0);
+	-ms-transform: translate3d(0,0,0);
+	-moz-transform:translate3d(0,0,0);
+	transition: transform 0.35s;
+	-webkit-transition: transform 0.35s;
+	-moz-transition: transform 0.35s;
+	-ms-transition: transform 0.35s;
+
+	&.settings-account {
+		z-index:-1;
+		opacity:0;
+	}
+
+	@media(min-width: @browser-transition-point) {
+		transform: translate3d(0,0,0);
+		-webkit-transform: translate3d(0,0,0);
+		-moz-transform: translate3d(0,0,0);
+		-ms-transform: translate3d(0,0,0);
+		transition: opacity 0s;
+		-webkit-transition: opacity 0s;
+		-moz-transition: opacity 0s;
+		-ms-transition: opacity 0s;
+
+		&.settings-account {
+			opacity:1;
+			z-index:10;
+		}
+	}
+}
+//overrides
+.ws-shell {
+	.settings-detail.is-selected {
+		@media(min-width: @browser-transition-point) {
+			transition: transform 0.35s;
+			-webkit-transition:transform 0.35s;
+			-moz-transition:transform 0.35s;
+			-ms-transition:transform 0.35s;
+
+			&.settings-account {
+				display: none;
+			}
+		}
+	}
+}
+
+.settings-back-button {
+	position: absolute;
+	width:120px;
+	height: 40px;
+	top: @header-height + 20px;
+	cursor: pointer;
+	display: none;
+	z-index:500;
+	font-size:15px;
+
+	@media (min-width: @browser-transition-point) {
+		display: inline-block;
+		left: 5px;
+	}
+
+	@media (min-width: @desktopM) {
+		left: ~'calc(50% - 512px)';
+	}
+
+	span {
+		font-size: 15px;
+		display: inline-block;
+		line-height: 44px;
+	}
+}
+
+.ws-shell .settings-back-button {
+	display: none;
+}
+.settings-detail-content-container {
+	width:100%;
+	height: 100%;
+	overflow:hidden;
+}
+
+.settings-detail-content-scrollable {
+	width:100%;
+	height:100%;
+	padding: 20px 15px;
+	position: relative;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+
+	@media(min-width: @tabletS) {
+		padding: @settings-nav-top-margin 0;
+	}
+}
+
+.ws-shell .settings-detail-content-scrollable {
+	@media(min-width: @tabletS) {
+		padding: 0;
+	}
+}
+
+.settings-detail-content {
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0;
+	left:0;
+	padding:12px;
+
+	@media(min-width: @browser-transition-point) {
+		padding:  @settings-nav-top-margin 20px 0 (@settings-nav-desktop-width - 40px);
+	}
+	@media(min-width: @tabletS) {
+		padding:  @settings-nav-top-margin 20px 0 @settings-nav-desktop-width;
+	}
+
+	@media (min-width: @desktopM) {
+		.set-gridcontainer-width(@bookmark-row-l, @bookmark-item-width-m, @bookmark-item-margin-m);
+		left: 50%;
+		.set-gridcontainer-margin-left(@bookmark-row-l, @bookmark-item-width-m, @bookmark-item-margin-m);
+	}
+
+}
+
+.ws-shell .settings-detail-content {
+	@media(min-width: @phoneL) {
+		position: static;
+		padding:@settings-nav-top-margin/2;
+		width: 85%;
+		margin:0 auto;
+	}
+
+	@media (min-width: @desktopM) {
+		padding:@settings-nav-top-margin/2;
+		left:0;
+		width:70%;
+		max-width: 960px;
+	}
+}
+.settings-detail-mobile-header {
+	position: absolute;
+	top:0;
+	left:0;
+	z-index:100;
+	width: 100%;
+	height: @header-height;
+	border-bottom: solid 1px @profile-border-color;
+	text-align: center;
+	font-size: 17px;
+	line-height: @header-height;
+	font-family: "Open Sans Semibold", sans-serif;
+
+	@media(min-width: @tabletS) {
+		display: none;
+	}
+
+	h2{
+		width: 100%;
+		padding: 0 40px;
+		position:relative;
+		.single-line-ellipsis();
+	}
+}
+
+.ws-shell .settings-detail-mobile-header {
+	@media(min-width: @tabletS) {
+		display: block;
+	}
+}
+
+.settings-detail-title {
+	font-size: 20px;
+	font-family: "Open Sans Semibold", sans-serif;
+	margin: 5px 0 20px;
+	display: none;
+
+	@media(min-width: @browser-transition-point) {
+		display: block;
+	}
+
+	&.promo-download-title {
+		display: block;
+		font-size:17px;
+		margin: 5px 0 10px;
+
+		@media(min-width: @browser-transition-point) {
+			font-size:20px;
+			margin: 5px 0 20px;
+		}
+	}
+}
+
+.about-description {
+	margin:0 0 20px;
+	line-height: 24px;
+}
+
+.about-sublink {
+	color: @highlightblue;
+	display: block;
+	font-size:14px;
+	height:24px;
+	margin-bottom:8px;
+
+	&:hover {
+		text-decoration: underline;
+	}
+
+	svg {
+		width:24px;
+		height:24px;
+		position:relative;
+		top:-2px;
+		margin-right: 6px;
+	}
+}
+
+.settings-back {
+	position: absolute;
+	top:0;
+	left:0;
+	width: 32px;
+	height: @header-height;
+	cursor: pointer;
+	z-index:100;
+}
+
+.settings-name, .preferences-title {
+	font-family: 'Open Sans Semibold', sans-serif;
+}
+
+.settings-name {
+	font-size:17px;
+	margin-bottom: 12px;
+	text-transform: capitalize;
+}
+
+.ws-shell .settings-name {
+	@media(min-width: @tabletS) {
+		font-size: 24px;
+	}
+}
+
+.setting-emailaddress, .settings-username {
+	line-height:24px;
+}
+
+.preference-actions {
+	padding-top:15px;
+	margin-top:40px;
+	border-top: solid 1px @profile-border-color;
+	text-align: center;
+
+	@media(min-width: @tabletS) {
+		padding-right: 40px;
+		text-align: right;
+	}
+}
+
+.preference-instruction {
+	line-height: 24px;
+}
+
+.setting-button {
+	font-size: 15px;
+	height: 36px;
+	line-height:32px;
+	border-radius: 2px;
+	padding: 0 16px;
+	margin: 0 4px;
+	display: inline-block;
+}
+
+.preference-options-container{
+	text-align: center;
+
+	p {
+		line-height: 24px;
+	}
+
+	.preference-option-radio-input {
+		display: none;
+	}
+	label{
+		font-size: 15px;
+	}
+
+	@media(min-width: @tabletS) {
+		text-align: left;
+	}
+}
+
+.preference-option-container {
+	width: 120px;
+	height: 120px;
+	position: relative;
+	display: inline-block;
+	text-align: center;
+	cursor: pointer;
+	margin: 25px 15px 10px;
+	text-align: center;
+	vertical-align: top;
+
+	.preference-option-icon {
+		width: 92px;
+		height: 92px;
+		padding: 3px;
+		border: solid 2px #cdd0d3;
+		border-radius: 2px;
+		margin-bottom: 12px;
+
+		&.horizon {
+			opacity: 0.7;
+		}
+
+		&:hover {
+			opacity: 1;
+		}
+
+		&.browser {
+			fill:#cdd0d3;
+
+			&:hover {
+				fill:#8ad6f9;
+			}
+		}
+	}
+
+	.preference-checked {
+		position: absolute;
+		bottom:17px;
+		right:2px;
+		display: none;
+	}
+}
+
+//Checked/ Active option style
+.preference-option-radio-input:checked + .preference-option-container{
+
+	.preference-option-icon{
+		opacity: 1;
+		border: solid 2px @highlightblue;
+
+		&.browser {
+			fill:#8ad6f9;
+		}
+	}
+
+	.preference-checked {
+		display: inline-block;
+	}
+	.preference-option-text{
+		font-family: "Open Sans Semibold", sans-serif;
+	}
+
+	a {
+		text-decoration: underline;
+		color: @highlightblue;
+		font-family: "Open Sans Regular";
+	}
+}
+
+.tou-data .tou-content {
+	margin: 15px 0;
+	//styles copied from vIDM terms of use page to fix bug HW-84996
+	font-size: 14px;
+	line-height: 25px;
+
+	//reset.css resets every styles that needs to be displayed. On use-case wise these styles needs to be updated regularly
+	ul {
+		list-style: initial;
+		list-style-position: inside;
+	}
+
+	ol {
+		list-style: decimal;
+		list-style-position: inside;
+	}
+
+	strong {
+		font-family: "Open Sans Semibold", sans-serif;
+	}
+}
+
+// change password
+.modal-changepassword {
+	.modal-content {
+		width: 80%;
+		@media(min-width: @desktopM) {
+			width: 748px;
+			height:448px;
+		}
+		overflow: hidden;
+	}
+
+	.dialog-container {
+		padding:46px 0 61px;
+		text-align: left;
+		@media(min-width: @desktopM) {
+			padding:66px 0 61px;
+		}
+	}
+
+	.dialog-header {
+		padding-left:0;
+		height:46px;
+		font-size:16px;
+
+		@media(min-width: @desktopM) {
+			height:66px;
+			font-size:20px;
+		}
+
+		h2 {
+			width: 100%;
+			line-height: 46px;
+			padding: 0 24px;
+
+			@media(min-width: @desktopM) {
+				height:66px;
+				line-height: 86px;
+			}
+		}
+	}
+
+	.dialog-body {
+		padding-left:0;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+
+	.dialog-actions {
+		bottom: 10px;
+		border-top:0;
+		text-align: center;
+
+		@media(min-width: @desktopM) {
+			bottom: 20px;
+			text-align: right;
+		}
+	}
+
+	.right-container {
+		width: 100%;
+		height:100%;
+		padding: 0 24px;
+
+		@media(min-width: @tabletS) {
+			float: right;
+			width: 280px;
+			height: auto;
+			margin-top: 5px;
+		}
+		@media(min-width: @desktopM) {
+			width: 320px;
+		}
+	}
+
+	.password-container {
+		padding: 10px 24px 0;
+		margin-right: 20px;
+
+		@media(min-width: @tabletS) {
+			width: 400px;
+			padding: 0 30px 0;
+		}
+
+		@media(min-width: @desktopM) {
+			width: 420px;
+		}
+
+		&.support-changepassword {
+			margin: 0 auto;
+			@media(min-width: @tabletS) {
+				width: 640px;
+				padding: 0 30px 0;
+			}
+		}
+	}
+
+	input {
+		width: 100%;
+		display: block;
+		height: 34px;
+		margin:10px 0 14px;
+		border: solid 1px #ccc;
+		border-radius:2px;
+		padding: 4px 12px;
+
+		@media(min-width: @tabletS) {
+			width:340px;
+			margin:10px 0 24px;
+		}
+
+		@media(min-width: @desktopM) {
+			width:360px;
+			margin:10px 0 24px;
+		}
+	}
+
+	.support-changepassword {
+		input {
+			@media (min-width: @tabletS) {
+				width: 100%;
+			}
+		}
+	}
+
+	input:focus {
+		border: solid 1px @highlightblue;
+	}
+}
+
+.error-messages {
+	color: rgba(217, 84, 30, 1);
+	font-size:13px;
+	line-height: 18px;
+	margin-bottom:25px;
+
+	svg {
+		width: 24px;
+		height:24px;
+	}
+	span {
+		vertical-align: middle;
+	}
+}
+
+.password-requirement-title {
+	font-family: "Open Sans Semibold", sans-serif;
+	margin-bottom:15px;
+}
+
+.password-requirement-text {
+	font-size:13px;
+
+	@media(min-width: @desktopM) {
+		font-size:15px;
+	}
+}
+
+.input-placeholder-animate {
+	position: relative;
+	margin: 10px 0;
+	input {
+		margin-bottom: 30px;
+	}
+	label {
+		color: #999;
+		font-weight: normal;
+		position: absolute;
+		pointer-events: none;
+		left: 10px;
+		top: 7px;
+		transition: 0.2s ease all;
+		-moz-transition: 0.2s ease all;
+		-webkit-transition: 0.2s ease all;
+		-ms-transition: 0.2s ease all;
+	}
+
+	input:focus ~ label, input:valid ~ label {
+		top: -20px;
+		font-size: 13px;
+		color: #697785;
+		left: 0;
+	}
+	.reveal-password-button {
+		position: absolute;
+		top: 0;
+		right: 0;
+		color: #ccc;
+	}
+}
+.icon-warning-big {
+	height: 35px;
+	width: 40px;
+}
+
+.pv-preference-container {
+	margin-top: 40px;
+
+	h2 {
+		font-family: "Open Sans Semi-bold", sans-serif;
+		font-size: 20px;
+	}
+
+	p {
+		margin: 10px 0;
+	}
+
+	a {
+		color: @highlightblue;
+	}
+}
+
+.about-promo-container {
+	margin-top: 40px;
+}
+
+.about-promo-action {
+	margin-top:12px;
+	padding: @button-standard-padding-v @button-standard-padding-h;
+	border-radius: @button-standard-radius;
+	max-width:260px;
+	.single-line-ellipsis();
+}

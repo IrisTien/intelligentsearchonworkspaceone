@@ -1,0 +1,31 @@
+// Project Horizon
+// (c) 2013-2015 VMware, Inc. All rights reserved.
+// VMware Confidential.
+
+@import "../base/fonts.less";
+
+@breadcrumb-font-size: small;
+
+.breadcrumb {
+    /** A navigational method for allowing the user to go back "up" in
+    the hierarchy to see other pages.
+
+    Pages linked to by breadcrumbs have usually already been visited,
+    but in the case of deep linking, they allow access to other, more
+    general pages. */
+
+    // This is very minimal currently since our only uses of breadcrumbs are
+    // for single "Back to list" links.  The primary concern here is for
+    // alignment of this link with other navigational features like tabs,
+    // though proper alignment will often require using `grid` and `box`.
+
+    line-height: 1.5;
+    .font > .size( @breadcrumb-font-size );
+
+    > * {
+        display: inline-block;
+        padding: .25em 0;
+        border: 1px solid transparent;
+        vertical-align: top;
+    }
+}

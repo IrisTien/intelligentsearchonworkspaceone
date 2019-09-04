@@ -1,0 +1,22 @@
+/*!
+Project Horizon
+(c) 2013-2014 VMware, Inc. All rights reserved.
+VMware Confidential.
+*/
+
+/**# UX Component Library **/
+
+// Reset (Meyer reset + some additions)
+@import "reset";
+
+// Utility mixins (e.g., CSS3)
+@import "mixins";
+
+@import "colors";
+@import "fonts";
+
+body {
+    background-color: @body-background-color;
+    .font > .family( body );
+    .font > .color( normal );
+}

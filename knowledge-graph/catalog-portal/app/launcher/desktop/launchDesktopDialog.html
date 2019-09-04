@@ -1,0 +1,41 @@
+<div modal>
+    <div class="dialog centered-" ng-controller="DesktopLaunchController as ctrl">
+        <div class="dialog-body typography">
+            <div class="dialog-info-icon">
+                <svg symbol="info"></svg>
+            </div>
+            <h3>{{'myapps.launch.openApp' | i18n:app.name}}</h3>
+            <p>
+                {{'myapps.launch.view.selectPreferredLaunchClient' | i18n }}
+            </p>
+            <p>
+                {{'myapps.launch.view.preferredClient.changeLaunchPrefTip' | i18n }}
+            </p>
+            <p>
+                <ul class="centered- list">
+                    <li>
+                        <input type="radio" ng-model="ctrl.preferredClient" value="NATIVE" id="native">
+                        <label for="native">{{'myapps.launch.view.preferredClient.horizonView' | i18n }}&nbsp;<span ng-if="ctrl.preferredClient == 'NATIVE'">{{'myapps.launch.view.preferredClient.isDefault' | i18n }}</span></label>
+                    </li>
+                    <li>
+                        <input type="radio" ng-model="ctrl.preferredClient" value="BROWSER" id="browser">
+                        <label for="browser">{{'myapps.launch.view.preferredClient.browser' | i18n }}&nbsp;<span ng-if="ctrl.preferredClient == 'BROWSER'">{{'myapps.launch.view.preferredClient.isDefault' | i18n }}</span></label>
+                    </li>
+                </ul>
+                <div ng-if="ctrl.preferredClient == 'BROWSER'">
+                    {{'myapps.launch.view.preferredClient.byBrowser.description' | i18n }}
+                </div>
+                <div ng-if="ctrl.showInstallViewClientMsg()" ng-bind-html="ctrl.byViewClientDescription"></div>
+            </p>
+            <p>
+                <button class="link- button" ng-click="$modal.close(true);">{{'button.cancel' | i18n }}</button>
+                <button ng-click="ctrl.launchByPreference();" class="primary- button"> {{'button.openHorizonView' | i18n }}</button>
+            </p>
+        </div>
+        <!--
+        <div class="dialog-footer">
+            <input type="checkbox">Do not show this message again</input>
+        </div>
+        -->
+    </div>
+</div>

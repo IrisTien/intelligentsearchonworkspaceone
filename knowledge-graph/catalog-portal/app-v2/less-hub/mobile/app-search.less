@@ -1,0 +1,102 @@
+@apps-search-item-height: 64px;
+@app-search-list-icon-size: 44px;
+
+@app-search-icon-top: (@apps-search-item-height - @app-search-list-icon-size)/2;
+@app-search-result-header-font-size: 13px;
+@app-search-item-name-font-size: 15px;
+@app-search-item-type-font-size: 13px;
+@app-search-empty-message-font-size: 17px;
+
+.apps-search {
+  .full-screen(1000);
+}
+
+.android .apps-search {
+  // UX required app search page to be white regardless of branding
+  background: #fff!important;
+  color: #000!important;
+}
+
+.app-search-header {
+  margin-top: 6px;
+  padding: 0 @list-item-padding-h;
+  line-height: 44px;
+}
+
+.android .app-search-header {
+  display: none;
+}
+
+.app-search-section-header {
+  margin: 12px 0 8px;
+  padding: 0 @list-item-padding-h;
+  text-transform: uppercase;
+  .base-text-style(@app-search-result-header-font-size, 400);
+  .single-line-ellipsis();
+}
+
+.android .app-search-section-header {
+  margin: 0;
+  height: 48px;
+  line-height: 48px;
+  .base-text-style(14px, 500);
+  text-transform: capitalize;
+
+  &.category-name {
+    border-top: solid 8px @list-item-divider-bg;
+  }
+}
+
+.app-search-item {
+  min-height: @apps-search-item-height;
+  position: relative;
+  width: 100%;
+  padding: 4px 36px 4px 72px;
+  cursor: pointer;
+  .list-item-right-arrow-image-mixin();
+  .list-item-divider-mixin(@list-item-divider-bg);
+
+  em {
+    background: @search-item-character-highlight-bg;
+  }
+}
+
+.android .app-search-item:before {
+  left:0;
+  background: @list-item-divider-bg!important;
+}
+
+.android .app-search-item {
+  padding-right: @list-item-padding-h;
+  background-image: none;
+}
+
+.app-search-item-icon {
+  .app-icon(@app-search-list-icon-size, @app-search-icon-top, @list-item-padding-h, 6px)
+}
+
+.app-search-item-name {
+  padding-top: 6px;
+  line-height: 20px;
+  .multi-line-ellipsis(2);
+  .base-text-style(@app-search-item-name-font-size, 600);
+}
+
+.app-search-item-type {
+  .base-text-style(@app-search-item-type-font-size, 400);
+  opacity: @light-text-opacity;
+  padding-bottom: 6px;
+}
+
+.search-empty-result {
+  margin-top: 50px;
+  text-align: center;
+  padding: 0 @list-item-padding-h;
+}
+
+.search-empty-message {
+  .base-text-style(@app-search-empty-message-font-size, 400);
+  line-height: 21px;
+  opacity: @light-text-opacity;
+}
+

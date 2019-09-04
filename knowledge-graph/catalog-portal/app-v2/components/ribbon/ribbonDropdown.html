@@ -1,0 +1,11 @@
+<ul class="ribbon-profile-list">
+    <li ng-if="ribbonCtrl.userInfo.adminUser" ng-click="ribbonCtrl.adminConsole($event)">
+        <a>{{'hub.userInfo.adminConsole' | i18n}}</a>
+    </li>
+    <li class="profile-settings-link" ng-click="ribbonCtrl.goToSettings($event)">
+        <a>{{'hub.userInfo.settings' | i18n}}</a>
+    </li>
+    <li class="profile-signout-link" ng-click="ribbonCtrl.hubSignOut($event)">
+        <a>{{'hub.userInfo.signout' | i18n}}</a>
+    </li>
+</ul>

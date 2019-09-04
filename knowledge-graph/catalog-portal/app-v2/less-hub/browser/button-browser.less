@@ -1,0 +1,87 @@
+@action-button-height: 25px;
+@app-button-font-size: 14px;
+
+@modal-action-button-font-size: 17px;
+
+@hub-browser-modal-button-action-height: 36px;
+@hub-browser-modal-button-action-border-radius: 4px;
+@modal-action-button-secondary-text-color: #495A67;
+@modal-action-button-secondary-border-color: #A9B6BE;
+
+// There is a difference between primary and secondary button
+// ---------------------------------------
+.app-button {
+  min-width: 72px;
+  max-width: 110px;
+  height: @action-button-height;
+  line-height: @action-button-height;
+  display: inline-block;
+  vertical-align: middle;
+  text-transform: uppercase;
+  text-align: center;
+  .base-text-style(@app-button-font-size, 600);
+  padding: 0 12px;
+  .single-line-ellipsis();
+  cursor: pointer;
+}
+
+.app-un-favorite-button,
+.app-favorite-button,
+.app-favoriting-spinner {
+  width: 110px;
+}
+
+@media (min-width: @browser-hamburger-ribbon-transition) {
+  .app-un-favorite-button,
+  .app-favorite-button,
+  .app-open,
+  .app-activate,
+  .app-install,
+  .app-managed,
+  .app-pending,
+  .app-installing,
+  .app-open,
+  .app-managed,
+  .app-re-install,
+  .app-update,
+  .app-view {
+    width: auto;
+    max-width: 160px;
+  }
+}
+
+// Modal button styles
+// button-action defines the layout of the button
+// text and background will be applied through .primary-action and .secondary-action
+// ---------------------------------------------------------
+.button-action {
+  height: @hub-browser-modal-button-action-height;
+  line-height: @hub-browser-modal-button-action-height;
+  font-size: @modal-action-button-font-size;
+  text-align: center;
+  padding: 0 @list-item-padding-h;
+  margin-right: 8px;
+  display: inline-block;
+  border-radius: @hub-browser-modal-button-action-border-radius;
+  .single-line-ellipsis();
+}
+
+.one-action .button-action {
+  max-width: 100%;
+}
+
+.two-action .button-action {
+  max-width: 48%;
+}
+
+.primary-action {
+  background-color: @primary-text-color;
+  color: @white;
+  font-weight: 400;
+}
+
+.secondary-action {
+  color: @modal-action-button-secondary-text-color;
+  border: solid 1px @modal-action-button-secondary-border-color;
+  font-weight: 400;
+}

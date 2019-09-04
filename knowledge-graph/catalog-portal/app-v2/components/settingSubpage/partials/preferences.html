@@ -1,0 +1,36 @@
+<h2 class="section-headline-style2">{{'hub.preferences.title' | i18n }}</h2>
+<div class="preferences-container" ng-controller="PreferencesController as preferencesCtrl">
+    <div class="preference-title-left-container">
+        <p class="preference-instruction">{{::'hub.preferences.horizon.subtitle' | i18n }}</p>
+    </div>
+    <div class="preference-selection-container">
+        <p>{{::'hub.preferences.launch.question' | i18n}}</p>
+        <fieldset class="preference-options-container" ng-init="preferencesCtrl.preferredClientTemp = preferencesCtrl.preferredClient">
+            <label>
+                <input type="radio" value="NATIVE" id="native" class="preference-option-radio-input"
+                       ng-model="preferencesCtrl.preferredClientTemp"
+                       ng-class="{'native-selected' : preferencesCtrl.preferredClientTemp === 'NATIVE'}"/>
+                <div class="preference-option-container">
+                    <svg class="preference-option-icon horizon" svg-symbol="icon-horizonclient-green" ></svg>
+                    <svg class="preference-checked primary-icon-color" svg-symbol="icon-preference-checkmark"></svg>
+                    <p class="preference-option-text">{{::'myapps.launch.view.preferredClient.horizonView' | i18n }}</p>
+                    <a class="primary-link-color" target="_blank" ng-show = "preferencesCtrl.preferredClientTemp === 'NATIVE'" ng-href="{{preferencesCtrl.installLink }}">{{::'appCenter.action.install' | i18n }}</a>
+                </div>
+            </label>
+            <label>
+                <input type="radio" value="BROWSER" id="browser" class="preference-option-radio-input"
+                       ng-model="preferencesCtrl.preferredClientTemp"
+                       ng-class="{'browser-selected' : preferencesCtrl.preferredClientTemp === 'BROWSER'}"/>
+                <div class="preference-option-container">
+                    <svg class="preference-option-icon browser" svg-symbol="icon-browser"></svg>
+                    <svg class="preference-checked primary-icon-color" svg-symbol="icon-preference-checkmark" ></svg>
+                    <p class="preference-option-text">{{::'myapps.launch.view.preferredClient.browser' | i18n }}</p>
+                </div>
+            </label>
+        </fieldset>
+    </div>
+    <notification-preference class="preference-notifications" ng-if="preferencesCtrl.notificationPreference"></notification-preference>
+    <div class="preference-actions">
+        <a class="app-button primary-btn preferences-update-button" ng-click="preferencesCtrl.saveLaunchDesktopPreference();"> {{::'button.update' | i18n }}</a>
+    </div>
+</div>

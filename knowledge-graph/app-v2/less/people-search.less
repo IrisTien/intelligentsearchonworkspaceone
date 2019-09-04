@@ -1,0 +1,309 @@
+@people-search-item-height: 96px;
+@user-avatar-size-s: 48px;
+@user-avatar-size-m: 64px;
+@people-search-item-padding: 16px;
+@people-search-recent-item-height: 44px;
+@people-search-icon-recent-offset: 7px;
+@people-search-item-body-padding-right: 36px;
+
+.people-search {
+    .header-content:not(.people-searchform-show) {
+        .search-form {
+            .search-input-bar {
+                width: ~ "calc(100% - 32px)";
+
+                @media(min-width: @browser-transition-point) {
+                    width: 80%;
+                }
+
+                @media(min-width: @tabletS) {
+                    width: 70%;
+                }
+            }
+        }
+        .search-form.notification-enabled{
+            .search-input-bar {
+                width: ~ "calc(100% - 62px)";
+            }
+        }
+    }
+
+    .search-results {
+        min-height: 150px;
+    }
+    // Have 1px border to separate the header-content to the recents list
+    .people-searchform-show .search-results {
+        border-top: solid 1px @catalog-border-color;
+
+        @media(min-width: @browser-transition-point) {
+            border: 0;
+        }
+    }
+
+    .people-searchresults-loading {
+        top: 120px;
+        position: relative;
+        .spinner-class();
+
+        @media(min-width: @browser-transition-point) {
+            top: 45%;
+        }
+    }
+
+    .people-search-item {
+        padding: @people-search-item-padding;
+        height: @people-search-item-height;
+        position: relative;
+        background-color: @white;
+        overflow: hidden;
+        border-bottom: solid 1px @bordergrey;
+    }
+
+    .people-search-item-body {
+        width: 100%;
+        padding: 0 @people-search-item-body-padding-right 0 @user-avatar-size-m + 12px;
+        font-size: 14px;
+        cursor: pointer;
+        // No email icon so no right padding
+        &.no-email {
+            padding-right: 0;
+        }
+    }
+
+    .people-search-tooltip-trigger {
+        position: absolute;
+        top: @people-search-item-height/4;
+        right: 4px;
+        width: @people-search-item-height/2;
+        height: @people-search-item-height/2;
+        text-align: center;
+        z-index: 100;
+
+        // The <a> is the copy email click event attached, increase this area for easy targeting
+        a {
+            display: inline-block;
+            width: @people-search-item-height/2;
+            height: @people-search-item-height/2;
+            padding: 8px;
+        }
+
+        .copy-email-tooltip .tooltip {
+            max-width:240px;
+            min-height: 24px;
+            text-align: center;
+            font-size: 13px;
+            top: 44px!important;
+            margin-right: 32px;
+            padding: 2px 12px;
+            transform: translate(-100%, 0);
+            -webkit-transform: translate(-100%, 0);
+            -moz-transform: translate(-100%, 0);
+            -ms-transform: translate(-100%, 0);
+            white-space: nowrap;
+            left: 40px;
+
+            // Off center the tooltip
+            &:before, &:after {
+                left: auto;
+                right: 10px;
+            }
+        }
+    }
+
+    .people-search-avatar {
+        float: left;
+        width: @user-avatar-size-m;
+        height: @user-avatar-size-m;
+        overflow: hidden;
+        border-radius: @user-avatar-border-radius;
+        color: @white;
+        position: relative;
+        background-image: url("../app-v2/graphics/icon-profile.svg");
+        background-size: contain;
+
+        .user-detail-initial {
+            font-size: 24px;
+            text-align: center;
+            display: inline-block;
+            background: @lightgray;
+            line-height: @user-avatar-size-m;
+        }
+
+        img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .people-search-item-name {
+        font-family: "Open Sans Semibold", sans-serif;
+        font-size: 16px;
+        text-align: left;
+        .single-line-ellipsis();
+    }
+
+    .people-search-item-title {
+      font-size: 13px;
+      text-align: left;
+      padding-top: 3px;
+      .single-line-ellipsis();
+    }
+
+    .people-search-item-name, .people-search-item-title {
+        // the higlight directive add the <em> so we can style here
+        em {
+            border-bottom: 1px dashed @lightgray;
+            display: inline-block;
+        }
+    }
+
+    .people-search-item-email {
+        display: inline-block;
+        font-size: 13px;
+        width: 100%;
+        .single-line-ellipsis();
+    }
+
+    .people-search-item-email-icon {
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .copied-email-highlight {
+        span {
+            background-color: rgba(0, 173, 245, 0.1);
+        }
+    }
+
+    .email-copied-notification {
+        position: absolute;
+        top: 36px;
+        height: 24px;
+        line-height: 24px;
+        right: 0;
+        font-size: 13px;
+        padding: 0 8px;
+        max-width: 220px;
+        text-align: center;
+        background: rgba(255,255,255, 0.64);
+        .single-line-ellipsis();
+
+        .icon-check {
+            height: 20px;
+            width: 20px;
+        }
+
+        .people-search-email-copied {
+            position: relative;
+            top: 2px;
+        }
+    }
+}
+
+.people-search-empty-result {
+    padding: 10px 40px 16px;
+    font-size: 14px;
+    min-height: 150px;
+    text-align:center;
+
+    svg {
+        width: 100px;
+        height: 80px;
+        display: block;
+        margin-bottom: 10px;
+        margin: 0 auto;
+    }
+}
+
+// people search recents container and its child rules
+.people-search-recent-container {
+    padding: 0 @people-search-item-padding 24px;
+
+    @media(min-width: @browser-transition-point) {
+        padding: 0 40px 24px;
+    }
+
+    .people-recent-title {
+        line-height: @people-search-recent-item-height;
+        font-size: 16px;
+        font-family: "Open Sans Semibold", sans-serif;
+        border-bottom: solid 1px @bordergrey;
+    }
+
+    .people-search-recent-item {
+        line-height: @people-search-recent-item-height;
+        width: 100%;
+        font-size: 15px;
+        border-bottom: solid 1px @bordergrey;
+        cursor: pointer;
+        padding-left: @mobile-default-taparea-size - @people-search-icon-recent-offset;
+        position: relative;
+        .single-line-ellipsis();
+
+        svg {
+            position: absolute;
+            top: (@people-search-recent-item-height - @mobile-default-taparea-size)/2;
+            left: -@people-search-icon-recent-offset;
+        }
+    }
+}
+
+.ws-shell .people-search-recent-container {
+    @media(min-width: @browser-transition-point) {
+        padding: 0 0 24px;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    @media(min-width: @tabletS) {
+        padding: 0 8px 24px;
+    }
+}
+
+.people-search.people-details {
+    .header-content.people-searchform-show {
+        background: @white;
+    }
+}
+
+.people-search-clear-text {
+   display: inline-block;
+
+   @media (min-width: @browser-transition-point) {
+      display: none;
+   }
+}
+
+.people-search-clear-search {
+    display: none;
+    @media (min-width: @browser-transition-point) {
+        display: inline-block;
+    }
+}
+
+.people-search, .people-details {
+    .search-recent-item-people {
+        line-height: 45px;
+    }
+}
+
+// Override styles for people details page, for new UX design
+.people-details.people-search {
+    .header-content:not(.people-searchform-show) {
+        .search-form .search-input-bar {
+            @media(min-width: @browser-transition-point) {
+                z-index: -1;
+                opacity: 0;
+            }
+
+            @media(min-width: @desktopM) {
+                z-index: 51;
+                opacity: 1;
+            }
+        }
+    }
+}

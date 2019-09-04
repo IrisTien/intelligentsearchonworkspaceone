@@ -1,0 +1,15 @@
+<div class="message">
+    <!-- A Dialog inside the message -->
+    <div class="dialog typography">
+        <div class="dialog-header">
+            <h3>{{message.type}}:&nbsp;{{message.text}}</h3>
+        </div>
+        <div class="dialog-body">
+            <p>{{message.info}}</p>
+        </div>
+        <div class="dialog-actions">
+            <button class="link- button" ng-click="close($index, false)">Cancel</button>
+            <button class="primary- button" ng-click="close($index)">Ok</button>
+        </div>
+    </div>
+</div>

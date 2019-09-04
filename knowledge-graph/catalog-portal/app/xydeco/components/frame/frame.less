@@ -1,0 +1,473 @@
+// Project Horizon
+// (c) 2013-2014 VMware, Inc. All rights reserved.
+// VMware Confidential.
+
+@import "../base/fonts";
+
+/** @pattern .frame
+
+A container for one or more panes.  It may or may not have a visible
+frame or border around it.  It serves as a fixed context within which
+panes of content are positioned and sized.
+
+@example[basic-frame.html] A basic frame with one scrollable pane.
+
+Frames should only contain panes and the `frame-*` members defined below.
+Intervening wrapper `<div>`s around panes will upset the layout, especially
+if the panes are scrollable.  However,
+see `frame-body` for a possible solution when wrapping panes in another `<div>`
+is unavoidable.
+
+**/
+@frame-sidebar-width: 6;
+@frame-M-sidebar-width: 4;
+@frame-S-sidebar-width: 4;
+@frame-LP-sidebar-width: 3;
+
+.frame {
+    @headerHeight: 2em;
+    @footerHeight: 2em;
+    @overlayHeight: 2em;
+
+    height: 100%;
+    width: 100%;
+    z-index: 0; // establish new stacking context
+
+    text-align: left; // even when inside a .right-.box
+
+    > * {
+        z-index: 1; // everything is stacked on top of the drawer
+    }
+
+    // most variants require elements be positioned relative to the frame.
+    position: relative;
+
+    // we will slide things behind the edge of the frame
+    overflow: hidden;
+
+    > header,
+    .frame-header {
+        /** An optional fixed header at the top of the frame.  The header might include
+            a title, navigation, or tools, for example.
+
+            @example[headered-frame.html] A frame with a header
+        */
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: @headerHeight;
+        line-height: @headerHeight;
+        background-color: @frame-header-background-color;
+        .font > .family( heading );
+        .font > .size( large );
+        .font > .weight( semi-bold );
+        z-index: 2; // put header on top, so dropdowns will overlay the frame body.
+        // TODO: provide mixin for border/background styling.
+    }
+
+    &.fullscreen- {
+        /** A frame which takes the full screen and has fixed position. */
+        position: fixed;
+    }
+
+    &.page- {
+        /** A frame intended to fill a page, and providing a larger space
+        for the header. */
+        .header-height( 80px, inherit );
+    }
+
+    &.headered- {
+        /** A frame which has a header at the top. */
+        .header-height();
+    }
+
+    .frame-header-left {
+        /** The left-hand side of a frame header. */
+        float: left;
+    }
+
+    .frame-header-right {
+        /** The right-hand side of a frame header. */
+        float: right;
+    }
+
+    &.footered- {
+        /** A frame which has a footer at the bottom. */
+        .footer-height();
+    }
+
+    > footer,
+    .frame-footer {
+        /** An optional fixed footer at the bottom of the frame.
+
+            @example[footered-frame.html] A frame with a header and footer **/
+
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: @footerHeight;
+        line-height: @footerHeight;
+    }
+
+    &.overlaid- {
+        /** A frame which has an overlay.*/
+        .overlay-height();
+    }
+
+    .frame-overlay {
+        /** An optional overlay at the bottom of the frame.  By default, the overlay
+            is at the bottom of the frame.
+
+            @example[overlaid-frame.html] A frame with a header and an overlay
+        **/
+
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: @overlayHeight;
+        z-index: 2;
+    }
+
+    &.sidebarred- {
+        /** A frame which has a sidebar. */
+        .sidebar-width();
+        @media @page-M {
+            .sidebar-width( @frame-M-sidebar-width );
+        }
+        @media @page-S {
+            .sidebar-width( @frame-S-sidebar-width );
+        }
+        @media @page-LP {
+            .sidebar-width( @frame-LP-sidebar-width );
+        }
+
+    }
+
+    .frame-sidebar {
+        /**
+            An optional sidebar, fixed to the frame, so as not to scroll
+            with any pane(s) inside the frame.
+
+            @example[frame-sidebar.html] A frame with a sidebar and a header
+        **/
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+
+    &.balanced- {
+        /** A frame whose contents are centered.  If the frame is `sidebarred-`,
+            then the `frame-sidebar` and the `page` (or `page- grid`) are both
+            considered to be content, centered together.
+
+            @example[balanced-frame.html] A balanced frame with sidebar
+        **/
+
+        &,&.sidebarred- {
+            padding-left: 0;
+        }
+
+        .frame-sidebar {
+            left: 50%;
+            padding-left: @grid-gutter/2;
+            padding-right: @grid-gutter/2;
+        }
+
+        .page,
+        .page-.grid {
+            position: relative;
+        }
+
+        .balanced-width();
+
+        @media @page-W {
+            .balanced-width( @page-W-columns );
+        }
+        @media @page-M {
+            .balanced-width( @page-M-columns, @frame-M-sidebar-width );
+        }
+        @media @page-S {
+            .balanced-width( @page-S-columns, @frame-S-sidebar-width );
+        }
+        @media @page-LP {
+            .balanced-width( @page-LP-columns, @frame-LP-sidebar-width );
+        }
+        @media @page-MP {
+            .balanced-width( @page-MP-columns, 0 );
+            .frame-sidebar {
+                display: none;
+            }
+        }
+        @media @page-SP {
+            .balanced-width( @page-SP-columns, 0 );
+        }
+    }
+
+    .frame-body {
+        /**
+        An optional wrapper around the pane(s) or any combination
+        of frame elements.  If intervening <div>s between the
+        frame and its elements, giving them this class will
+        propagate down the height of the frame.
+
+        This class is helpful if, for example, the header and pane
+        are generated by a partial, but the footer is not.
+
+        @example[frame-body.html] A frame with a frame body.
+        **/
+
+        height: 100%;
+        z-index: 1;
+    }
+
+    .frame-drawer {
+        /** A layer of content below the rest of the frame's
+            content.  The frame's other content slides away
+            to reveal the drawer.
+
+            Drawers are often used in place of sidebars on small-screen
+            mobile devices.  However, in many designs, the contents of the drawer
+            differ from the contents of a sidebar, so there is little advantage to
+            combining the two into one responsive layout pattern.  Instead, use
+            @media queries and the mixins provided to hide/show the drawer and
+            sidebar as required.
+
+            @example[frame-drawer.html] A frame with a drawer.
+            */
+        @width: 280px;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: @width;
+        padding: 10px;
+        z-index: 0; // beneath everything else
+
+        &:after {
+            @width: 5px;
+            // the shadow
+            content: "";
+            position: absolute;
+            left: -@width;
+            top: 0;
+            width: @width;
+            height: 100%;
+            .background-gradient( horizontal, rgba( 0, 0, 0, 0 ), rgba( 0, 0, 0, .5 ) );
+            .translate( 0, 0 );
+            .transition( transform, 0.3s );
+        }
+
+        &.is-active:after {
+            .translate( @width, 0 );
+        }
+
+        & ~ * {
+            background-color: @page-background-color;
+            .translate( 0, 0 );
+            .transition( transform, 0.3s );
+        }
+
+        &.is-active ~ * {
+            .translate( @width, 0 );
+        }
+    }
+
+    &.split-,
+    .frame-split {
+        /** Split a frame into two panes.
+
+            Use the `split-` modifier only if the frame only contains two panes,
+            and no header or footer.  Otherwise, wrap the two panes in a
+            `frame-split` element.
+            */
+        position: relative;
+        height: 100%;
+        width: 100%;
+        > * {
+            position: absolute;
+        }
+        &.horizontal- {
+            /** A frame which is split horizontally.
+                By default the frame is split equally (1:1)
+
+               @example[split-frame.html] Two panes side-by-side
+               **/
+            > * {
+                height: 100%;
+                top: 0;
+            }
+            > :first-child {
+                left: 0;
+            }
+            > :last-child {
+                right: 0;
+            }
+            .split( horizontal, 1, 1 );
+            &.one-two- {
+                /** Split the frame 1:2 */
+                .split( horizontal, 1, 2 );
+            }
+            // TODO: add more splits, as needed
+        }
+        &.vertical- {
+            /** A frame which is split vertically.
+                By default the frame is split equally (1:1)
+                */
+            > * {
+                width: 100%;
+                left: 0;
+                &:first-child { top: 0; }
+                &:last-child { bottom: 0; }
+            }
+            .split( vertical, 1, 1 );
+            &.one-two- {
+                /** Split the frame 1:2 */
+                .split( vertical, 1, 2 );
+            }
+            &.two-one- {
+                /** Split the frame 2:1 */
+                .split( vertical, 2, 1 );
+            }
+        }
+    }
+
+    &.tabbed- {
+        /** TODO: A frame with tabs which select alternate panes to view. */
+    }
+
+    // Mixins
+
+    // Set the height of the header (if any)
+    .header-height( @ht: @headerHeight, @lineht: @ht ) {
+        padding-top: @ht;
+        > header,
+        > .frame-header,
+        > .frame-body > .frame-header {
+            height: @ht;
+            line-height: @lineht;
+        }
+        > aside,
+        > .frame-sidebar,
+        > .frame-body > .frame-sidebar {
+            padding-top: @ht;
+        }
+    }
+
+    .header-height( 0 ) {
+        > header,
+        > .frame-header,
+        > .frame-body > .frame-header {
+            display: none;
+        }
+    }
+
+    // Set the height of the footer (if any)
+    .footer-height( @ht: @footerHeight, @lineht: @ht ) {
+        padding-bottom: @ht;
+        > footer,
+        > .frame-footer,
+        > .frame-body > .frame-footer {
+            height: @ht;
+            line-height: @lineht;
+        }
+    }
+
+    .footer-height( 0 ) {
+        > .frame-footer,
+        > .frame-body > .frame-footer {
+            display: none;
+        }
+    }
+
+    // Set the height of the overlay
+    .overlay-height( @ht: @overlayHeight, @lineht: @ht ) {
+
+        // leave space at the bottom of the pane for the overlay
+        &.overlaid- > .pane {
+            padding-bottom: @ht;
+        }
+
+        // overlays interact with grids.  We want the grid
+        // (and sidebar) to continue, but pad the last grid-row
+        // and any box-module inside the sidebar
+        &.overlaid- .grid {
+            .grid-sidebar .box-module,
+            .grid-row:last-child {
+                padding-bottom: @ht;
+            }
+        }
+
+        > .frame-overlay,
+        > .frame-body > .frame-overlay {
+            height: @ht;
+            line-height: @lineht;
+        }
+    }
+
+    .overlay-height( 0 ) {
+        > .frame-overlay,
+        > .frame-body > .frame-overlay {
+            display: none;
+        }
+    }
+
+    .sidebar-width( @w: @frame-sidebar-width ) {
+        .grid > .leave( left, @w );
+        > aside,
+        > .frame-sidebar,
+        > .frame-body > .frame-sidebar {
+            .grid > .width( @w );
+        }
+    }
+
+    .sidebar-width( 0 ) {
+        padding-left: 0;
+        > aside,
+        > .frame-sidebar,
+        > .frame-body > .frame-sidebar {
+            display: none;
+        }
+    }
+
+    .balanced-width( @total: @page-L-columns, @sb: @frame-sidebar-width ) {
+        // consider both the total page width and the sidebar width for balanced frame.
+        .frame-sidebar {
+            .grid > .width( @sb );
+            .grid > .set( margin-left, -@total/2 ); // half the total "page" area
+        }
+        .page,
+        .page-.grid {
+            .grid > .set( left, @sb/2 );
+            .grid > .width( @total - @sb ); // remainder of page, after removing scrollbar
+        }
+    }
+
+    // Set the dimensions for a split frame
+    .split( horizontal, @first ) when (ispercentage(@first)) {
+        > :first-child {
+            width: @first;
+        }
+        > :last-child {
+            width: (100% - @first);
+        }
+    }
+
+    .split( vertical, @first ) when (ispercentage(@first)) {
+        > :first-child {
+            height: @first;
+        }
+        > :last-child {
+            height: (100% - @first);
+        }
+    }
+
+    .split( @dir, @first, @second ) {
+        .split( @dir, 100% * (@first / (@first + @second)) );
+    }
+}

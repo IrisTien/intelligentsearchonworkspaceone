@@ -1,0 +1,149 @@
+@app-list-border: 1px solid rgba(0, 0, 0, .25);
+@app-list-icon-size: 56px;
+@app-list-item-height: 84px;
+@app-list-center-padding: 16px 160px 0 88px;
+
+@app-list-icon-size-android: 40px;
+
+@app-list-center-padding-android: 16px 120px 0 72px;
+
+@app-list-icon-top: (@app-list-item-height - @app-list-icon-size)/2;
+@app-list-icon-top-android: (@app-list-item-height - @app-list-icon-size-android)/2;
+@app-list-name-font-size: 15px;
+@app-list-text-font-size: 13px;
+@app-managed-font-size: 9px;
+@app-list-inline-svg-size: 16px;
+
+.app-list {
+  .full-screen(1000);
+}
+
+.app-list-item {
+  padding: @app-list-center-padding;
+  position: relative;
+  display: block;
+  min-height: @app-list-item-height;
+  width: 100%;
+  .list-item-divider-mixin(@list-item-divider-bg);
+}
+
+.android .app-list-item {
+  padding: @app-list-center-padding-android;
+}
+
+.android .app-list-item:before {
+  left:0;
+}
+
+.app-list-item-icon {
+    .app-icon(@app-list-icon-size, @app-list-icon-top);
+}
+
+.android .app-list-item-icon {
+    .app-icon(@app-list-icon-size-android, @app-list-icon-top-android);
+}
+
+.app-list-item-name {
+    //define the margin padding etc in the class instead of mixin class
+    .base-text-style(@app-list-name-font-size, 600);
+    white-space: normal;
+    line-height: 20px;
+    .multi-line-ellipsis(2);
+}
+
+.android .app-list-item-name {
+  .base-text-style(@app-list-name-font-size + 1px, 400);
+}
+
+.app-list-item-type {
+    .base-text-style(@app-list-text-font-size, 400);
+    .single-line-ellipsis();
+    opacity: 0.55;
+    line-height: 22px;
+
+    svg {
+        width: @app-list-inline-svg-size;
+        height: @app-list-inline-svg-size;
+        margin-top: 3px;
+    }
+
+    &.tunnle-list-item {
+        padding-bottom: 6px;
+    }
+}
+
+.android .app-list-item-type {
+  .base-text-style(@app-list-text-font-size + 1px, 400);
+}
+
+.app-list-item-actions {
+  height: 100%;
+  position: absolute;
+  right: @list-item-padding-h - 2px;
+  top: 0;
+  // This is the vertical align helper
+  &:before {
+      content: '';
+      display: inline-block;
+      height: 100%;
+      width: 1px;
+      vertical-align: middle
+  }
+
+  .app-installed {
+      opacity: 0.4;
+      text-align: right;
+  }
+}
+
+.app-list-item-tunnel-icon-mobile {
+  width: 16px;
+  height: 16px;
+  margin-top: 4px;
+}
+
+// Faborite button styles
+// ---------------------------------------
+.app-details-action {
+  .app-favoriting-spinner {
+    position: relative;
+    padding: 12px 0;
+  }
+
+  .app-favorited {
+    .app-favorite-button, .app-favoriting-spinner {
+      display: none;
+    }
+  }
+
+  .app-not-favorited {
+    .app-un-favorite-button, .app-favoriting-spinner {
+      display: none;
+    }
+  }
+
+  .app-favoriting {
+    .app-un-favorite-button, .app-favorite-button{
+      display: none;
+    }
+  }
+}
+
+.app-managed {
+  font-size: @app-managed-font-size;
+  position: absolute;
+  .single-line-ellipsis();
+  bottom: 15px;
+  left: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.img-invert {
+  filter: grayscale(1);
+  -webkit-filter: grayscale(1);
+}
+
+.container-invert {
+  opacity: .55;
+}

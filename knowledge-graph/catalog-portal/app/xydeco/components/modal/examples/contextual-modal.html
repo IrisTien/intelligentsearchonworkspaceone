@@ -1,0 +1,13 @@
+<div class="pane" ng-controller="ModalDemo as demo">
+  <div id="context" modal-context>
+    <p id="inside"><%= p.2 %></p>
+    <button ng-click="$modal.open(demo.externalTemplate, {message: '<%= s %>'})"><%= btn %></button>
+  </div>
+  <p id="outside"><%= p.1 %></p>
+</div>
+<!-- styling for demo only -->
+<style>
+#context { border: 1px solid red; position: absolute; top: 0; left: 50%; height: 100%; width: 50%; }
+#inside  { margin: 50px auto; }
+#outside { position: absolute; bottom: 50px; left: 25%; width: 50%; }
+</style>

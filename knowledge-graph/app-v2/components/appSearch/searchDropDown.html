@@ -1,0 +1,22 @@
+<div class="search-results">
+    <!-- loading spinner section-->
+    <div ng-if="ctrl.loading && ctrl.isAWJadeMobile" class="search-app-loading">
+        <spinner-loading></spinner-loading>
+    </div>
+    <div ng-if="ctrl.loading && !ctrl.isAWJadeMobile" class="search-app-loading">
+        <div ng-include="'app-v2/components/appSearch/searchDropDownPreview.html'"></div>
+    </div>
+
+    <div id="search-container" class="search-results-content">
+        <div class="section-headline-style2 app-search-header app-count" ng-show="ctrl.appCount">{{ctrl.appCount}} {{::'hub.apps.search.header' | i18n}}</div>
+        <div class="app-search-section-header total-app-count" ng-show="ctrl.totalAppCount">
+            <span class="search-category-length">{{'hub.apps.search.in.app' | i18n : ctrl.totalAppCount}}</span>
+        </div>
+        <div ng-repeat="app in ctrl.apps track by $index+app.appId+app.categoryName" class="search-item-app" ng-include="'app-v2/components/appSearch/searchItem.html'"></div>
+        <div class="search-empty-result" ng-if="ctrl.noResults">
+            <h2 class="empty-page-heading">{{ ::'hub.apps.search.no.result.header' | i18n }}</h2>
+            <p class="search-empty-message">{{ ::'hub.apps.search.no.result.msg' | i18n }}</p>
+            <section class="hub-no-apps" ng-include="'app-v2/svgincludes-hub/hub-no-search-results.html'"></section>
+        </div>
+    </div>
+</div>

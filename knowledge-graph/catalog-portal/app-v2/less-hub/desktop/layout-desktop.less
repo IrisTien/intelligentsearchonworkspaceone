@@ -1,0 +1,53 @@
+@breadcrumb-height: 72px;
+@mac-toolbar-height: 0;
+@content-max-width: 1030px;
+@hub-desktopapp-width-min: 640px;
+// Be Careful when changing the left-panel-width value as it will have impact on the grid structure
+@left-panel-width: @category-left-panel-width + 25px;
+
+.global-container-desktop {
+    .full-screen(0, @content-bg);
+}
+
+.content-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    top:0;
+    left:0;
+    min-width: @hub-desktopapp-width-min;
+    padding: @breadcrumb-height 0 0 0;
+}
+
+.content-container-scrollable {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    // leave some padding for windows scroller bar
+    padding-right: 24px;
+}
+
+.content {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    padding: @list-item-padding-h 0 0 @left-panel-width;
+
+    @media (min-width: @content-max-width) {
+        width: @content-max-width;
+    }
+}
+
+.scroll-hidden {
+    overflow: hidden;
+}
+
+.spinner-overlay {
+    background-color: @fullscreen-bg;
+    opacity: 0.5;
+    z-index: 1250;
+    pointer-events: none;
+}

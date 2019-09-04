@@ -1,0 +1,6 @@
+<svg id="icon-linked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+	<path d="M25,6H8A1.46,1.46,0,0,0,6.5,7.44V24.56A1.46,1.46,0,0,0,8,26H25a1.46,1.46,0,0,0,1.48-1.44V7.44A1.46,1.46,0,0,0,25,6Z" style="fill:#0065a1" stroke-width="0"/>
+	<rect x="8.96" y="13.5" width="2.97" height="9.54" style="fill:#fff" stroke-width="0"/>
+	<path d="M10.45,8.75a1.72,1.72,0,1,1-1.72,1.72,1.72,1.72,0,0,1,1.72-1.72" style="fill:#fff" stroke-width="0"/>
+	<path d="M13.79,13.5h2.85v1.3h0a3.11,3.11,0,0,1,2.81-1.54c3,0,3.55,2,3.55,4.55V23h-3V18.4c0-1.11,0-2.53-1.54-2.53s-1.78,1.21-1.78,2.45V23h-3V13.5Z" style="fill:#fff" stroke-width="0"/>
+</svg>

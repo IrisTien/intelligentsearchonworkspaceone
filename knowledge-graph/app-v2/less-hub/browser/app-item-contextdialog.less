@@ -1,0 +1,94 @@
+@appitem-contextdialog-delay: 0.15s;
+@appitem-contextdialog-content-animtime: 0.15s;
+@grid-gutter: 24px;
+
+@contextdialog-bg: #fff;
+@contextdialog-content-width-min: 120px;
+@contextdialog-container-top: -40px;
+@contextdialog-border-radius: 4px;
+@contextdialog-font-size: 12px;
+@contextdialog-item-height: 34px;
+@contextdialog-box-shadow: 0 0 6px 0 rgba(0,0,0,.15);
+
+@list-item-default-hover-color: rgba(9, 83, 151, 0.05);
+
+.appitem-contextdialog-container {
+    min-width: @contextdialog-content-width-min;
+    z-index: 100;
+    position: absolute;
+    top: @contextdialog-container-top;
+    height: auto;
+    left: 12px;
+    opacity: 0;
+    box-shadow: @contextdialog-box-shadow;
+
+    &.north, &.northeast, &.northwest {
+        bottom: @grid-gutter/2;
+        top:auto;
+    }
+
+    &.south, &.southeast, &.southwest {
+
+    }
+
+    &.northeast, &.southeast {
+
+    }
+
+    &.northwest, &.southwest {
+        right: 0;
+        left: auto;
+    }
+
+    &.north, &.south {
+        left: 50%;
+        transform: translate( -50%, 0 );
+        -moz-transform: translate( -50%, 0 );
+        -webkit-transform: translate( -50%, 0 );
+        -ms-transform: translate( -50%, 0 );
+    }
+}
+
+.contextmenu-on .appitem-contextdialog-container {
+    opacity: 1;
+    height: auto;
+    transition: opacity @appitem-contextdialog-content-animtime @appitem-contextdialog-delay;
+    -webkit-transition: opacity @appitem-contextdialog-content-animtime @appitem-contextdialog-delay;
+}
+
+.appitem-contextdialog-actions-list {
+    background: @contextdialog-bg;
+    border-radius: @contextdialog-border-radius;
+    padding: @list-item-padding-h/2 0;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,.15);
+
+    li {
+        .base-text-style(@contextdialog-font-size, 400);
+        height: @contextdialog-item-height;
+        line-height: @contextdialog-item-height;
+        padding: 0 @list-item-padding-h;
+        color: @primary-text-color;
+        .single-line-ellipsis();
+
+        // Tentative -- will rework this in the next round
+        &:hover {
+            background: @list-item-default-hover-color;
+            color:@primary-text-color;
+        }
+
+        a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+        // ensure the event target is the same as the link
+        span {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

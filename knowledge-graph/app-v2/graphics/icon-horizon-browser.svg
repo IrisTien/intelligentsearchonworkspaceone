@@ -1,0 +1,9 @@
+<svg id="icon-horizon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <path d="M13.2,22.51H7.34a.82.82,0,0,1-.84-.8V8.31a.82.82,0,0,1,.84-.8H24.66a.82.82,0,0,1,.84.8V21.7a.82.82,0,0,1-.84.8H18.79" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  <line x1="6.5" y1="13" x2="25.5" y2="13" fill="none" stroke-linejoin="round" stroke-width="1.5"/>
+  <circle cx="9.75" cy="10.25" r="0.75" stroke-width="0"/>
+  <circle cx="13.25" cy="10.25" r="0.75" stroke-width="0"/>
+  <circle cx="16.75" cy="10.25" r="0.75" stroke-width="0"/>
+  <polyline points="19 19.5 16 16.5 13 19.5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  <line x1="16" y1="17" x2="16" y2="26" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+</svg>

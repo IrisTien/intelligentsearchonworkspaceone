@@ -1,0 +1,6 @@
+<svg id="icon-termsofuse" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+	<line x1="12.9" y1="12.28" x2="19.1" y2="12.28" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+	<line x1="12.9" y1="15.5" x2="19.1" y2="15.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+	<line x1="12.9" y1="18.72" x2="16.1" y2="18.72" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+	<path d="M21.41,23.1H10.59a.79.79,0,0,1-.79-.78V9.68a.79.79,0,0,1,.79-.78H21.41a.79.79,0,0,1,.79.78V22.32A.79.79,0,0,1,21.41,23.1Z" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

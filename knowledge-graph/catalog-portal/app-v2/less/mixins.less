@@ -1,0 +1,57 @@
+// commonly used minxins
+
+.caret-basic-style() {
+  content: '';
+  position:absolute;
+  width: 0;
+  height: 0;
+}
+
+.up-caret-before(@pos-x, @pos-y) {
+  @top-y:-(@pos-y)-2px;
+  top: @top-y;
+  right: @pos-x;
+  border-left: @profile-caret-height+2px solid transparent;
+  border-right: @profile-caret-height+2px solid transparent;
+  border-bottom: (@profile-caret-height+2px) solid @profile-border-color;
+}
+
+.up-caret-after(@pos-x, @pos-y) {
+  @top-y: -(@pos-y);
+  @border-bottom-height:@profile-caret-height+1px;
+  top: @top-y;
+  right: @pos-x+1px;
+  border-left: @border-bottom-height solid transparent;
+  border-right: @border-bottom-height solid transparent;
+  border-bottom: @border-bottom-height solid @white;
+}
+// This one update the notificaiton caret on different viewport
+.update-caret-pos-x (@new-pos-x) {
+  right: @new-pos-x;
+}
+
+.down-caret-before(@pos-x, @pos-y) {
+  @top-y:(@pos-y);
+  top: @top-y;
+  right: @pos-x;
+  border-left: @profile-caret-height+2px solid transparent;
+  border-right: @profile-caret-height+2px solid transparent;
+  border-top: (@profile-caret-height+2px) solid #ccc;
+}
+
+.down-caret-after(@pos-x, @pos-y) {
+  @top-y: (@pos-y)-2px;
+  top: @top-y;
+  right: @pos-x+2px;
+  border-left: @profile-caret-height solid transparent;
+  border-right: @profile-caret-height solid transparent;
+  border-top:@profile-caret-height solid @vmwareheadercolor;
+}
+
+.inline-block-vertical-align-helper(@item-height) {
+  content: '';
+  width:0;
+  height: @item-height;
+  display:inline-block;
+  vertical-align: middle;
+}

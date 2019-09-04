@@ -1,0 +1,441 @@
+// Project Horizon
+// (c) 2013-2015 VMware, Inc. All rights reserved.
+// VMware Confidential.
+
+@import "../base/mixins";
+@import "../grid/grid";
+@import "../typography/typography";
+
+/** @pattern .box
+
+A box is a unit of layout, a rectangle of content
+positioned relative to other boxes.
+
+The box class itself does not control layout.
+Layout is controlled by the boxes' parent element, which
+is often a `grid`.  In this case, the grid controls spacing
+of the boxes, while the boxes' modifiers
+control the width of the boxes
+such that they align with the grid.
+
+@example [box-demo.html] Boxes of various sizes
+
+**/
+@box-module-padding : @grid-gutter/2;
+
+.box-base {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
+.box:extend(.box-base all) {
+
+    .define-widths();
+
+    img {
+        max-width: 100%;
+    }
+
+    &.left- {
+        /** Float the box to the left (default). */
+        .align( left );
+    }
+
+    &.right- {
+        /** Float the box to the right. */
+        .align( right );
+    }
+
+    &.center- {
+        /** Center the box in the row. */
+        .align( center );
+    }
+
+    // Justifying the content inside the box.
+
+    &.flushleft- {
+        /** Justify text within the box to the left edge (default). */
+        .justify( left );
+    }
+
+    &.flushright- {
+        /** Justify text within the box to the right edge. */
+        .justify( right );
+    }
+
+    &.centering- {
+        /** Center text within the box. */
+        .justify( center );
+    }
+
+    // Controlling floats
+
+    &.clearleft- {
+        /** Clear left floats before setting this box. */
+        .clear( left );
+    }
+
+    &.clearright- {
+        /** Clear left floats before setting this box. */
+        .clear( right );
+    }
+
+    &.clear- {
+        /** Clear left floats before setting this box. */
+        .clear();
+    }
+
+    &.header- {
+        /** A box used to build a header.  The `line-height` is controlled
+        so that baselines in all header boxes will align.
+        */
+        line-height: 2em;
+        h1, h2, h3, h4, h5, h6 {
+            line-height: inherit;
+        }
+    }
+
+    &.auto- {
+        /** Let the box retain its own natural (auto) width (the default). */
+        .width( auto );
+    }
+
+    &.full-width- {
+        /** Let the box assume the width of its parent grid. */
+        .width( full );
+    }
+
+    &.full-height- {
+        /** Let the box assume the height of its parent grid. */
+        height: 100%;
+        padding-top: 0;
+        padding-bottom: 0;
+        .box-module {
+            height: 100%;
+        }
+    }
+
+    &.remainder- { /**
+
+        A remainder box will use the remaining space on a row.
+
+        @example [remainder-box-demo.html] A remainder box
+
+
+        When combined with a nested sub-grid, a remainder box will create a
+        column as wide as the remaining space on the row where it begins,
+        regardless of whether the column's height exceeds the height of the
+        side column(s).
+
+        @example [remainder-subgrid-demo.html] A sub-grid in a remainder box
+        **/
+
+        .width( remainder );
+    }
+
+    &.has-overflow { /**
+        If a box contains elements which overflow,
+        adding this class to the box allows them to be visible.
+        **/
+
+        overflow: visible;
+        // A z-index is applied to create a stacking context and
+        // display the overflow content on top of other boxes.
+        z-index: 2;
+    }
+
+    .box-module { /** Create a framed module within a box, and have the edges
+        of the module align with the grid.  Typically you will
+        have other CSS that sets a border and/or background on
+        the module.
+
+       @example [box-module-demo.html] Box modules
+       **/
+
+       @pad: @box-module-padding;  // needn't be tied to grid dimensions
+
+       width: 100%;
+       margin: 0;
+       padding: @pad;
+       position: relative;
+       overflow: hidden;
+
+       + .box-module {
+           margin-top: (@grid-gutter);
+       }
+    }
+
+    &.leave-one- {
+        /** Leave one column(s) of space between this box and the
+        previous one. */
+        .leave (1);
+    }
+
+    &.leave-two-   { .leave(2); }
+    &.leave-three- { .leave(3); }
+    &.leave-four-  { .leave(4); }
+    &.leave-five-  { .leave(5); }
+    &.leave-six-   { .leave(6); }
+    &.leave-seven- { .leave(7); }
+    &.leave-eight- { .leave(8); }
+
+    // Mixins
+
+    // Set the width/height of a box using grid.
+    .width ( @n ) when (isnumber(@n)) {
+        .grid > .set( width, @n, -@grid-gutter );
+        box-sizing: content-box;
+    }
+
+    .width ( auto ) {
+        width: auto;
+    }
+
+    .width( full ) {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .width( half ) {
+        width: 50%;
+        box-sizing: border-box;
+    }
+
+    .width( remainder ) {
+        float: none;
+        width: auto;
+        overflow: hidden;
+    }
+
+    .height ( @n ) { .grid > .set( height, @n ); }
+
+    // Set the min-width of an element from its integral dimension
+    .min-width ( @n, @offset: -@grid-gutter ) {
+        .grid > .set( min-width, @n );
+        box-sizing: content-box;
+    }
+
+    // Define width prefixes for grids and boxes
+    .define-widths ( @classes: @grid-width-classes ) {
+        .define-widths( @classes, length(@classes) );
+    }
+
+    .define-widths ( @classes, @n ) when ( @n > 0 ) {
+        @class: extract(@classes, @n);
+        .define-widths( @classes, @n - 1 );
+        &.@{class} {
+            .width( @n );
+        }
+    }
+
+    // Alignment of the box within a grid
+
+    .align( left ) {
+        float: left;
+    }
+
+    .align( right ) {
+        float: right;
+    }
+
+    .align( center ) {
+        float: none;
+        margin: 0 auto;
+    }
+
+    // Justifying the text inside the box
+
+    .justify( left ) {
+        text-align: left;
+    }
+
+    .justify( right ) {
+        text-align: right;
+    }
+
+    .justify( center ) {
+        text-align: center;
+    }
+
+    // Clear floats
+
+    .clear ( @side: both ) {
+        clear: @side;
+    }
+
+    // Leave space between this box and adjacent box(es)
+
+    .leave ( left, @n ) {
+        .grid > .set( margin-left, @n );
+    }
+
+    .leave ( right, @n ) {
+        .grid > .set( margin-right, @n );
+    }
+
+    .leave ( @n ) {
+        .leave( left, @n );
+        &.right- {
+            .leave( left, 0 );
+            .leave( right, @n );
+        }
+    }
+
+    // hide a box
+    .hide () {
+        display: none;
+    }
+
+    // Derived class interface
+
+    .extend () {
+        &:extend( .box-base all );
+    }
+
+    .modify ( right- ) {
+        &:extend( .box.right- );
+    }
+
+    .modify ( center- ) {
+        &:extend( .box.center- );
+    }
+
+    .modify ( remainder- ) {
+        &:extend( .box.remainder- );
+    }
+}
+
+
+@media @page-M {
+    // Responsive override classes for width and alignment
+    .box {
+        .box > .define-widths( @grid-M-width-classes );
+
+        &.M-full-width- { .box > .width( full ); }
+        &.M-half-width- {  .box > .width(half);  }
+        &.M-auto- { .box > .width( auto ); }
+        &.M-remainder- { .box > .width( remainder ); }
+
+        &.M-left- { .box > .align(left); }
+        &.M-right- { .box > .align(right); }
+        &.M-center- { .box > .align(center); }
+
+        &.M-flushleft- { .box > .justify(left); }
+        &.M-flushright- { .box > .justify(right); }
+        &.M-centering- { .box > .justify(center); }
+
+        &.M-clearleft- { .box > .clear(left); }
+        &.M-clearright- { .box > .clear(right); }
+        &.M-clear- { .box > .clear(); }
+
+        &.M-hide- { .box > .hide(); }
+    }
+}
+
+@media @page-S {
+    // Responsive override class for width
+    .box {
+        .box > .define-widths( @grid-S-width-classes );
+
+        &.S-full-width- {  .box > .width(full);  }
+        &.S-half-width- {  .box > .width(half);  }
+        &.S-auto- { .box > .width( auto ); }
+        &.S-remainder- { .box > .width( remainder ); }
+
+        &.S-left- { .box > .align(left); }
+        &.S-right- { .box > .align(right); }
+        &.S-center- { .box > .align(center); }
+
+        &.S-flushleft- { .box > .justify(left); }
+        &.S-flushright- { .box > .justify(right); }
+        &.S-centering- { .box > .justify(center); }
+
+        &.S-clearleft- { .box > .clear(left); }
+        &.S-clearright- { .box > .clear(right); }
+        &.S-clear- { .box > .clear(); }
+
+        &.S-hide- { .box > .hide(); }
+
+    }
+}
+
+@media @page-LP {
+    // Responsive override class for width
+    .box {
+        .box > .define-widths( @grid-LP-width-classes );
+
+        &.LP-full-width- {  .box > .width(full);  }
+        &.LP-half-width- {  .box > .width(half);  }
+        &.LP-auto- { .box > .width( auto ); }
+        &.LP-remainder- { .box > .width( remainder ); }
+
+        &.LP-left- { .box > .align(left); }
+        &.LP-right- { .box > .align(right); }
+        &.LP-center- { .box > .align(center); }
+
+        &.LP-flushleft- { .box > .justify(left); }
+        &.LP-flushright- { .box > .justify(right); }
+        &.LP-centering- { .box > .justify(center); }
+
+        &.LP-clearleft- { .box > .clear(left); }
+        &.LP-clearright- { .box > .clear(right); }
+        &.LP-clear- { .box > .clear(); }
+
+        &.LP-hide- { .box > .hide(); }
+    }
+}
+
+@media @page-MP {
+    // Responsive override class for width
+    .box {
+        .box > .define-widths( @grid-MP-width-classes );
+
+        &.MP-full-width- {  .box > .width(full);  }
+        &.MP-half-width- {  .box > .width(half);  }
+        &.MP-auto- { .box > .width( auto ); }
+        &.MP-remainder- { .box > .width( remainder ); }
+
+        &.MP-left- { .box > .align(left); }
+        &.MP-right- { .box > .align(right); }
+        &.MP-center- { .box > .align(center); }
+
+        &.MP-flushleft- { .box > .justify(left); }
+        &.MP-flushright- { .box > .justify(right); }
+        &.MP-centering- { .box > .justify(center); }
+
+        &.MP-clearleft- { .box > .clear(left); }
+        &.MP-clearright- { .box > .clear(right); }
+        &.MP-clear- { .box > .clear(); }
+
+        &.MP-hide- { .box > .hide(); }
+    }
+}
+
+@media @page-SP {
+    // Responsive override class for width
+    .box {
+        .box > .define-widths( @grid-SP-width-classes );
+
+        &.SP-full-width- {  .box > .width(full);  }
+        &.SP-half-width- {  .box > .width(half);  }
+        &.SP-auto- { .box > .width( auto ); }
+        &.SP-remainder- { .box > .width( remainder ); }
+
+        &.SP-left- { .box > .align(left); }
+        &.SP-right- { .box > .align(right); }
+        &.SP-center- { .box > .align(center); }
+
+        &.SP-flushleft- { .box > .justify(left); }
+        &.SP-flushright- { .box > .justify(right); }
+        &.SP-centering- { .box > .justify(center); }
+
+        &.SP-clearleft- { .box > .clear(left); }
+        &.SP-clearright- { .box > .clear(right); }
+        &.SP-clear- { .box > .clear(); }
+
+        &.SP-hide- { .box > .hide(); }
+    }
+}

@@ -1,0 +1,32 @@
+<div class="settings-detail-content-container">
+    <div class="settings-detail-mobile-header">
+        <div class="settings-back" id="pt-support-tips-button"
+             ng-click="::supportCtrl.dismissSupportDetail()">
+            <svg svg-symbol="icon-page-back" class="icon-page-back"></svg>
+        </div>
+        <h2>{{::'userInfo.tips' | i18n}}</h2>
+    </div>
+    <div class="settings-detail-content-scrollable" ng-controller="AppTipsController as appTipsCtrl">
+        <div class="settings-detail-content setting-app-tips-content">
+            <div ng-if="appTipsCtrl.device =='phone'" class="carousel-container" id="pt-support-apptips-carousel-phone">
+                <ul rn-carousel rn-carousel-controls class="settings-tips-carousel-phone">
+                    <li class="apptips-item" ng-repeat= "tip in carouselPhoneImages" ng-class="{'active': carouselIndex === $index}">
+                        <ng-include src="tip.svglink"></ng-include>
+                        <h3>{{ tip['header'] | i18n}}</h3>
+                        <p ng-bind-html="tip['message']" class="text-inline-svg"></p>
+                    </li>
+                </ul>
+            </div>
+
+            <div ng-if="appTipsCtrl.device =='tablet'" class="carousel-container" id="pt-support-apptips-carousel-tablet">
+                <ul rn-carousel rn-carousel-controls class="settings-tips-carousel-tablet">
+                    <li class="apptips-item" ng-repeat= "tip in carouselTabletImages" ng-class="{'active': carouselIndex === $index}">
+                        <ng-include src="tip.svglink"></ng-include>
+                        <h3>{{ tip['header'] | i18n}}</h3>
+                        <p ng-bind-html="tip['message']" class="text-inline-svg"></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

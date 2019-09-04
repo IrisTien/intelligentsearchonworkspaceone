@@ -1,0 +1,8 @@
+<div class="tabs-container">
+    <ul class="nav-tabs">
+        <li ng-repeat="pane in panes" ng-if="!pane.displaycheck" ng-class="[{active:pane.selected}, pane.datalabel]" ng-click="select(pane)" id="tab-{{$index}}">
+            {{::pane.datalabel}}
+        </li>
+    </ul>
+    <div ng-if="!pane.displaycheck" class="tab-content" ng-transclude></div>
+</div>

@@ -1,0 +1,10 @@
+<svg id="icon-slack" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+	<path d="M19.11,6.8A1.88,1.88,0,0,0,15.54,8l4.84,14.87A1.88,1.88,0,0,0,22.66,24a1.84,1.84,0,0,0,1.27-2.31S19.11,6.8,19.11,6.8Z" style="fill:#ecb32d" stroke="transparent"/>
+	<path d="M11.62,9.23a1.88,1.88,0,0,0-3.57,1.15l4.84,14.88a1.88,1.88,0,0,0,2.28,1.16,1.85,1.85,0,0,0,1.27-2.31S11.62,9.23,11.62,9.23Z" style="fill:#63c1a0" stroke="transparent"/>
+	<path d="M25.21,19.12a1.88,1.88,0,0,0-1.16-3.57L9.16,20.41A1.86,1.86,0,0,0,8,22.68,1.84,1.84,0,0,0,10.31,24Z" style="fill:#e01a59" stroke="transparent"/>
+	<path d="M12.26,23.33l3.56-1.15-1.15-3.56L11.1,19.77Z" style="fill:#331433" stroke="transparent"/>
+	<path d="M19.76,20.89l3.57-1.15-1.15-3.57-3.57,1.15Z" style="fill:#d62027" stroke="transparent"/>
+	<path d="M22.76,11.62a1.87,1.87,0,1,0-1.15-3.56L6.73,12.9a1.88,1.88,0,0,0-1.16,2.27,1.85,1.85,0,0,0,2.31,1.28S22.76,11.62,22.76,11.62Z" style="fill:#89d3df" stroke="transparent"/>
+	<path d="M9.83,15.83l3.56-1.16-1.15-3.56L8.67,12.26Z" style="fill:#258b74" stroke="transparent"/>
+	<path d="M17.32,13.4l3.56-1.16L19.73,8.68,16.17,9.83Z" style="fill:#819c3c" stroke="transparent"/>
+</svg>

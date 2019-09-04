@@ -1,0 +1,17 @@
+<h2 class="section-headline-style2">{{'app.rating.label' | i18n}}</h2>
+<div class="user-rating-container">
+    <p class="thumbs-container like"
+       ng-class="{'is-rated': appRatingCtrl.ratingData.rating === 1,
+       'disable-thumbs-container': appRatingCtrl.hideVirtualApp && appRatingCtrl.app && appRatingCtrl.app.type === 'VIRTUAL'}"
+       ng-click="appRatingCtrl.updateLikeRating()">
+        <svg class="icon-thumbs reverse-icon" svg-symbol="icon-thumbs"></svg>
+        <span class="rating-text">{{ appRatingCtrl.ratingData.likes }}</span>
+    </p>
+    <p class="thumbs-container dislike"
+       ng-class="{'is-rated': appRatingCtrl.ratingData.rating === -1,
+       'disable-thumbs-container': appRatingCtrl.hideVirtualApp && appRatingCtrl.app && appRatingCtrl.app.type === 'VIRTUAL'}"
+       ng-click="appRatingCtrl.updateDislikeRating()">
+        <svg class="icon-thumbs icon-thumbs-down" svg-symbol="icon-thumbs"></svg>
+        <span class="rating-text">{{ appRatingCtrl.ratingData.dislikes }}</span>
+    </p>
+</div>

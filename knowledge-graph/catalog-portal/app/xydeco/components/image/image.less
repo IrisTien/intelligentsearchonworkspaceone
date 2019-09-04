@@ -1,0 +1,95 @@
+/*
+ * Project Horizon
+ * (c) 2013-2015 VMware, Inc. All rights reserved.
+ * VMware Confidential.
+ */
+
+@image-borderColor: #cccccc;
+@image-borderWidth: 1px;
+
+.image {
+    /** @pattern
+        A rectangular area that contains an image.  The image pattern provides
+        control over the size and cropping of the image.
+
+        The image itself should be specified using an inline `background-image`
+        style.  Any content within the `.image` box will be rendered on top
+        of this background image.
+
+        @example [basic-image.html] Basic image examples
+    **/
+
+    display: block;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% auto;
+    border: @image-borderWidth solid @image-borderColor;
+    overflow: hidden;
+    position: relative; // for positioning objects inside image
+
+    // Size the image to a certain width and aspect ratio (width/height)
+    .aspect ( @ratio, @width: 100% ) {
+        width: @width;
+        height: 0;
+        padding-bottom: (1/@ratio)*@width;
+    }
+
+    &,
+    &.sd-,
+    &.sd-.landscape- {
+        .aspect( 4/3 );
+    }
+
+    &.filled- {
+        /** The image will completely cover the area, and may be clipped. */
+        background-size: cover;
+    }
+
+    &.contained- {
+        /** The image will be size to be contained by the area, and will not be clipped. */
+        background-size: contain;
+    }
+
+    &.tiled- {
+        /** The image will be tiled to fill the area. */
+        background-repeat: repeat;
+    }
+
+    &.square- {
+        /** The image area will be a square. */
+        .aspect( 1 );
+    }
+
+    &.landscape- {
+        /** The image will be wider than it is tall (default 4:3). */
+        .aspect( 4/3 );
+    }
+
+    &.portrait- {
+        /** The image will be taller than it is wide (default 3:4). */
+        .aspect( 3/4 );
+    }
+
+    &.hd-,
+    &.hd-.landscape- {
+        /** The image will have the HD (16:9) aspect ratio. */
+        .aspect( 16/9 );
+    }
+
+    &.hd-.portrait- {
+        .aspect( 9/16 );
+    }
+
+    &.cinema-,
+    &.cinema-.landscape- {
+        /** The image will have the cinematic (21:9) aspect ratio. */
+        .aspect( 21/9 );
+    }
+
+    &.cinema-.portrait- {
+        .aspect( 9/21 );
+    }
+
+    // TODO: image-caption, overlaid on image
+}

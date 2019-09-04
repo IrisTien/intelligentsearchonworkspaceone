@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html id="ng-app" ng-app="com.vmware.vdi.client" ng-controller="AppCenterController">
+<head>
+   <title>VMware Horizon</title>
+  <link rel="stylesheet" href="/styles/main.css" />
+   <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+   <script type="text/javascript" src="./dialog.js"></script>
+   <script type="text/javascript" src="./operation.js"></script>
+   <script type="text/javascript" src="./data.js"></script>
+   <script type="text/javascript" src="./data-service.js"></script>
+   <script type="text/javascript" src="./render.js"></script>
+   <script type="text/javascript" src="./main.js"></script>
+</head>
+<body>
+   <H2>WS1 smart search</H2>
+   <input id="search-bar" style="width:600px;height:20px;margin-left:20px"></input>
+   <button id="search-button" class="close-dialog-btn" type="button" onclick="onSearch()">search</button>
+   <div id="container" style="position:relative;width:100%;height:100%">
+      <canvas id="myCanvas"></canvas>
+      <iframe id="myIframe" width=800 height=768 src="./loading.html" style="display:none;width:600px;height:768px;position:fixed;top:50px;left:780px;border-width:0"></iframe>
+      <iframe id="loadingIframe" width=800 height=768 src="./loading.html" style="display:none;width:600px;height:768px;position:fixed;top:50px;left:780px;border-width:0"></iframe> 
+   </div>
+
+   <div id="container" style="width:100%;height:200px">
+      <!-- plan DOMs will be inserted here -->
+      <div class="dialog-container">
+         <dialog id="dialog-model" class="dialog-model" style="width:1024px">
+            <h3 class="dialog-header"  id="dialog-title">Details</h3>
+            <div class="dialog-body" id="dialog-message"></div>
+            <image src="resources/logo.jpg"  style="width: 450px;" id="dialog-image"></image>
+            <div class="dialog-footer">
+                <button id="close-dialog" class="close-dialog-btn" type="button">OK</button>
+            </div>
+         </dialog>
+      </div>
+      <div id="table-container">
+      </div>
+   </div>
+</body>

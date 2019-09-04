@@ -1,0 +1,16 @@
+<div modal-new="eula" class="hub-eula-modal-popup">
+    <section class="dialog-container hub-modal-container">
+        <section class="modal-body">
+            <header class="dialog-header">
+                <h3 class="modal-title">{{ ::title }}</h3>
+            </header>
+            <div class="dialog-body">
+                <p class="modal-content-text" ng-bind-html="message"></p>
+            </div>
+        </section>
+        <footer class="dialog-actions two-action modal-footer">
+            <button class="button-action secondary-action modal-button-secondary" ng-click="modal.cancel()">{{ ::'decline' | i18n }}</button>
+            <button class="button-action primary-action modal-button-primary" ng-click="modal.close(true)">{{ ::'accept' | i18n }}</button>
+        </footer>
+    </section>
+</div>

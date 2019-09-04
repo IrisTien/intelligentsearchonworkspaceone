@@ -1,0 +1,119 @@
+<article class="settings content-container-scrollable" ng-if="!appCenterCtrl.isAWJadeDesktop" ng-hide="appCenterCtrl.isAWJadeDocked && appCenterCtrl.isAWJadeWithNativenav">
+	<div class="content width-boundary">
+			<div class="settings-mobile-header" >
+				<div class="mobile-avatar-container profile-avatar" image-load>
+					<img ng-src="{{appCenterCtrl.user.imageURL}}" ng-show="appCenterCtrl.user.imageURL" class="icon-mobile-image"/>
+				</div>
+				<p class="settings-name">{{'fullname' | i18n : appCenterCtrl.user.firstName : appCenterCtrl.user.lastName}}</p>
+				<p class="settings-emailaddress">{{::appCenterCtrl.user.emailAddress}}</p>
+				<p class="settings-username">{{::appCenterCtrl.user.userName}}</p>
+			</div>
+
+			<ul class="settings-nav">
+				<li class="nav-account-link" ng-show="!appCenterCtrl.isAWJade" ng-class="{'is-selected': settingsCtrl.settingActiveTab == 'account'}">
+					<a title="{{'userInfo.account' | i18n}}" ng-click="settingsCtrl.subPageNavigate('account')"><p>{{'userInfo.account' | i18n}}</p>
+						<svg svg-symbol="icon-caret-right"></svg>
+					</a>
+				</li>
+				<li ng-if="::!appCenterCtrl.isAWJadeMobile && !appCenterCtrl.mdmOnlyWS1" class="nav-devices-link" id="pt-leftnav-devices" ng-class="{'is-selected': settingsCtrl.settingActiveTab == 'devices'}">
+					<a title="{{'userInfo.devices' | i18n}}" ng-click="settingsCtrl.subPageNavigate('devices')"><p>{{'userInfo.devices' | i18n}}</p>
+						<svg svg-symbol="icon-caret-right"></svg>
+					</a>
+				</li>
+				<li ng-hide="::appCenterCtrl.isAWJadeMobile" class="nav-about-app-tips" ng-class="{'is-selected': settingsCtrl.settingActiveTab == 'tips'}">
+					<a title="{{'userInfo.tips' | i18n}}" id="settings-leftnav-app-tips" ng-click="settingsCtrl.subPageNavigate('tips')"><p>{{'userInfo.tips' | i18n}}</p>
+						<svg svg-symbol="icon-caret-right"></svg>
+					</a>
+				</li>
+				<li ng-if="::!appCenterCtrl.isAWJadeMobile" class="nav-about-link" ng-class="{'is-selected': settingsCtrl.settingActiveTab == 'about'}" >
+					<a title="{{'userInfo.about' | i18n}}" id="settings-leftnav-about" ng-click="settingsCtrl.subPageNavigate('about')"><p>{{'userInfo.about' | i18n}}</p>
+						<svg svg-symbol="icon-caret-right"></svg>
+					</a>
+				</li>
+				<li ng-if="::appCenterCtrl.isAWJadeMobile" class="nav-about-native-link" ng-class="{'is-selected': settingsCtrl.settingActiveTab == 'about'}"  ng-click="::settingsCtrl.nativeAbout()">
+					<p>{{'userInfo.about' | i18n}}</p>
+					<svg svg-symbol="icon-caret-right"></svg>
+				</li>
+				<li ng-if="::appCenterCtrl.isAWJadeMobile && appCenterCtrl.inAppNotificationEnabled && settingsCtrl.showNotificationTab" class="nav-notifications-native-link" ng-click="::settingsCtrl.nativeNotification()">
+					<span>{{'userInfo.notifications' | i18n}}</span>
+					<svg svg-symbol="icon-caret-right"></svg>
+				</li>
+				<li class="nav-preferences-link" ng-show="!appCenterCtrl.isAWJadeMobile" ng-class="{'is-selected': settingsCtrl.settingActiveTab == 'preferences'}"  >
+					<a title="{{'userInfo.preferences' | i18n}}" id="settings-leftnav-preferences" ng-click="settingsCtrl.subPageNavigate('preferences')" class="pt-nav-preferences"
+						<p>{{'userInfo.preferences' | i18n}}</p>
+						<svg svg-symbol="icon-caret-right"></svg>
+					</a>
+				</li>
+				<li class="nav-termsofuse-link" id="pt-nav-termsofuse" ng-if="appCenterCtrl.isAWJadeMobile && appCenterCtrl.isTermsOfUseEnabled" ng-class="{'is-selected': settingsCtrl.settingActiveTab == 'termsofuse'}">
+					<a ng-click="settingsCtrl.subPageNavigate('termsofuse')"><p>{{'userInfo.termsofuse' | i18n}}</p>
+						<svg svg-symbol="icon-caret-right"></svg>
+					</a>
+				</li>
+				<li class="nav-signout-link" id="pt-nav-signout" ng-show="appCenterCtrl.isBrowser || appCenterCtrl.isWindowsJade" ng-click="appCenterCtrl.signout($event)">
+					<p>{{'userInfo.signout' | i18n}}</p>
+				</li>
+				<li class="nav-removeaccount-link" id="pt-nav-removeaccount" ng-if="appCenterCtrl.isAWJadeMobile && !appCenterCtrl.isWindowsJade && settingsCtrl.removeAccountOrSignOutEnabled" ng-click="appCenterCtrl.unEnrollConfirm($event)">
+					<p>{{'userInfo.removeAccount'| i18n}}</p>
+				</li>
+			</ul>
+	</div>
+</article>
+
+<!--in order to get the 100% height from the device, and also to animate from right without shifting the content container, the detail panels will have to be outside of the content-container
+     This make it difficult to use a directive and use ng-transclent-->
+<div class="settings-details-container" ng-if="!appCenterCtrl.isAWJadeDesktop" ng-hide="appCenterCtrl.isAWJadeDocked && appCenterCtrl.isAWJadeWithNativenav">
+	<div class="settings-back-button" ng-click="::appCenterCtrl.backAction()">
+		<svg svg-symbol="icon-detail-back" class="icon-setting-close-button"></svg>
+		<span>{{'app.settings.link.back' | i18n}}</span>
+	</div>
+	<section class="settings-detail settings-account" ng-include="'app-v2/settings/account.html'"  ng-class="{'is-selected': settingsCtrl.settingActiveTab == 'account'}">
+
+	</section>
+	<section class="settings-detail settings-about" id="pt-settings-about-detail" ng-include="'app-v2/settings/about.html'" ng-class="{'is-selected': settingsCtrl.settingActiveTab == 'about'}">
+
+	</section>
+
+	<section class="settings-detail settings-devices" ng-include="'app-v2/common/devices.html'" ng-class="{'is-selected': settingsCtrl.settingActiveTab == 'devices'}">
+    </section>
+
+	<section class="settings-detail settings-tips" id="pt-settings-about-app-tips" ng-include="'app-v2/settings/tipsDesktop.html'" ng-class="{'is-selected': settingsCtrl.settingActiveTab == 'tips'}" ng-controller="AppTipsController as appTipsCtrl" >
+	</section>
+
+	<section class="settings-detail settings-preferences" ng-include="'app-v2/settings/preferences.html'" ng-class="{'is-selected': settingsCtrl.settingActiveTab == 'preferences'}" ng-controller="PreferencesController as preferencesCtrl">
+
+	</section>
+	<section class="settings-detail settings-termsofuse" ng-include="'app-v2/settings/termsofuse.html'" ng-class="{'is-selected': settingsCtrl.settingActiveTab == 'termsofuse'}">
+	</section>
+
+</div>
+
+<article class="settings-nativenav content-container-scrollable" ng-if="appCenterCtrl.isAWJadeDesktop || (appCenterCtrl.isAWJadeDocked && appCenterCtrl.isAWJadeWithNativenav)">
+	<div class="content width-boundary">
+		<div class="settings-mobile-header">
+			<div class="desktopapp-native-avatar-container profile-avatar" image-load>
+				<img ng-src="{{appCenterCtrl.user.imageURL}}" ng-show="appCenterCtrl.user.imageURL" class="icon-mobile-image"/>
+			</div>
+			<p class="settings-name">{{'fullname' | i18n : appCenterCtrl.user.firstName : appCenterCtrl.user.lastName}}</p>
+			<p class="settings-username">{{::'userInfo.profile.username' | i18n}} {{::appCenterCtrl.user.userName}}</p>
+			<p class="settings-emailaddress">{{::appCenterCtrl.user.emailAddress}}</p>
+		</div>
+		<ul class="nativenav-settings-nav">
+			<li class="nav-about-devices-link" ng-if="!appCenterCtrl.hideDevicesTab" ng-click="settingsCtrl.openDeviceListForDesktopappNativenav()" id="pt-desktopapp-nativenav-devices">
+				<span>{{'userInfo.devices' | i18n}}</span>
+			</li>
+			<li class="nav-about-native-link" ng-click="settingsCtrl.nativeAbout()" id="pt-desktopapp-nativenav-about">
+				<span>{{'userInfo.about' | i18n}}</span>
+			</li>
+			<li class="nav-termsofuse-link" ng-if="appCenterCtrl.isTermsOfUseEnabled" ng-click="settingsCtrl.termsOfUseForDesktopAppNativenav()" id="pt-desktopapp-nativenav-termsofuse">
+				<span>{{'userInfo.termsofuse' | i18n}}</span>
+			</li>
+			<li class="nav-signout-link align-right" ng-if="!(appCenterCtrl.isAWJadeDocked && appCenterCtrl.isAWJadeWithNativenav)" ng-click="appCenterCtrl.signoutNativenav($event)" id="pt-desktopapp-nativenav-signout">
+				<span>{{'userInfo.signout' | i18n}}</span>
+			</li>
+			<li class="nav-removeaccount-link" id="pt-nav-removeaccount-docked" ng-if="appCenterCtrl.isAWJadeMobile && appCenterCtrl.isAWJadeDocked && settingsCtrl.removeAccountOrSignOutEnabled" ng-click="appCenterCtrl.unEnrollConfirm($event)">
+				<p>{{'userInfo.removeAccount'| i18n}}</p>
+			</li>
+		</ul>
+	</div>
+</article>
+

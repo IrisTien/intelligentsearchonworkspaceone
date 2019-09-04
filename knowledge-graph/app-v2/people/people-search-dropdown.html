@@ -1,0 +1,29 @@
+<div class="search-results">
+    <div id="search-container">
+        <div ng-show="ctrl.isLoading" class="people-searchresults-loading">
+            <div ng-include="'app-v2/common/spinner.html'"></div>
+        </div>
+        <div ng-repeat="user in ctrl.users track by $index+user.id"  ng-if="!ctrl.reqChars" class="people-search-item"
+             ng-include="'app-v2/people/people-search-item.html'"
+             ng-click="ctrl.userDetails(user)">
+        </div>
+        <div class="people-search-recent-container" ng-show="!ctrl.reqChars && ctrl.recentVisitedUser.length && !ctrl.users.length">
+            <h3 class="people-recent-title">
+                {{::'app.people.labels.recent' | i18n }}
+            </h3>
+            <div ng-repeat="recentUser in ctrl.recentVisitedUser track by $index+recentUser.id"
+                 ng-mousedown="ctrl.userDetails(recentUser)" class="people-search-recent-item"
+                 ng-include="'app-v2/people/people-recent-search-item.html'">
+            </div>
+        </div>
+        <div class="people-search-empty-result" ng-if="ctrl.noResults">
+            <ng-include src="'app-v2/svgincludes/illo-people-search-no-result.html'" class="illo-people-search-no-result"></ng-include>
+            <p>{{ ::'appCenter.peopleSearch.noResults' | i18n }}</p>
+            <p>{{ ::'appCenter.peopleSearch.tryNewSearch' | i18n }}</p>
+        </div>
+        <div class="people-search-empty-result" ng-if="ctrl.reqChars && !vm.isLoading">
+            <ng-include src="'app-v2/svgincludes/illo-people-search-no-result.html'" class="illo-people-search-no-result"></ng-include>
+            <p>{{::'appCenter.peopleSearch.atLeastThreeChars' | i18n }}</p>
+        </div>
+    </div>
+</div>

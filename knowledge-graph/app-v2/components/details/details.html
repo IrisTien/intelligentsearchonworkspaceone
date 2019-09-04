@@ -1,0 +1,93 @@
+<article class="details-apps">
+    <div ng-show="detailsCtrl.isLoading" class="loading-app-details-container">
+        <spinner-loading></spinner-loading>
+    </div>
+    <div ng-if="!detailsCtrl.isLoading">
+        <section class="masthead-mobile app-details-actions">
+            <div class="masthead-mobile-left app-details-close-button" ng-click="detailsCtrl.hubBackBtnAction()">
+                <detail-close-button></detail-close-button>
+            </div>
+            <div class="app-logo-header" ng-style="{'background-image':('url('+ detailsCtrl.iconStyle+')')}"></div>
+            <div class="app-action-header"
+                 ng-if="(!detailsCtrl.isHideVirtualAppEnabled || detailsCtrl.isHideVirtualAppEnabled && detailsCtrl.app.type !== 'VIRTUAL')">
+                <div catalog-item-actions current-view="HUB_APP_LIST" app="detailsCtrl.app"></div>
+            </div>
+        </section>
+
+        <section class="content-container">
+            <div class="content-container-scrollable" scroll-check currentview="details-apps" elemclass=".details-apps">
+                <div class="content details-apps-content">
+                    <!-- details-page-header section -->
+                    <section class="details-page-header">
+                        <div class="details-app-tile">
+                            <div class="app-logo" ng-style="{'background-image':('url('+ detailsCtrl.iconStyle+')')}"></div>
+                        </div>
+
+                        <h2 class="detail-page-app-title">{{ ::detailsCtrl.name }}</h2>
+                        <p class="detail-page-app-version" ng-if="::detailsCtrl.version">
+                            <span>{{::'app.details.label.version' | i18n}}</span>
+                            <span>{{::detailsCtrl.version}}</span>
+                        </p>
+                        <p class="detail-page-app-size" ng-if="detailsCtrl.appSize && detailsCtrl.app.isMdmApp">
+                            <span>{{::'app.details.label.size' | i18n}}</span>
+                            <span>{{::detailsCtrl.appSize}}</span>
+                        </p>
+                        <p class="detail-page-app-type" ng-if="!detailsCtrl.app.isMdmApp">
+                            <svg class="icon-horizon" ng-if="detailsCtrl.app.isHorizonResource || detailsCtrl.app.isHorizonAirResource" svg-symbol="icon-horizon-watermark"></svg>
+                            <span>{{::detailsCtrl.app.appTypeDisplayVal}}</span>
+                        </p>
+
+                        <div ng-if="(!detailsCtrl.isHideVirtualAppEnabled || detailsCtrl.isHideVirtualAppEnabled && detailsCtrl.app.type !== 'VIRTUAL')"
+                             catalog-item-actions current-view="HUB_APP_LIST" app-details-page="true" show-favorite="detailsCtrl.isHubAppFavoritesEnabled && !detailsCtrl.loadFromDbFailed && detailsCtrl.app.isBookmarkableApp" class="app-details-action" app="detailsCtrl.app"></div>
+
+                        <div launch-message ng-if="detailsCtrl.showNativeLaunchMessage"></div>
+                        <div class="details-page-app-not-available" ng-if="detailsCtrl.isHideVirtualAppEnabled && detailsCtrl.app.type === 'VIRTUAL'">
+                            {{:: 'app.virtual.unavailable' | i18n }}
+                        </div>
+                    </section>
+
+                    <section class="section-container app-rating-container" ng-if= "detailsCtrl.isAppRatingsEnabled && !detailsCtrl.loadFromDbFailed">
+                        <app-rating app="detailsCtrl.app" rating-data="detailsCtrl.appRatingData"
+                                    hide-virtual-app="detailsCtrl.isHideVirtualAppEnabled"></app-rating>
+                    </section>
+
+                    <section class="detail-page-description section-container" ng-if="::detailsCtrl.descriptionHTML">
+                        <h2 class="section-headline-style2 description-header">{{::'app.details.label.description' | i18n}}</h2>
+                        <div ng-if="::detailsCtrl.descriptionHTML" class="detail-page-description-text-container">
+                            <div class="description-content">
+                                <div id="description" ng-bind-html="::detailsCtrl.descriptionHTML"></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section ng-if="::detailsCtrl.screenshots.length" class="section-container detail-page-screenshots" id="screenshots">
+                        <h2 class="section-headline-style2 screenshots-header">{{::'app.details.label.screenshots' | i18n}}</h2>
+                        <ul rn-carousel-control rn-carousel class="detail-page-screenshot-carousel" rn-carousel-index="carouselIndex">
+                            <li class="detail-page-screenshot-container" ng-repeat="item in ::detailsCtrl.screenshots">
+                                <img class="detail-page-screenshot" ng-src="{{item.href}}" ng-swipe-left="swiping=true" ng-swipe-right="swiping=true" ng-click="swiping ? ( swiping = false ) : detailsCtrl.hubOpenZoomedImageCarousel($index)">
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="section-container detail-page-categories" ng-if="::detailsCtrl.categories.length">
+                        <h2 class="section-headline-style2 categories-header">{{::'app.details.label.category' | i18n}}</h2>
+                        <ul class="categories-content">
+                            <li ng-repeat="category in ::detailsCtrl.categories">{{category}}{{$last ? '' : ',&nbsp;'}}</li>
+                        </ul>
+                    </section>
+
+                    <section class="section-container detail-page-support" ng-if="detailsCtrl.creatorName || detailsCtrl.supportEmail || detailsCtrl.supportPhone">
+                        <h2 class="section-headline-style2">{{::'app.details.label.support' | i18n}}</h2>
+                        <p class="detail-support-text" ng-if="::detailsCtrl.creatorName">{{::'app.details.label.developer' | i18n}}:&nbsp;{{detailsCtrl.creatorName}}</p>
+                        <p class="detail-support-text" ng-if="::detailsCtrl.supportEmail">{{::'app.details.label.email' | i18n}}:&nbsp;{{detailsCtrl.supportEmail}}</p>
+                        <p class="detail-support-text" ng-if="::detailsCtrl.supportPhone">{{::'app.details.label.phone' | i18n}}:&nbsp;{{detailsCtrl.supportPhone}}</p>
+                    </section>
+
+                    <section class="section-container app-feedback" ng-if="::detailsCtrl.isAppFeedbackSupported" ng-click="detailsCtrl.openEmail()">
+                        <a class="feedback-label">{{::'app.details.label.sendFeedback' | i18n}}</a>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </div>
+</article>

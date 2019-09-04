@@ -1,0 +1,259 @@
+<article class="details-people">
+    <div ng-show="userDetailsCtrl.isLoading" class="loading-people-details-container">
+        <spinner-loading></spinner-loading>
+    </div>
+    <header class="masthead-mobile">
+        <div ng-click="::userDetailsCtrl.backBtnAction()" class="people-detail-back-button">
+            <detail-close-button></detail-close-button>
+        </div>
+        <h2 class="user-detail-small-header">{{userDetailsCtrl.user.firstName + " " + userDetailsCtrl.user.lastName}}</h2>
+        <div ng-click="::userDetailsCtrl.openSearch()" class="people-detail-search-button">
+            <svg svg-symbol="icon-searchglass" class="icon-bell"></svg>
+        </div>
+    </header>
+
+    <section class="content-container">
+        <div class="content-container-scrollable"  scroll-check currentview="details-people" elemclass=".details-people">
+            <section class="user-detail-header">
+                <div class="user-detail-header-avatar" image-load>
+                    <span ng-if="userDetailsCtrl.user.initial" class="user-detail-initial">{{userDetailsCtrl.user.initial}}</span>
+                    <img ng-show="userDetailsCtrl.user.imageURL" ng-src="{{userDetailsCtrl.user.imageURL}}" class="user-avatar-img-style"/>
+                </div>
+                <p class="user-detail-header-name">
+                    {{userDetailsCtrl.user.firstName + " " + userDetailsCtrl.user.lastName}}
+                </p>
+                <p class="user-detail-header-employeenumber" ng-if="userDetailsCtrl.user.employeeNumber">
+                    &#40; {{userDetailsCtrl.user.employeeNumber}} &#41;
+                </p>
+                <p class="user-detail-header-text user-detail-title">
+                    {{userDetailsCtrl.user.title}}
+                </p>
+                <p class="user-detail-header-text user-detail-buiness-unit" ng-if="userDetailsCtrl.user.businessUnit">
+                    {{userDetailsCtrl.user.businessUnit}}
+                </p>
+            </section><!--end of user-detail-page-header -->
+
+            <!-- tabs for the two sections -->
+            <nav class="user-profile-tabs">
+                <p ng-click="!userDetailsCtrl.isProfile && userDetailsCtrl.toggleProfileTab()" class="user-profile-tab profile"
+                   ng-class="{'selected': userDetailsCtrl.isProfile, 'primary-link-color':  userDetailsCtrl.isIOS}">
+                    {{ ::'app.people.labels.profile' | i18n }}
+                </p>
+                <p ng-click="userDetailsCtrl.isProfile && userDetailsCtrl.toggleProfileTab()" class="user-profile-tab organization"
+                   ng-class="{'selected': !userDetailsCtrl.isProfile, 'primary-link-color':  userDetailsCtrl.isIOS}">
+                    {{ ::'hub.people.labels.organization' | i18n }}
+                </p>
+            </nav>
+
+            <section class="user-detail-profile-section" ng-class="{'tab-hidden':!userDetailsCtrl.isProfile}">
+                <div class="user-detail-profile-content">
+                    <!-- email section : removed all the copy email logic as it is for desktop/browser -->
+                    <div ng-if="userDetailsCtrl.user.emailAddress" class="user-detail-profile-item">
+                        <p class="user-detail-profile-item-label">
+                            {{ ::'app.people.labels.workEmail' | i18n }}
+                        </p>
+                        <p class="user-detail-profile-item-content">
+                            {{::userDetailsCtrl.user.emailAddress}}
+                        </p>
+                        <div ng-if="::userDetailsCtrl.nativeEmailClientSupported" class="user-profile-action">
+                            <a role="button" aria-label="openEmailButtonLabel" ng-click="userDetailsCtrl.openEmail(userDetailsCtrl.user.emailAddress)" stop-event="click">
+                                <svg svg-symbol="icon-email" class="user-search-item-email-icon"></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- work phone section -->
+                    <div ng-if="userDetailsCtrl.user.phoneNumber" class="user-detail-profile-item">
+                        <p class="user-detail-profile-item-label">
+                            {{ ::'app.people.labels.workPhone' | i18n }}
+                        </p>
+                        <p class="user-detail-profile-item-content">
+                            {{::userDetailsCtrl.user.phoneNumber}}
+                        </p>
+                        <div ng-if="userDetailsCtrl.linksSupported" class="user-profile-action">
+                            <a role="button" aria-label="openDiallerButtonLabel" ng-click="userDetailsCtrl.openTel(userDetailsCtrl.user.phoneNumber)" stop-event="click">
+                                <svg svg-symbol="icon-call" class="user-search-item-call-icon"></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- mobile phone section -->
+                    <div ng-if="userDetailsCtrl.user.mobile" class="user-detail-profile-item">
+                        <p class="user-detail-profile-item-label">
+                            {{ ::'app.people.labels.mobile' | i18n }}
+                        </p>
+                        <p class="user-detail-profile-item-content">
+                            {{::userDetailsCtrl.user.mobile}}
+                        </p>
+                        <div ng-if="userDetailsCtrl.linksSupported" class="user-profile-action">
+                             <span class="message-icon-spacing">
+                                  <a role="button" aria-label="openSmsButtonLabel" ng-click="userDetailsCtrl.openSms(userDetailsCtrl.user.mobile)" stop-event="click">
+                                       <svg svg-symbol="icon-sms" class="user-search-item-sms-icon branding-icon-primary"></svg>
+                                  </a>
+                             </span>
+                            <span>
+                                <a role="button" aria-label="openDiallerButtonLabel" ng-click="userDetailsCtrl.openTel(userDetailsCtrl.user.mobile)" stop-event="click">
+                                     <svg svg-symbol="icon-call" class="user-search-item-call-icon"></svg>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- alternative phone section -->
+                    <div ng-if="userDetailsCtrl.user.alternatePhoneNumber" class="user-detail-profile-item">
+                        <p class="user-detail-profile-item-label">
+                            {{ ::'app.people.labels.alternateNumber' | i18n }}
+                        </p>
+                        <p class="user-detail-profile-item-content">
+                            {{::userDetailsCtrl.user.alternatePhoneNumber}}
+                        </p>
+                        <div ng-if="::userDetailsCtrl.linksSupported" class="user-profile-action">
+                            <a role="button" aria-label="openDiallerButtonLabel" ng-click="userDetailsCtrl.openTel(userDetailsCtrl.user.alternatePhoneNumber)" stop-event="click">
+                                <svg svg-symbol="icon-call" class="user-search-item-call-icon"></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- address phone section -->
+                    <div ng-if="userDetailsCtrl.user.address" class="user-detail-profile-item">
+                        <p class="user-detail-profile-item-label">
+                            {{ ::'app.people.labels.address' | i18n }}
+                        </p>
+                        <p class="user-detail-profile-item-content no-ellipsis">
+                            {{::userDetailsCtrl.user.address}}
+                        </p>
+                        <div ng-if="userDetailsCtrl.linksSupported" class="user-profile-action">
+                            <a role="button" aria-label="openMapsButtonLabel" ng-click="userDetailsCtrl.openMaps(userDetailsCtrl.user.address)" stop-event="click">
+                                <svg svg-symbol="icon-maps" class="user-icon-maps branding-icon-primary"></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- employee number-->
+
+                <div class="user-detail-profile-content" ng-if="userDetailsCtrl.user.employeeNumber || userDetailsCtrl.user.skills || userDetailsCtrl.user.businessUnit || userDetailsCtrl.user.costCenter || userDetailsCtrl.user.physicalDeliveryOfficeName">
+                    <!-- email section : removed all the copy email logic as it is for desktop/browser -->
+                    <div ng-if="userDetailsCtrl.user.employeeNumber" class="user-detail-profile-item">
+                        <p class="user-detail-profile-item-label">
+                            {{ ::'app.people.labels.employeeNumber' | i18n }}
+                        </p>
+                        <p class="user-detail-profile-item-content employee-number">
+                            {{::userDetailsCtrl.user.employeeNumber}}
+                        </p>
+                    </div>
+
+                    <!-- skills section -->
+                    <div ng-if="userDetailsCtrl.user.skills" class="user-detail-profile-item">
+                        <p class="user-detail-profile-item-label">
+                            {{ ::'app.people.labels.skills' | i18n }}
+                        </p>
+                        <p class="user-detail-profile-item-content employee-skills">
+                            {{::userDetailsCtrl.user.skills}}
+                        </p>
+                    </div>
+                    <!-- business unit section -->
+                    <div ng-if="userDetailsCtrl.user.businessUnit" class="user-detail-profile-item">
+                        <p class="user-detail-profile-item-label">
+                            {{ ::'app.people.labels.businessUnit' | i18n }}
+                        </p>
+                        <p class="user-detail-profile-item-content employee-business-unit">
+                            {{::userDetailsCtrl.user.businessUnit}}
+                        </p>
+                    </div>
+                    <!-- costCenter section -->
+                    <div ng-if="userDetailsCtrl.user.costCenter" class="user-detail-profile-item">
+                        <p class="user-detail-profile-item-label">
+                            {{ ::'app.people.labels.costCenter' | i18n }}
+                        </p>
+                        <p class="user-detail-profile-item-content employee-cost-center">
+                            {{::userDetailsCtrl.user.costCenter}}
+                        </p>
+                    </div>
+                    <!-- Office Location section -->
+                    <div ng-if="userDetailsCtrl.user.physicalDeliveryOfficeName" class="user-detail-profile-item">
+                        <p class="user-detail-profile-item-label">
+                            {{ ::'app.people.labels.physicalDeliveryOfficeName' | i18n }}
+                        </p>
+                        <p class="user-detail-profile-item-content employee-office-location">
+                            {{::userDetailsCtrl.user.physicalDeliveryOfficeName}}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- section II social media info-->
+                <div class="user-detail-profile-content"
+                     ng-if="userDetailsCtrl.user.linkedInProfileUrl || userDetailsCtrl.user.slack || userDetailsCtrl.user.socialCast
+                                        ||userDetailsCtrl.user.skypeForBusiness">
+                    <!-- linkedIn phone section -->
+                    <div ng-if="userDetailsCtrl.user.linkedInProfileUrl" class="user-detail-profile-item">
+                        <p class="user-detail-profile-item-label">
+                            {{ ::'app.people.labels.linkedIn' | i18n }}
+                        </p>
+                        <p class="user-detail-profile-item-content long-links">
+                            {{::userDetailsCtrl.user.linkedInProfileUrl}}
+                        </p>
+                        <div ng-if="userDetailsCtrl.linksSupported" class="user-profile-action">
+                            <a role="button" aria-label="openLinkedInButtonLabel" ng-click="userDetailsCtrl.openSocialUrl(userDetailsCtrl.user.linkedInProfileUrl)" stop-event="click">
+                                <svg svg-symbol="icon-linkedin" class="user-icon-social linked-in"></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- slack phone section -->
+                    <div ng-if="userDetailsCtrl.user.slack" class="user-detail-profile-item">
+                        <p class="user-detail-profile-item-label">
+                            {{ ::'app.people.labels.slack' | i18n }}
+                        </p>
+                        <p class="user-detail-profile-item-content long-links">
+                            {{::userDetailsCtrl.user.slack}}
+                        </p>
+                        <div ng-if="userDetailsCtrl.linksSupported" class="user-profile-action">
+                            <a role="button" aria-label="openSlackButtonLabel" ng-click="userDetailsCtrl.openSocialUrl(userDetailsCtrl.user.slack)" stop-event="click">
+                                <svg svg-symbol="icon-slack" class="user-icon-social slack"></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- socialcast phone section -->
+                    <div ng-if="userDetailsCtrl.user.socialCast" class="user-detail-profile-item">
+                        <p class="user-detail-profile-item-label">
+                            {{ ::'app.people.labels.socialcast' | i18n }}
+                        </p>
+                        <p class="user-detail-profile-item-content long-links">
+                            {{::userDetailsCtrl.user.socialCast}}
+                        </p>
+                        <div ng-if="userDetailsCtrl.linksSupported" class="user-profile-action">
+                            <a role="button" aria-label="openSocialcastButtonLabel" ng-click="userDetailsCtrl.openSocialUrl(userDetailsCtrl.user.socialCast)" stop-event="click">
+                                <svg svg-symbol="icon-socialcast" class="user-icon-social socialcast"></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- skype phone section -->
+                    <div ng-if="userDetailsCtrl.user.skypeForBusiness" class="user-detail-profile-item">
+                        <p class="user-detail-profile-item-label">
+                            {{ ::'app.people.labels.skypeForBusiness' | i18n }}
+                        </p>
+                        <p class="user-detail-profile-item-content long-links">
+                            {{::userDetailsCtrl.user.skypeForBusiness}}
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="user-detail-org-section" ng-class="{'tab-hidden':userDetailsCtrl.isProfile}">
+                <collapse-panel class="user-org-manager-section" currentview = "HUB_CP" headerlabel="{{userDetailsCtrl.getManagerLabel()}}"
+                                ng-if="userDetailsCtrl.managers.length > 2" ng-class="{'collapsed': collapsed, 'no-direct-reports': userDetailsCtrl.directReports.length==0}" collapsed="userDetailsCtrl.managerToggle">
+                    <people-item user="manager" category="'org'" class="people-org-item" ng-class="{'current-user': manager.id === userDetailsCtrl.user.id, 'no-direct-reports': userDetailsCtrl.directReports.length==0}"
+                         ng-repeat="manager in userDetailsCtrl.managers | orderBy:'$index':true track by $index+manager.id">
+                    </people-item>
+                </collapse-panel>
+                <div class="current-user-section" ng-if="userDetailsCtrl.managerToggle">
+                     <people-item user="manager" category="'org'" class="people-org-item" ng-class="{'current-user': manager.id === userDetailsCtrl.user.id, 'no-direct-reports': userDetailsCtrl.directReports.length==0, 'no-managers-section': userDetailsCtrl.managers.length <= 2}"
+                         ng-repeat="manager in userDetailsCtrl.managers | limitTo : 2 | orderBy:'$index':true track by $index+manager.id"></people-item>
+                </div>
+                <collapse-panel class="user-org-reportee-section" currentview = "HUB_CP" ng-if="userDetailsCtrl.directReports.length"
+                                headerlabel="{{userDetailsCtrl.directReports.length}} {{ ::'app.people.labels.directReports' | i18n }}" collapsible = "false">
+                    <people-item user="reportee" category="'org'" class="people-org-item"
+                         ng-repeat="reportee in userDetailsCtrl.directReports track by $index+reportee.id">
+                    </people-item>
+                </collapse-panel>
+            </section>
+        </div>
+    </section>
+</article>
+

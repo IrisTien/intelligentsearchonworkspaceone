@@ -1,0 +1,19 @@
+<!-- only trigger the long-hold on mobile devices using bookmarkItemCtrl.onMobileDevice property (which at the moment set to isAWJade)
+     and through brwoser screen resize is small than 540px -->
+<div  class="bookmark-app-item" ng-click="bookmarksCtrl.sortableOptions.disabled && bookmarkItemCtrl.launchApp(bookmarkItemCtrl.app, $event)"
+      hm-hold="bookmarksCtrl.sortableOptions.disabled && bookmarkItemCtrl.triggerContextdialog($event)" ng-class="{'dots-windows': appCenterCtrl.isWindowsBrowser, 'dots-nowindows-mobile': appCenterCtrl.isMobileNonWindowBrowser}">
+  <!--  use the .bookmark-item-actions to activate the contextDialog -->
+    <div class="bookmark-item-actions" ng-hide="!bookmarksCtrl.sortableOptions.disabled" contextdialog="{uris:{'contextdialogTemplate':(true)}, scope:{app:bookmarkItemCtrl.app}}"
+         contextdialogTemplate="app-v2/bookmarks/bookmarkContextDialog.html" contextDialogTP="540">
+        <svg svg-symbol="icon-dots" class="icon-bookmark-context-trigger"></svg>
+    </div>
+    <div class="bookmark-app-icon" image-load>
+      <img ng-src="{{bookmarkItemCtrl.app.icon}}">
+    </div>
+
+    <p class="bookmark-app-caption" line-clamp2 content="::bookmarkItemCtrl.app.name" lines="2"></p>
+
+    <div ng-if="app.disabledThinApps" class="thinapp-tooltip" ng-show="bookmarksCtrl.sortableOptions.disabled" tooltip tooltiptext="appCenter.nav.arrange.tooltip" triggerelement="bookmark-app-item" triggerdelay="500"></div>
+
+    <div ng-if="!app.disabledThinApps" class="nonthinapp-tooltip" ng-show="bookmarksCtrl.sortableOptions.disabled" tooltip tooltiptext="app.tooltip.clicktolaunch" triggerelement="bookmark-app-item" triggerdelay="500"></div>
+</div>

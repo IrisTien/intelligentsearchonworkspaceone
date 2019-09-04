@@ -1,0 +1,14 @@
+<div modal class="fullscreen">
+    <section class="dialog-container">
+        <header class="dialog-header">
+            <h3>{{ title }}</h3>
+        </header>
+        <div class="dialog-body">
+            <p ng-bind-html="message"></p>
+        </div>
+        <footer class="dialog-actions two-action">
+            <button class="button-action" ng-click="modal.cancel()">{{ 'decline' | i18n }}</button>
+            <button class="button-action" ng-click="modal.close(true)">{{ 'accept' | i18n }}</button>
+        </footer>
+    </section>
+</div>

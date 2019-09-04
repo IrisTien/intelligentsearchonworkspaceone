@@ -1,0 +1,7 @@
+<svg id="icon-signout" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+	<path d="M12.23,13.11l0-4.2a.85.85,0,0,1,.86-.85h8.58a.85.85,0,0,1,.86.85v11a.85.85,0,0,1-.45.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+	<path d="M16.2,20.75H13.11a.85.85,0,0,1-.86-.85l0-1.25" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+	<polyline points="22.09 20.66 16.2 23.93 16.2 11.25 22.34 8.47" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+	<polyline points="9.5 13.39 7.04 16 9.5 18.61" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+	<line x1="7.08" y1="16" x2="13.42" y2="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

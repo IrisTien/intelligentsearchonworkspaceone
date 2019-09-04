@@ -1,0 +1,6 @@
+<div ng-class="{'hub-notifications-collapsed': showMoreDetails}">
+    <div ng-transclude></div>
+</div>
+<div class="hub-notification-card-more-details" ng-if="showMoreDetails" ng-click="goToLongCard(notificationCardCtrl.id)">
+    {{::'hub.notifications.moreDetails' | i18n}}
+</div>

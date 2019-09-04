@@ -1,0 +1,19 @@
+<a class="mobile-panel-scrim"></a>
+<div class="settings-mobile-panel-content">
+    <ul id="mobile-nav-list" class="mobile-nav-list">
+        <li class="mobile-nav-apps" ui-sref-active="selected-tab"><a ui-sref="apps">{{::'hub.nav.label.apps' | i18n }}</a></li>
+        <li class="mobile-nav-people" ng-if="ribbonCtrl.showPeopleTab" ui-sref-active="selected-tab"><a ui-sref="people">{{::'hub.nav.label.people' | i18n }}</a></li>
+        <li class="mobile-nav-notification" ng-if="ribbonCtrl.showNotifications" ui-sref-active="selected-tab"><a ui-sref="notifications">{{::'hub.nav.label.notification' | i18n }}</a></li>
+        <li class="mobile-nav-divider"></li>
+        <li class="mobile-nav-account" ui-sref-active="selected-tab">
+            <a ui-sref="settings">{{::'hub.nav.label.account' | i18n }}</a>
+            <div class="mobile-nav-avatar">
+                <p class="mobile-avatar-initial" ng-if="ribbonCtrl.userInfo.initials"><span>{{::ribbonCtrl.userInfo.initials}}</span></p>
+                <img ng-if="ribbonCtrl.userInfo.imageURL" ng-src="{{ribbonCtrl.userInfo.imageURL}}"/>
+            </div>
+        </li>
+        <li class="mobile-nav-signout"><a ng-click="ribbonCtrl.hubSignOut($event)">{{::'hub.nav.label.signout' | i18n }}</a></li>
+    </ul>
+</div>
+
+

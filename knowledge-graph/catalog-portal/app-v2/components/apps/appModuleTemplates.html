@@ -1,0 +1,78 @@
+<script type="text/ng-template" id="Promotions">
+    <app-promotions class="promotions-app"
+                    promotions="appsCtrl.promotions" applications="appsCtrl.promotionApplication"
+                    categories="appsCtrl.promotionCategory">
+    </app-promotions>
+</script>
+<script type="text/ng-template" id="Recommended">
+    <section class="apps-recommended-apps">
+        <div class="apps-module-header">
+            <h2 class="section-headline-style2 apps-module-headline">
+                <span>{{::'hub.apps.recommended' | i18n}}</span>
+            </h2>
+            <a class="apps-module-see-all primary-text-color recommended-apps-see-all"
+               ng-if="appsCtrl.recommendedApps.length > appsCtrl.oneRowSectionAppsCount" ng-click="appsCtrl.toggleOneRowAppsModule('recommended')">
+                <span class="see-all-span" ng-show="appsCtrl.appsModuleOneRow.recommended">{{::'hub.apps.see.all' | i18n}} &#40;{{appsCtrl.recommendedApps.length}}&#41;</span>
+                <span class="see-less-span" ng-show="!appsCtrl.appsModuleOneRow.recommended">{{::'hub.apps.see.less' | i18n}}</span>
+            </a>
+        </div>
+        <div class="apps-module-content">
+            <div class="grid-container">
+                <app-item class="grid-item app-item"
+                          ng-repeat="app in appsCtrl.recommendedApps | limitTo: appsCtrl.displayedRecommendedAppsCount" app="app" favorite-enabled="appsCtrl.favoritesEnabled"></app-item>
+                <!-- Do not remove these still needed if the app count number small than the minSectionAppsCount -->
+                <div class="grid-item-empty" ng-repeat="app in appsCtrl.emptyFillers"></div>
+            </div>
+        </div>
+    </section>
+</script>
+<script type="text/ng-template" id="NewApps">
+    <section class="apps-newapps">
+        <div class="apps-module-header">
+            <h2 class="section-headline-style2 apps-module-headline">
+                <span>{{::'hub.apps.newApps' | i18n}}</span>
+            </h2>
+            <a class="apps-module-see-all primary-text-color newapps-see-all"
+               ng-if="appsCtrl.newApps.length > appsCtrl.oneRowSectionAppsCount" ng-click="appsCtrl.toggleOneRowAppsModule('newApps')">
+                <span class="see-all-span" ng-show="appsCtrl.appsModuleOneRow.newApps">{{::'hub.apps.see.all' | i18n}} &#40;{{appsCtrl.newApps.length}}&#41;</span>
+                <span class="see-less-span" ng-show="!appsCtrl.appsModuleOneRow.newApps">{{::'hub.apps.see.less' | i18n}}</span>
+            </a>
+        </div>
+        <div class="apps-module-content">
+            <div class="grid-container">
+                <app-item class="grid-item app-item"
+                          ng-repeat="app in appsCtrl.newApps | limitTo: appsCtrl.displayedNewAppsCount"
+                          app="app" favorite-enabled="appsCtrl.favoritesEnabled"></app-item>
+                <!-- Do not remove these still needed if the app count number small than the minSectionAppsCount -->
+                <div class="grid-item-empty" ng-repeat="app in appsCtrl.emptyFillers"></div>
+            </div>
+        </div>
+    </section>
+</script>
+<script type="text/ng-template" id="Favorites">
+    <!-- This is the favoriteapps section -->
+    <section class="apps-configure-favorites" ng-if="!appsCtrl.favorites.length && !appsCtrl.entitlementsLoadFromDbFailed">
+        <div class="apps-module-content configure-section" ng-click="appsCtrl.goToAllAppsList()">
+            <p class="configure-favorites-message">{{::'hub.apps.configure.favorites.msg' | i18n}}</p>
+            <button class="button-configure-favorites">{{::'hub.apps.configure.favorites' | i18n}}</button>
+        </div>
+    </section>
+    <section class="apps-favorite" ng-if="appsCtrl.favorites.length">
+        <div class="apps-module-header" ng-hide="appsCtrl.favoritesOnlyView">
+            <h2 class="section-headline-style2 apps-module-headline">
+                <svg svg-symbol="icon-star" class="icon-apps-section-favorite"></svg>
+                <span>{{::'hub.apps.favorites' | i18n}}</span>
+            </h2>
+            <a class="apps-module-link primary-text-color favorite-apps-configure" ng-hide = "appsCtrl.isFavoritesEditDisabled" ng-click = "appsCtrl.goToFavoriteEditMode()">
+                {{::'hub.apps.edit.favorites' | i18n}}
+            </a>
+        </div>
+        <div class="apps-module-content">
+            <div class="grid-container">
+                <app-item class="grid-item app-item"
+                          ng-repeat="app in appsCtrl.favorites" app="app" favorite-enabled="appsCtrl.favoritesEnabled" app-in-favorites=true></app-item>
+                <div class="grid-item-empty" ng-repeat="app in appsCtrl.emptyFillers"></div>
+            </div>
+        </div>
+    </section>
+</script>

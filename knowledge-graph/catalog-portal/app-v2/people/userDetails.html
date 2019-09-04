@@ -1,0 +1,259 @@
+<div ng-show="userDetailsCtrl.isLoading" class="apps-loading">
+    <div ng-include="'app-v2/common/spinner.html'"></div>
+</div>
+<article class="details">
+    <div class="user-details-loaded-container" ng-class="{'header-collapsed':userDetailsCtrl.isScrolled}">
+        <section class="user-detail-page-header">
+            <svg svg-symbol="user-header-background-ie" class="ie-header-background branding-icon-primary"
+                 ng-if="::userDetailsCtrl.isIE"></svg>
+           <div class="content user-detail-page">
+               <section class="content-body">
+                   <div ng-hide="appCenterCtrl.isAWJadeDesktop || appCenterCtrl.isAWJadeDocked"
+                        class="details-back-button user-details-back-button"
+                        id="pt-details-content-backbutton">
+                       <span ng-click="::userDetailsCtrl.backBtnAction()" class="back-button">
+                           <svg svg-symbol="icon-detail-back" class="icon-setting-close-button"></svg>
+                           <span>{{'app.settings.link.back' | i18n}}</span>
+                       </span>
+                       <span class="people-home" ng-click="appCenterCtrl.peopleSearch()">
+                           <svg svg-symbol="icon-people" class="icon-people-home"></svg>
+                       </span>
+                   </div>
+
+                   <div class="user-detail-header-body">
+                       <div class="user-detail-header-avatar-container" image-load>
+                           <span ng-if="userDetailsCtrl.user.initial" class="user-detail-initial">{{userDetailsCtrl.user.initial}}</span>
+                           <img ng-show="userDetailsCtrl.user.imageURL" ng-src="{{userDetailsCtrl.user.imageURL}}"
+                                class="user-detail-header-avatar"/>
+                       </div>
+                       <div class="user-detail-header-labels">
+                           <p class="user-detail-header-name">
+                               {{userDetailsCtrl.user.firstName + " " + userDetailsCtrl.user.lastName}}
+                           </p>
+                           <p class="user-detail-header-text">
+                               {{userDetailsCtrl.user.title}}
+                           </p>
+                           <p class="user-detail-header-text">
+                               {{userDetailsCtrl.user.costCenter}}
+                           </p>
+                       </div>
+                   </div>
+                   <!-- tabs for the two sections -->
+                    <div class="user-profile-tab">
+                        <nav class="user-profile-nav">
+                            <div ng-click="!userDetailsCtrl.isProfile && userDetailsCtrl.toggleProfileTab()"
+                                 class="user-profile-nav-item"
+                                 ng-class="{'selected': userDetailsCtrl.isProfile}">
+                                <a>{{ ::'app.people.labels.profile' | i18n }}</a>
+                            </div>
+                            <div ng-click="userDetailsCtrl.isProfile && userDetailsCtrl.toggleProfileTab()"
+                                 class="user-profile-nav-item"
+                                 ng-class="{'selected': !userDetailsCtrl.isProfile}">
+                                <a>{{ ::'app.people.labels.org' | i18n }}</a>
+                            </div>
+                        </nav>
+                    </div>
+                </section>
+            </div>
+        </section><!--end of user-detail-page-header -->
+        <div class="content-container-scrollable">
+            <div class="content">
+                <section class="content-body user-details-content-body" ng-if="userDetailsCtrl.user">
+                    <section class="user-profile-section" ng-class="{'tab-hidden':!userDetailsCtrl.isProfile}">
+                        <div class="scroll-hidden" scroll scrolled="userDetailsCtrl.isScrolled">
+                            <h3 class="user-details-profile-header">{{ ::'app.people.labels.profile' | i18n }}</h3>
+                            <div class="user-details-profile-content">
+                                <div ng-if="userDetailsCtrl.user.emailAddress" class="user-details-profile-item">
+                                    <div class="user-details-profile-item-label">
+                                        {{ ::'app.people.labels.workEmail' | i18n }}
+                                    </div>
+                                    <div class="user-details-profile-item-label-content"
+                                         ng-class="{'copied-email-highlight': userDetailsCtrl.user.isCopied}">
+                                        <span class="allow-user-select">{{userDetailsCtrl.user.emailAddress}}</span>
+                                    </div>
+                                    <div ng-show="!userDetailsCtrl.user.isCopied" class="user-profile-action-icon">
+                                        <div ng-if="::userDetailsCtrl.copyEmailSupported">
+                                            <a role="button" aria-label="copyEmailButtonLabel" ng-click="userDetailsCtrl.copyEmail(userDetailsCtrl.user)" stop-event="click">
+                                                <svg svg-symbol="icon-copy-email" class="user-search-item-copy-email-icon branding-icon-primary"></svg>
+                                            </a>
+                                            <div class="profile-copy-email-tooltip" tooltip tooltiptext="app.tooltip.copyEmail"
+                                                 triggerelement="user-profile-action-icon"></div>
+                                        </div>
+                                        <div ng-if="::userDetailsCtrl.nativeEmailClientSupported">
+                                            <a role="button" aria-label="openEmailButtonLabel" ng-click="userDetailsCtrl.openEmail(userDetailsCtrl.user.emailAddress)" stop-event="click">
+                                                <svg svg-symbol="icon-email" class="user-search-item-email-icon branding-icon-primary"></svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="user-profile-email-copied-notification"
+                                         ng-show="userDetailsCtrl.user.isCopied"
+                                         ng-class="{'copied-email-mobile': people.isCopied}">
+                                        <svg svg-symbol="icon-messaging-check"
+                                                 class="branding-icon-primary  icon-check branding-icon-primary"></svg>
+                                        <span class="user-search-email-copied">
+                                            {{ ::'app.peopleSearch.emailCopied' | i18n }}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div ng-if="userDetailsCtrl.user.phoneNumber" class="user-details-profile-item">
+                                    <div class="user-details-profile-item-label">
+                                        {{ ::'app.people.labels.workPhone' | i18n }}
+                                    </div>
+                                    <div class="user-details-profile-item-label-content allow-user-select">
+                                        {{::userDetailsCtrl.user.phoneNumber}}
+                                    </div>
+                                    <div ng-if="::appCenterCtrl.isAWJadeMobile && userDetailsCtrl.linksSupported"
+                                         class="user-profile-action-icon branding-icon-primary phone">
+                                        <a role="button" aria-label="openDiallerButtonLabel" ng-click="userDetailsCtrl.openTel(userDetailsCtrl.user.phoneNumber)" stop-event="click">
+                                            <svg svg-symbol="icon-call" class="user-search-item-call-icon"></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div ng-if="userDetailsCtrl.user.mobile" class="user-details-profile-item">
+                                    <div class="user-details-profile-item-label">
+                                        {{ ::'app.people.labels.mobile' | i18n }}
+                                    </div>
+                                    <div class="user-details-profile-item-label-content allow-user-select">
+                                        {{::userDetailsCtrl.user.mobile}}
+                                    </div>
+                                    <div ng-if="::appCenterCtrl.isAWJadeMobile && userDetailsCtrl.linksSupported"
+                                         class="user-profile-action-icon branding-icon-primary">
+                                        <span class="message-icon-spacing">
+                                            <a role="button" aria-label="openSmsButtonLabel" ng-click="userDetailsCtrl.openSms(userDetailsCtrl.user.mobile)" stop-event="click">
+                                                <svg svg-symbol="icon-sms" class="user-search-item-sms-icon branding-icon-primary"></svg>
+                                            </a>
+                                        </span>
+                                        <span>
+                                            <a role="button" aria-label="openDiallerButtonLabel" ng-click="userDetailsCtrl.openTel(userDetailsCtrl.user.mobile)" stop-event="click">
+                                                <svg svg-symbol="icon-call" class="user-search-item-call-icon"></svg>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div ng-if="userDetailsCtrl.user.alternatePhoneNumber" class="user-details-profile-item">
+                                    <div class="user-details-profile-item-label">
+                                        {{ ::'app.people.labels.alternateNumber' | i18n }}
+                                    </div>
+                                    <div class="user-details-profile-item-label-content allow-user-select">
+                                        {{::userDetailsCtrl.user.alternatePhoneNumber}}
+                                    </div>
+                                    <div ng-if="::appCenterCtrl.isAWJadeMobile && userDetailsCtrl.linksSupported"
+                                         class="user-profile-action-icon branding-icon-primary phone">
+                                        <a role="button" aria-label="openDiallerButtonLabel" ng-click="userDetailsCtrl.openTel(userDetailsCtrl.user.alternatePhoneNumber)" stop-event="click">
+                                            <svg svg-symbol="icon-call" class="user-search-item-call-icon"></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div ng-if="userDetailsCtrl.user.address" class="user-details-profile-item">
+                                    <div class="user-details-profile-item-label">
+                                        {{ ::'app.people.labels.address' | i18n }}
+                                    </div>
+                                    <div class="user-details-profile-item-label-content no-ellipsis allow-user-select">
+                                        {{::userDetailsCtrl.user.address}}
+                                    </div>
+                                    <div class="user-profile-action-icon" ng-if="userDetailsCtrl.linksSupported">
+                                        <a role="button" aria-label="openMapsButtonLabel" ng-click="userDetailsCtrl.openMaps(userDetailsCtrl.user.address)" stop-event="click">
+                                            <svg svg-symbol="icon-maps" class="user-icon-maps branding-icon-primary"></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-details-profile-content"
+                                 ng-if="userDetailsCtrl.user.linkedInProfileUrl || userDetailsCtrl.user.slack || userDetailsCtrl.user.socialCast
+                                    ||userDetailsCtrl.user.skypeForBusiness">
+                                <div ng-if="userDetailsCtrl.user.linkedInProfileUrl" class="user-details-profile-item">
+                                    <div class="user-details-profile-item-label">
+                                        {{ ::'app.people.labels.linkedIn' | i18n }}
+                                    </div>
+                                    <div class="user-details-profile-item-label-content">
+                                        {{::userDetailsCtrl.user.linkedInProfileUrl}}
+                                    </div>
+                                    <div class="user-profile-action-icon branding-icon-primary social"
+                                         ng-if="userDetailsCtrl.linksSupported">
+                                        <a role="button" aria-label="openLinkedInButtonLabel" ng-click="userDetailsCtrl.openSocialUrl(userDetailsCtrl.user.linkedInProfileUrl)" stop-event="click">
+                                            <svg svg-symbol="icon-linkedin" class="user-icon-social linked-in"></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div ng-if="userDetailsCtrl.user.slack" class="user-details-profile-item">
+                                    <div class="user-details-profile-item-label">
+                                        {{ ::'app.people.labels.slack' | i18n }}
+                                    </div>
+                                    <div class="user-details-profile-item-label-content">
+                                        {{::userDetailsCtrl.user.slack}}
+                                    </div>
+                                    <div class="user-profile-action-icon branding-icon-primary social"
+                                         ng-if="userDetailsCtrl.linksSupported">
+                                        <a role="button" aria-label="openSlackButtonLabel" ng-click="userDetailsCtrl.openSocialUrl(userDetailsCtrl.user.slack)" stop-event="click">
+                                            <svg svg-symbol="icon-slack" class="user-icon-social slack"></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div ng-if="userDetailsCtrl.user.socialCast" class="user-details-profile-item">
+                                    <div class="user-details-profile-item-label">
+                                        {{ ::'app.people.labels.socialcast' | i18n }}
+                                    </div>
+                                    <div class="user-details-profile-item-label-content">
+                                        {{::userDetailsCtrl.user.socialCast}}
+                                    </div>
+                                    <div class="user-profile-action-icon branding-icon-primary social"
+                                         ng-if="userDetailsCtrl.linksSupported">
+                                        <a role="button" aria-label="openSocialcastButtonLabel" ng-click="userDetailsCtrl.openSocialUrl(userDetailsCtrl.user.socialCast)" stop-event="click">
+                                            <svg svg-symbol="icon-socialcast" class="user-icon-social socialcast"></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div ng-if="userDetailsCtrl.user.skypeForBusiness" class="user-details-profile-item">
+                                    <div class="user-details-profile-item-label">
+                                        {{ ::'app.people.labels.skypeForBusiness' | i18n }}
+                                    </div>
+                                    <div class="user-details-profile-item-label-content">
+                                        {{::userDetailsCtrl.user.skypeForBusiness}}
+                                    </div>
+                                    <div class="user-profile-action-icon branding-icon-primary social" ng-if="userDetailsCtrl.linksSupported && userDetailsCtrl.isBrowser">
+                                        <a role="button" aria-label="openSkypeForBusinessButtonLabel" ng-click="userDetailsCtrl.openSocialUrl(userDetailsCtrl.user.skypeForBusiness)" stop-event="click">
+                                            <svg svg-symbol="icon-skype" class="user-icon-social icon-skype"></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="user-org-section" ng-class="{'tab-hidden':userDetailsCtrl.isProfile}"
+                             ng-if="userDetailsCtrl.managers.length || userDetailsCtrl.directReports.length">
+                        <div class="scroll-hidden" scroll scrolled="userDetailsCtrl.isScrolled">
+                            <h3 class="user-details-profile-header header-org">{{ ::'app.people.labels.org' | i18n }}</h3>
+                            <div class="user-details-org-content">
+                                <collapse-panel class="user-org-manager-section"
+                                                ng-if="userDetailsCtrl.managers.length > 2"
+                                                headerlabel="{{userDetailsCtrl.getManagerLabel()}}"
+                                                collapsed="userDetailsCtrl.managerToggle"
+                                                collapsible="userDetailsCtrl.managerToggle">
+                                    <div user-item user="manager" class="people-team-item"
+                                         ng-repeat="manager in userDetailsCtrl.managers | orderBy:'$index':true track by $index+manager.id"
+                                         ng-class="{'current-user': manager.id === userDetailsCtrl.user.id}"></div>
+                                </collapse-panel>
+                                <div class="manager-collapsed" ng-if="userDetailsCtrl.managerToggle">
+                                    <div ng-if="userDetailsCtrl.managerToggle">
+                                        <div user-item user="manager" class="people-team-item"
+                                             ng-class="{'current-user': manager.id === userDetailsCtrl.user.id}"
+                                             ng-repeat="manager in userDetailsCtrl.managers | limitTo : 2 | orderBy:'$index':true track by $index+manager.id"></div>
+                                    </div>
+                                </div>
+                                <collapse-panel class="user-org-reportee-section"
+                                                ng-if="userDetailsCtrl.directReports.length"
+                                                headerlabel="{{userDetailsCtrl.directReports.length}} {{ ::'app.people.labels.directReports' | i18n }}">
+                                    <div user-item user="reportee" class="people-team-item"
+                                         ng-repeat="reportee in userDetailsCtrl.directReports track by $index+reportee.id"></div>
+                                </collapse-panel>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+

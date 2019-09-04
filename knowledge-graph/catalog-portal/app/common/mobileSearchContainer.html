@@ -1,0 +1,10 @@
+<div class="searchContainer ng-hide-animate" ng-show="appCenterCtrl.searchMode">
+    <span class="inputContainer">
+        <span class="icon-left"><svg symbol="search"></svg></span>
+        <input search-input id="searchInput" class="search- input" type="search" ng-model="appCenterCtrl.searchText"
+               ng-model-options="{ debounce: 250 }" autocapitalize="off" autocorrect="off"
+               placeholder="{{'appCenter.searchApps' | i18n }}" control="appCenterCtrl.mobileSearchInputControl">
+        <span class="icon-right" ng-show="appCenterCtrl.searchText" ng-click="appCenterCtrl.clearSearch()"><svg symbol="circle-x"></svg></span>
+    </span>
+    <a class="close" ng-click="appCenterCtrl.closeSearch()">{{::'button.cancel'|i18n}}</a>
+</div>

@@ -1,0 +1,69 @@
+<article class="notifications-subpage-container">
+    <div ng-show="notificationCtrl.isLoading" class="loading-container">
+        <spinner-loading></spinner-loading>
+    </div>
+    <header class="masthead-mobile no-search-masthead">
+        <div ng-if="notificationCtrl.archivedTab" class="masthead-mobile-left archive-back-button" ng-click="notificationCtrl.goBack()">
+            <subpage-back-button></subpage-back-button>
+        </div>
+        <div ng-if="!notificationCtrl.archivedTab" class="masthead-mobile-left app-details-close-button" ng-click="notificationCtrl.goBack()">
+            <detail-close-button></detail-close-button>
+        </div>
+        <h2 ng-if="!notificationCtrl.archivedTab" class="masthead-headline">{{::'hub.notifications' | i18n }}</h2>
+        <h2 ng-if="notificationCtrl.archivedTab" class="masthead-headline">{{::'myapps.mobilepagetitle.archived' | i18n }}</h2>
+        <div class="masthead-mobile-right" ng-hide="notificationCtrl.showFirstTimeMessage || notificationCtrl.archivedTab" actionsheet="{uris:{'contextdialogTemplate':(true)}}"
+             contextdialogTemplate="app-v2/components/notifications/notificationsContextDialog.html">
+            <svg svg-symbol="icon-dots-large" class="notifications-overflow-menu" ></svg>
+        </div>
+    </header>
+    <section class="content-container">
+        <div class="content-container-scrollable">
+            <div class="notifications-content-wrapper" ng-if="!notificationCtrl.archivedTab">
+                <div ng-if="notificationCtrl.showFirstTimeMessage && !notificationCtrl.isLoading" class="empty-notification">
+                    <p class="empty-notification-title">{{::'hub.notifications.welcome' | i18n}}</p>
+                    <p class="empty-notification-description">{{::'hub.notifications.first.time.message' | i18n}}</p>
+                    <div class="icon-empty-notification" ng-include="'app-v2/svgincludes-hub/hub-notification-all-caughtup.html'"></div>
+                </div>
+                <div ng-if="!notificationCtrl.notifications.length && !notificationCtrl.isLoading && notificationCtrl.showNoNotificationsMessage" class="empty-notification">
+                    <p class="empty-notification-title">{{::'hub.notifications.congratulations' | i18n}}</p>
+                    <p class="empty-notification-description">{{::'hub.notifications.empty.description1' | i18n}}</p>
+                    <p class="empty-notification-description">{{::'hub.notifications.empty.description2' | i18n}}</p>
+                    <div class="icon-empty-notification" ng-include="'app-v2/svgincludes-hub/hub-notification-all-caughtup.html'"></div>
+                    <button class="view-archived-button primary-link-color" ng-click="notificationCtrl.hubGoToArchived()">{{::'app.notification.see.archived' | i18n}}</button>
+                </div>
+                <div ng-if="notificationCtrl.priority.length">
+                    <h2 class="section-headline-style2 notifications-timestamp">{{'hub.notifications.priority' | i18n }}</h2>
+                    <hub-notification-card ng-repeat="notification in notificationCtrl.priority track by notification.id" data="notification" on-archive="notificationCtrl.archiveNotification(notification.id)"></hub-notification-card>
+                </div>
+                <div ng-if="notificationCtrl.today.length">
+                    <h2 class="section-headline-style2 notifications-timestamp">{{'hub.notifications.today' | i18n }}</h2>
+                    <hub-notification-card ng-repeat="notification in notificationCtrl.today track by notification.id" data="notification" on-archive="notificationCtrl.archiveNotification(notification.id)"></hub-notification-card>
+                </div>
+                <div ng-if="notificationCtrl.yesterday.length">
+                    <h2 class="section-headline-style2 notifications-timestamp">{{'hub.notifications.yesterday' | i18n }}</h2>
+                    <hub-notification-card ng-repeat="notification in notificationCtrl.yesterday track by notification.id" data="notification" on-archive="notificationCtrl.archiveNotification(notification.id)"></hub-notification-card>
+                </div>
+                <div ng-if="notificationCtrl.lastWeek.length">
+                    <h2 class="section-headline-style2 notifications-timestamp">{{'hub.notifications.lastWeek' | i18n }}</h2>
+                    <hub-notification-card ng-repeat="notification in notificationCtrl.lastWeek track by notification.id" data="notification" on-archive="notificationCtrl.archiveNotification(notification.id)"></hub-notification-card>
+                </div>
+                <div ng-if="notificationCtrl.lastMonth.length">
+                    <h2 class="section-headline-style2 notifications-timestamp">{{'hub.notifications.lastMonth' | i18n }}</h2>
+                    <hub-notification-card ng-repeat="notification in notificationCtrl.lastMonth track by notification.id" data="notification" on-archive="notificationCtrl.archiveNotification(notification.id)"></hub-notification-card>
+                </div>
+                <div ng-if="notificationCtrl.older.length > 0">
+                    <h2 class="section-headline-style2 notifications-timestamp">{{'hub.notifications.older' | i18n }}</h2>
+                    <hub-notification-card ng-repeat="notification in notificationCtrl.older track by notification.id" data="notification" on-archive="notificationCtrl.archiveNotification(notification.id)"></hub-notification-card>
+                </div>
+            </div>
+            <div class="notifications-content-wrapper" ng-if="notificationCtrl.archivedTab">
+                <div ng-if="!notificationCtrl.notifications.length && !notificationCtrl.isLoading && notificationCtrl.showNoNotificationsMessage" class="empty-notification">
+                    <p class="empty-notification-title">{{::'hub.notifications.congratulations' | i18n}}</p>
+                    <p class="empty-notification-description">{{::'hub.notifications.empty.description.archived' | i18n}}</p>
+                    <div class="icon-empty-notification" ng-include="'app-v2/svgincludes-hub/hub-notification-all-caughtup.html'"></div>
+                </div>
+                <hub-notification-card ng-repeat="notification in notificationCtrl.notifications track by notification.id" data="notification" on-archive="notificationCtrl.archiveNotification(notification.id)"></hub-notification-card>
+            </div>
+        </div>
+    </section>
+</article>

@@ -1,0 +1,39 @@
+//Settings styles
+
+.usersettings {
+
+    @avatarSize: 50px;
+
+    .usersettings-title {
+        text-align: center;
+        .font > .size(xlarge);
+    }
+
+    nav {
+        margin-top: 2em;
+        li {
+            .font > .size(large);
+        }
+    }
+
+    .media {
+        padding-top: 2em;
+        .media-image {
+            width: @avatarSize;
+            .symbol {
+                font-size: @avatarSize;
+                color: grey;
+            }
+        }
+        .media-body {
+            padding-top: 1.2em;
+            .usersettings-name{
+                .font > .size(normal);
+                .font > .weight(bold);
+            }
+            .usersettings-email{
+                .font > .size(small);
+            }
+        }
+    }
+}

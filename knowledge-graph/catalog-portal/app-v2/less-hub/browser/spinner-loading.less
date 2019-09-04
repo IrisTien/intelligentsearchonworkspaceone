@@ -1,0 +1,156 @@
+@import '../shared/color-variables.less';
+
+// Optional overlay depending on the parent item passes a overlay = "true" attribute
+.loading-spinner-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: @loading-spinner-overlay-bg;
+}
+
+// iOS Loading Spinner
+// ---------------------------------------
+@ios-spinner-size: 24px;
+@ios-intro-anim-time: 0.6s;
+
+@ios-anim-loop-time: 1s;
+@ios-anim-blade-increment-time: 0.083s;
+
+// mixin class for the svg path iterations
+@iterations: 12;
+@animation-iteration-time: 0.083s; // which is 1s/12
+
+.path-loop (@i) when (@i > 0) {
+    rect:nth-of-type(@{i}) {
+        @pulse-time: @i * @animation-iteration-time;
+        animation: pulse @ios-anim-loop-time -@pulse-time infinite linear;
+        -webkit-animation: pulse @ios-anim-loop-time -@pulse-time infinite linear;
+    }
+    .path-loop(@i - 1);
+}
+
+// This could be used as a class as itself or a mixin class
+.loader-ios-mixin(@iosSize: @ios-spinner-size) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: @iosSize;
+    height: @iosSize;
+    margin-top: -@iosSize/2;
+    margin-left: -@iosSize/2;
+    animation: ios-startup-zoom @ios-intro-anim-time;
+    -webkit-animation: ios-startup-zoom @ios-intro-anim-time;
+    z-index: 5000;
+
+    fill: @ios-spinner-fill-color-start;
+    .path-loop(@iterations);
+}
+
+@keyframes pulse {
+    50% { fill: @ios-spinner-fill-color-start; }
+    to { fill: @ios-spinner-fill-color-end; }
+}
+
+@-webkit-keyframes pulse {
+    50% { fill: @ios-spinner-fill-color-start; }
+    to { fill: @ios-spinner-fill-color-end; }
+}
+
+@keyframes ios-startup-zoom {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes ios-startup-zoom {
+    from {
+        -webkit-transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        -webkit-transform: scale(1);
+        opacity: 1;
+    }
+}
+
+// this is the default class to use
+
+.loader-ios {
+    .loader-ios-mixin();
+}
+
+// Android Loading Spinner
+// ---------------------------------------
+@android-spinner-size: 24px;
+@android-spinner-anim-speed: 2s;
+@android-spinner-border-width: 3px;
+
+// This could be used as a class as itself or a mixin class
+.loader-android-mixin (@androidSize: @android-spinner-size) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: @androidSize;
+    height: @androidSize;
+    margin-top: -@androidSize/2;
+    margin-left: -@androidSize/2;
+    fill: transparent;
+    stroke: @android-spinner-border-color;
+    animation: dash @android-spinner-anim-speed ease infinite, rotate @android-spinner-anim-speed * 0.9 linear infinite;
+    -webkit-animation: dash @android-spinner-anim-speed ease infinite, rotate @android-spinner-anim-speed * 0.9 linear infinite;
+    z-index: 5000;
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1, 85;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 75, 85;
+        stroke-dashoffset: -20;
+    }
+
+    100% {
+        stroke-dasharray: 70, 85;
+        stroke-dashoffset: -65;
+    }
+}
+
+@-webkit-keyframes dash {
+    0% {
+        stroke-dasharray: 1, 85;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 75, 85;
+        stroke-dashoffset: -20;
+    }
+
+    100% {
+        stroke-dasharray: 70, 85;
+        stroke-dashoffset: -65;
+    }
+}
+
+@keyframes rotate {
+    0% {transform: rotate(0deg); }
+    100% {transform: rotate(360deg); }
+}
+
+@-webkit-keyframes rotate {
+    0% {-webkit-transform: rotate(0deg); }
+    100% {-webkit-transform: rotate(360deg); }
+}
+
+// This is the default class
+.loader-android {
+    .loader-android-mixin();
+}

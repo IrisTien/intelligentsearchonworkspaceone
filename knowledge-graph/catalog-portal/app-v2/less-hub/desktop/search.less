@@ -1,0 +1,124 @@
+// This is the search input shared by both app and people search in used in the search module
+@search-input-bar-padding: 28px;
+@desktop-input-icon-size: 24px;
+@desktop-input-icon-top: 4px;
+@search-input-field-border-radius: 4px;
+
+@search-results-top-position: @breadcrumb-height - 8px;
+
+@search-input-bar-width-s: 320px;
+@search-input-bar-width-m: 480px;
+@search-input-bar-width-l: 620px;
+@search-input-bar-height: 36px;
+@search-input-border-color: #aaaaaa;
+
+@search-results-width-desktop-s: 360px;
+@search-results-width-desktop-m: 480px;
+@search-results-width-desktop-l: 620px;
+
+@search-scrim-bg: rgba(71,71,71,.75);
+
+.search-input-bar {
+    width: @search-input-bar-width-s;
+    height: @search-input-bar-height;
+    position: relative;
+
+    @media (min-width: @desktopapp-stop1) {
+        width: @search-input-bar-width-m;
+    }
+
+    @media (min-width: @desktopapp-stop2) {
+        width: @search-input-bar-width-l;
+    }
+
+    label, button {
+        position: absolute;
+        height: 100%;
+        top: 0;
+        z-index:200;
+    }
+
+    label {
+        left: 0;
+        padding: 0 2px;
+        color: @search-placeholder-text-color;
+    }
+
+    .icon-input-searchglass {
+        width: @desktop-input-icon-size;
+        height: @desktop-input-icon-size;
+        margin: @desktop-input-icon-top 1px;
+    }
+
+    .search-clear-button {
+        height: @desktop-input-icon-size;
+        top: 2px;
+        right: 0;
+    }
+}
+
+.search-inputfield {
+    width: 100%;
+    height: @search-input-bar-height;
+    background: @white;
+    border: solid 1px @search-input-border-color;
+    border-radius: @search-input-field-border-radius;
+    padding: 2px @search-input-bar-padding;
+    font-size: 13px;
+    position:absolute;
+    z-index: 150;
+}
+
+.search-results-scrim {
+    position: fixed;
+    // To make the scrim larger than all screen sizes to ensure it is covered
+    width: 100%;
+    height: 100%;
+    background: @search-scrim-bg;
+    top: 0;
+    left: 0;
+    // content-container z-index is 0, it needs to height than that but lower than the ribbon z-index
+    z-index: 100;
+}
+
+.search-results, .search-results-people {
+    width: @search-results-width-desktop-s;
+    position: fixed;
+    right: 78px;
+    top: @search-results-top-position;
+    height: ~ 'calc(100% - 100px)';
+    // needs to be higher than search-results-scrim z-index
+    z-index: 200;
+
+    @media (min-width: @desktopapp-stop1) {
+        right: 100px;
+        width: @search-results-width-desktop-m;
+    }
+
+    @media (min-width: @desktopapp-stop2) {
+        width: @search-results-width-desktop-l;
+    }
+}
+
+.notifications-enabled {
+    .search-results, .search-results-people {
+        right: 78px + 50px;
+
+        @media (min-width: @desktopapp-stop1) {
+            right: 100px + 50px;
+        }
+    }
+}
+
+.search-results-content {
+    background: @white;
+    max-height: 100%;
+    border-radius: 4px;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.search-clear-x-button-android {
+    display: none;
+}

@@ -1,0 +1,319 @@
+@recomendedapp-skip-button-width: 70px;
+@recommendedapp-selectall-width: 40px;
+@recommendedapp-install-modal-title-fontsize-s: 16px;
+@recommendedapp-install-modal-title-fontsize-m: 20px;
+@category-clearall-button-width: 16px;
+@category-filter-name-height:40px;
+@category-filter-name-padding:12px;
+
+.catalog .grid-container {
+    @media(min-width: @browser-transition-point) {
+        padding: 24px 0;
+    }
+}
+
+.category-filter-name {
+    font-size: 15px;
+    text-align: left;
+    height:@category-filter-name-height;
+    line-height:20px;
+    text-transform: capitalize;
+    padding: 16px;
+    white-space: nowrap;
+    position:relative;
+
+    @media(min-width: @browser-transition-point) {
+        max-width: 360px;
+        top: 14px;
+    }
+
+    @media(min-width: @desktopM) {
+        background: none;
+        border-width:0;
+    }
+}
+
+.catagory-name-label {
+    display: inline-block;
+    vertical-align: top;
+    max-width: 80%;
+    .single-line-ellipsis();
+}
+
+//For noLaunchableApps, there is a filter icon
+.hide-topnav .catagory-name-label {
+    max-width: 70%;
+}
+
+.cagetory-filter-number {
+    display: inline-block;
+    vertical-align: top;
+
+    &:before {
+        content: "(";
+    }
+
+    &:after {
+        content: ")";
+    }
+}
+
+.category-clear-all {
+    display: inline-block;
+    width: @mobile-default-taparea-size;
+    height: @mobile-default-taparea-size;
+    position:relative;
+    top: -@category-clearall-button-width/2 + @category-filter-name-padding/2 - 3px;
+
+    @media(min-width: @desktopM) {
+        display: none;
+    }
+}
+
+.empty-catalog {
+    text-align: center;
+
+    .illo-empty-catalog svg{
+        margin-top: 40px;
+        width: 160px;
+        height: 133px;
+
+        @media(min-width: @browser-transition-point) {
+            width: 200px;
+            height: 167px;
+        }
+    }
+
+    p {
+        font-size: 15px;
+        margin: 20px;
+    }
+}
+
+.private-app-instructions {
+    .dialog-body {
+        padding-top: 20px;
+
+        .instructionsTitle {
+            font-weight: bold;
+            padding-bottom: 15px;
+        }
+        .tutorialLink {
+            text-align: center;
+            color: @highlightblue;
+        }
+    }
+}
+
+.private-app-video {
+    .dialog-body {
+        height: 100%;
+        max-height: 600px;
+    }
+    .tutorialImageHeader p {
+        float: right;
+        color: @highlightblue;
+    }
+    .tutorialImage {
+        height: 100%;
+    }
+    video {
+        display: block;
+        max-height:90%;
+        margin: 0 auto;
+    }
+}
+
+.recommended-apps-header {
+    position:fixed;
+    width:100%;
+    background: @white;
+    top:0;
+    left:0;
+    z-index:500;
+
+    .header-right {
+        @media(min-width: @browser-transition-point) {
+            right:10px;
+        }
+    }
+
+    //increase from 40px to 60px for the "skip" button
+    .mobile-title-container h2 {
+        padding: 0 @recomendedapp-skip-button-width;
+        //default set by .mobile-title-container is 17px, however for English it is ellipsed on 320px so knock down 1px, other languages have to be ellipsed
+        font-size:15px;
+        display: block!important;
+
+        @media(min-width: @phoneS) {
+            font-size: 17px;
+        }
+    }
+
+    .skip-button {
+        display: inline-block;
+        width: @recomendedapp-skip-button-width;
+        height: @header-height;
+        line-height: @header-height;
+        z-index: 1000;
+        text-align: left;
+        padding-left: 8px;
+        font-size:14px;
+        cursor: pointer;
+        color: @highlightblue;
+        .single-line-ellipsis();
+
+        @media(min-width: @browser-transition-point) {
+            width: @recomendedapp-skip-button-width + 40px;
+        }
+    }
+}
+
+.docked-style.recommended-apps-header {
+    height:@desktopapp-header-height;
+    min-width: 0;
+
+    .mobile-title-container {
+        @media(min-width: @browser-transition-point) {
+            display: block;
+        }
+    }
+
+    h2 {
+        line-height: @desktopapp-header-height
+    }
+
+    .skip-button {
+        height: @desktopapp-header-height;
+        line-height: @desktopapp-header-height;
+    }
+}
+
+.recommended-apps-select-all {
+    position:relative;
+    width: @recommendedapp-selectall-width;
+    height: @header-height;
+    padding: (@header-height - @mobile-default-taparea-size)/2 (@recommendedapp-selectall-width - @mobile-default-taparea-size)/2 (@header-height - @mobile-default-taparea-size)/2 0;
+
+    .icon-recommended-app-all {
+        fill: @white;
+        stroke: @highlightblue;
+    }
+
+    .icon-recommended-app-selector {
+        position: absolute;
+        top: (@header-height - @mobile-default-taparea-size)/2 + 1px;
+        left: 2px;
+        stroke: @highlightblue;
+    }
+
+    &.select-all {
+        .icon-recommended-app-all {
+            fill: @highlightblue;
+            stroke: @highlightblue;
+        }
+
+        .icon-recommended-app-selector {
+            stroke: @white;
+        }
+    }
+}
+
+.docked-style .recommended-apps-select-all {
+    padding: (@desktopapp-header-height - @mobile-default-taparea-size)/2 (@recommendedapp-selectall-width - @mobile-default-taparea-size)/2 (@desktopapp-header-height - @mobile-default-taparea-size)/2 0;
+}
+
+.docked-style .icon-recommended-app-selector {
+    top: (@desktopapp-header-height - @mobile-default-taparea-size)/2 + 1px;
+}
+
+.recommended-apps-toolbar {
+    position: fixed;
+    bottom: 0;
+    z-index: 600;
+    width: 100%;
+    background: @highlightblue;
+    height: @bottom-nav-height;
+    line-height: @bottom-nav-height;
+    font-size: 17px;
+    color: white;
+    text-align: center;
+    padding: 0 16px;
+
+    .install-button {
+        font-family: "Open Sans Semibold", sans-serif;
+        display: inline-block;
+        height: @bottom-nav-height;
+        line-height: @bottom-nav-height;
+        .single-line-ellipsis();
+
+         &.install-disabled {
+             opacity: 0.5;
+             z-index: -1;
+         }
+    }
+}
+
+.recommended-apps {
+    .help-content {
+        background: rgba(255, 255, 255, 0.6);
+        padding: 16px;
+        position: relative;
+        max-height: 120px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .help-icon {
+        width:48px;
+        height:48px;
+        position:absolute;
+        left:8px;
+        top:12px;
+    }
+
+    .help-text {
+        width:100%;
+        font-size: 13px;
+        line-height:20px;
+        text-align: left;
+        padding: 0 0 0 48px;
+        margin-bottom: 8px;
+
+        @media(min-width: @browser-transition-point) {
+            font-size: 15px;
+        }
+
+    }
+}
+
+// This is a special style modal which do not use the standard modal header
+// The title sits inside the dialog-body so we can use either 1 line or 2 lines for title without adjust header padding
+// For localization concerns we do not want to limit to only one line, we use max of 2 lines here
+.recommended-apps-install-modal {
+    .modal-content {
+        // needs a pixel size to avoid webview scroller
+        max-height:400px;
+    }
+    .dialog-body {
+        h2 {
+            font-family: "Open Sans Semibold", sans-serif;
+            font-size: @recommendedapp-install-modal-title-fontsize-s;
+            margin-bottom: 12px;
+            .multi-line-ellipsis(2);
+
+            @media(min-width: @tabletS) {
+                font-size: @recommendedapp-install-modal-title-fontsize-m;
+            }
+        }
+
+        .recommended-apps-install-message {
+            font-size: 14px;
+
+            @media(min-width: @tabletS) {
+                font-size: 16px;
+            }
+        }
+    }
+}
+

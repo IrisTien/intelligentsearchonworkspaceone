@@ -1,0 +1,90 @@
+<div ng-show="appCenterCtrl.brandingAvailable" class="main-header header-container branding-portal-header-background branding-portal-header-text">
+    <section toast></section>
+    <section class="header-content width-boundary" ng-class="{'searchform-show': appCenterCtrl.searchFieldOn, 'people-searchform-show': appCenterCtrl.showRecentSearch}">
+        <div class="header-left">
+            <div class="branding-logo"></div>
+            <a class="page-back-button" ng-click="::appCenterCtrl.backAction(appCenterCtrl.$state.current.activeTab)">
+                <svg svg-symbol="icon-page-back" class="icon-page-back" ng-class="{'page-back-show':appCenterCtrl.$state.current.activeTab == 'details' || appCenterCtrl.$state.current.activeTab == 'notifications' || appCenterCtrl.$state.current.activeTab == 'peopleDetails' || appCenterCtrl.$state.current.activeTab == 'archivedNotifications'}"></svg>
+            </a>
+            <a class="people-home" ng-click="appCenterCtrl.peopleSearch()" ng-if="appCenterCtrl.$state.current.activeTab === 'peopleDetails'">
+                <svg svg-symbol="icon-people" class="icon-people-home"></svg>
+            </a>
+        </div>
+        <div class="header-center">
+            <div class="mobile-title-container">
+                <h2 ng-click="appCenterCtrl.scrollToTop()">{{appCenterCtrl.$state.current.mobilePageTitle | i18n}}</h2>
+            </div>
+            <div ng-if="appCenterCtrl.$state.current.activeTab == 'bookmarks' || appCenterCtrl.$state.current.activeTab == 'catalog'" class="search-form branding-portal-text" search-input search-controller="SearchController" template-url="app-v2/search/search-input.html" is-active="appCenterCtrl.searchFieldOn" control="appCenterCtrl.searchFieldToggle">
+            </div>
+            <div ng-if="appCenterCtrl.showPeopleTab && appCenterCtrl.$state.current.activeTab == 'people' || appCenterCtrl.$state.current.activeTab == 'peopleDetails'" class="search-form branding-portal-text"
+                 search-input search-controller="PeopleSearchController" template-url="app-v2/people/people-search-input.html"  is-active="appCenterCtrl.showRecentSearch" control="appCenterCtrl.searchFieldToggle"
+                 ng-class="{'notification-enabled': appCenterCtrl.inAppNotificationEnabled}">
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="mobile-search-button" role="button" aria-label="mobileSearchButtonLabel" ng-click="appCenterCtrl.toggleSearchField()" ng-if="appCenterCtrl.appsLoaded && appCenterCtrl.$state.current.activeTab !== 'people'">
+                <svg svg-symbol="icon-searchglass" class="icon-searchglass"></svg>
+                <span role="button" aria-label="searchCancelLabel" class="search-cancel">{{::'button.cancel'|i18n}}</span>
+            </div>
+            <div class="mobile-search-button" role="button" aria-label="mobileSearchButtonLabel" ng-click="appCenterCtrl.cancelPeopleSearchField()" ng-if="appCenterCtrl.appsLoaded && appCenterCtrl.$state.current.activeTab === 'people' && appCenterCtrl.showRecentSearch">
+                <svg svg-symbol="icon-searchglass" class="icon-searchglass"></svg>
+                <span role="button" aria-label="searchCancelLabel" class="search-cancel">{{::'button.cancel'|i18n}}</span>
+            </div>
+            <div class="notification-bell-button mobile" ng-click="appCenterCtrl.showNotification()" ng-if="appCenterCtrl.appsLoaded && appCenterCtrl.inAppNotificationEnabled && appCenterCtrl.isRenderNotificationBellForMobile" ng-hide="(appCenterCtrl.searchFieldOn && appCenterCtrl.$state.current.activeTab !== 'people' ) || (appCenterCtrl.$state.current.activeTab === 'people' && appCenterCtrl.showRecentSearch) || (appCenterCtrl.$state.current.activeTab !== 'catalog' && appCenterCtrl.$state.current.activeTab !== 'bookmarks' && appCenterCtrl.$state.current.activeTab !== 'people' && appCenterCtrl.$state.current.activeTab !== 'peopleDetails')">
+                <svg svg-symbol="icon-bell" class="icon-bell"></svg>
+                <div notification-count></div>
+            </div>
+            <div class="notifications-overflow-actions mobile" ng-if="appCenterCtrl.$state.current.activeTab == 'notifications'" ng-click="appCenterCtrl.showNotificationsOverflowContainer()">
+                <svg svg-symbol="icon-dots"></svg>
+            </div>
+            <section dropdown-list="{ closeOnClick: false}" class="notification-desktop-container" dropdown-control='appCenterCtrl.isNotificationDropdownActive' id="notification-button" ng-if="appCenterCtrl.appsLoaded && appCenterCtrl.inAppNotificationEnabled && !appCenterCtrl.isRenderNotificationBellForMobile && !appCenterCtrl.isAWJadeDesktop" ng-show="!appCenterCtrl.searchFieldOn || appCenterCtrl.$state.current.activeTab === 'people' || appCenterCtrl.$state.current.activeTab === 'peopleDetails'">
+                <div class="notification-bell-button desktop dropdown-toggle">
+                    <svg svg-symbol="icon-bell" class="icon-bell"></svg>
+                    <div notification-count></div>
+                </div>
+                <div dropdown-panel-body class="notification-dropdown-container branding-portal-text" id= "pt-notification-dropdown" ng-include="'app-v2/notifications/notificationDesktop.html'">
+                </div>
+            </section>
+            <section dropdown-list class="profile-container" id="profile-button">
+                <div class="dropdown-toggle dropdown-toggle-profile" ng-show="appCenterCtrl.userAvailable">
+                    <div class="profile-avatar-container profile-avatar" image-load>
+                        <img ng-src="{{appCenterCtrl.user.imageURL}}" ng-show="appCenterCtrl.user.imageURL" class="icon-profile-desktopapp"/>
+                    </div>
+                    <span class="profile-username">{{'fullname' | i18n : appCenterCtrl.user.firstName : appCenterCtrl.user.lastName}}</span>
+                    <svg svg-symbol="icon-down-caret" class="profile-down-caret"></svg>
+                </div>
+                <div dropdown-panel-body class="profile-dropdown-container branding-portal-text" id= "pt-profile-dropdown" ng-include="'app-v2/common/profileDesktop.html'">
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <section class="top-nav-container branding-portal-header-background branding-portal-header-text" ng-if="appCenterCtrl.appsLoaded && !appCenterCtrl.directEnrollmentEnabled">
+        <div class="top-nav-content width-boundary">
+            <div class="top-nav-actions" ng-class="{'catalog-on': appCenterCtrl.$state.current.activeTab == 'catalog', 'filter-show': appCenterCtrl.categoryFilterOn }" ng-click="appCenterCtrl.updateTopnavActions()">
+                <svg svg-symbol="icon-category-filter" class="icon-category-filter" id="pt-category-filter-icon"></svg>
+            </div>
+            <nav class="top-nav-tabs branding-portal-text capsule-border" ng-if="appCenterCtrl.showTabsSection" ng-class="{'top-nav-catalog': appCenterCtrl.$state.current.activeTab == 'catalog','top-nav-people': appCenterCtrl.$state.current.activeTab == 'people' || appCenterCtrl.$state.current.activeTab == 'peopleDetails',
+            'bookmarks-hidden': !appCenterCtrl.showBookmarksTab,'catalog-hidden': !appCenterCtrl.showCatalogTab}">
+                <a ng-click="appCenterCtrl.bookmark()" ng-if="appCenterCtrl.showBookmarksTab" class= "bookmark-nav capsule-text-color" ng-class="{'selected': appCenterCtrl.$state.current.activeTab == 'bookmarks'}">{{::'app.nav.tab.bookmark' | i18n }}</a>
+                <a ng-click="appCenterCtrl.catalog()" ng-if="appCenterCtrl.showCatalogTab" class="catalog-nav capsule-text-color" ng-class="{'selected': appCenterCtrl.$state.current.activeTab == 'catalog'}">{{::'app.nav.tab.catalog' | i18n }}</a>
+                <a ng-if="appCenterCtrl.showPeopleTab" ng-click="appCenterCtrl.peopleSearch()" class="people-nav capsule-text-color" ng-class="{'selected': appCenterCtrl.$state.current.activeTab == 'people' || appCenterCtrl.$state.current.activeTab == 'peopleDetails'}">{{::'app.nav.tab.people' | i18n }}</a>
+            </nav>
+        </div>
+    </section>
+    <section class="top-nav-container branding-portal-header-background branding-portal-header-text" ng-if="appCenterCtrl.appsLoaded && !appCenterCtrl.directEnrollmentEnabled">
+        <div class="top-nav-content width-boundary">
+            <div class="top-nav-actions" ng-class="{'catalog-on': appCenterCtrl.$state.current.activeTab == 'catalog', 'filter-show': appCenterCtrl.categoryFilterOn }" ng-click="appCenterCtrl.updateTopnavActions()">
+                <svg svg-symbol="icon-category-filter" class="icon-category-filter" id="pt-category-filter-icon"></svg>
+            </div>
+            <nav class="top-nav-tabs branding-portal-text capsule-border" ng-if="appCenterCtrl.showTabsSection" ng-class="{'top-nav-catalog': appCenterCtrl.$state.current.activeTab == 'catalog','top-nav-people': appCenterCtrl.$state.current.activeTab == 'people' || appCenterCtrl.$state.current.activeTab == 'peopleDetails',
+            'bookmarks-hidden': !appCenterCtrl.showBookmarksTab,'catalog-hidden': !appCenterCtrl.showCatalogTab}">
+                <a ng-click="appCenterCtrl.bookmark()" ng-if="appCenterCtrl.showBookmarksTab" class= "bookmark-nav capsule-text-color" ng-class="{'selected': appCenterCtrl.$state.current.activeTab == 'bookmarks'}">{{::'app.nav.tab.bookmark' | i18n }}</a>
+                <a ng-click="appCenterCtrl.catalog()" ng-if="appCenterCtrl.showCatalogTab" class="catalog-nav capsule-text-color" ng-class="{'selected': appCenterCtrl.$state.current.activeTab == 'catalog'}">{{::'app.nav.tab.catalog' | i18n }}</a>
+                <a ng-if="appCenterCtrl.showPeopleTab" ng-click="appCenterCtrl.peopleSearch()" class="people-nav capsule-text-color" ng-class="{'selected': appCenterCtrl.$state.current.activeTab == 'people' || appCenterCtrl.$state.current.activeTab == 'peopleDetails'}">{{::'app.nav.tab.people' | i18n }}</a>
+                <a ng-click="appCenterCtrl.smartSearch()" class="people-nav capsule-text-color" ng-class="{'selected': appCenterCtrl.$state.current.activeTab == 'smartSearch'}">smart search</a>
+            </nav>
+        </div>
+    </section>
+    <div class="sorting-overlay" ng-hide="appCenterCtrl.sortingDisabled"></div>
+</div><!--  end of header container  -->

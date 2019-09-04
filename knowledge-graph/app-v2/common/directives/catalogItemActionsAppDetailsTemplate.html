@@ -1,0 +1,127 @@
+<div class="catalog-item-actions-app-details">
+ <span ng-if="catalogItemActionsCtrl.app.approvalRequiredForMdmApp">
+        <!-- Non activated requestable apps -->
+        <a ng-if="catalogItemActionsCtrl.app.statusCode == '1'"
+           class="catalog-action catalog-activate two primary" ng-click="catalogItemActionsCtrl.activateApp()">
+            <svg svg-symbol="icon-requestapp" class="icon-request action-icon"></svg>
+            <span class="action-text">{{::'appCenter.action.request' | i18n}}</span>
+        </a>
+
+     <!-- Pending for native app request  -->
+        <a ng-if="catalogItemActionsCtrl.app.statusCode == '2' && catalogItemActionsCtrl.app.appStateReason === 'PendingApproval'"
+           class="catalog-action catalog-processing one">
+            <svg svg-symbol="icon-dots" class="icon-processing action-icon"></svg>
+            <span class="action-text">{{::'appCenter.action.pending' | i18n}}</span>
+        </a>
+
+     <!-- installing for native app request  -->
+        <a ng-if="catalogItemActionsCtrl.app.statusCode == '2' && !catalogItemActionsCtrl.app.appStateReason"
+           class="catalog-action catalog-processing one">
+            <svg svg-symbol="icon-install-processing" class="icon-install-processing action-icon"></svg>
+            <span class="action-text">{{::'appCenter.action.installing' | i18n}}</span>
+        </a>
+
+        <a ng-if="catalogItemActionsCtrl.app.statusCode == '3' && catalogItemActionsCtrl.app.isMdmApp"
+           class="catalog-action catalog-installed one primary" ng-click="catalogItemActionsCtrl.activateApp()">
+            <svg svg-symbol="icon-installed" class="icon-installed action-icon"></svg>
+            <span class="action-text">{{::'appCenter.action.installed' | i18n}}</span>
+        </a>
+
+         <a ng-if="catalogItemActionsCtrl.app.statusCode == '4' && catalogItemActionsCtrl.app.isMdmApp"
+                class="catalog-action catalog-update one primary" ng-click="catalogItemActionsCtrl.activateApp()">
+            <svg svg-symbol="icon-install-update" class="icon-install-update action-icon"></svg>
+            <span class="action-text">{{::'appCenter.action.update' | i18n}}</span>
+        </a>
+    </span>
+    <span ng-if="!catalogItemActionsCtrl.app.approvalRequiredForMdmApp">
+    <!-- Non activated requestable web apps -->
+    <a ng-if="catalogItemActionsCtrl.app.statusCode == '1' && catalogItemActionsCtrl.app.approvalRequired"
+       class="catalog-action" ng-click="catalogItemActionsCtrl.activateApp()">
+        <svg svg-symbol="icon-requestapp" class="icon-request action-icon"></svg>
+        <span class="action-text">{{::'appCenter.action.request' | i18n}}</span>
+    </a>
+
+    <a role="button" aria-label="bookmarkButtonLabel"
+       ng-if="(catalogItemActionsCtrl.app.isBookmarkableApp || catalogItemActionsCtrl.app.isThinApp) && !(catalogItemActionsCtrl.hideBookmarksTab || catalogItemActionsCtrl.hideCatalogTab)"
+       class="catalog-action"
+       ng-class="{'catalog-bookmarked': catalogItemActionsCtrl.app.favorite , 'catalog-not-bookmarked' : !catalogItemActionsCtrl.app.favorite, 'catalog-bookmarking': catalogItemActionsCtrl.app.bookmarking}"
+       ng-click="catalogItemActionsCtrl.toggleBookmark(catalogItemActionsCtrl.app, $event)">
+        <svg ng-if="!catalogItemActionsCtrl.activateBookmarking" svg-symbol="icon-bookmark"
+             class="icon-bookmark pt-button-bookmark action-icon"></svg>
+        <div ng-if="catalogItemActionsCtrl.activateBookmarking"
+             class="icon-detail-bookmarking pt-button-bookmark action-icon"></div>
+        <span class="action-text" ng-if="!catalogItemActionsCtrl.app.favorite">{{::'app.details.action.bookmark' | i18n}}</span>
+        <span class="action-text" ng-if="catalogItemActionsCtrl.app.favorite">{{::'app.details.action.bookmarked' | i18n}}</span>
+    </a>
+    <a role="button" aria-label="launchButtonLabel" ng-if="catalogItemActionsCtrl.app.isLaunchableApp"
+       class="catalog-action"
+       ng-click="catalogItemActionsCtrl.launchApp(catalogItemActionsCtrl.app, $event)">
+        <svg svg-symbol="icon-openapp" class="icon-openapp action-icon"
+             ng-if="!catalogItemActionsCtrl.app.isHorizonResource && !catalogItemActionsCtrl.app.isHorizonAirResource"></svg>
+        <svg class="action-icon icon-launchapp"
+             ng-if="catalogItemActionsCtrl.app.isHorizonResource || catalogItemActionsCtrl.app.isHorizonAirResource"
+             svg-symbol="icon-horizonclient"></svg>
+        <!--this one only shows on catalog page though css -->
+        <span class="action-text"
+              ng-if="!catalogItemActionsCtrl.app.isHorizonResource && !catalogItemActionsCtrl.app.isHorizonAirResource">{{::'appCenter.action.open' | i18n}}</span>
+        <span class="action-text"
+              ng-if="catalogItemActionsCtrl.app.isHorizonResource || catalogItemActionsCtrl.app.isHorizonAirResource">{{::'app.details.action.launch' | i18n}}</span>
+    </a>
+
+    <a ng-if="catalogItemActionsCtrl.app.isViewableThinappPackage" class="catalog-action"
+       ng-click="catalogItemActionsCtrl.viewThinAppPackage(catalogItemActionsCtrl.app, $event)">
+        <svg svg-symbol="icon-openapp" class="icon-openapp action-icon"></svg>
+        <!--this one only shows on catalog page though css -->
+        <span class="action-text">{{::'appCenter.action.view' | i18n}}</span>
+    </a>
+
+    <a ng-if="catalogItemActionsCtrl.app.statusCode == '1' && catalogItemActionsCtrl.app.isMdmApp"
+       class="catalog-action" ng-click="catalogItemActionsCtrl.activateApp()" role="button" id="installButtonId"
+       aria-label="installButtonLabel">
+        <svg ng-if="!catalogItemActionsCtrl.app.mgmtRequired" svg-symbol="icon-install"
+             class="icon-install action-icon"></svg>
+        <svg ng-if="catalogItemActionsCtrl.app.mgmtRequired" svg-symbol="icon-install-mdm"
+             class="icon-install-mdm action-icon icon-mdm-required"></svg>
+        <span class="action-text">{{::'appCenter.action.install' | i18n}}</span>
+    </a>
+
+    <a ng-if="catalogItemActionsCtrl.app.statusCode == '2' && catalogItemActionsCtrl.app.isMdmApp"
+       class="catalog-action" ng-click="catalogItemActionsCtrl.activateApp()">
+        <svg svg-symbol="icon-install-processing" class="icon-install-processing action-icon"></svg>
+        <span class="action-text">{{::'appCenter.action.installing' | i18n}}</span>
+    </a>
+
+    <a ng-if="catalogItemActionsCtrl.app.statusCode == '3' && catalogItemActionsCtrl.app.isMdmApp"
+       class="catalog-action" ng-click="catalogItemActionsCtrl.activateApp()">
+        <svg svg-symbol="icon-installed" class="icon-installed action-icon"></svg>
+        <span class="action-text">{{::'appCenter.action.installed' | i18n}}</span>
+    </a>
+
+    <a ng-if="catalogItemActionsCtrl.app.statusCode == '4' && catalogItemActionsCtrl.app.isMdmApp"
+       class="catalog-action catalog-update one primary" ng-click="catalogItemActionsCtrl.activateApp()">
+        <svg svg-symbol="icon-install-update" class="icon-install-update action-icon"></svg>
+        <span class="action-text">{{::'appCenter.action.update' | i18n}}</span>
+    </a>
+
+    <a ng-if="catalogItemActionsCtrl.app.installStatus == 'ACTIVATED' && catalogItemActionsCtrl.app.usePerAppPassword"
+       ng-click="catalogItemActionsCtrl.openSetAppPasswordDialog(catalogItemActionsCtrl.app, $event)"
+       class="catalog-action">
+        <svg svg-symbol="icon-set-password" class="action-icon set-app-password-icon"></svg>
+        <span class="action-text">{{::'app.details.action.setPassword' | i18n}}</span>
+    </a>
+
+    <a ng-if="catalogItemActionsCtrl.app.isPasswordVaultApp && catalogItemActionsCtrl.app.showPvAppCredentialsLink"
+       ng-click="catalogItemActionsCtrl.openSetPVAppPasswordDialog(catalogItemActionsCtrl.app, $event)"
+       class="catalog-action">
+        <svg svg-symbol="icon-set-password" class="action-icon set-app-password-icon"></svg>
+        <span class="action-text">{{::'app.details.action.pvAppCredentials' | i18n}}</span>
+    </a>
+
+    <a ng-if="catalogItemActionsCtrl.app.resetAllowed"
+       ng-click="catalogItemActionsCtrl.resetDesktop(catalogItemActionsCtrl.app, $event)"
+       class="catalog-action reset-desktop-link">
+        <svg svg-symbol="icon-power" class="action-icon icon-power"></svg>
+        <span class="action-text">{{::'app.details.label.resetDektop' | i18n}}</span>
+    </a>
+    </span>
+</div>

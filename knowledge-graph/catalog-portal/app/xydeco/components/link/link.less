@@ -1,0 +1,24 @@
+// Project Horizon
+// (c) 2013-2014 VMware, Inc. All rights reserved.
+//* VMware Confidential.
+
+/** @pattern .link
+
+A hyperlink on a web page.  Provides the default styling for `<a href="">`
+elements.
+*/
+
+@import "../base/colors.less";
+
+.link,
+a[href] {
+    color: @link-color;
+    cursor: pointer;
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: @link-hover-color;
+        text-decoration: underline;
+    }
+}

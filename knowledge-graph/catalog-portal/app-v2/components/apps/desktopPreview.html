@@ -1,0 +1,74 @@
+<main class="preview-content-container">
+    <article class="content-container-scrollable">
+        <div class="content left-panel preview-apps">
+            <section class="apps-module preview-promotions" ng-if="appsCtrl.previewShowPromotions">
+                <div class="preview-promotion-card preview-animating-bg"></div>
+            </section>
+
+            <section class="apps-module apps-favorite" ng-if="appsCtrl.previewShowFavorites">
+                <h2 class="preview-apps-module-headline"></h2>
+                <div class="preview-apps-module-content">
+                    <div class="grid-container">
+                        <div class="grid-item app-item" ng-repeat="app in [1,2,3,5,6,7,8]">
+                            <div class="preview-app-tile preview-animating-bg"></div>
+                            <p class="preview-app-label-container preview-animating-bg"></p>
+                        </div>
+                        <div class="grid-item-empty app-item" ng-repeat="app in [1,2,3,4,5,6]">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="apps-module apps-recommended-apps" ng-if="appsCtrl.previewShowRecommendedApps">
+                <h2 class="preview-apps-module-headline"></h2>
+                <div class="preview-apps-module-content one-row">
+                    <div class="grid-container">
+                        <div class="grid-item app-item" ng-repeat="app in [1,2,3,4,5]">
+                            <div class="preview-app-tile preview-animating-bg"></div>
+                            <p class="preview-app-label-container preview-animating-bg"></p>
+                        </div>
+                        <div class="grid-item-empty app-item" ng-repeat="app in [1,2,3,4,5,6]">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="apps-module apps-new-apps" ng-if="appsCtrl.previewShowNewApps">
+                <h2 class="preview-apps-module-headline"></h2>
+                <div class="preview-apps-module-content one-row">
+                    <div class="grid-container">
+                        <div class="grid-item app-item" ng-repeat="app in [1,2,3]">
+                            <div class="preview-app-tile preview-animating-bg"></div>
+                            <p class="preview-app-label-container preview-animating-bg"></p>
+                        </div>
+                        <div class="grid-item-empty app-item" ng-repeat="app in [1,2,3,4,5,6]">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="apps-module apps-all" ng-if="appsCtrl.previewShowAllApps">
+                <h2 class="preview-apps-module-headline"></h2>
+                <div class="preview-apps-module-conten">
+                    <div class="grid-container">
+                        <div class="grid-item app-item" ng-repeat="app in [1,2,3,4,5,6,9,10,11,12,13,14,15,16]">
+                            <div class="preview-app-tile preview-animating-bg"></div>
+                            <p class="preview-app-label-container preview-animating-bg"></p>
+                        </div>
+                        <div class="grid-item-empty app-item" ng-repeat="app in [1,2,3,4,5,6]">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="preview-category-container">
+                <div class="preview-category category-browser">
+                    <h2 class="preview-category-header preview-animating-bg"></h2>
+                    <ul>
+                        <li class="preview-category-list-item preview-animating-bg" ng-repeat="item in [1,2,3,4,5,6, 7, 8, 9, 10, 11, 12]"></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </article>
+</main>

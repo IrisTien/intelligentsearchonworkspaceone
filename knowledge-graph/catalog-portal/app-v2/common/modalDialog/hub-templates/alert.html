@@ -1,0 +1,15 @@
+<div modal-new="modal-alert" class="hub-modal-container hub-alert-modal">
+    <section class="dialog-container">
+        <section class="modal-body">
+            <header class="dialog-header" ng-if="title">
+                <h3 class="modal-title">{{::title | i18n }}</h3>
+            </header>
+            <div class="dialog-body">
+                <p class="modal-content-text" ng-show="message">{{::message | i18n }}</p>
+            </div>
+        </section>
+        <footer class="dialog-actions one-action">
+            <button class="button-action primary-action modal-button-primary" ng-click="$modal.close()">{{::ok | i18n }}</button>
+        </footer>
+    </section>
+</div>

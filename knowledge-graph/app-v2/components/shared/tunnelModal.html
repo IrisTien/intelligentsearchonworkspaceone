@@ -1,0 +1,15 @@
+<div modal-new class="modal-fullscreen mobile-slide-modal hub-tunnel-modal">
+    <div class="dialog-header">
+        <div class="tunnel-modal-close" ng-click="modal.cancel()">
+            <svg svg-symbol="icon-close-android" class="icon-modal-fullscreen-close"></svg>
+        </div>
+    </div>
+    <div class="dialog-body tunnel-modal-content">
+        <ng-include src="'app-v2/svgincludes-hub/hub-tunnel-required.html'" class="hub-tunnel-required"></ng-include>
+        <h2 class="tunnel-app-header">{{ ::'hub.tunnel.text.line1' | i18n }} <span class="tunnel-app-header" id="pt-tunnel-app-name">{{::name}}</span></h2>
+        <p class="tunnel-app-text">{{ ::'hub.tunnel.text.line2' | i18n }}</p>
+        <button class="tunnel-modal-button primary-btn" type="button" role="button" id="tunnel-modal-footer" ng-click="modal.close(true)">
+            {{ ::'app.tunnel.continue' | i18n }}
+        </button>
+    </div>
+</div>

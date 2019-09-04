@@ -1,0 +1,155 @@
+// Project Horizon
+// (c) 2013-2015 VMware, Inc. All rights reserved.
+// VMware Confidential.
+
+@import "../base/fonts";
+@import "../base/colors";
+@import "../button/button";
+@import "../typography/typography";
+
+/** @pattern .tabs
+
+A set of navigation elements, arranged horizontally or vertically,
+which cause an associated view to be changed.
+
+To use tabs as the main navigation for the app, reflecting the current
+app route, use the `nav-path` directive.
+
+@example [nav-tabs.html, nav-tabs.js] Basic Tabs
+*/
+
+@tabs-primary-highlight: rgba(255,255,255,0.2);
+@tabs-secondary-highlight: #444d56;
+@tabs-tertiary-highlight: rgba(220,222,224,1);
+@tabs-tertiary-borderRadius: 2px;
+@tabs-shadow: rgba(0,0,0,0.2);
+
+.tabs {
+
+    @em: 14px;
+    @ht: 2.5 * @em;
+    @lineht: 1.5 * @em;
+    @vpad: (@ht - @lineht)/2;
+    @hpad: 2 * @em;
+
+    width: 100%;
+    white-space: nowrap;
+    padding: 0 (@hpad/2);
+
+    .font > .family( nav, bold );
+    .font > .size( small );
+    .font > .tracking( semi-loose );
+
+    line-height: @lineht;
+
+    > li {
+        display: inline-block;
+        white-space: nowrap;
+        padding: @vpad (@hpad/2); // other @hpad/2 is in the <a>
+        vertical-align: top;
+
+        > a {
+            display: block;
+            white-space: nowrap;
+            padding: 0 (@hpad/2);
+            text-decoration: none;
+            text-shadow: 0 1px rgba( 0, 0, 0, 0.3 );
+            cursor: pointer;
+
+            &, &[href] {
+                color: inherit;
+            }
+
+            &:hover, &:focus, &:active {
+                color: inherit;
+                text-decoration: none;
+            }
+        }
+    }
+
+    > li.is-active > a {
+        &:hover {
+            background-color: transparent;
+        }
+    }
+
+    &.center- {
+        /** Tabs which are centered. */
+        text-align: center;
+    }
+
+    // TODO: make primary/secondary/tertiary more reusable, else remove
+
+    &.primary- {
+        /** Tabs used for the first level of navigation. */
+        @border: 1px;
+        color: @nav-font-color;
+        background-color: @nav-primary-color;
+        padding: 0 (3*@hpad/4);
+        > li {
+            padding: (@vpad - @border) (@hpad/4);
+            > a {
+                border-radius: 4px;
+                border: @border solid @tabs-primary-highlight;
+                &:hover, &:focus, &:active {
+                    background-color: @tabs-primary-highlight;
+                }
+            }
+            &.is-active > a {
+                background-color: @tabs-primary-highlight;
+                border-color: transparent;
+            }
+        }
+    }
+
+    &.secondary- {
+        /** Tabs used for the second level of navigation. */
+        @underlineWidth: 1px;
+        color: @nav-font-color;
+        background-color: @nav-secondary-color;
+
+        > li {
+            padding: @vpad (@hpad/2) (@vpad - @underlineWidth) (@hpad/2);
+            &:first-child {
+                padding-left: (@hpad/4);
+            }
+            > a {
+                padding: 0;
+                border-bottom: @underlineWidth solid transparent;
+            }
+            &.is-active > a {
+                border-bottom-color: @tabs-secondary-highlight;
+            }
+        }
+    }
+
+    &.tertiary- {
+        /** Tabs used for the third level of navigation. */
+
+        .bar.button- > .extend();
+
+        display: table;
+        margin: 0 auto;
+        padding: 10px 0;
+        width: auto;
+        letter-spacing: 0;
+
+        &::after {
+            content: none;
+        }
+
+        > li {
+            .button > .extend();
+            .button > .size( small );
+            .bar.button- > .button > .extend();
+            display: table-cell;
+            padding: 5px 0; // button bars have too much padding
+            > a {
+                // Undo tab styling that conflicts with button- bar.
+                color: inherit;
+                text-shadow: inherit;
+                background-color: transparent;
+            }
+        }
+    }
+}

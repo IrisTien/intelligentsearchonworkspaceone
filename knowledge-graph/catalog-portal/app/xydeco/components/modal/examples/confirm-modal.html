@@ -1,0 +1,5 @@
+<div modal-context class="pane" ng-controller="ConfirmModalDemo as demo">
+    <p ng-hide="demo.deleted"><%= p %></p>
+    <button class="danger- button" ng-click="demo.action()">Delete</button>
+    <p ng-show="demo.cancelled">Whew! That was close.</p>
+</div>

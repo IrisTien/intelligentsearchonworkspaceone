@@ -1,0 +1,55 @@
+@collapse-panel-anim-time: 0.35s;
+@collapse-panel-header-height: 32px; // increased to 32 for touch screen
+@collapse-panel-header-font-size: 14px;
+@collapse-panel-header-padding: 30px;
+
+.collapse-panel-container {
+	width: 100%;
+}
+
+.collapse-panel-header {
+	width: 100%;
+	opacity: @light-text-opacity;
+	height: @collapse-panel-header-height;
+	line-height: @collapse-panel-header-height ;
+	font-size: @collapse-panel-header-font-size;
+	position: relative;
+	text-align: left;
+    cursor: pointer;
+
+	&.collapsed {
+		svg {
+			transform: rotate(-90deg);
+			-webkit-transform: rotate(-90deg);
+			-moz-transform: rotate(-90deg);
+			-ms-transform: rotate(-90deg);
+		}
+	}
+
+	&.non-collapsible{
+        cursor: default;
+	}
+
+	h3 {
+		width: 100%;
+		.single-line-ellipsis();
+	}
+}
+
+.collapse-panel-content {
+	font-size: @collapse-panel-header-font-size;
+	text-align: left;
+	display: block;
+
+	&.collapsed {
+		display: none;
+	}
+}
+
+.people-details .collapse-panel-header {
+	padding-left: @collapse-panel-header-padding;
+}
+
+.collapsible-header .collapse-panel-header {
+	padding-left: @collapse-panel-header-padding;
+}

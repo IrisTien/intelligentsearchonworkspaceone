@@ -1,0 +1,290 @@
+@details-page-bg: @fullscreen-bg;
+@details-font-color: @gb-fullscreen-default-text-color;
+
+@app-logo-small-header-size: 26px;
+@app-action-button-height: 24px;
+
+@small-header-icon-button-anim-time: 0.2s;
+
+@details-header-app-tile-s: 86px;
+@details-header-app-tile-m: 110px;
+
+@details-header-app-tile-logo-s: 58px;
+@details-header-app-tile-logo-m: 74px;
+
+@details-header-padding-left-s: @details-header-app-tile-s + @list-item-padding-h + 18px;
+@details-header-padding-left-m: @details-header-app-tile-m + @list-item-padding-h + 18px;
+
+@app-rating-text-font-size: 16px;
+
+@app-detail-content-max-width: 900px;
+@app-detail-modal-gutter: 40px;
+@app-detail-height-offset: 2 * @app-detail-modal-gutter;
+
+// Details Apps page global container .details-apps
+.details-apps {
+    z-index: 1250;
+    background: @white;
+
+    &.content-container {
+        padding-top: 32px;
+    }
+
+    .content {
+        padding-left:0;
+    }
+
+    p {
+        line-height: 1.5;
+    }
+}
+
+// Details favorite buttons
+.app-details-action {
+    .app-favoriting-spinner {
+        position: relative;
+        padding: 12px 0;
+    }
+
+    .app-favorited {
+        .app-favorite-button, .app-favoriting-spinner {
+            display: none;
+        }
+    }
+
+    .app-not-favorited {
+        .app-un-favorite-button, .app-favoriting-spinner {
+            display: none;
+        }
+    }
+
+    .app-favoriting {
+        .app-un-favorite-button, .app-favorite-button{
+            display: none;
+        }
+    }
+
+    // For localization issue
+    .app-button {
+        @media (min-width: @browser-hamburger-ribbon-transition) {
+            max-width: 240px;
+        }
+    }
+}
+// Details sections general rules
+// ---------------------------------------
+.section-container {
+    position: relative;
+    padding: @list-item-padding-h;
+    .list-item-divider-mixin2(@list-item-divider-bg);
+
+    &:last-child {
+        margin-bottom: 40px;
+    }
+}
+
+.details-apps-content .section-headline-style2 {
+    margin: @list-item-padding-h 0 @list-item-padding-h;
+}
+
+// Styles for the details header section
+// ---------------------------------------
+.details-page-header {
+    min-height: 140px;
+    padding: @list-item-padding-h @list-item-padding-h 24px @details-header-padding-left-m;
+    position: relative;
+    .list-item-divider-mixin2(@list-item-divider-bg);
+
+    .details-app-tile {
+        position: absolute;
+        left: @list-item-padding-h;
+        height: @details-header-app-tile-m;
+        width: @details-header-app-tile-m;
+        border-radius: 10px;
+        background-color: @app-tile-bg-color;
+        box-shadow: 0 1px 6px 0 @app-tile-shadow-color;
+        padding: (@details-header-app-tile-m - @details-header-app-tile-logo-m)/2;
+    }
+
+    .app-installed {
+        border: solid 1px @list-item-divider-bg;
+    }
+
+    .app-logo {
+        height: @details-header-app-tile-logo-m;
+        width: @details-header-app-tile-logo-m;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        border-radius: 8px;
+    }
+
+    .detail-page-app-title {
+        margin-bottom: 4px;
+        .app-details-app-name-text();
+        .single-line-ellipsis();
+    }
+
+    .detail-page-app-version, .detail-page-app-type, .detail-page-app-size {
+        opacity: @light-text-opacity;
+        .app-details-content-text();
+        .single-line-ellipsis();
+    }
+
+    .app-details-action {
+        margin-top: 12px;
+    }
+
+    .icon-horizon {
+        width: 14px;
+        height: 13px;
+        position: relative;
+        top: 6px;
+    }
+
+    .app-button {
+        margin: 0 4px 8px 0;
+        position: relative;
+    }
+
+    .app-managed {
+        position: static;
+        display: inline-block;
+        text-align: left;
+    }
+}
+
+.app-detail-dismiss-button {
+    position: absolute;
+    left: 0;
+    top:0;
+    font-size: 15px;
+    line-height: 32px;
+}
+
+// User ratings section
+// ---------------------------------------
+.user-rating-container {
+    position: absolute;
+    right: @list-item-padding-h;
+    bottom: @list-item-padding-h + 12px;
+
+    .thumbs-container {
+        display: inline-block;
+        height: @mobile-default-taparea-size;
+        line-height: @mobile-default-taparea-size;
+    }
+
+    .is-rated .icon-thumbs {
+        fill: @app-rating-selected-color;
+        stroke: @app-rating-selected-color;
+    }
+
+    .icon-thumbs {
+        margin: 0 4px;
+        fill: transparent;
+        stroke: @app-rating-default-color;
+        vertical-align: middle;
+
+        &.icon-thumbs-down {
+            margin-top: 4px;
+            margin-left: 8px;
+        }
+    }
+
+    .reverse-icon {
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+    }
+
+    .rating-text {
+        color: #748490;
+        display: inline-block;
+        min-width:16px;
+        text-align: center;
+        .base-text-style(@app-rating-text-font-size, 600)
+    }
+
+    .is-rated .rating-text {
+        color: @primary-link-color;
+    }
+}
+
+// Details screenshot section rules
+// ---------------------------------------
+.detail-page-screenshots {
+    text-align: left;
+    padding-right: 0;
+
+    @media (min-width: @phoneL) {
+        overflow-x: auto;
+    }
+
+    &::-webkit-scrollbar{
+        height: 0;
+    }
+
+    .carousel {
+        height: 288px;
+    }
+}
+
+ul[rn-carousel].detail-page-screenshot-carousel {
+    width: 100%;
+    height:auto;
+    min-height: 140px;
+    overflow-x:hidden;
+}
+
+ul[rn-carousel] li.detail-page-screenshot-container {
+    position: relative;
+    height: auto;
+    width: 40%;
+    // CSS trick to get ng-carousel dynamic height
+    //https://github.com/revolunet/angular-carousel/issues/309
+    margin-left: -40%;
+
+    &:first-child {
+        margin-left: 0;
+    }
+
+    @media (min-width: @phoneL) {
+        width: 280px;
+        margin-left: -280px;
+    }
+
+    img.detail-page-screenshot {
+        width: 92%;
+        max-width:240px;
+    }
+}
+
+// Details categories section
+.detail-page-categories li {
+    display: inline-block;
+    line-height: 1.6;
+}
+
+//Toast message
+.launch-message {
+    .notify-message-list {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        z-index: 1500;
+        top: @details-header-app-tile-m + 10;
+
+        .notify-message-container {
+            margin: 10px 16px;
+        }
+    }
+}
+
+.app-feedback {
+    .list-item-right-arrow-image-mixin();
+}
+
+// content as a lighter text color
+.categories-content, .description-content, .detail-support-text {
+    opacity: @light-text-opacity;
+}

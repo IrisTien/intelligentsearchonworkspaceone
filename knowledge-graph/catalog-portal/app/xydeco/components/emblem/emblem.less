@@ -1,0 +1,241 @@
+/** @pattern .emblem
+
+A branded representation of an app (or resource?)
+as it appears in the launcher and catalog.
+
+@example[emblem-examples.html]
+
+
+**/
+
+@import "../grid/grid";
+
+.emblem {
+
+    .config () {
+        @bg-color: #fff;
+        @size: 2*@grid-modulus - @grid-gutter;
+        @tile-size: .80 * @size;
+        @image-size: .64 * @size;
+        @radius: 20%;
+        @highlight-stroke-color: #6DB33F;
+        @highlight-stroke-width: 2px;
+        @flag-bg-color: #6DB33F;
+        @flag-radius: 2px;
+        @title-vspace: 10px;
+        @title-font-size: 12px;
+        @title-color: #5E6F78;
+        @title-height: 1.5 * @title-font-size;
+        @favorite-icon-size: 24px;
+        @favorite-fill-color: #FFC20E;
+        @favorite-stroke-color: #9B9B9B;
+        @shadow: 0 1px 3px 2px rgba(94,111,120,0.13);
+        @text-shadow: 0 1px 1px #fff;
+        @badge-size: 22px;
+        @badge-icon-size: 16px;
+        @badge-bg-color: #D8D8D8;
+        @badge-fg-color: #979797;
+
+        // transition duration
+        @t: .2s;
+    }
+
+    .emblem > .config();
+
+    position: relative; // positioning context
+    padding-top: @tile-size;
+    min-width: @tile-size;
+
+    &:before {
+        // the solid tile behind the icon
+        content: "";
+        display: block;
+        position: absolute;
+        width: @tile-size;
+        height: @tile-size;
+        top: 0;
+        left: 50%;
+        .translateX( -50% );
+        background: @bg-color;
+        border-radius: @radius;
+        box-shadow: @shadow;
+    }
+
+    .emblem-image {
+        /** The image (icon or logo) with the decoration that surrounds it.
+            The image file is set with an inline `background-image` style
+            in the markup. */
+        margin: 0;
+        position: absolute;
+        width: @image-size;
+        height: @image-size;
+        top: (@tile-size - @image-size)/2;
+        left: 50%;
+        .translateX( -50% );
+        border-radius: @radius;
+        background-color: @bg-color;
+        // background-image is set from inline style
+        background-size: contain;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+    .emblem-title {
+        /** The name of the app or resource.  Can be branded by adding
+            the `theme-launcher-text` class. */
+        margin: @title-vspace auto 0;
+        font-size: @title-font-size;
+        color: @title-color;
+        line-height: 1.25em;
+        height: @title-height;
+        .box-sizing( border-box );
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-shadow: @text-shadow;
+    }
+
+    .emblem-flag {
+        /** Optional. A textual flag displayed in the upper-right of the emblem.
+            Should be hidden (or removed) if empty. */
+        display: block;
+        position: absolute;
+        top: 0;
+        left : 50%;
+        .translateX(-@tile-size/2);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #fff;
+        background-color: @flag-bg-color;
+        border-radius: @flag-radius;
+        font-size: 10px;
+        line-height: 12px;
+        padding: 2px .5em;
+        text-transform: uppercase;
+        -webkit-font-smoothing: antialiased; // better for white text
+        z-index: 1;
+    }
+
+    .emblem-title,
+    .emblem-flag {
+        // used to transition to/from the is-dragging state
+        opacity: 1;
+        .transition( opacity .5s );
+    }
+
+
+    .emblem-favorite {
+        /** A star used to indicate and toggle whether this app is a favorite **/
+        font-size: @favorite-icon-size;
+        position: absolute;
+        top: -@favorite-icon-size/2;
+        right: 50%;
+        .translateX(@tile-size/2 + @favorite-icon-size/2);
+
+        .symbol {
+            fill: none;
+            stroke: @favorite-stroke-color;
+            &.filled- {
+                fill: @favorite-fill-color;
+                stroke: none;
+            }
+        }
+    }
+
+    .emblem-badge {
+        /** An icon overlayed on the emblem to convey the app type. **/
+        @vnudge: -4px;
+        @hnudge: -4px;
+        @borderWidth: 1px;
+        position: absolute;
+        bottom: @title-height - @vnudge;
+        right: 50%;
+        width: @badge-size;
+        height: @badge-size;
+        border-radius: (@badge-size/2);
+        .translateX(@size/2 + @hnudge);
+        background: @badge-bg-color;
+        border: @borderWidth solid @badge-fg-color;
+        color: @badge-fg-color;
+        font-size: @badge-icon-size;
+        line-height: @badge-size;
+        text-align: center;
+        .symbol {
+            margin-top: (@badge-size - @badge-icon-size)/2 - @borderWidth;
+        }
+    }
+
+    .emblem-status {
+        /** A status message overlaid on top of the emblem,
+            used to display launching status.
+            Normally hidden. */
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        max-height: 100%;
+        .translateY(-50%);
+        font-size: 12px;
+        font-weight: bold;
+        .transition( opacity .5s );
+        color: #fff;
+        text-shadow: 1px 1px fade( #000, 80% );
+        opacity: 0;
+        text-align: center;
+    }
+
+    &.launching- {
+        .emblem-status {
+            display: block;
+            opacity: 1;
+        }
+    }
+
+    .box.is-dragging & {
+        .emblem-title,
+        .emblem-flag,
+        .emblem-badge,
+        .emblem-favorite {
+            opacity: 0;
+            .transition( opacity 0 );
+        }
+    }
+
+    &.simple- {
+        /** @modifier
+          A simplified version of emblem, for use where interaction is not required. **/
+        .shadow( none );
+        .border( 1px solid #9B9B9B );
+    }
+
+    &.highlighted- {
+        /** @modifier
+          A highlighted emblem used for "NEW" apps. **/
+        &::before {
+            border: @highlight-stroke-width solid @highlight-stroke-color;
+        }
+        .emblem-title {
+            .font > .weight( bold );
+        }
+    }
+
+    &.borderless- {
+        &::before {
+            border: none;
+        }
+    }
+
+    .shadow (@spec) {
+        &::before {
+            box-shadow: @spec;
+        }
+    }
+
+    .border (@spec) {
+        &::before {
+            border: @spec;
+        }
+    }
+}

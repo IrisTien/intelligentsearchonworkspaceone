@@ -1,0 +1,146 @@
+// Project Horizon
+// (c) 2013-2014 VMware, Inc. All rights reserved.
+// VMware Confidential.
+
+/** @pattern .message
+
+The message dialog
+
+@example [message.html, message-demo.js, externalMessageTemplate.html] Message dialogs
+
+**/
+@import "../base/mixins";
+@import "../base/colors";
+@import "../glyph/glyph";
+
+@modal-border-radius: 2px;
+@message-default-fg-color: @greytext-color;
+@message-default-bg-color: #fff;
+@message-info-fg-color: @action-color;
+@message-error-fg-color: @danger-color;
+@message-error-bg-color: screen(@danger-color, #bbb);
+@message-warning-fg-color: @warning-color;
+@message-warning-bg-color: screen(@warning-color, #bbb);
+@message-success-fg-color: @success-color;
+@message-success-bg-color: screen(@success-color, #bbb);
+@message-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+@message-z-index: 200;
+@message-width: 50%;
+
+.message-context {
+  position: relative;
+}
+
+.message {
+    /** The dialog box which contains the content of the of the message. */
+
+    @vpad : 1em;
+    @hpad : 1.5em;
+    @icon-pad: 4em;
+
+    width: @message-width;
+    margin: 40px auto;
+    color: @text-color;
+    border: 1px solid @message-default-fg-color;
+    border-radius: 2px;
+    background: @message-default-bg-color;
+    box-shadow: @message-box-shadow;
+    padding: @vpad @icon-pad;
+    overflow: hidden;
+    position: relative; // to position icon
+
+    .message-icon {
+        display: none; // unless the message has a type
+        .glyph > .extend();
+        .glyph > .apply( circled- );
+        // typical adjustment for these circled icons:
+        .glyph > .nudge( .12em );
+        .glyph > .size( small );
+        position: absolute;
+        left: @hpad;
+        top: @vpad;
+    }
+
+    &.info-,
+    &.zero-data- {
+        /** A general, informative message. */
+        border-color: @message-info-fg-color;
+        .message-icon {
+            display: block;
+            .glyph > .apply( i- );
+            color: @message-info-fg-color;
+        }
+    }
+
+    &.error- {
+        /** A message which states that an error occur. */
+        border-color: @message-error-fg-color;
+        background-color: @message-error-bg-color;
+        .message-icon {
+            display: block;
+            .glyph > .apply( bang- );
+            color: @message-error-fg-color;
+        }
+    }
+
+    &.warning- {
+        /** A message which states that an error occur. */
+        border-color: @message-warning-fg-color;
+        background-color: @message-warning-bg-color;
+        .message-icon {
+            display: block;
+            .glyph > .apply( bang- );
+            color: @message-warning-fg-color;
+        }
+    }
+
+    &.success- {
+        /** A message which states that a requested operation was successful. */
+        border-color: @message-success-fg-color;
+        background-color: @message-success-bg-color;
+        .message-icon {
+            display: block;
+            .glyph > .apply( check- );
+            color: @message-success-fg-color;
+        }
+    }
+
+    &.zero-data- {
+        /** A message which states that there is no data to present. */
+        // TODO: styling, especially if it contains a graphic.
+    }
+
+    .button.close- {
+        position: absolute;
+        right: @hpad;
+        top: @vpad;
+        color: rgba(0,0,0,0.5);
+    }
+
+    .message-actions {
+        text-align: right;
+    }
+
+    .dialog {
+        // remove excess padding when using a dialog inside a message.
+        margin: -@vpad -@icon-pad;
+    }
+}
+
+.message-queue{
+    position: absolute;
+    top: 0;
+    width: @message-width;
+    left: 50%;
+    z-index: @message-z-index;
+    .translate(-50%, 0);
+
+    > li {
+        margin-bottom: 10px;
+    }
+
+    .message {
+        width: 100%;
+        margin: 0;
+    }
+}

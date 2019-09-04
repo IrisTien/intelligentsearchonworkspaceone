@@ -1,0 +1,17 @@
+<article id="catalog-container" class="catalog content-container-scrollable" infinite-scroll>
+    <div class="content width-boundary">
+        <section class="content-body-with-sidebar" scroll-container=".catalog.content-container-scrollable">
+            <div class="grid-container new-apps-mobile-container">
+                <div catalog-item ng-repeat="app in ctrl.newApps" class="grid-item new-app" appdata="app"></div>
+            </div>
+        </section>
+        <div class="mobile-notifications-overflow-actions-container" ng-class="{'active': ctrl.showNewAppsNotificationsOverflowActions}">
+            <div class="overflow-actions-overlay" ng-click="ctrl.hideNewAppsNotificationOverflowActions()">
+            </div>
+            <div class="overflow-actions-content">
+                <svg svg-symbol="icon-close-popup" class="overflow-actions-close" ng-click="ctrl.hideNewAppsNotificationOverflowActions()"></svg>
+                <p class="list-item bookmark-all-new-apps" ng-click="ctrl.bookmarkAll()">{{::'app.thinappsInPackage.button.bookmarkAll' | i18n}}</p>
+            </div>
+        </div>
+    </div>
+</article>

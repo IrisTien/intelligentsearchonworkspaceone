@@ -1,0 +1,26 @@
+<div modal-context class="pane">
+    <div ng-controller="ModalDemo as demo">
+        <div ng-repeat="m in demo.messages">
+            <input ng-model="m">
+            <button ng-click="$modal.open('myDialog', {message: m})">Message {{$index}}</button>
+        </div>
+        <button ng-click="$modal.open('myDialog', {title: 'Oops!'})">No Message</button>
+    </div>
+    <!-- the modal template itself, in the DOM but hidden -->
+    <div modal="myDialog" class="headered- footered- modal">
+        <div class="dialog typography">
+            <div class="dialog-header">
+                <h3 ng-if="!title">Modal Dialog</h3>
+                <h3 ng-if="title">{{ title }}</h3>
+            </div>
+            <div class="dialog-body">
+                <p ng-if="!message">There was no message.</p>
+                <p ng-if="message">{{ message }}</p>
+            </div>
+            <div class="dialog-actions">
+                <button class="link- button" ng-click="$modal.close()">Cancel</button>
+                <button class="primary- button" ng-click="$modal.close()">Ok</button>
+            </div>
+        </div>
+  </div>
+</div>

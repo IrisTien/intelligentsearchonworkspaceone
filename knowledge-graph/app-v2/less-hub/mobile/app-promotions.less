@@ -1,0 +1,175 @@
+@promotion-banner-background-image-one: url(../app-v2/graphics-hub/promotion-background-one.svg);
+@promotion-banner-background-image-two: url(../app-v2/graphics-hub/promotion-background-two.svg);
+@promotion-banner-background-image-three: url(../app-v2/graphics-hub/promotion-background-three.svg);
+@promotion-banner-background-color: #0081A7;
+@promotion-banner-width: 280px;
+@promotion-banner-width-xs: 240px;
+@promotion-banner-height: 180px;
+@promotion-banner-dots-color: #D8D8D8;
+@promotion-banner-dots-size: 6px;
+@promotion-button-text-color: #00518A;
+@promotion-app-name-size: 23px;
+@promotion-category-name-size: 30px;
+@promotion-category-title-size: 13px;
+
+.promotions {
+  display: block;
+
+  .promotion-container {
+    display: inline-block;
+  }
+
+  .owl-carousel {
+    &:not(.off) .owl-dots.disabled {
+      display: block;
+    }
+
+    &.off {
+      display: block;
+    }
+  }
+
+  .off .promotion-container {
+    margin-right: 10px;
+    &:first-child {
+      margin-left: 10px;
+    }
+  }
+
+  .owl-stage {
+    left: 10px;
+  }
+
+  .promotion-card {
+    height: @promotion-banner-height;
+    border-radius: 8px;
+    background: @promotion-banner-background-color no-repeat;
+    background-size: cover;
+    padding: 20px;
+    color: @white;
+    display: table;
+    width: 100%;
+    .app-tile {
+      margin: 28px auto;
+      @media (min-width: @phoneXS) {
+        margin: 23px auto;
+      }
+      @media (min-width: @phoneS) {
+        margin: 18px auto;
+      }
+      @media (min-width: @phoneM) {
+        margin: 12px auto;
+      }
+      @media (min-width: @tabletS) {
+        margin: 8px auto;
+      }
+    }
+  }
+
+  .owl-drag .owl-item {
+    &:first-child {
+      .promotion-card {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .promotion-container {
+    &.one {
+      .promotion-card {
+        background-image: @promotion-banner-background-image-one;
+      }
+    }
+    &.two {
+      .promotion-card {
+        background-image: @promotion-banner-background-image-two;
+      }
+    }
+    &.three {
+      .promotion-card {
+        background-image: @promotion-banner-background-image-three;
+      }
+    }
+  }
+
+  .promotion-card-container {
+    max-width: @promotion-banner-width-xs;
+    @media (min-width: @phoneS) {
+      max-width: @promotion-banner-width;
+    }
+    margin: auto;
+  }
+
+  .promotion-app-icon {
+    padding-right: 20px;
+    display: table-cell;
+  }
+
+  .promotion-details {
+    vertical-align: top;
+    display: table-cell;
+
+    .restrict-icon {
+      width: 12px;
+      height: 12px;
+      border: solid 1px #fff;
+      border-radius: 50%;
+      text-align: center;
+      display: inline-block;
+      position: relative;
+    }
+
+    .restrict-icon::before {
+      content: '-';
+      top: -5px;
+      position: absolute;
+      display: block;
+      color: white;
+      left: 2px;
+    }
+  }
+
+  .promotions-button {
+    background: @white;
+    color: @promotion-button-text-color;
+    border-radius: 4px;
+  }
+
+  .app-name {
+    margin-top: 20px;
+    line-height: 1.4;
+    font-size: @promotion-app-name-size;
+  }
+
+  .category-title {
+    font-size: @promotion-category-title-size;
+  }
+
+  .category-name {
+    font-size: @promotion-category-name-size;
+    margin-bottom: 10px;
+  }
+
+  .app-name, .category-name {
+    font-weight: 400;
+    .multi-line-ellipsis(2);
+    overflow: hidden;
+    height: 70px;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .owl-dots {
+    text-align: center;
+    button {
+      margin: 0 5px;
+      width: @promotion-banner-dots-size;
+      height: @promotion-banner-dots-size;
+      background: @promotion-banner-dots-color;
+      border-radius: 50%;
+    }
+    button.active {
+      background: @primary-button-color;
+    }
+  }
+}

@@ -1,0 +1,37 @@
+<data-owl-carousel class="owl-carousel" data-options="appPromotionsCtrl.carouselConfig" ng-if="appPromotionsCtrl.refresh">
+    <div class="promotion-container item" owl-carousel-item="" ng-repeat="promotion in ::appPromotionsCtrl.promotions"
+         ng-class="{'one': $index%3 === 0, 'two': $index%3 === 1, 'three': $index%3 === 2}"  ng-style="{width:appPromotionsCtrl.promotionWidth}">
+        <div class="promotion-card category-promotion" ng-if="promotion.customizationEntityType === 'CATEGORY'">
+            <p class="category-title">{{::'hub.promotions.banner.category.title' | i18n}}</p>
+            <p class="category-name">{{promotion.identifier}}</p>
+            <a class="app-button promotions-button"
+               ui-sref="apps.list({ category: '{{promotion.identifier}}', type:'category' })">
+                {{::'hub.promotions.banner.category.open' | i18n}}
+            </a>
+        </div>
+        <div class="promotion-card app-promotion" ng-if="promotion.customizationEntityType === 'APPLICATION'">
+            <div class="promotion-card-container">
+                <div class="promotion-app-icon">
+                    <div class="app-tile">
+                        <div class="app-icon" image-load>
+                            <img ng-src="{{appPromotionsCtrl.getAppIcon(promotion.identifier)}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="promotion-details">
+                    <p class="app-name">{{appPromotionsCtrl.getAppName(promotion.identifier)}}</p>
+                    <div ng-if="appPromotionsCtrl.isVirtualAppEnabled(promotion.identifier)">
+                        <div class="restrict-icon"></div>
+                        <span class="disabled-by-admin">
+                            {{::'hub.promotions.banner.disabled' | i18n}}
+                        </span>
+                    </div>
+                    <a class="app-button promotions-button" ng-if="!appPromotionsCtrl.isVirtualAppEnabled(promotion.identifier)"
+                       ui-sref="apps.details({ appId: '{{promotion.identifier}}' })">
+                        {{::'hub.promotions.banner.app.get' | i18n}}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</data-owl-carousel>

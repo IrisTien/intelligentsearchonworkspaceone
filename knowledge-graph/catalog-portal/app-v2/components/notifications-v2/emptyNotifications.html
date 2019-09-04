@@ -1,0 +1,8 @@
+<div ng-if="!notificationCtrl.notifications.length && !notificationCtrl.isLoading && !notificationCtrl.showFirstTimeMessage && notificationCtrl.showNoNotificationsMessage"
+     class="empty-notification">
+    <p class="empty-v2-notification-title primary-text-color">{{::'hub.notifications.congratulations' | i18n}}</p>
+    <p class="empty-v2-notification-description">{{::'hub.v2.notifications.empty.description' | i18n}}</p>
+    <div class="icon-v2-empty-notification" ng-include="'app-v2/svgincludes-hub/hub-v2-notifications-empty.html'"></div>
+    <a class="view-archived-button primary-link-color"
+       ui-sref="notifications({filter:'all'})">{{::'app.notification.see.all' | i18n}}</a>
+</div>

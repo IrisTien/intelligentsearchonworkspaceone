@@ -1,0 +1,20 @@
+<section class="content-container settings-subpage">
+    <div ng-include="'app-v2/components/settingSubpage/settingsBreadcrumb.html'"></div>
+    <div class="content-container-scrollable">
+        <div class="settings-content-wrapper">
+            <p class="about-copyright">{{::'app.about.copyright' | i18n }}</p>
+
+            <a target="_blank" ng-href="{{::'app.about.patentsLink' | i18n}}" class="about-sublink patent-button">
+                <svg svg-symbol="icon-openapp-small"></svg>{{'app.about.button.label.patents' | i18n }}
+            </a>
+
+            <a ng-if="isOnPrem" target="_blank" ng-href="{{::'app.about.licenseAgreementLink' | i18n}}" class="about-sublink licence-button" >
+                <svg svg-symbol="icon-openapp-small"></svg>{{'app.about.button.label.licenseAgreement' | i18n }}
+            </a>
+
+            <a ng-if="!isOnPrem" target="_blank" ng-href="{{::'app.about.saasLicenseAgreementLink' | i18n}}" class="about-sublink license-button" >
+                <svg svg-symbol="icon-openapp-small"></svg>{{'app.about.button.label.licenseAgreement' | i18n }}
+            </a>
+        </div>
+    </div>
+</section>

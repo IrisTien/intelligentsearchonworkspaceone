@@ -1,0 +1,11 @@
+<div modal-new="modal-alert" class="recommended-apps-install-modal">
+    <section class="dialog-container no-header">
+        <div class="dialog-body">
+            <h2 ng-show="title">{{ title | i18n }}</h2>
+            <p class="recommended-apps-install-message" ng-show="message">{{ message | i18n }}</p>
+        </div>
+        <footer class="dialog-actions one-action">
+            <button class="button-action primary-action" ng-click="$modal.close()">{{ ok | i18n }}</button>
+        </footer>
+    </section>
+</div>

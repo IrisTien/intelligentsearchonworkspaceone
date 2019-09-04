@@ -1,0 +1,30 @@
+<div ng-if="(!appListItemCtrl.hideVirtualApp || appListItemCtrl.hideVirtualApp && appListItemCtrl.app.type !== 'VIRTUAL')">
+    <div class="app-list-item-icon" image-load>
+        <img ng-src="{{appListItemCtrl.app.backgroundImage}}">
+    </div>
+    <p line-clamp3 lines="2" content="::appListItemCtrl.app.name" class="app-list-item-name"></p>
+    <p class="app-list-item-type" ng-if="appListItemCtrl.app.appTypeDisplayVal">
+        <svg ng-if="appListItemCtrl.app.isHorizonResource || appListItemCtrl.app.isHorizonAirResource"
+             svg-symbol="icon-horizon-watermark"></svg>
+        {{::appListItemCtrl.app.appTypeDisplayVal}}
+    </p>
+    <p class="app-list-item-type" ng-if="appListItemCtrl.app.isTunnelRequired" ng-class="{'tunnle-list-item': appListItemCtrl.app.isTunnelRequired}">
+        <svg svg-symbol="icon-tunnel" class="app-list-item-tunnel-icon-mobile"></svg>
+        {{ ::'app.tunnel.header' | i18n }}
+    </p>
+    <div catalog-item-actions current-view="HUB_APP_LIST" app="appListItemCtrl.app" show-favorite ="!appListItemCtrl.isLoadFromDbFailed && appListItemCtrl.app.isBookmarkableApp" class="app-list-item-actions" stop-event="click">
+    </div>
+</div>
+<div ng-if="appListItemCtrl.hideVirtualApp && appListItemCtrl.app.type === 'VIRTUAL'">
+    <div class="app-list-item-icon" image-load>
+        <img class="img-invert" ng-src="{{appListItemCtrl.app.backgroundImage}}">
+    </div>
+    <p line-clamp3 lines="2" content="::appListItemCtrl.app.name" class="app-list-item-name"></p>
+    <p class="app-list-item-type">
+        {{ ::'app.virtual.disabled' | i18n }}
+    </p>
+    <div class="app-list-item-actions container-invert">
+        {{ ::'app.virtual.not.available' | i18n }}
+    </div>
+</div>
+

@@ -1,0 +1,116 @@
+@search-input-bar-padding: 30px;
+@mobile-input-icon-size: 24px;
+@search-input-bar-height: 28px;
+@search-input-bar-padding-ios-v: (@masthead-mobile-height-ios - @search-input-bar-height)/2;
+@search-input-bar-padding-android-v: 10px;
+@search-input-field-border-radius: 10px;
+
+.search-input-bar {
+  width: 100%;
+  height: 100%;
+  padding: @search-input-bar-padding-ios-v @search-cancel-button-width @search-input-bar-padding-ios-v @list-item-padding-h;
+  position: relative;
+
+  label, button {
+    position: absolute;
+    height: 100%;
+    top: 10px;
+    color: inherit;
+  }
+
+  label {
+    left: @list-item-padding-h;
+    padding: 0 2px;
+    color: @search-placeholder-text-color;
+  }
+
+  .icon-input-searchglass {
+    width: @mobile-input-icon-size;
+    height: @mobile-input-icon-size;
+    margin: 4px 1px;
+  }
+
+  .search-clear-button {
+    top: 11px;
+    height: @search-input-bar-height;
+    right: @search-cancel-button-width - 2px;
+  }
+}
+
+.android {
+  .search-input-bar {
+      padding: @search-input-bar-padding-android-v @list-item-padding-h @search-input-bar-padding-android-v 72px;
+  }
+
+  .icon-input-searchglass {
+    display: none;
+  }
+
+  .search-clear-button {
+    top: 13px;
+    right: @list-item-padding-h - 4px;
+  }
+}
+
+.search-inputfield {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: @search-input-bg;
+  border-radius: @search-input-field-border-radius;
+  padding: 6px @search-input-bar-padding;
+  font-size: 15px;
+}
+
+.android .search-inputfield {
+  background: transparent;
+  padding: 6px 0;
+  font-size: 16px;
+  caret-color: @primary-text-color;
+}
+
+.android ::placeholder, .android ::-webkit-placeholder {
+  color: @primary-text-color;
+}
+
+.mobile-search-cancel {
+  width: @search-cancel-button-width;
+  position: absolute;
+  top: 12px!important;
+  right: 0;
+  padding: 0 8px;
+  text-align: center;
+  line-height: 30px;
+  .single-line-ellipsis();
+  .text-link-style();
+}
+
+.android .mobile-search-cancel {
+  display: none;
+}
+
+.search-back-button-android {
+  display: none;
+}
+
+.android .search-back-button-android {
+  position: absolute;
+  top: (@masthead-mobile-height-android - @mobile-default-taparea-size)/2;
+  left: 12px;
+  display: block;
+  z-index:100;
+}
+
+.search-clear-x-button-android {
+  display: none;
+}
+
+.android .search-clear-x-button {
+  display: none;
+}
+// Show the android clear button when is android
+.android .search-clear-x-button-android {
+  display: block;
+}
+

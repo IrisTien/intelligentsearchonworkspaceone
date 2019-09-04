@@ -1,0 +1,8 @@
+<ul class="menu theme-portal-text">
+    <li ng-repeat="item in $listView.items">
+        <a title="{{::item.name}}" ng-click="$listView.selectLabel(item);">
+            <span class="menu-item-name" style="float: left">{{::item.name}}</span>
+            <span ng-show="$listView.config.selectedItem.name == item.name" style="float: right"><svg symbol="checkmark"></svg></span>
+        </a>
+    </li>
+</ul>

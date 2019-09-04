@@ -1,0 +1,35 @@
+<header class="breadcrumb-container">
+    <breadcrumb hide-install="true" hide-refresh="true"></breadcrumb>
+</header>
+<section class="content-container">
+    <div ng-if="notificationCtrl.isLoading" class="notification-loading-container">
+        <div ng-include="'app-v2/components/notifications-v2/notificationsBrowserPreview.html'"></div>
+    </div>
+    <div class="content-container-scrollable" ng-if="!notificationCtrl.isLoading">
+        <a ng-if="notificationCtrl.isAWJadeDesktop" ui-sref="apps" class="notifications-back-button"><svg svg-symbol="icon-back"></svg> {{::'hub.apps.detail.back' | i18n}}</a>
+        <div class="content">
+            <div class="hub-notifications-nav-container">
+                <h2 class="notification-page-title desktop-page-title ng-binding">
+                    {{::'hub.nav.label.notification' | i18n}}
+                </h2>
+                <notifications-left-nav links="notificationCtrl.leftNavLinks" header-label="::'hub.nav.label.notifications.filter' | i18n"></notifications-left-nav>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="notifications-container content-container" ng-if="!notificationCtrl.isLoading">
+    <div class="content-container-scrollable">
+        <div class="notifications-content-wrapper">
+            <ng-include src="'app-v2/components/notifications-v2/emptyNotifications.html'"></ng-include>
+            <ng-include src="'app-v2/components/notifications-v2/firstTimeMessage.html'"></ng-include>
+            <div ng-if="notificationType.notifications.length" ng-repeat="notificationType in notificationCtrl.parsedNotification track by notificationType.label">
+                <h2 class="section-headline-style2 notifications-timestamp">{{notificationType.label}}</h2>
+                <notification-card-v2
+                        ng-repeat="notification in notificationType.notifications track by notification.id"
+                        data="notification"
+                        ></notification-card-v2>
+            </div>
+        </div>
+    </div>
+</section>
+<div ui-view ng-if="notificationCtrl.notifications.length"></div>

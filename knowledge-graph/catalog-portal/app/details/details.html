@@ -1,0 +1,173 @@
+<div modal-context class="details-main headered- view- frame theme-portal-background">
+    <div class="frame-header">
+        <div class="theme-portal-masthead">
+            <div class="mobile- masthead">
+                <div class="masthead-left">
+                    <a class="iconic- link- button" ng-click="::detailsCtrl.backAction()">
+                        <svg symbol="mobile-back-arrow"></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="headered- frame">
+        <div class="frame-header">
+            <div class="details-filter-bar">
+                <div class="page- grid">
+                    <div class="four- box has-overflow">
+                        <a class="iconic- link- button" ng-click="::detailsCtrl.backAction()">
+                            <svg symbol="arrow-left"></svg>
+                            <span>{{::'app.details.link.back' | i18n}}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="vertically- scrollable- backdrop- pane">
+            <div class="page">
+                <article class="appdetails typography">
+                    <header>
+                        <div class="media">
+                            <div class="media-image">
+                                <div class="simple- emblem borderless-">
+                                    <div class="emblem-image"
+                                         ng-style="{'background-image':('url('+ detailsCtrl.iconStyle+')')}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <h2>{{ ::detailsCtrl.name }}</h2>
+                                <ul class="list">
+                                    <li ng-if="::detailsCtrl.subType">
+                                        {{::'app.details.label.type' | i18n}}&nbsp;{{::detailsCtrl.appSubType}}
+                                    </li>
+                                    <li ng-if="::(detailsCtrl.version || detailsCtrl.size || detailsCtrl.price)">
+                                        <ul class="inline- list">
+                                            <li ng-if="::detailsCtrl.version">
+                                                {{::'app.details.label.version' | i18n}}:&nbsp; {{ ::detailsCtrl.version }}
+                                            </li>
+                                            <li ng-if="::detailsCtrl.size">
+                                                {{
+                                                    ::(detailsCtrl.size/1000000).toPrecision(3)
+                                                }}{{
+                                                    ::'app.details.abbrev.megabytes' | i18n
+                                                }}
+                                            </li>
+                                            <li ng-if="::detailsCtrl.price">
+                                                {{ ::detailsCtrl.price }}
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <div ng-if="::detailsCtrl.installStatus" class="appdetails-action">
+                                    <div install-button app="detailsCtrl" is-loading="detailsCtrl.isLoading"
+                                         modal-obj="$modal" normal-width="true"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    <nav ng-if="::detailsCtrl.reviews.length">
+                        <ul class="button- bar">
+                            <li class="large- hollow- button is-selected">
+                                {{::'app.details.nav.details' | i18n}}
+                            </li>
+                            <li class="large- hollow- button">
+                                {{::'app.details.nav.reviews' | i18n}}
+                            </li>
+                        </ul>
+                    </nav>
+                    <section ng-if="::detailsCtrl.mgmtRequired" id="mgmtRequired" >
+                            <svg symbol="lock"></svg>
+                            <span>{{::'app.details.needsDeviceEnrollment' | i18n}}</span>
+                    </section>
+                    <section ng-if="::detailsCtrl.screenshots.length" id="screenshots">
+                        <ul class="grid appdetails-screenshots">
+                            <li class="four- box" ng-repeat="item in ::detailsCtrl.screenshots">
+                                <div class="contained- square- image"
+                                    style="background-image: url({{item.href}})" ng-click="detailsCtrl.goToSlide($index)"></div>
+                            </li>
+                        </ul>
+                    </section>
+                    <section ng-if="detailsCtrl.screenshots.length == 0" id = "noScreenshots">
+                        <h3>{{::'app.details.label.screenshots' | i18n}}</h3>
+                        <div>{{::'app.details.noScreenshots' | i18n}}</div>
+                    </section>
+                    <section ng-if="::detailsCtrl.descriptionHTML" id="description">
+                        <h3>{{::'app.details.label.description' | i18n}}</h3>
+                        <div ng-bind-html="::detailsCtrl.descriptionHTML"></div>
+                    </section>
+                    <section ng-if="!detailsCtrl.descriptionHTML && !detailsCtrl.isLoading" id="pt-detail-nodescription">
+                        <h3>{{::'app.details.label.description' | i18n}}</h3>
+                        <div>{{::'app.details.noDescription' | i18n}}</div>
+                    </section>
+                    <section ng-if="::detailsCtrl.categories.length || detailsCtrl.version || detailsCtrl.size">
+                        <h3>{{::'app.details.label.information' | i18n}}</h3>
+                        <dl class="compact- description- list">
+                            <dt ng-if="::detailsCtrl.categories.length">
+                                {{::'app.details.label.category' | i18n}}</dt>
+                            <dd ng-if="::detailsCtrl.categories.length">
+                                <ul class="comma- list">
+                                    <li ng-repeat="cat in ::detailsCtrl.categories">{{cat}}</li>
+                                </ul>
+                            </dd>
+                            <dt ng-if="detailsCtrl.version">{{::'app.details.label.version' | i18n}}</dt>
+                            <dd ng-if="detailsCtrl.version">{{::detailsCtrl.version}}</dd>
+                            <dt ng-if="detailsCtrl.size">{{::'app.details.label.size' | i18n}}</dt>
+                            <dd ng-if="detailsCtrl.size">    {{
+                                    ::(detailsCtrl.size/1000000).toPrecision(3)
+                                }}{{
+                                    ::'app.details.abbrev.megabytes' | i18n
+                                }}</dd>
+                            <dt ng-if="detailsCtrl.price">{{::'app.details.label.price' | i18n}}</dt>
+                            <dd ng-if="detailsCtrl.price">{{::detailsCtrl.price}}</dd>
+                        </dl>
+                    </section>
+                    <section ng-if="detailsCtrl.showRequirement">
+                        <h3>{{::'app.details.label.requirement' | i18n}}</h3>
+                        <dl>
+                            <!--For ThinApp-->
+                            <dd ng-if="detailsCtrl.subType === 'THINAPP'">
+                                <span>{{::'app.details.thinapp.requirement' | i18n}}</span>
+                            </dd>
+
+                            <!--For XenApp-->
+                            <dd ng-if="detailsCtrl.subType === 'XENAPP'">
+                                <span ng-click="preventCloseOnClick($event)" ng-bind-html="detailsCtrl.xenAppTooltip" ></span>
+                            </dd>
+
+                            <!--For XenAppDeliveryGroup-->
+                            <dd ng-if="detailsCtrl.subType === 'XENAPPDELIVERYGROUP'">
+                                <span ng-click="preventCloseOnClick($event)" ng-bind-html="detailsCtrl.xenAppDeliveryGroupTooltip" ></span>
+                            </dd>
+
+                            <!--For ViewDesktop-->
+                            <dd ng-if="detailsCtrl.subType === 'VIEWPOOL'">
+                                <span ng-click="preventCloseOnClick($event)" ng-bind-html="detailsCtrl.viewDesktopTooltip" ></span>
+                            </dd>
+
+                            <!--For ViewApp-->
+                            <dd ng-if="detailsCtrl.subType === 'VIEWAPP'">
+                                <span ng-click="preventCloseOnClick($event)" ng-bind-html="detailsCtrl.viewAppTooltip" ></span>
+                            </dd>
+
+                            <!--For DesktoneDesktop-->
+                            <dd ng-if="detailsCtrl.subType === 'DESKTONEDESKTOP'">
+                                <span ng-click="preventCloseOnClick($event)" ng-bind-html="detailsCtrl.desktoneTooltip"></span>
+                            </dd>
+
+                            <!--For DesktoneApplication-->
+                            <dd ng-if="detailsCtrl.subType === 'DESKTONEAPPLICATION'">
+                                <span ng-click="preventCloseOnClick($event)" ng-bind-html="detailsCtrl.daasAppTooltip"></span>
+                            </dd>
+                        </dl>
+
+                    </section>
+
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <div spinner ng-show="detailsCtrl.isLoading"></div>
+
+</div>

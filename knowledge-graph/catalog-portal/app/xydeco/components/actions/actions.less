@@ -1,0 +1,56 @@
+// Project Horizon
+// (c) 2013-2014 VMware, Inc. All rights reserved.
+// VMware Confidential.
+
+/** @pattern .actions
+
+An ordered list of alternatives provided to the user, usually in the form of
+of buttons that may be clicked.
+
+The primary call to action should be the first action listed.  The CSS will
+handle ordering them left-to-right or right-to-left, as appropriate.
+
+@example[actions-demo.html]
+*/
+
+@actions-spacing: .5em;
+
+.actions {
+    @pad: @actions-spacing/2;
+
+    display: block;
+    width: 100%;
+    margin: 0 -@pad;
+    .clearfix;
+
+    .action-item,
+    > li {
+        padding: 0 @pad;
+        float: left;
+    }
+
+    &.left-to-right- { /** @modifier */
+    }
+
+    &.right-to-left- { /** @modifier */
+        .action-item,
+        > li {
+            float: right;
+        }
+    }
+
+    &.vertical- { /** @modifier */
+        display: inline-table; // inline so text-align: right works
+        width: auto;
+        margin: 0;
+        .action-item,
+        > li {
+            float: none;
+            padding: @pad 0;
+            button,
+            .button {
+                width: 100%;
+            }
+        }
+    }
+}

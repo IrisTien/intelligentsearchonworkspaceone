@@ -1,0 +1,275 @@
+@notify-container-height: 36px;
+@message-default-bg-color:#0095d3;
+@message-info-fg-color: #0095d3;
+@message-info-bg-color: #D6F3FF;
+@message-info-icon-color: #00A1E4;
+@message-progress-bg-color: #0095d3;
+@message-progress-line-color: #2EA6DA;
+@message-error-fg-color: rgba(217, 84, 30, 1);
+@message-error-bg-color: #F5E4E5;
+@message-error-icon-color: #C84A54;
+@message-text-color-gray: rgba(65, 75, 87, 1);
+@message-close-icon-color: rgba(65, 75, 87, 1);
+@message-warning-fg-color: rgba(248, 152, 29, 1);
+@message-warning-bg-color: #FDECD2;
+@message-warning-icon-color: #F38B00;
+@message-box-shadow: 0 1px 2px rgba(0,0,0,.3);
+@message-success-fg-color: @white;
+@notify-button-border-radius: 2px;
+@message-z-index: 200;
+@message-width: 100%;
+
+.notify-container {
+    position: fixed;
+    top: @masthead-height;
+    width: 100%;
+    z-index: 500;
+}
+
+.topnav-hide .notify-container, .people-search .notify-container {
+    top: @header-height;
+}
+
+.ws-desktop .notify-container {
+    top: @desktopapp-header-height;
+}
+
+.ws-desktop.ws-mac .notify-container {
+    top: @desktopapp-header-height + @mac-toolbar-height;
+}
+
+.notify-content {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.notify-message-container {
+    width: @message-width;
+    height: @notify-container-height;
+    margin: 0 auto;
+    color: @white;
+    white-space: nowrap;  // since all child elements are inline-block ensure they are on the same line
+    background: @message-default-bg-color;
+    box-shadow: @message-box-shadow;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+
+    .message-body {
+        width:100%;
+        font-size:13px;
+        display: inline-block;
+        margin: 0;
+    }
+    svg {
+        color:@white;
+    }
+
+    .notify-close-button {
+        position:absolute;
+        top:6px;
+        right: 0;
+        z-index:100;
+        color:@white;
+
+        @media (min-width: @phoneL) {
+            right: 6px;
+        }
+
+        svg {
+            width:24px;
+            height:24px;
+        }
+    }
+
+    // make all .message-body child elements inline-block and use vertical-align: middle to align them vertically
+    .message-icon, .message-text, .notify-action-button {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 2px;
+    }
+
+    .notify-action-button {
+        @media (min-width: @phoneL) {
+            margin-left:6px;
+        }
+    }
+
+    .message-text {
+        height: 36px;
+        line-height: 36px;
+        max-width: 240px;
+        .single-line-ellipsis();
+
+        @media (min-width: @phoneM) {
+            max-width: 75%;
+        }
+
+        @media (min-width: @phoneL) {
+            max-width: 90%;
+        }
+
+        @media (min-width: @tabletS) {
+            max-width: 95%;
+        }
+
+        @media (min-width: @desktopM) {
+            max-width: 1440px;
+        }
+    }
+
+    &.info {
+        border-color: @message-info-fg-color;
+        background-color: @message-info-bg-color;
+        text-align: left;
+
+        @media (min-width: @phoneM) {
+            text-align: center;
+        }
+
+        .message-icon svg {
+            color: @message-info-icon-color;
+        }
+
+        .notify-close-button svg{
+            color: @message-close-icon-color;
+        }
+
+        .message-text {
+            color: @message-text-color-gray;
+            max-width: 180px;
+
+            @media (min-width: @phoneS) {
+                max-width: 230px;
+            }
+            @media (min-width: @phoneM) {
+                max-width: 65%;
+            }
+
+            @media (min-width: @phoneL) {
+                max-width: 85%;
+            }
+        }
+    }
+
+    &.error {
+        background-color: @message-error-bg-color;
+        color: @message-text-color-gray;
+
+        .message-icon svg {
+            color: @message-error-icon-color;
+        }
+
+        .notify-close-button svg{
+            color: @message-close-icon-color;
+        }
+
+    }
+
+    &.warning {
+        /** A message which states that an error occur. */
+        background-color: @message-warning-bg-color;
+        color: @message-text-color-gray;
+
+        .message-icon svg {
+            color: @message-warning-icon-color;
+        }
+
+        .notify-close-button svg{
+            color: @message-close-icon-color;
+        }
+
+    }
+
+    &.success {
+        background: #6cb33f; /* Old browsers */
+        background: -moz-linear-gradient(left,  #6cb33f 0%, #22b26f 100%);
+        background: -webkit-linear-gradient(left,  #6cb33f 0%,#22b26f 100%);
+        background: linear-gradient(to right,  #6cb33f 0%,#22b26f 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6cb33f', endColorstr='#22b26f',GradientType=1 ); /* IE6-9 */
+        .message-icon {
+            color: @message-success-fg-color;
+        }
+    }
+
+    &.progress {
+        @-webkit-keyframes progress{
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: -75px 0px;
+            }
+        }
+        @-moz-keyframes progress{
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: -75px 0px;
+            }
+        }
+        @-ms-keyframes progress{
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: -75px 0px;
+            }
+        }
+        @keyframes progress{
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: -70px 0px;
+            }
+        }
+
+        background-image: repeating-linear-gradient(-45deg, @message-progress-line-color, @message-progress-bg-color 5px, @message-progress-bg-color 10px);
+        -webkit-animation:progress 3s linear infinite;
+        -moz-animation:progress 3s linear infinite;
+        -ms-animation:progress 3s linear infinite;
+        animation:progress 3s linear infinite;
+        background-size: 100px 100px;
+
+    }
+
+    .message-actions {
+        text-align: right;
+    }
+}
+
+.notify-action-button {
+    height: 24px;
+    line-height:24px;
+    background: @white;
+    color: @message-info-fg-color;
+    font-size: 13px;
+    padding: 0 6px;
+    max-width: 65px;
+    border-radius: @notify-button-border-radius;
+    .single-line-ellipsis();
+
+    @media (min-width: @phoneS) {
+        max-width:80px;
+        right: 6px;
+    }
+
+    @media (min-width: @tabletS) {
+        max-width:120px;
+    }
+
+    @media (min-width: @desktopM) {
+      right: 8px;
+    }
+}
+
+.entitlement-notloaded {
+    color: @white;
+}
+
+.settings-style + .notify-container .info, .support-style + .notify-container .info {
+    display: none;
+}
+

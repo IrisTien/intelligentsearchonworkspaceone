@@ -1,0 +1,48 @@
+#pull-to-refresh {
+  display: none;
+  top:-30px;
+  .pull-spinner {
+    display: none;
+    position: relative;
+  }
+
+  .spinner-class();
+  .pull {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .release {
+    font-size: 30px;
+    text-align: center;
+    animation: roll .3s;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  @keyframes roll {
+    0% {
+      transform: rotate(0);
+      -webkit-transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(180deg);
+      -webkit-transform: rotate(180deg);
+    }
+  }
+
+  .set-transition-speed {
+    -webkit-transition-duration: 150ms;
+    -moz-transition-duration: 150ms;
+    -o-transition-duration: 150ms;
+    transition-duration: 150ms;
+  }
+
+  .reset-transition-speed {
+    -webkit-transition-duration: 0ms;
+    -moz-transition-duration: 0ms;
+    -o-transition-duration: 0ms;
+    transition-duration: 0ms;
+  }
+
+}

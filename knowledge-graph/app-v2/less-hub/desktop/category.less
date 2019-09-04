@@ -1,0 +1,99 @@
+@category-header-height: 44px;
+@category-list-item-height: 44px;
+
+@category-left-panel-width: 235px;
+// To hide the scroll bar
+@category-padding-offset: 20px;
+@category-item-text-font-size: 15px;
+
+@category-section-gutter: 8px;
+@category-item-width: 220px;
+
+@list-item-hover-bg-m: rgba(255,255,255,.60);
+
+@category-list-caret-color: #b8b8b8;
+@category-list-caret-size: 9px;
+
+.category-container {
+    position: absolute;
+    top: 0;
+    left:0;
+    width: @category-left-panel-width;
+    min-height: ~ 'calc(100vh - @{breadcrumb-height})';
+    overflow: hidden;
+    border-right: solid 1px @list-item-divider-bg;
+}
+
+.category-bottom-scrim {
+    position: absolute;
+    bottom: 0;
+    width: @category-left-panel-width;
+    height: 32px;
+    display: none;
+
+    @media (min-width: @desktopapp-stop3) {
+        display: block;
+        background: linear-gradient(to bottom, rgba(245,245,245,0) 0%,rgba(245,245,245,1) 100%);
+    }
+}
+
+.category {
+    ul:last-child {
+        margin-bottom: 32px;
+    }
+}
+// ng-include generated an extra div, without defining the height, the scrolling is disabled
+.category-template-container {
+    height: 100%;
+}
+
+.category-default-items {
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: solid 1px @list-item-divider-bg;
+}
+
+.category-header {
+    line-height: @category-header-height;
+    padding: 20px @list-item-padding-h;
+}
+
+.category-list-item {
+    width: 220px;
+    position: relative;
+    height: @category-list-item-height;
+    line-height: @category-list-item-height;
+    padding: 0 32px 0 @list-item-padding-h;
+    font-size: @category-item-text-font-size;
+    background-position: right -2px center;
+    .single-line-ellipsis;
+    cursor: pointer;
+    // Generate the caret using css so it can be branded
+    &:after {
+        content: '';
+        position: absolute;
+        top: 18px;
+        right: 16px;
+        width: @category-list-caret-size;
+        height: @category-list-caret-size;
+        border-top: solid 1.5px @category-list-caret-color;
+        border-right: solid 1.5px @category-list-caret-color;
+        transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+    }
+
+    &.is-selected {
+        color: @primary-text-color;
+        border-radius: @category-list-item-height/2;
+        background-color: @white;
+
+        &:hover {
+            background-color: @white;
+        }
+    }
+
+    &:hover {
+        background-color: @list-item-hover-bg-m;
+        border-radius: @category-list-item-height/2;
+    }
+}

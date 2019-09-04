@@ -1,0 +1,36 @@
+<div class="search-results">
+    <!-- loading spinner section-->
+    <div ng-show="ctrl.isLoading" class="search-people-loading">
+        <spinner-loading></spinner-loading>
+    </div>
+
+    <!-- people search result items section-->
+    <div class="search-people-recent-container" ng-if="!ctrl.reqChars && ctrl.recentVisitedUser.length && !ctrl.users.length">
+        <h2 class="section-headline-style2 people-search-headerline">
+            {{::'app.people.labels.recent' | i18n }}
+        </h2>
+        <p ng-repeat="recentUser in ctrl.recentVisitedUser track by $index+recentUser.id"
+             ng-mousedown="ctrl.userDetails(recentUser)" class="search-people-recent-item"
+             ng-include="'app-v2/components/peopleSearch/peopleSearchRecentItem.html'">
+        </p>
+    </div>
+
+    <!-- people search result items section-->
+    <h2 class="section-headline-style2 people-search-headerline" ng-if="!ctrl.reqChars && ctrl.users.length > 0">{{ctrl.users.length}} {{::'hub.people.search.result' | i18n }}</h2>
+    <div ng-repeat="user in ctrl.users track by $index+user.id"  ng-if="!ctrl.reqChars" class="search-people-item"
+         ng-include="'app-v2/components/peopleSearch/peopleSearchItem.html'"
+         ng-click="ctrl.userDetails(user)">
+    </div>
+
+    <!-- people empty result section-->
+    <div class="search-people-empty-result" ng-if="ctrl.noResults">
+        <h2 class="empty-page-heading">{{ ::'hub.apps.search.no.result.header' | i18n }}</h2>
+        <p class="search-empty-message">{{ ::'hub.apps.searchpeople.no.result.msg' | i18n }}</p>
+        <section class="search-module hub-no-apps" ng-include="'app-v2/svgincludes-hub/hub-no-search-results.html'"></section>
+    </div>
+    <div class="search-people-empty-result" ng-if="ctrl.reqChars && !vm.isLoading">
+        <p>{{::'appCenter.peopleSearch.atLeastThreeChars' | i18n }}</p>
+        <section class="search-module hub-no-apps" ng-include="'app-v2/svgincludes-hub/hub-no-search-results.html'"></section>
+    </div>
+</div>
+

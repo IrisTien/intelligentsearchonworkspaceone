@@ -1,0 +1,104 @@
+<div class="catalog-main headered- view- frame" ng-class="{'no-tabs-':!appCenterCtrl.hasLaunchableApps}"
+     filter-menu="catalogCtrl.filterConfig" on-select="catalogCtrl.filterByLabel(item)">
+    <div frame-drawer hamburger-menu drawer-control="appCenterCtrl.drawerIsActive">
+    </div>
+
+    <div class="drawer-overlay" ng-class="{'is-active':appCenterCtrl.drawerIsActive}" ng-click="appCenterCtrl.toggleDrawer()"></div>
+
+    <div class="frame-header">
+        <div class="theme-portal-masthead">
+            <div class="mobile- masthead" ng-class="{ 'search-' : appCenterCtrl.searchMode }">
+                <div class="mastheadContainer">
+                    <div class="masthead-left">
+                        <div>
+                            <a class="iconic- link- button" ng-click="appCenterCtrl.toggleDrawer()">
+                                <svg symbol="hamburger"></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="masthead-center">
+                        {{::'appCenter.nav.myApps' | i18n}}
+                    </div>
+                    <div class="masthead-right">
+                        <a class="iconic- link- button" ng-click="appCenterCtrl.showSearch()">
+                            <svg symbol="search"></svg>
+                        </a>
+                    </div>
+                </div>
+                <div ng-include="'app/common/mobileSearchContainer.html'"></div>
+            </div>
+        </div>
+        <div class="masthead-navigation-tabs" ng-show="appCenterCtrl.hasLaunchableApps" >
+            <ul class="secondary- center- tabs">
+                <!-- inline blocks: let the <li>s close themselves to suppress intervening whitespace -->
+                <li>
+                    <a ng-click="appCenterCtrl.launcher()">{{'app.nav.tab.launcher' | i18n }}</a>
+                <li class="is-active">
+                    <a ng-click="appCenterCtrl.catalog()">{{'app.nav.tab.catalog' | i18n }}</a>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="headered- balanced- sidebarred- frame theme-portal-background" ng-class="{'no-tabs-':!appCenterCtrl.hasLaunchableApps}">
+        <div class="frame-header appcenter-filter-bar">
+            <div class="full-bleed- page">
+                <div class="grid">
+                    <div class="navigation-tabs-container catalog-margin">
+                        <ul class="secondary- tabs">
+                            <li>
+                                <img src="app/graphics/launcher_inactive.svg" class="navigation-image">
+                                <a ng-click="appCenterCtrl.launcher()">{{'app.nav.tab.launcher' | i18n }}</a>
+                            </li>
+                            <li class="is-active">
+                                <img src="app/graphics/catalog_active.svg" class="navigation-image catalog-navigation-image">
+                                <a ng-click="appCenterCtrl.catalog()">{{'app.nav.tab.catalog' | i18n }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="welcomeMessageContainer desktopOnly theme-portal-text">
+                <div ng-if="!catalogCtrl.showNoSearchResultsMsg" class="welcomeMessage">{{::'appCenter.welcomeMsg' | i18n}}</div>
+                <div class="desktopFilterBarContainer tabletPotraitOnly">
+                    <div filter-bar="{ isDesktop: true }"
+                         selected-item="catalogCtrl.appCenterContext.selectedCategory.name"></div>
+                </div>
+            </div>
+        </div>
+        <div class="frame-sidebar">
+            <div class="vertically- scrollable- pane">
+                <div ng-include="'app/catalog/catalogMenu.html'"></div>
+            </div>
+        </div>
+        <div class="vertically- scrollable- pane" infinite-scroll onend="catalogCtrl.getNextPage()">
+            <div class="full-bleed- page catalog-items-container">
+                <div class="grid">
+                    <div class="mobileFilterBarContainer mobileOnly">
+                        <div filter-bar selected-item="catalogCtrl.appCenterContext.selectedCategory.name"></div>
+                    </div>
+                    <div ng-if="catalogCtrl.showNoResultsMsg" class="noresultsmsg box">
+                        <strong>{{'appCenter.noAppsMsg' | i18n}}</strong>
+                    </div>
+                    <div ng-if="catalogCtrl.showNoSearchResultsMsg" class="noresultsmsg box mobileOnly">
+                        <strong>{{'appCenter.noSearchResults' | i18n}}</strong>
+                    </div>
+                    <div ng-if="catalogCtrl.showNoSearchResultsMsg" class="noresultsmsg box desktopOnly">
+                        <strong>{{'appCenter.noSearchResults' | i18n}}</strong>
+                    </div>
+                    <div class="grid" no-touch>
+                        <div class="MP-full-width- three- box"
+                            ng-repeat="app in catalogCtrl.visibleCatalogApps track by app.appId">
+                            <div catalog-item appdata="app" modalobj="$modal" is-loading="catalogCtrl.isLoading" device-status="deviceStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div spinner ng-show="catalogCtrl.isLoading"></div>
+</div>

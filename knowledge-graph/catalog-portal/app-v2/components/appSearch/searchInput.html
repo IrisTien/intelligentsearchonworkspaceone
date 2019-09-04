@@ -1,0 +1,37 @@
+<div>
+    <header class="masthead-mobile search">
+        <div class="search-back-button-android" ng-click="ctrl.goBack()">
+            <svg svg-symbol="icon-search-back-android" class="icon-search-back-android"></svg>
+        </div>
+        <div class="search-input-bar">
+            <label>
+                <svg svg-symbol="icon-searchglass" class="icon-input-searchglass"></svg>
+            </label>
+            <input type="text"
+                   ng-model="ctrl.query.name"
+                   ng-change="ctrl.onsearch()"
+                   ng-model-options="{ debounce: 500 }"
+                   placeholder="{{ ::'hub.apps.search.text' | i18n }}"
+                   class="search-inputfield"
+                   autocorrect="off"
+                   autocapitalize="off"/>
+            <!--on mobile screen clear text and on desktop screen close search-->
+            <button class="search-clear-button people-search-clear-text" ng-click="ctrl.clearSearchResults()" ng-show="ctrl.query.name && !ctrl.loading">
+                <svg svg-symbol="icon-circle-x" class="search-clear-x-button"></svg>
+                <svg svg-symbol="icon-circle-x-android" class="search-clear-x-button-android"></svg>
+            </button>
+        </div>
+        <div class="mobile-search-cancel" ng-click="ctrl.goBack()">
+            <span class="search-cancel">{{::'button.cancel'|i18n}}</span>
+        </div>
+    </header>
+    <main class="content-container" scroll-input-blur>
+        <article class="content-container-scrollable">
+            <div class="content">
+                <div search-dropdown template-url="app-v2/components/appSearch/searchDropDown.html"
+                     search-item="'.search-item-app.active'" ng-if="ctrl.query.name.length"></div>
+            </div>
+        </article>
+    </main>
+</div>
+

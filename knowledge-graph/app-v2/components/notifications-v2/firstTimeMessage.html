@@ -1,0 +1,5 @@
+<div ng-if="notificationCtrl.showFirstTimeMessage && !notificationCtrl.isLoading" class="empty-notification">
+    <p class="empty-v2-notification-title primary-text-color">{{::'hub.notifications.welcome' | i18n}}</p>
+    <p class="empty-v2-notification-description">{{::'hub.v2.notifications.first.time.description' | i18n}}</p>
+    <div class="icon-v2-empty-notification" ng-include="'app-v2/svgincludes-hub/hub-v2-notifications-empty.html'"></div>
+</div>

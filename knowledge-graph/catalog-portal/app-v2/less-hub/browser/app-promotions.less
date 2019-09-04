@@ -1,0 +1,366 @@
+@promotion-banner-background-image-one: url(../app-v2/graphics-hub/promotion-background-one.svg);
+@promotion-banner-background-image-two: url(../app-v2/graphics-hub/promotion-background-two.svg);
+@promotion-banner-background-image-three: url(../app-v2/graphics-hub/promotion-background-three.svg);
+
+@owl-dot-size: 5px;
+@owl-dot-inactive-bg: #bababa;
+@owl-dot-active-bg: @primary-button-background;
+// default uses html entity so if size need to be changed, change the font-size then set the color to transparent
+@owl-nav-font-size: 120px;
+@owl-nav-width: 40px;
+@owl-nav-height: 200px;
+
+@promo-width-xs: 240px;
+@promo-width-s: 300px;
+
+@promo-banner-content-border-radius: 8px;
+
+// All the -center refer to the center slide
+@promo-banner-content-padding-left-s: 108px;
+@promo-banner-content-padding-left-m: 112px;
+
+@promo-banner-content-padding-left-s-center: 100px;
+@promo-banner-content-padding-left-m-center: 116px;
+
+@promo-banner-height-s: 160px;
+@promo-banner-height-m: 180px;
+
+@promo-card-anim-time: 0.35s;
+
+@promo-app-name-font-size: 15px;
+@promo-banner-center-scale-ratio: 1.18;
+
+@promo-app-tile-s: 74px;
+@promo-app-tile-s-center: 70px;
+
+@promo-app-tile-m: 84px;
+@promo-app-tile-m-center: 86px;
+
+@app-promo-icon-s: 50px;
+@app-promo-icon-s-center: 44px;
+
+@app-promo-icon-m: 54px;
+@app-promo-icon-m-center: 58px;
+
+@category-promotion-title-font-size: 11px;
+@promo-category-name-font-size: 20px;
+
+// Owl rules overrides
+.owl-carousel {
+  .owl-dots {
+      position: absolute;
+      top: @promo-banner-height-s;
+      width: 100%;
+      height: @owl-dot-size;
+      text-align: center;
+      padding-top: 6px;
+      // For less than three, the plugin disable the dots
+      display: block!important;
+
+      @media (min-width: @phoneS) {
+          top: @promo-banner-height-m;
+      }
+  }
+
+  button.owl-dot {
+      margin: 0 3px;
+      width: @owl-dot-size;
+      height: @owl-dot-size;
+      background-color: @owl-dot-inactive-bg;
+      border-radius: 50%;
+
+      &.active {
+          background-color: @owl-dot-active-bg;
+      }
+  }
+
+  .owl-nav {
+    // There is a bug in owl carousel, the disabled class does not get removed on .owl-nav,
+    // https://github.com/OwlCarousel2/OwlCarousel2/issues/1809
+      font-size: @owl-nav-font-size;
+      color: transparent;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 0;
+
+      button.owl-prev, button.owl-next {
+          position: absolute;
+          width: @owl-nav-height;
+          height: @owl-nav-height + 60px;
+          top: (@promo-banner-height-s - (@owl-nav-height + 60px))/2;
+          border-radius: 50%;
+          background: radial-gradient(ellipse at center, rgba(0,0,0,0.65) 40%,rgba(0,0,0,0) 65%);
+
+          @media (min-width: @phoneS) {
+              top: (@promo-banner-height-m - (@owl-nav-height + 60px))/2;
+          }
+      }
+
+      button.owl-prev {
+          left: -(@owl-nav-height - @owl-nav-width);
+          &:after {
+              content: '';
+              position: absolute;
+              top: 114px;
+              right: 8px;
+              width: 24px;
+              height: 24px;
+              border-top: solid 2px transparent;
+              border-right: solid 2px transparent;
+              transform: rotate(-135deg);
+              -ms-transform: rotate(-135deg);
+          }
+
+          &:hover:after {
+              border-top: solid 2px @category-list-caret-color;
+              border-right: solid 2px @category-list-caret-color;
+          }
+      }
+
+      button.owl-next {
+          right: -(@owl-nav-height - @owl-nav-width);
+
+          &:after {
+              content: '';
+              position: absolute;
+              top: 114px;
+              left: 8px;
+              width: 24px;
+              height: 24px;
+              border-top: solid 2px transparent;
+              border-right: solid 2px transparent;
+              transform: rotate(45deg);
+              -ms-transform: rotate(45deg);
+          }
+
+          &:hover:after {
+              border-top: solid 2px @category-list-caret-color;
+              border-right: solid 2px @category-list-caret-color;
+          }
+      }
+  }
+
+  // For iOS and Android devices, the carousel can advance by swiping so UX spec hides it
+  &.ios-android .owl-nav {
+      display: none!important;
+  }
+}
+
+// Promo banner specific rules
+.apps-module.promotions {
+  margin-top: @list-item-padding-h;
+
+  @media (min-width: @browser-hamburger-ribbon-transition) {
+      padding: @list-item-padding-h @list-item-padding-h 0;
+  }
+}
+
+.promotions-app {
+    width: 100%;
+    // must declare block as this is an angular component which default is inline
+    display: block;
+    height: @promo-banner-height-s + 20px;
+    // need to set to hidden otherwise during resize the ow-carousel cloned item might show
+    overflow: hidden;
+
+    @media (min-width: @phoneS) {
+        height: @promo-banner-height-m + 30px;
+    }
+}
+
+.promotion-card {
+    width: @promo-width-xs;
+    height: @promo-banner-height-s;
+    padding: 13px;
+
+    @media (min-width: @phoneS) {
+        width: @promo-width-s;
+        height: @promo-banner-height-m;
+        padding: 16px;
+    }
+}
+
+// If there is only one banner, hide all the cloned version and the active one
+.lone-banner .owl-item.cloned, .lone-banner .owl-item.active:not(.center) {
+    opacity: 0;
+}
+
+.promotion-card-content {
+    width: 100%;
+    height: 100%;
+    background: @primary-button-background;
+    background-size: cover;
+    border-radius: @promo-banner-content-border-radius;
+    position: relative;
+    padding: @list-item-padding-h * 1.5 @list-item-padding-h @list-item-padding-h @promo-banner-content-padding-left-s;
+
+    @media (min-width: @phoneS) {
+        padding-left: @promo-banner-content-padding-left-m;
+    }
+
+    &.category-promotion {
+        display: table;
+        padding: 20px!important;
+    }
+}
+
+// Instead of using app-tile, app-icon, as the size is different to avoid overrides and confustion
+.app-promo-tile {
+  position: absolute;
+  top: @list-item-padding-h;
+  left: @list-item-padding-h * 2/3;
+  width: @promo-app-tile-s;
+  height: @promo-app-tile-s;
+  background: @white;
+  border-radius: @app-tile-border-radius-s;
+  padding: (@promo-app-tile-s - @app-promo-icon-s)/2;
+
+  @media (min-width: @phoneS) {
+      top: 24px;
+      left: 16px;
+      width: @promo-app-tile-m;
+      height: @promo-app-tile-m;
+      padding: (@promo-app-tile-m - @app-promo-icon-m)/2;
+  }
+}
+
+.app-promo-icon {
+  width: @app-promo-icon-s;
+  height: @app-promo-icon-s;
+
+  @media (min-width: @phoneS) {
+      width: @app-promo-icon-m;
+      height: @app-promo-icon-m;
+  }
+
+  img {
+      transform: translateY(-50%);
+      -webkit-transform: translateY(-50%);
+      position: relative;
+      top: 50%;
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 6px;
+      background: @white;
+  }
+}
+
+.app-promo-title-content {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  height: 80px;
+}
+
+.category-promotion-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  height: 80px;
+}
+
+.active.center .app-promo-title-content {
+  height: 100px;
+}
+
+.app-promo-name {
+    font-size: @promo-app-name-font-size;
+    font-weight: 500;
+    color: @white;
+    line-height: 20px;
+    max-height: 40px;
+    .multi-line-ellipsis(2);
+}
+
+.category-promo-name {
+  font-size: @promo-category-name-font-size;
+  font-weight: 500;
+  color: @white;
+  line-height: 26px;
+  max-height: 52px;
+  .multi-line-ellipsis(2);
+}
+
+.category-promo-title {
+  font-size: @category-promotion-title-font-size;
+  line-height: 15px;
+  margin-bottom: 4px;
+  color: @white;
+  .single-line-ellipsis();
+}
+
+.one .promotion-card-content {
+  background-image: @promotion-banner-background-image-one;
+}
+
+.two .promotion-card-content {
+    background-image: @promotion-banner-background-image-two;
+}
+
+.three .promotion-card-content {
+    background-image: @promotion-banner-background-image-three;
+}
+
+.promotion-app-action-button {
+    max-width: 140px;
+    margin-top: 16px;
+    height: 22px;
+    line-height: 22px;
+    background: @white;
+    border-radius: 4px;
+    color: @primary-text-color;
+    font-size: 12px;
+    font-weight: bold;
+    .single-line-ellipsis();
+
+    @media (min-width: @phoneS) {
+        left: @promo-banner-content-padding-left-m;
+    }
+}
+
+.active.center .promotion-card-content {
+  padding-top: 16px;
+  padding-left: @promo-banner-content-padding-left-s-center;
+  transform: scale(@promo-banner-center-scale-ratio);
+  -webkit-transform: scale(@promo-banner-center-scale-ratio);
+  -ms-transform: scale(@promo-banner-center-scale-ratio);
+  transition: transform @promo-card-anim-time;
+  -webkit-transition: transform @promo-card-anim-time;
+  -ms-transition: transform @promo-card-anim-time;
+
+  @media (min-width: @phoneS) {
+      padding-left: @promo-banner-content-padding-left-m-center;
+  }
+
+  .app-promo-tile {
+      position: absolute;
+      top: @list-item-padding-h * 1.5;
+      left: @list-item-padding-h;
+      width: @promo-app-tile-s-center;
+      height: @promo-app-tile-s-center;
+      background: @white;
+      border-radius: @app-tile-border-radius-s;
+      padding: (@promo-app-tile-s-center - @app-promo-icon-s-center)/2;
+
+      @media (min-width: @phoneS) {
+          width: @promo-app-tile-m-center;
+          height: @promo-app-tile-m-center;
+          padding: (@promo-app-tile-m-center - @app-promo-icon-m-center)/2;
+      }
+  }
+
+  .app-promo-icon {
+      width: @app-promo-icon-s-center;
+      height: @app-promo-icon-s-center;
+
+      @media (min-width: @phoneS) {
+          width: @app-promo-icon-m-center;
+          height: @app-promo-icon-m-center;
+      }
+  }
+
+  .app-promo-name {
+      margin-top: 8px;
+  }
+}

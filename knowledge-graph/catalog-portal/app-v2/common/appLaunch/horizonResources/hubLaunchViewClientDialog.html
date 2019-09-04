@@ -1,0 +1,18 @@
+<div modal-new="modal-confirmation" class="horizon-view-launch-modal">
+    <section class="dialog-container" ng-controller="ViewDesktopLaunchController as ctrl">
+        <header class="dialog-header">
+            <svg svg-symbol="icon-close-popup" class="modal-close-icon" ng-click="$modal.cancel(); $event.stopPropagation();"></svg>
+        </header>
+        <div class="dialog-body">
+            <div class="modal-app-list-item-icon" image-load>
+                <img ng-src="{{app._links.icon.href}}">
+            </div>
+            <h3 class="modal-title" ng-bind-html="app.name"></h3>
+            <p class="modal-content-text" ng-bind-html="ctrl.byViewClientDescription"></p>
+        </div>
+        <footer class="dialog-actions two-action">
+            <button class="button-action secondary-action modal-button-secondary" ng-click="$modal.close()">{{::'hub.appLaunch.cancel' | i18n }}</button>
+            <button class="button-action primary-action modal-button-primary" ng-click="ctrl.launchByViewClient();">{{::'hub.appLaunch.open' | i18n }}</button>
+        </footer>
+    </section>
+</div>

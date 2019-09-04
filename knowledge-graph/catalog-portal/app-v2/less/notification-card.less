@@ -1,0 +1,438 @@
+@button-standard-font-size : 14px;
+@desktop-date-font-size : 14px;
+@notification-card-container-padding : 8px;
+@notification-card-header-height : 58px;
+@notification-card-actions-height : 40px;
+@notification-card-item-padding : 16px;
+@notification-icon-width : 32px;
+@notifification-secondary-button-color : #696969;
+
+.notifications-card-container-desktop {
+  font-family: "Open Sans Regular",sans-serif;
+  width: 100%;
+  position: relative;
+  border-top: 1px solid #cdd0d3;
+  background-color: white;
+  z-index: 2000;
+
+  .notifications-header-container {
+    position: relative;
+    width: 100%;
+    height: @notification-card-header-height;
+    font-size: 14px;
+    padding-left: 60px;
+    padding-right: 12px;
+    padding-top: 6px;
+
+    .icon-notifications-ws1 {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      margin-right: 12px;
+      display: inline-block;
+    }
+
+    .notifications-title {
+      font-family: "Open Sans Semibold",sans-serif;
+      display: inline-block;
+      font-size: 16px;
+      width: 100%;
+      line-height: 48px;
+      .single-line-ellipsis();
+      vertical-align: bottom;
+    }
+  }
+
+  .notifications-body-container {
+    position: relative;
+    width: 100%;
+    padding: 0 16px 16px;
+    min-height: 40px;
+
+    .notifications-body-text {
+      width: 100%;
+      font-size: @desktop-date-font-size;
+      white-space: pre-wrap;
+      color: #414b57;
+      opacity: 0.9;
+
+      a {
+        display: inline-block;
+        word-break: break-all;
+        color: @blue;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .notifications-date {
+      display: inline-block;
+      font-size: @desktop-date-font-size;
+      color: #414b57;
+      opacity: @light-text-opacity;
+      padding-top: 6px;
+    }
+
+    .notifications-additional-body-section {
+      width: 90%;
+      padding: 8px 6px 8px 0;
+
+      .new-app-icon-container {
+        display: inline-block;
+
+        &:first-child {
+          .tooltip {
+            max-width: 320px;
+            min-height: 24px;
+            text-align: center;
+            top: 36px;
+            margin-left: 4px;
+            transform: translate(0, 0);
+            -webkit-transform: translate(0, 0);
+            -moz-transform: translate(0, 0);
+            -ms-transform: translate(0, 0);
+            white-space: nowrap;
+            left: -4px;
+
+            // Off center the tooltip
+            &:before, &:after {
+              left: 17px;
+              right: auto;
+            }
+          }
+        }
+      }
+
+      .notification-new-app-icon-container {
+        position: relative;
+        margin-right: 4px;
+        width: @notification-icon-width + 2px;
+        height: @notification-icon-width + 2px;
+        border: 1px @bordergrey solid;
+        display: inline-block;
+
+        .tooltip {
+          z-index: 5000;
+          bottom: auto;
+          top: 36px;
+          font-size: 13px;
+        }
+      }
+
+      .icon-additional-body-icons {
+          width: @notification-icon-width;
+          padding: 2px;
+          border-radius: 3px;
+        }
+
+      .notification-extra-icon-text {
+        display: inline-block;
+        position: absolute;
+        font-size: 14px;
+        color: #414b57;
+        opacity: @light-text-opacity;
+        line-height: 2.3;
+      }
+    }
+  }
+
+  .notifications-actions-container {
+    position: relative;
+    width: 100%;
+    height: @notification-card-actions-height;
+    line-height:@notification-card-actions-height;
+    white-space: nowrap;
+    text-align: right;
+
+    .notifications-action-button-primary {
+      font-family: "Open Sans Semibold",sans-serif;
+      display: inline-block;
+      position: relative;
+      border: solid 1px @highlightblue;
+      color: @highlightblue;
+      line-height: 30px;
+      font-size: 14px;
+      text-align: center;
+      .single-line-ellipsis();
+      padding: 0 6px;
+      min-width: 24%;
+      border-radius: 2px;
+      height: 30px;
+      margin: 0 8px 0 0;
+      cursor: pointer;
+
+      &:hover {
+        background-color: @highlightbluelight;
+      }
+
+      &:last-child {
+        margin: 0 12px 0 0;
+
+        &:hover {
+          background-color: @highlightbluelight;
+        }
+      }
+    }
+
+    .notifications-action-button-secondary {
+      font-family: "Open Sans Semibold",sans-serif;
+      display: inline-block;
+      position: relative;
+      border: solid 1px @notifification-secondary-button-color;
+      color: @notifification-secondary-button-color;
+      line-height: 30px;
+      font-size: 14px;
+      text-align: center;
+      .single-line-ellipsis();
+      padding: 0 6px;
+      min-width: 24%;
+      border-radius: 2px;
+      height: 30px;
+      margin: 0 8px 0 0;
+      cursor: pointer;
+
+      &:hover {
+        background-color: @secondarygraybg;
+      }
+
+      &:last-child {
+        margin: 0 12px 0 0;
+
+        &:hover {
+          background-color: @secondarygraybg;
+        }
+      }
+    }
+
+  }
+}
+
+.notifications-card-container-mobile {
+  font-family: "Open Sans Regular",sans-serif;
+  width: 96%;
+  margin: 6px auto;
+  position: relative;
+  border: 1px solid #cdd0d3;
+  background-color: white;
+  border-radius: 4px;
+  color: @mediumgrey;
+  z-index: 2000;
+
+  @media (min-width: @browser-transition-point) {
+    width: 50%;
+  }
+
+  .notifications-header-container {
+    position: relative;
+    width: 100%;
+    height: @notification-card-header-height;
+    font-size: 14px;
+    padding-left: 60px;
+    padding-right: 12px;
+    padding-top: 6px;
+
+    .icon-notifications-ws1 {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 12px;
+      left: 10px;
+      margin-right: 12px;
+      display: inline-block;
+    }
+
+    .notifications-title {
+      font-family: "Open Sans Semibold",sans-serif;
+      display: inline-block;
+      font-size: 16px;
+      width: 100%;
+      line-height: 48px;
+      .single-line-ellipsis();
+    }
+  }
+
+  .notifications-body-container {
+    position: relative;
+    width: 100%;
+    padding: 0 16px 16px;
+    min-height: 40px;
+
+    .notifications-body-text {
+      width: 100%;
+      font-size: @desktop-date-font-size;
+      white-space: pre-wrap;
+      opacity: 0.9;
+
+      a {
+        display: inline-block;
+        word-break: break-all;
+        color: @blue;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .notifications-date {
+      font-size: @desktop-date-font-size;
+      opacity: @light-text-opacity;
+      padding-top: 6px;
+    }
+
+    .notifications-additional-body-section {
+      width: 90%;
+      padding: 8px 6px 8px 0;
+
+      .icon-additional-body-icons {
+        width: @notification-icon-width;
+        padding: 2px;
+        border-radius: 3px;
+      }
+
+      .notification-new-app-icon-container {
+        position: relative;
+        margin-right: 4px;
+        width: @notification-icon-width + 2px;
+        height: @notification-icon-width + 2px;
+        border: 1px @bordergrey solid;
+        display: inline-block;
+      }
+
+      .notification-extra-icon-text {
+        display: inline-block;
+        position: absolute;
+        font-size: 14px;
+        color: #414b57;
+        opacity: @light-text-opacity;
+        line-height: 2.3;
+      }
+    }
+  }
+
+  .notifications-actions-container {
+    position: relative;
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    height: @notification-card-actions-height;
+    line-height:@notification-card-actions-height;
+
+    .notifications-action-button-primary {
+      font-family: "Open Sans Semibold",sans-serif;
+      display: table-cell;
+      position: relative;
+      border-top: solid 1px @catalog-border-color;
+      border-right: solid 1px @catalog-border-color;
+      color: @highlightblue;
+      height: @notification-card-actions-height;
+      line-height:@notification-card-actions-height;
+      font-size: 14px;
+      text-align: center;
+      .single-line-ellipsis();
+      padding: 0 4px;
+
+      &:last-child {
+        border-right: 0;
+      }
+    }
+
+    .notifications-action-button-secondary {
+      font-family: "Open Sans Semibold",sans-serif;
+      display: table-cell;
+      position: relative;
+      border-top: solid 1px @catalog-border-color;
+      border-right: solid 1px @catalog-border-color;
+      color: @notifification-secondary-button-color;
+      height: @notification-card-actions-height;
+      line-height:@notification-card-actions-height;
+      font-size: 14px;
+      text-align: center;
+      .single-line-ellipsis();
+      padding: 0 4px;
+
+      &:last-child {
+        border-right: 0;
+      }
+    }
+  }
+}
+
+.notifications-close-button {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  z-index: 50;
+  cursor: pointer;
+  color: @lightgray;
+}
+
+.new-apps-modal-popup-close-icon {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+  color: @lightgray;
+}
+
+.notification-disabled {
+  background-color: rgba(224, 225, 227, 0.3);
+
+  img {
+    filter: grayscale(1);
+  }
+
+  svg {
+    filter: grayscale(1);
+  }
+}
+
+@keyframes bluefade {
+  from {
+    background: rgba(7, 169, 237, 0.4);
+  }
+  to {
+    background: transparent;
+  }
+}
+
+.notification-highlight {
+  animation: bluefade 1s;
+}
+
+.notifications-card-container-desktop .notifications-actions-container .notifications-action-button-primary.disabled {
+  border: 1px solid @darkgray!important;
+}
+
+.notifications-actions-container .notifications-action-button-primary.disabled {
+    pointer-events: none!important;
+    opacity: 0.5!important;
+    color: @darkgray!important;
+}
+
+.notifications-card-container-desktop .notifications-actions-container .notifications-action-button-secondary.disabled{
+  border: 1px solid @darkgray!important;
+}
+
+.notifications-actions-container .notifications-action-button-secondary.disabled {
+  pointer-events: none!important;
+  opacity: 0.5!important;
+  color: @darkgray!important;
+}
+
+.notifications-header-container {
+  .image-holder {
+    border-radius: 50%;
+    background: #D4D6D8;
+
+  }
+  .icon-notification-image {
+    height: 26px;
+    width: 26px;
+    margin: 6px auto;
+  }
+}

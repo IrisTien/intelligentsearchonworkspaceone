@@ -1,0 +1,72 @@
+/** @pattern .spinner
+
+Shown when waiting for server to respond
+with data before rendering.
+
+@example[spinner-colors.html] Colored spinners
+**/
+
+@spinner-dim: .3;
+@spinner-bright: 1;
+@spinner-size-large: 100px;
+@spinner-size-small: 50px;
+@spinner-segments: 12;
+@spinner-duration: 2s;
+
+.spinner {
+    //Defaulting to small size
+    .size(@spinner-size-small);
+    fill: currentColor;
+
+    &.inline- {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    &.center- {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    use {
+        opacity: @spinner-dim;
+        .animation( spinner-animation @spinner-duration linear infinite );
+    }
+
+    .segment( @i ) {
+        @delay: (@i - 1) * @spinner-duration / @spinner-segments;
+        use:nth-child(@{i}) {
+            .animation-delay( @delay );
+        }
+    }
+
+    .segments( @spinner-segments );
+
+    .segments( @n ) when (@n > 0) { .segments(@n - 1); }
+    .segments( @n ) { .segment(@n); }
+
+    .size( @s: @spinner-size-large ) {
+        height: @s;
+        width: @s;
+    }
+
+    //Helpers for sizing the spinner
+    .large() {
+        .size(@spinner-size-large);
+    }
+    &.large {
+        .size(@spinner-size-large);
+    }
+}
+
+.spinner-frames ( @n: @spinner-segments, @tail: @n/2 ) {
+    @ymin: @spinner-dim;
+    @ymax: @spinner-bright;
+    @tn: (@tail / @n) * 100%;
+    0% { opacity: @ymin; }
+    0.1% { opacity: @ymax; }
+    @{tn} { opacity: @ymin; }
+    100% { opacity: @ymin; }
+}
+
+.keyframes( spinner-animation, { .spinner-frames() });

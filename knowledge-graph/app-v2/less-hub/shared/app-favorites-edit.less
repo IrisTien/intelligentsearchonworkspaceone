@@ -1,0 +1,200 @@
+@favorites-edit-content-container-border-radius: 8px;
+@content-favorites-edit-padding: 24px;
+
+@sort-header-font-size: 16px;
+@sort-button-height: 24px;
+
+@sort-button-disabled-bg: #cbd1d5;
+
+@sort-warning-message-font-size: 14px;
+@sort-warning-message-bg: #e16e1e;
+
+@favorites-edit-header-height: 72px;
+@favorites-edit-footer-height: 72px;
+
+@favorites-edit-scrim-color: rgba(86, 86, 86, .85);
+
+@windows-touchscreen-message-font-size: 11px;
+@windows-touchscreen-message-color: #757575;
+
+@sort-cancel-button-color: #000;
+@sort-cancel-button-border-color: #000;
+
+@sort-button-font-size: 12px;
+
+.app-favorites-edit {
+  background-color: @favorites-edit-scrim-color;
+  padding-top: 0;
+  z-index: 1000;
+}
+
+// This one has height set to auto similar to modal dialog content and center the content in the middle of the viewport
+.container-favorites-edit {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  width: 300px;
+  max-width: @content-max-width;
+  max-height: 100%;
+  background: @content-bg;
+  border-radius: @favorites-edit-content-container-border-radius;
+
+  @media (min-width: @phoneM) {
+    width: 380px;
+  }
+
+  @media (min-width: @phoneL) {
+    width: 510px;
+  }
+
+  @media (min-width: @browser-hamburger-ribbon-transition) {
+      width: 680px;
+  }
+
+  @media (min-width: 880px) {
+    width: 830px;
+  }
+
+  @media (min-width: @browser-category-transition) {
+    width: @content-max-width;
+  }
+
+  .app-tile {
+    margin: 0 auto 10px;
+  }
+}
+
+.content-favorites-edit {
+  width: 100%;
+  height: 100%;
+  padding: @favorites-edit-header-height 0 @favorites-edit-footer-height;
+}
+
+.content-favorites-edit-body {
+  min-height: 260px;
+  overflow-y: auto;
+  position: relative;
+
+  @media (min-height: 480px) {
+    max-height: 320px;
+  }
+
+  @media (min-height: 600px) {
+    max-height: 440px;
+  }
+
+  @media (min-height: 720px) {
+    max-height: 560px;
+  }
+
+  @media (min-height: 840px) {
+    max-height: 680px;
+  }
+}
+
+.app-favorites-edit-header {
+  position: absolute;
+  width: 100%;
+  top:0;
+  left:0;
+  padding: 0 @list-item-padding-h * 2;
+  height: @favorites-edit-header-height;
+  z-index: 600;
+  border-bottom: solid 1px @list-item-divider-bg;
+
+  h2 {
+      font-size: @sort-header-font-size;
+      margin-top: 20px;
+      line-height: 24px;
+      .single-line-ellipsis();
+  }
+}
+
+.windows-touchscreen-message {
+  font-size: @windows-touchscreen-message-font-size;
+  color: @windows-touchscreen-message-color;
+  margin-bottom: 16px;
+  .single-line-ellipsis();
+}
+
+.editmode-close-button {
+  position: absolute;
+  top: (@favorites-edit-header-height - @mobile-default-taparea-size)/2;
+  right: 12px;
+  z-index:50;
+}
+
+.app-favorites-edit-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left:0;
+  height: @favorites-edit-footer-height;
+  line-height: @favorites-edit-footer-height;
+  background: @content-bg;
+  border-bottom-right-radius: @favorites-edit-content-container-border-radius;
+  border-bottom-left-radius: @favorites-edit-content-container-border-radius;
+  text-align: right;
+  z-index: 600;
+  border-top: solid 1px @list-item-divider-bg;
+}
+
+.sort-actions-container {
+  height: @favorites-edit-footer-height;
+  line-height: @favorites-edit-footer-height;
+}
+
+.sort-warning-message-container {
+    position: absolute;
+    top: @favorites-edit-header-height - 20px;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+}
+
+.sort-warning-message {
+    font-size: @sort-warning-message-font-size;
+    background: @sort-warning-message-bg;
+    color: @white;
+    line-height: 1.5;
+    padding: 6px @list-item-padding-h;
+    margin: @list-item-padding-h;
+}
+
+.sort-action {
+    padding: 0 @list-item-padding-h;
+    display: inline-block;
+    vertical-align: middle;
+    height: @sort-button-height;
+    line-height: @sort-button-height - 2px;
+    padding: 0 20px;
+    max-width: 200px;
+    border-radius: 4px;
+    margin-right: 32px;
+    color: @white;
+    font-size: @sort-button-font-size;
+    text-transform: uppercase;
+    .single-line-ellipsis();
+    position: relative;
+    z-index: -1;
+    opacity: 0.5;
+
+    &.sort-cancel {
+        border: solid 1px @sort-cancel-button-border-color;
+        color: @sort-cancel-button-color;
+        max-width: 240px;
+    }
+
+    &.sort-save {
+        border: solid 1px @primary-button-background;
+        background: @primary-button-background;
+        color: @white;
+    }
+
+    &.sort-cancel.sort-button-enabled, &.sort-save.sort-button-enabled {
+        opacity: 1;
+        z-index: 50;
+    }
+}

@@ -1,0 +1,304 @@
+@setting-rn-control-size:32px;
+@settings-rn-control-color: #b1b5b9;
+@settings-rn-control-caret-size:10px;
+
+.setting-tips-desktop {
+    padding-bottom: 20px;
+    font-size: 15px;
+    line-height: 1.6;
+
+    .subsection-container {
+        margin-bottom: 40px;
+    }
+
+    .tips-device {
+        margin-bottom:15px;
+
+        &.tips-mobile-bookmarks {
+            margin-top:12px;
+        }
+    }
+
+    .illo-tips-bookmarks-desktop svg, .illo-tips-catalog-desktop svg, .illo-tips-people-desktop svg, .illo-tips-notification-desktop svg {
+        width: 270px;
+        height:215px;
+    }
+
+    .illo-tips-bookmarks-phone svg{
+        width: 160px;
+        height:133px;
+
+        @media (min-width: @browser-transition-point) {
+            width: 170px;
+            height:141px;
+        }
+
+        @media (min-width: @tabletS) {
+            width: 260px;
+            height:206px;
+        }
+    }
+
+    .tips-catalog-mobile {
+        @media (min-width: @tabletL) {
+            white-space: nowrap;
+        }
+    }
+
+    .illo-tips-catalog-phone svg{
+        width:170px;
+        height:170px;
+    }
+
+    .tips-device {
+        @media (min-width: @tabletS) {
+            display: inline-block;
+        }
+    }
+
+    .illo-tips-bookmarks-tablet svg {
+        width: 170px;
+        height:141px;
+
+        @media (min-width: @tabletS) {
+            width: 260px;
+            height:206px;
+        }
+    }
+
+    .illo-tips-catalog-tablet svg{
+        width: 198px;
+        height:180px;
+    }
+
+    .tips-section-header {
+        font-family: 'Open Sans Semibold', sans-serif;
+        margin: 10px 0 8px;
+
+        &.mobile-devices {
+            margin-top:-10px;
+        }
+    }
+
+    .tips-inlineicon {
+        position:relative;
+        top:-1px;
+        width:16px;
+        height:16px
+    }
+
+    .tips-desktop-rearrange {
+        margin-top: 12px;
+
+        @media (min-width: @desktopM) {
+            text-align:left;
+            white-space:nowrap;
+        }
+
+        .illo-tips-rearrange svg{
+            width:220px;
+            height:141px;
+        }
+    }
+
+    .text-inline-svg {
+        svg {
+            width:16px;
+            height:16px;
+            display: inline-block;
+        }
+    }
+}
+
+// Need to adjust the modal the standard modal header is 46px
+
+.modal-tips {
+    .dialog-container {
+        padding: @header-height 0 0;
+    }
+
+    .dialog-header {
+        height: @header-height;
+        line-height: @header-height;
+        box-shadow: 0 1px 1px rgba(0,0,0,.3);
+    }
+}
+
+// for tipsMobileApp.html styles
+.setting-app-tips-content {
+    width:100%;
+    max-height: 100%;
+    max-width:930px;
+
+    .tips-mobile-phone-browser {
+        height:100%;
+    }
+
+    .carousel-container {
+        height:100%;
+    }
+
+    h3 {
+        font-family: "Open Sans Semibold", sans-serif;
+        margin: 20px 0 10px;
+        font-size: 16px;
+
+        @media (min-width: @phoneS) {
+            margin: 25px 0 15px;
+        }
+
+        @media (min-width: @phoneM) {
+            margin: 30px 0 18px;
+        }
+    }
+
+    // Please keep the ul[rn-carousel] to overwrite the default style
+    ul[rn-carousel].settings-tips-carousel-phone {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        min-height: 480px;
+    }
+
+   ul[rn-carousel].settings-tips-carousel-tablet {
+       width: 100%;
+       height: 100%;
+       text-align: center;
+       min-height: 540px;
+   }
+
+    ul[rn-carousel].settings-tips-carousel-phone>li.apptips-item {
+        padding: 20px 30px 0;
+
+            svg {
+                width: 210px;
+                height: 175px;
+
+                @media (min-width: @phoneS) {
+                    width: 240px;
+                    height: 200px;
+                }
+
+                @media (min-width: @phoneM) {
+                    width: 270px;
+                    height: 225px;
+                }
+            }
+
+        .text-inline-svg {
+            svg {
+                width:16px;
+                height:16px;
+                margin: 0 4px;
+                display: inline-block;
+            }
+        }
+
+    }
+
+    ul[rn-carousel].settings-tips-carousel-tablet>li.apptips-item {
+        padding: 0 15%;
+
+        svg {
+            width: 270px;
+            height: 225px;
+            margin-top:40px;
+
+            @media (min-width: @browser-transition-point) {
+              width: 300px;
+              height: 250px;
+            }
+
+            @media (min-width: @tabletS) {
+              width: 360px;
+              height: 300px;
+            }
+        }
+
+        .text-inline-svg {
+            svg {
+                width:16px;
+                height:16px;
+                margin: 0 4px;
+                display: inline-block;
+            }
+        }
+    }
+
+  // need to name space the rn-carousel-control as other carousel such as the detailed page app image might also use it
+    .rn-carousel-control.rn-carousel-control-next,
+    .rn-carousel-control.rn-carousel-control-prev {
+        position:fixed;
+        z-index: 500;
+        top: 200px;
+        width: @setting-rn-control-size;
+        height:@setting-rn-control-size;
+        display: inline-block;
+        border-radius: @setting-rn-control-size/2;
+        border: solid 1.3px @settings-rn-control-color;
+        color:@settings-rn-control-color;
+
+        @media (min-width: @tabletS) {
+            top: 240px;
+        }
+    }
+
+    .rn-carousel-control.rn-carousel-control-next {
+        @media (min-width: @tabletS) {
+            right: 20%;
+        }
+
+        &:before {
+            position: absolute;
+            content: "";
+            top: 10px;
+            left:8px;
+            width: @settings-rn-control-caret-size;
+            height:@settings-rn-control-caret-size;
+            border-top: solid 2px @settings-rn-control-color;
+            border-right: solid 2px @settings-rn-control-color;
+            transform: rotate(45deg);
+        }
+    }
+
+    .rn-carousel-control.rn-carousel-control-prev {
+        @media (min-width: @tabletS) {
+            left: 20%;
+        }
+
+        &:before {
+            position: absolute;
+            content: "";
+            top: 10px;
+            left:12px;
+            width: @settings-rn-control-caret-size;
+            height:@settings-rn-control-caret-size;
+            border-bottom: solid 2px @settings-rn-control-color;
+            border-left: solid 2px @settings-rn-control-color;
+            transform: rotate(45deg);
+        }
+    }
+}
+
+// This is support page modal, otherwise large viewport will not have the title and the content not centered
+.modal-tips {
+    .setting-app-tips-content {
+        margin: 0 auto;
+    }
+
+    .mobile-title-container {
+        @media (min-width: @browser-transition-point) {
+            display: block;
+        }
+    }
+}
+
+// For mobile phone browser
+.settings-detail-content.setting-app-tips-content .tips-mobile-phone-browser{
+
+    .rn-carousel-control.rn-carousel-control-prev {
+        @media (min-width: @browser-transition-point) {
+            left: 170px;
+        }
+    }
+}

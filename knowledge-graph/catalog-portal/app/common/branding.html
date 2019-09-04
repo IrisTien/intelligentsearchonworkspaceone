@@ -1,0 +1,43 @@
+<div branding="appCenterCtrl.branding">
+    .masthead-logo {
+    <span ng-if="$branding.brandNameAndImages.logoUrl">
+        background-image: url({{ $branding.brandNameAndImages.logoUrl }});
+    </span>
+    }
+    .theme-portal-masthead {
+        background-color: {{ $branding.portalBranding.mastheadBackgroundColor }};
+        color: {{ $branding.portalBranding.mastheadForegroundColor }};
+    }
+    .theme-portal-background, .theme-portal-background.frame {
+        background-color: {{ $branding.portalBranding.backgroundColor }};
+    }
+    .theme-portal-background {
+    <span ng-if="$branding.portalBranding.backgroundImageUrl">
+        <!--for browsers that don't support multiple bg images, skip the overlays-->
+        background-image: url({{ $branding.portalBranding.backgroundImageUrl }});
+    </span>
+    }
+    html.multiplebgs .theme-portal-background {
+    <span ng-if="$branding.portalBranding.backgroundHighlightUrl ||
+                $branding.portalBranding.backgroundPatternUrl ||
+                $branding.portalBranding.backgroundImageUrl">
+        <!--for browsers that support multiple bg images, show the overlays-->
+        background-image:
+            url({{ $branding.portalBranding.backgroundHighlightUrl }}),
+            url({{ $branding.portalBranding.backgroundPatternUrl }}),
+            url({{ $branding.portalBranding.backgroundImageUrl }});
+    </span>
+    }
+    .theme-portal-text {
+        color: {{ $branding.portalBranding.foregroundColor }};
+    <span ng-if="$branding.portalBranding.letteringEffect==='letterpress'">
+        text-shadow: 1px 1px rgba(255, 255, 255, 0.5);
+    </span>
+    <span ng-if="$branding.portalBranding.letteringEffect==='emboss'">
+        text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+    </span>
+    <span ng-if="$branding.portalBranding.letteringEffect==='none'">
+        text-shadow: none;
+    </span>
+    }
+</div>

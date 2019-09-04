@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="343px" height="94px" viewBox="0 0 343 94" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>4BAC9C0D-B071-4F36-8DC2-6E0EFFB43753-798-000072BAE24C87EE</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <linearGradient x1="53.9171338%" y1="-73.0082125%" x2="53.9171338%" y2="94.4046188%" id="linearGradient-1">
+            <stop stop-color="#80B8D7" offset="0%"></stop>
+            <stop stop-color="#A3CBE2" offset="0%"></stop>
+            <stop stop-color="#C1DCEB" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="iOS-mobile-and-tablet" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="notifications_main_priority" transform="translate(-15.000000, -118.000000)" fill="url(#linearGradient-1)">
+            <g id="Group-2" transform="translate(7.000000, 74.000000)">
+                <g id="Group">
+                    <g id="notifications/card-master" transform="translate(8.000000, 44.000000)">
+                        <g id="card-background">
+                            <g id="ios_card-copy-21">
+                                <rect id="priority-background" x="0" y="0" width="343" height="93.4846416"></rect>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,56 @@
+<section class="content-container hub-browser-settings">
+    <div class="content-container-scrollable">
+        <div class="content settings-content">
+            <!-- User profile -->
+
+            <div class="user-details-container">
+                <div class="profile-avatar" image-load>
+                    <p class="profile-detail-initial" ng-if="hubSettingsCtrl.user.initials"><span>{{::hubSettingsCtrl.user.initials}}</span></p>
+                    <img ng-src="{{::hubSettingsCtrl.user.imageURL}}" ng-show="hubSettingsCtrl.user.imageURL" class="settings-user-avatar"/>
+                </div>
+                <div class="user-name-details">
+                    <p class="user-name">{{::hubSettingsCtrl.user.firstName}}&nbsp;{{::hubSettingsCtrl.user.lastName}}</p>
+                    <p class="user-details">
+                        <span class="user-title" ng-if="hubSettingsCtrl.user.title">{{::hubSettingsCtrl.user.title}}</span>
+                        <span class="user-bu" ng-if="hubSettingsCtrl.user.businessUnit">&#47; {{::hubSettingsCtrl.user.businessUnit}}</span>
+                        <span class="user-emp-no" ng-if="hubSettingsCtrl.user.employeeNumber">&#47; {{::hubSettingsCtrl.user.employeeNumber}}</span>
+                    </p>
+                    <div class="user-change-password" ng-if="hubSettingsCtrl.isPasswordChangeEnabled">
+                        <a class="about-sublink change-password-link primary-link-color" ng-click="hubSettingsCtrl.openChangePassword()">{{::'userInfo.profile.passwordchange' | i18n}} {{::'userInfo.profile.password' | i18n}}</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Download Hub -->
+            <div class="hub-download-banner" ng-if="hubSettingsCtrl.downloadTitle">
+                <div class="download-image">
+                    <h2 class="section-headline-style2 download-title">{{::hubSettingsCtrl.downloadTitle}}</h2>
+                    <p class="download-subtitle">{{::hubSettingsCtrl.downloadSubtitle}}</p>
+                    <button class="app-button primary-btn download-button" ng-click="hubSettingsCtrl.downloadApp();"> {{::'button.download' | i18n }}</button>
+                </div>
+            </div>
+
+            <!-- Preferences -->
+            <preferences-hub-browser></preferences-hub-browser>
+
+            <!-- About -->
+            <div class="about-content-container">
+                <h2 class="section-headline-style2">{{'hub.about.title' | i18n }}</h2>
+                <div class="about-content">
+                    <p class="about-copyright">{{::'app.about.copyright' | i18n }}</p>
+                </div>
+                <div class="about-links primary-link-color">
+                    <a target="_blank" ng-href="{{::'app.about.patentsLink' | i18n}}" class="about-sublink patent-button">
+                        <svg svg-symbol="icon-openapp-small"></svg>{{'app.about.button.label.patents' | i18n }}
+                    </a>
+                    <a ng-if="workspaceOne.isOnPrem" target="_blank" ng-href="{{::'app.about.licenseAgreementLink' | i18n}}" class="about-sublink licence-button" >
+                        <svg svg-symbol="icon-openapp-small"></svg>{{'app.about.button.label.licenseAgreement' | i18n }}
+                    </a>
+                    <a ng-if="!workspaceOne.isOnPrem" target="_blank" ng-href="{{::'app.about.saasLicenseAgreementLink' | i18n}}" class="about-sublink license-button" >
+                        <svg svg-symbol="icon-openapp-small"></svg>{{'app.about.button.label.licenseAgreement' | i18n }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

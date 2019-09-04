@@ -1,0 +1,8 @@
+<div modal-context class="pane">
+  <div ng-controller="ModalDemo as demo">
+    <div ng-repeat="m in demo.messages">
+      <input ng-model="m">
+      <button ng-click="$modal.open(demo.externalTemplate, {message: m})">Message {{$index}}</button>
+    </div>
+  </div>
+</div>

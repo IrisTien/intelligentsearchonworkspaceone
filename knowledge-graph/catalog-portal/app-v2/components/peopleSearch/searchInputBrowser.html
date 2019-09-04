@@ -1,0 +1,25 @@
+<div>
+     <div class="search-input-bar">
+        <label>
+            <svg svg-symbol="icon-searchglass" class="icon-input-searchglass"></svg>
+        </label>
+        <input type="text"
+               ng-model="ctrl.query.name"
+               ng-click="ctrl.onSearch()"
+               ng-change="ctrl.onSearch()"
+               ng-model-options="{ debounce: 500 }"
+               placeholder="{{ ::'appCenter.peopleSearch.placeholder' | i18n }}"
+               class="search-inputfield"
+               autocorrect="off"
+               autocapitalize="off"/>
+            <!--on mobile screen clear text and on desktop screen close search-->
+        <button class="search-clear-button people-search-clear-text" ng-click="ctrl.clearText()" ng-show="ctrl.query.name && !ctrl.loading">
+            <svg svg-symbol="icon-circle-x" class="search-clear-x-button"></svg>
+        </button>
+    </div>
+    <div class="search-results-scrim" id="pt-search-scrim" ng-show="ctrl.showScrim" search-results-close
+         close="ctrl.closeOnBlur()" show-scrim="ctrl.showScrim"></div>
+    <div search-dropdown scroll-input-blur template-url="app-v2/components/peopleSearch/peopleSearchDropDownBrowser.html"
+             search-item="'.search-item-people.active'" ng-if="ctrl.showScrim"></div>
+</div>
+

@@ -1,0 +1,77 @@
+<div>
+    <!-- Favorite app -->
+    <span role="button" aria-label="favoriteButtonLabel"
+          ng-if="catalogItemActionsCtrl.showFavorite && catalogItemActionsCtrl.favoriteEnabled"
+          ng-click="catalogItemActionsCtrl.toggleBookmark(catalogItemActionsCtrl.app, $event)"
+          ng-class="{'app-favorited': catalogItemActionsCtrl.app.favorite && !catalogItemActionsCtrl.app.bookmarking,
+                'app-not-favorited' : !catalogItemActionsCtrl.app.favorite && !catalogItemActionsCtrl.app.bookmarking,
+                'app-favoriting': catalogItemActionsCtrl.app.bookmarking}">
+        <span ng-if="catalogItemActionsCtrl.appDetailsPage">
+            <span class="app-button secondary-btn app-favorite-button">{{::'appCenter.action.favorite' | i18n}}</span>
+            <span class="app-button secondary-btn app-un-favorite-button">{{::'appCenter.action.unfavorite' | i18n}}</span>
+            <span class="app-button app-favoriting-spinner"><spinner-loading></spinner-loading></span>
+        </span>
+        <span ng-if="(!catalogItemActionsCtrl.isAWJadeMobile && !catalogItemActionsCtrl.appDetailsPage)">
+            <svg svg-symbol="icon-favorite" class="icon-app-favorite-button"></svg>
+            <svg svg-symbol="icon-favorite" class="icon-app-un-favorite-button"></svg>
+            <span class="app-favoriting-spinner"><spinner-loading></spinner-loading></span>
+        </span>
+    </span>
+
+    <!-- Non activated requestable web apps -->
+    <span ng-if="catalogItemActionsCtrl.app.statusCode == '1' && catalogItemActionsCtrl.app.approvalRequired"
+          class="app-button primary-btn app-activate" ng-click="catalogItemActionsCtrl.activateApp()">
+        {{::'appCenter.action.request' | i18n}}
+    </span>
+
+    <!-- Non activated mdm apps -->
+    <span role="button" id="installButtonId" aria-label="installButtonLabel"
+          ng-if="catalogItemActionsCtrl.app.statusCode == '1' && catalogItemActionsCtrl.app.isMdmApp"
+          class="app-button primary-btn app-install" ng-click="catalogItemActionsCtrl.activateApp()">
+         {{::'appCenter.action.install' | i18n}}
+    </span>
+    <span ng-if="catalogItemActionsCtrl.app.statusCode == '1' && catalogItemActionsCtrl.app.isMdmApp
+    && catalogItemActionsCtrl.app.mgmtRequired"
+          class="app-managed">{{::'hub.require.app.management' | i18n}}</span>
+
+    <!-- Processing all apps -->
+    <span ng-if="catalogItemActionsCtrl.app.statusCode == '2' && !catalogItemActionsCtrl.app.isMdmApp && catalogItemActionsCtrl.app.approvalRequired"
+          class="app-button secondary-btn app-pending">
+        {{::'appCenter.action.pending' | i18n}}
+    </span>
+
+    <!-- Processing MDM apps -->
+    <span ng-if="catalogItemActionsCtrl.app.statusCode == '2' && catalogItemActionsCtrl.app.isMdmApp"
+          class="app-button secondary-btn app-installing" ng-click="catalogItemActionsCtrl.showInfo(catalogItemActionsCtrl.app, $event)">
+        {{::'appCenter.action.installing' | i18n}}
+    </span>
+
+    <span role="button" aria-label="launchButtonLabel" ng-if="catalogItemActionsCtrl.app.isLaunchableApp"
+          class="app-button primary-btn app-open"
+          ng-click="catalogItemActionsCtrl.launchApp(catalogItemActionsCtrl.app, $event)">
+        {{::'appCenter.action.open' | i18n}}
+    </span>
+
+    <!-- Activated mdm apps-->
+    <span ng-if="catalogItemActionsCtrl.app.statusCode == '3' && catalogItemActionsCtrl.app.isMdmApp"
+          class="app-button secondary-btn app-re-install" ng-click="catalogItemActionsCtrl.activateApp()">
+        {{::'appCenter.action.reinstall' | i18n}}
+    </span>
+
+    <!-- Update mdm apps-->
+    <span ng-if="catalogItemActionsCtrl.app.statusCode == '4' && catalogItemActionsCtrl.app.isMdmApp"
+          class="app-button primary-btn app-update" ng-click="catalogItemActionsCtrl.activateApp()">
+        {{::'appCenter.action.update' | i18n}}
+    </span>
+
+    <span ng-if="catalogItemActionsCtrl.app.isViewableThinappPackage" class="app-button primary-btn app-view"
+          ng-click="catalogItemActionsCtrl.viewThinAppPackage(catalogItemActionsCtrl.app, $event)">
+        <span ng-if="!catalogItemActionsCtrl.app.perDeviceActivationRequired">{{::'appCenter.action.view' | i18n}}</span>
+    </span>
+
+    <span ng-if="catalogItemActionsCtrl.app.resetAllowed"
+       ng-click="catalogItemActionsCtrl.resetDesktop(catalogItemActionsCtrl.app, $event)"
+       class="app-button secondary-btn app-reset">
+        <span class="action-text">{{::'app.details.label.resetDektop' | i18n}}</span>
+    </span>
+</div>

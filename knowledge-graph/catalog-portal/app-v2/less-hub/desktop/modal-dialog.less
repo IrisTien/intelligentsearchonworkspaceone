@@ -1,0 +1,378 @@
+@modal-browser-content-width: 280px;
+@hub-browser-content-width-l: 355px;
+@modal-browser-content-bg-color: #f2f2f2;
+@hub-browser-modal-scrim-bg-color: rgba(79,79,79,0.6);
+@modal-z-index: 2000;
+@modal-browser-border-radius: 8px;
+
+@dialog-header-height: 46px;
+@dialog-actions-height: 72px;
+@dialog-h-padding: 16px;
+@modal-thinapps-width: 600px;
+@modal-thinapps-body-padding: 20px;
+
+@modal-dialog-body-title-size: 20px;
+@modal-dialog-body-font-size: 14px;
+
+@zoomedImage-mobile-width: 240px;
+@zoomedImage-desktop-width: 360px;
+
+@hub-modal-desktop-width: 320px;
+@hub-modal-expanded-width: 600px;
+
+@modal-change-password-input-height-ios: 22px;
+@modal-change-password-input-bg-ios: #fff;
+@modal-change-password-input-border-color-ios: #dad9db;
+@input-error-text-color: #fe3a2e;
+
+@modal-app-list-icon-size: 72px;
+@modal-app-list-icon-top: 12px;
+
+
+// Modal dialog
+//-------------------------------------------
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: -1;
+
+    &.is-active {
+        opacity: 1;
+        z-index: @modal-z-index;
+    }
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: @hub-browser-modal-scrim-bg-color;
+}
+
+.modal-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    width: @modal-browser-content-width;
+    min-height: 80px;
+    max-height: 100%;
+    background: @modal-browser-content-bg-color;
+    border-radius: @modal-browser-border-radius;
+    text-align: center;
+
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+        width: @hub-browser-content-width-l;
+    }
+
+    a {
+        cursor: pointer;
+        color: @primary-link-color;
+        text-decoration: underline;
+    }
+
+    h3 {
+        .base-text-style(@modal-dialog-body-title-size, 600);
+        line-height: 1.4;
+        margin: 20px;
+
+        &.no-ellipsis {
+            white-space: normal;
+            overflow: visible;
+        }
+    }
+
+    p {
+        font-size: @modal-dialog-body-font-size;
+        line-height: 1.4;
+        word-break: break-word;
+    }
+}
+
+.dialog-container {
+    padding: (@dialog-header-height + 8px) 0 (@dialog-actions-height + 16px);
+    position: relative;
+    max-height: 100%;
+    width: 100%;
+}
+
+.dialog-header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    height: @dialog-header-height;
+    overflow: hidden;
+    padding: 0 @dialog-h-padding;
+    line-height: @dialog-header-height;
+
+    .modal-close-icon {
+        width: @mobile-default-taparea-size;
+        height: @mobile-default-taparea-size;
+        position: absolute;
+        right: 12px;
+        top: 12px;
+    }
+}
+
+.dialog-body {
+    width: 100%;
+    // reserve 1 line text around 20px
+    min-height: 24px;
+    @dialog-paddings: (@dialog-header-height + 8px) + (@dialog-actions-height + 16px) + 20px;
+    max-height: ~'calc(100vh - @{dialog-paddings})';
+    padding: 0 @list-item-padding-h;
+    font-size: @modal-dialog-body-font-size;
+    overflow-y: auto;
+
+    .modal-app-list-item-icon {
+        .app-icon2(@modal-app-list-icon-size);
+    }
+}
+
+.dialog-actions {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 50;
+    width: 100%;
+    height: @dialog-actions-height;
+    padding: (@dialog-actions-height - @hub-browser-modal-button-action-height)/2 8px;
+    overflow: hidden;
+    box-shadow: 1px -1px 4px rgba(0,0,0,.15);
+    text-align: right;
+    border-bottom-left-radius: @modal-browser-border-radius;
+    border-bottom-right-radius: @modal-browser-border-radius;
+}
+
+// This is for the details page screenshot do not remove
+.hub-modal-details-screenshots-zoomed {
+    .modal-content {
+        width: 80%;
+
+        // New iPhoneMax width
+        @media (min-width: 414px) {
+            width: 320px;
+            max-height: 560px;
+        }
+
+        @media (min-width: @phoneL) {
+            width: 360px;
+            max-height: 640px;
+        }
+
+        @media (min-width: @tabletS) {
+            width: 420px;
+            max-height: 720px;
+        }
+    }
+
+    .modal-popup-close-icon {
+        position: absolute;
+        top: 0;
+        right:0;
+        opacity: @light-text-opacity;
+        padding: 4px;
+        z-index: 100;
+    }
+
+    .dialog-container {
+        padding: 36px 24px 58px;
+    }
+
+    .dialog-body {
+        max-height: 480px;
+
+        @media (min-width: @phoneS) {
+            max-height: 520px;
+        }
+
+        @media (min-width: @phoneM) {
+            max-height: 560px;
+        }
+
+        @media (min-width: @phoneL) {
+            max-height: 640px;
+        }
+    }
+
+    .dialog-actions {
+        text-align: center;
+    }
+
+    .rn-carousel-indicator span {
+        font-size: 10px;
+        padding: 0 2px;
+        &.active {
+            color: #0F91C6;
+        }
+    }
+}
+
+ul.zoomed-image-carousel-list[rn-carousel] {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+
+    @media (min-width: @tabletS) {
+        width: @zoomedImage-desktop-width;
+        margin-left: -@zoomedImage-desktop-width;
+        margin: 0 auto;
+    }
+}
+
+ul.zoomed-image-carousel-list[rn-carousel] > li {
+    width: 100%;
+    height: auto;
+    //Need to override the angular carousel default position: absolute so the image will take on its nature height
+    position: relative;
+    margin-left: -100%;
+    padding: 0 10px;
+
+    &:first-child {
+        margin-left: 0;
+    }
+
+    img.zoomed-image-carousel-item {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+// Styling for hub-launch-password-dialog
+//-----------------------------------------
+.hub-launch-password-dialog, .hub-setapp-password-dialog {
+    .error-text {
+        margin-top: 8px;
+        color: @input-error-text-color;
+    }
+
+    input {
+        width: 100%;
+        border: solid 1px @modal-change-password-input-border-color-ios;
+        margin-top: 12px;
+        height: @modal-change-password-input-height-ios;
+        line-height: @modal-change-password-input-height-ios;
+        padding: 4px;
+        background: @modal-change-password-input-bg-ios;
+    }
+
+    ::-webkit-input-placeholder {
+        color: @modal-change-password-input-border-color-ios;
+    }
+}
+
+.view-preference-modal {
+    .modal-content {
+        text-align: left;
+    }
+    .preference-options-container {
+        text-align: center;
+        label {
+            display: inline-block;
+            text-align: center;
+            vertical-align: top;
+        }
+    }
+    .preference-option-text {
+        margin-top: 10px;
+    }
+
+    @media (max-width: @browser-hamburger-ribbon-transition) {
+        .preference-option-container {
+            width: 60px;
+            height: 60px;
+
+            .preference-option-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .preference-checked {
+                height: 24px;
+                width: 24px;
+                right: -8px;
+                bottom: -8px;
+            }
+        }
+
+        .preference-option-text, a {
+            font-size: 13px;
+            width: 80px;
+        }
+    }
+}
+
+.hub-vpp-registration-modal {
+    .modal-content {
+        @media (min-width: @browser-hamburger-ribbon-transition) {
+            width: @hub-modal-expanded-width;
+        }
+    }
+
+    .modal-button-primary {
+        max-width: 240px;
+    }
+}
+
+// Thin Apps Modal designs
+.hub-modal-thinapps-in-package {
+    .modal-content {
+        width: @modal-thinapps-width;
+        text-align: left;
+
+        p {
+            font-size: 12px;
+        }
+
+        h3 {
+            margin: 0;
+        }
+    }
+
+    .dialog-header {
+        height: auto;
+        padding: 16px;
+        line-height: unset;
+
+        .modal-title {
+            padding: 0;
+        }
+    }
+
+    .dialog-container {
+        padding: 72px 0 88px;
+    }
+
+    .apps-module-content {
+        margin: 24px 0;
+    }
+
+    .left-panel, .right-panel {
+        display: inline-block;
+        vertical-align: top;
+        width: ~'calc((@{modal-thinapps-width} - @{modal-thinapps-body-padding} * 2 - 4px)   / 2)';
+    }
+
+    .grid-container {
+        text-align: left;
+    }
+
+    .grid-item {
+        margin: 8px;
+    }
+
+    .search-input-bar {
+        width: 100%;
+    }
+}

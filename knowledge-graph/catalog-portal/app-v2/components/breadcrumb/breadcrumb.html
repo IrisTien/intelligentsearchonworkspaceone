@@ -1,0 +1,20 @@
+<h2 class="desktop-page-title">
+    {{::breadcrumbCtrl.desktopPageTitle}}
+</h2>
+<section class="desktop-right-module" ng-class="{'notifications-enabled': breadcrumbCtrl.inAppNotificationEnabled}">
+    <app-search class="search-bar-container" ng-if="breadcrumbCtrl.$state.current.currentTab == 'apps'"></app-search>
+    <people-search class="search-bar-container" ng-if="breadcrumbCtrl.$state.current.currentTab  == 'people'"></people-search>
+    <div ng-if="breadcrumbCtrl.inAppNotificationEnabled" ui-sref="notifications" class="hub-desktop-notification-bell-button">
+        <svg svg-symbol="icon-bell"></svg>
+        <div notification-count></div>
+    </div>
+    <div class="desktop-refresh-button" ng-if="!breadcrumbCtrl.hideRefresh" ng-class="{'is-refreshing': breadcrumbCtrl.isDesktopAppRefreshing}" ng-click="breadcrumbCtrl.desktopRefresh(breadcrumbCtrl.$state.current.currentTab)">
+        <svg svg-symbol="icon-refresh" class="icon-desktop-refresh"></svg>
+    </div>
+    <div class="desktop-install-button" ng-if="!breadcrumbCtrl.hideInstall" id="desktopapp-install-button" ng-click="breadcrumbCtrl.showAppInstall()">
+        <svg svg-symbol="icon-install" class="icon-windows-install"></svg>
+    </div>
+</section>
+
+
+

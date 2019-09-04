@@ -1,0 +1,37 @@
+<section class="appitem-contextdialog-container" ng-controller="NotificationV2ContextDialogController as ctrl">
+    <!-- scrim to dismiss the dialog box -->
+    <button class="appitem-contextdialog-scrim nativenav-hide"></button>
+
+    <div class="appitem-contextdialog-content">
+        <div class="appitem-contextdialog-actions">
+            <ul class="appitem-contextdialog-actions-list">
+                <li ng-repeat="filter in ctrl.filtersList">
+                    <div ng-if="ctrl.isAndroid" class="menu-item-container">
+                        <svg svg-symbol="icon-filter-selected" class="notifications-dialog-overflow-menu" ng-if="ctrl.filter === filter.filterName"></svg>
+                    </div>
+                    <a class="hub-notifications-filter-action" id="pt-notifications-{{filter.filterName}}" ng-click="ctrl.goToFilter(filter.filterName)">
+                        <span ng-class="{'notifications-menu-item-selected-text' : ctrl.isAndroid && ctrl.filter === filter.filterName}" ng-bind="filter.label" class="nativenav-hide"></span>
+                    </a>
+                </li>
+            </ul>
+            <ul ng-if="ctrl.isIOS" class="appitem-contextdialog-actions-list cancel-action">
+                <li>
+                    <a>
+                        <span class="nativenav-hide">{{::'button.cancel' | i18n}}</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul ng-if="ctrl.isAndroid" class="appitem-contextdialog-actions-list cancel-action notifications-context-dialog-cancel">
+                <li>
+                    <div class="menu-item-container">
+                        <svg svg-symbol="icon-notification-filter-cancel" class="notifications-dialog-overflow-menu-cancel" ></svg>
+                    </div>
+                    <a class="hub-notifications-filter-action">
+                        <span class="nativenav-hide">{{::'button.cancel' | i18n}}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

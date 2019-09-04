@@ -1,0 +1,71 @@
+@desktopapp-min-width: @desktopapp-cutoff;  /*640px*/
+@desktopapp-header-height: 56px;
+
+.ws-desktop {
+    .global-container{
+        position: fixed;
+        max-width: 100%;
+        min-width:@desktopapp-min-width;
+    }
+
+    .content-container {
+        padding-top: @desktopapp-header-height;
+        padding-bottom: 0;
+        min-width:@desktopapp-cutoff;
+    }
+
+    .topnav-hide .content-container {
+        padding-top: @desktopapp-header-height;
+    }
+
+    .content-container-scrollable{
+        min-width:@desktopapp-cutoff;
+        overflow-x: hidden;
+
+        &.settings-nativenav {
+            background: @white;
+        }
+    }
+
+    .content {
+        width: 100%!important;
+        min-width: @desktopapp-cutoff;
+        margin: 0 auto;
+    }
+
+    .content-sidebar {
+        padding-left: 12px;
+        display: inline-block!important;
+        box-shadow: 0 2px 1px rgba(0,0,0,.15);
+        background: rgba(255,255,255,.7);
+        width: @sidebar-width;
+
+        @media (min-width: 1440px) {
+            background: rgba(255,255,255,0);
+            box-shadow: 0 2px 1px rgba(0,0,0,0);
+        }
+    }
+
+    .content-body-with-sidebar {
+        display: inline-block;
+        width:~'calc(100% - 208px)'!important;
+        min-height: 400px;
+        margin-left: @sidebar-width;
+    }
+
+    &.ws-mac .content-container {
+        padding-top: @desktopapp-header-height + @mac-toolbar-height;
+    }
+}
+
+// The settings page for nativenav does not have the nasthead so the padding at the top is 0
+.ws-nativenav.ws-desktop .content-container.nativenav-settings-style {
+    padding-top: 0;
+}
+
+// TODO Tentative, once the feature flag IGI is lifted, we will use ng-if = "!AWJadeDesktop" for the footer
+.ws-desktop {
+    .bottom-nav-container {
+        display: none;
+    }
+}

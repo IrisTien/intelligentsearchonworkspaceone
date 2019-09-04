@@ -1,0 +1,39 @@
+<section class="appitem-contextdialog-container" ng-controller="BookmarkItemContextDialogController as dialogCtrl">
+    <ul class="appitem-contextdialog-actions-list">
+        <li ng-if="app.viewClientLaunchEnabled">
+            <a class="browser-open-link" ng-click="appItemCtrl.openWithViewClient(appItemCtrl.app, $event)">
+                <span id="pt-view-client-text" class="nativenav-show">{{::'myapps.dialog.openAppWithViewClient' | i18n}}</span>
+            </a>
+        </li>
+
+        <li ng-if="app.viewBrowserLaunchEnabled">
+            <a class="browser-open-link" ng-click="appItemCtrl.openWithBrowser(appItemCtrl.app, $event)" ng-show="appItemCtrl.isViewOptionSupported(appItemCtrl.app, 'BROWSER')">
+                <span id="pt-view-browser-text" class="nativenav-show">{{::'myapps.dialog.openAppWithBrowser' | i18n}}</span>
+            </a>
+        </li>
+
+        <li ng-if="app.isViewResourceEnabled">
+            <a class="browser-open-link" class="launchApp" id="pt-launchapp-link" ng-click="appItemCtrl.launchApp(appItemCtrl.app, $event)">
+                <span ng-if="app.type === 'WEB'" id="pt-launchapp-web-text" class="nativenav-show">{{::'myapps.dialog.openAppWithBrowser' | i18n}}</span>
+                <span ng-if="app.type !== 'WEB'" id="pt-launchapp-nonweb-text" class="nativenav-show">{{::'myapps.dialog.openApp' | i18n}}</span>
+            </a>
+        </li>
+
+        <li>
+            <a class="detailLink" id="pt-detail-link" ng-click="dialogCtrl.hubAppDetails(app);" actiontype="links">
+                <span id="pt-detail-text" class="nativenav-hide">{{::'hub.contextDialog.label.viewDetails' | i18n}}</span>
+            </a>
+        </li>
+
+        <li ng-if="dialogCtrl.isBookmarkableApp(app) && favoriteEnabled">
+            <a class="toggleFavApp" id="pt-togglefav-link" ng-click="dialogCtrl.hubToggleFavoriteApp(app, appItemCtrl.visibleLauncherApps, $index, $event);">
+                <span id="pt-toggle-favorite-text" class="nativenav-show">{{appItemCtrl.contextDialogFavoriteLabel}}</span>
+            </a>
+        </li>
+        <li ng-if="app.resetAllowed">
+            <a class="resetDesktop" ng-click="resetDesktop(app, $event)">
+                <span id="pt-reset-password" class="nativenav-show">{{::'app.details.label.resetDektop' | i18n}}</span>
+            </a>
+        </li>
+    </ul>
+</section>

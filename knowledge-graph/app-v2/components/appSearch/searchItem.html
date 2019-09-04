@@ -1,0 +1,26 @@
+<div class="app-search-section-header category-name" ng-if="app.isCategory">
+    <span class="search-category-length">{{'hub.apps.search.in.category' | i18n : app.length}}</span>
+    <span ng-bind-html="app.categoryName | highlight:ctrl.query.name"></span>
+</div>
+<div class="app-search-item" ng-if="!app.isCategory" ng-click="ctrl.details(app)">
+    <div ng-show="app.name">
+        <div class="app-search-item-icon" image-load>
+            <img ng-src="{{app._links.icon.href}}">
+        </div>
+        <p class="app-search-item-name" ng-bind-html="app.name | highlight:ctrl.query.name"></p>
+        <p class="app-search-item-type">
+            <svg ng-if="app.isHorizonResource || app.isHorizonAirResource" svg-symbol="icon-horizon-watermark"></svg>
+            {{::app.appTypeDisplayVal}}
+        </p>
+    </div>
+
+    <div
+        ng-if="!ctrl.isAWJadeMobile"
+        catalog-item-actions
+        current-view="HUB_APP_LIST"
+        class="search-item-actions"
+        show-favorite ="!ctrl.isLoadFromDbFailed && app.isBookmarkableApp"
+        app="app"
+        stop-event="click">
+    </div>
+</div>

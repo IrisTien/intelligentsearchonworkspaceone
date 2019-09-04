@@ -1,0 +1,17 @@
+<div modal-new class="modal-unenroll">
+    <section class="dialog-container">
+        <header class="dialog-header">
+            <svg class="modal-warning-message-icon-desktop" svg-symbol="icon-warning-big"></svg>
+            <h3>{{ 'appCenter.device.unEnrollWarningTitle' | i18n}}</h3>
+        </header>
+        <div class="dialog-body">
+            <svg class="modal-warning-message-icon" svg-symbol="icon-warning-big"></svg>
+            <p>{{ 'appCenter.device.mdmUnEnrollMessage' | i18n}}</p>
+            <p>{{ 'appCenter.device.mdmUnEnrollConfirmationMessage' | i18n}}</p>
+        </div>
+        <footer class="dialog-actions two-action">
+            <button class="button-action secondary-action" ng-click="appCenterCtrl.unEnrollCallback();modal.close(true)">{{ 'appCenter.device.remove' | i18n }}</button>
+            <button class="button-action primary-action" ng-click="modal.cancel()">{{ 'appCenter.device.keep' | i18n }}</button>
+        </footer>
+    </section>
+</div>

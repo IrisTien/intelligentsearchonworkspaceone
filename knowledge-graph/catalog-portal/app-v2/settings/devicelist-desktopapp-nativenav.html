@@ -1,0 +1,38 @@
+<div modal-new class="modal-fullscreen modal-settings-nativenav" >
+    <section class="dialog-container">
+        <header class="dialog-header no-symbol">
+            <h2 class="settings-desktopapp-nativenav-heading">{{::'userInfo.devices' | i18n}}</h2>
+            <svg svg-symbol="icon-close-popup" class="modal-popup-close-icon" ng-click="$modal.close()"></svg>
+        </header>
+
+        <div class="dialog-body" ng-controller="DevicesController as devicesCtrl">
+            <div class="empty-devices-message-desktopapp" ng-if="devicesCtrl.devices.length < 1 && !devicesCtrl.isLoading">
+                <ng-include src="'app-v2/svgincludes/illo-empty-device.html'"></ng-include>
+                <p>{{::'app.devices.emptyDeviceListMessage' | i18n}}</p>
+            </div>
+
+            <ul class="device-list-desktopapp-nativenav" ng-if="devicesCtrl.devices.length > 0 && !devicesCtrl.isLoading">
+                <li ng-repeat="device in devicesCtrl.devices track by $index" ng-class="device.osFamily">
+                    <p class="device-icon-name">
+                        <ng-include src="device.iconfilename" class="device-icon"></ng-include>
+                        <span>{{::device.machineName}}</span>
+                    </p>
+
+                    <div class="device-info-container">
+                        <p class="device-heading-time"> {{::'app.devices.tableColumn.lastLoginTime' | i18n}}</p>
+                        <p class="login-date-time">{{::device.lastLoginTime | date:'medium'}}</span>
+                        <p class="unlink-device" ng-show="device.osFamily == 'Windows'">
+                            <a class="unlink-device-link" ng-click="devicesCtrl.unlinkDevice(device, $event)">
+                                {{'app.devices.unlinkDevice' | i18n }}
+                            </a>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <div ng-show="!devicesCtrl.isLoading" class="devicelist-loading">
+        <div ng-include="'app-v2/common/spinner.html'"></div>
+    </div>
+</div>
+

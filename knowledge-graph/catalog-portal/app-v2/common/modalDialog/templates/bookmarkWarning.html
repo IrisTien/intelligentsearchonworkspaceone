@@ -1,0 +1,18 @@
+<div modal-new="modal-confirmation">
+    <section class="dialog-container">
+        <header class="dialog-header dialog-header-no-top-padding" ng-show="title">
+            <div ng-show="title">{{ title | i18n }}</div>
+        </header>
+        <div class="dialog-body">
+            <p ng-show="message">{{ message | i18n }}</p>
+        </div>
+        <footer class="dialog-actions two-action">
+            <button class="button-action secondary-action" ng-click="$modal.close()">
+                {{ cancel | i18n }}
+            </button>
+            <button class="button-action primary-action" ng-click="$modal.cancel()">
+                {{ ok | i18n }}
+            </button>
+        </footer>
+    </section>
+</div>

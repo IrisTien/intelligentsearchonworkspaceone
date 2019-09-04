@@ -1,0 +1,190 @@
+/*
+ * Project Horizon
+ * (c) 2013-2014 VMware, Inc. All rights reserved.
+ * VMware Confidential.
+ */
+
+@import "../base/fonts";
+@import "../list/list";
+
+@typography-block-spacing: .5em;
+@typography-section-spacing: 1.5em;
+@typography-hrule-color: #ddd;
+
+.typography-headings {
+    /** @helper
+        Define font styles for headings h1 .. h6 */
+
+    h1, h2, h3, h4, h5, h6 {
+        .font > .family( heading, semi-bold );
+        .font > .leading( tight );
+        margin-top: @typography-block-spacing;
+        &:first-child {
+            margin-top: 0;
+        }
+        small {
+            .font > .weight( light );
+            .font > .color( grey-text );
+            &.is-loading {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    h1 {
+        .font > .weight( bold );
+        .font > .size( giant );
+    }
+    h2 {
+        .font > .size( xlarge );
+    }
+    h3 {
+        .font > .size( large );
+    }
+
+    h4 {
+        .font > .size( normal );
+    }
+
+    h5 {
+        .font > .size( small );
+    }
+
+    h6 {
+        .font > .size( xsmall );
+    }
+}
+
+.typography-font {
+    /** @helper
+        Define default typography font styles */
+
+    .font > .family( body );
+    .font > .size( normal );
+    .font > .style( normal );
+    .font > .leading( normal );
+    .font > .color( normal );
+    text-rendering: optimizeLegibility;
+}
+
+.typography {
+/** Applies standard typographical formatting conventions
+    to semantic HTML tags inside.  These styles are not applied
+    globally because they interfere with layout constraints in
+    typical web applications.
+
+@example An article with typography applied.
+    <article class="typography">
+      <header>
+        <h1><%= h.0 %></h1>
+        <p><%= p.0 %>
+      </header>
+      <section>
+        <h2><%= h.1 %></h2>
+        <p><%= p.1 %>
+      </section>
+      <section>
+        <h3><%= h.2 %></h3>
+        <p><%= p.2 %>
+      </section>
+      <section>
+        <h4><%= h.3 %></h4>
+        <p><%= p.3 %>
+      </section>
+    </article>
+    */
+
+    .use( font );
+    .use( headings );
+
+    header,
+    h1, h2, h3, h4, h5, h6 {
+        line-height: 1.25;
+    }
+
+    h1 + h2,
+    h2 + h3,
+    h3 + h4,
+    h4 + h5,
+    h5 + h6 {
+        // subtitles
+        margin-top: 0;
+    }
+    h4, h5, h6 {
+        // supertitles
+        +h1, +h2, +h3 {
+            margin-top: -.25em;
+        }
+    }
+
+    > * + section {
+        // top-level sections
+        margin-top: @typography-section-spacing;
+    }
+
+    p, ul, ol, dl, table, pre {
+        // block-level elements
+        margin-top: @typography-block-spacing;
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    h4 + p,
+    h5 + p,
+    h6 + p {
+        // headings that stay tight to the next paragraph
+        margin-top: 0;
+    }
+
+    header, footer, section, acticle {
+        .apply( section );
+    }
+
+    table {
+        td, th {
+            white-space: nowrap;
+            padding: 10px 1em;
+        }
+    }
+
+    pre {
+        .font > .family( code );
+        .font > .size( small );
+    }
+
+    code {
+        .font > .family( code );
+        .font > .size( small );
+        padding: 0 .25em
+    }
+
+    em {
+        .font > .style( oblique );
+    }
+
+    // derived style interface
+
+    .use ( font ) {
+        &:extend( .typography-font all );
+    }
+
+    .use ( headings ) {
+        &:extend( .typography-headings all );
+    }
+
+    // Mixin to apply certain typography rules
+
+    .apply( section ) {
+        // Selectively remove the block-level spacing from the first
+        // child of semantic sections
+        > :first-child {
+            margin-top: 0;
+        }
+    }
+
+    hr {
+        border-top: 1px solid @typography-hrule-color;
+    }
+
+}

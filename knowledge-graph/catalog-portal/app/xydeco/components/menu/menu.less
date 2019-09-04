@@ -1,0 +1,113 @@
+/*
+ * Project Horizon
+ * (c) 2013-2014 VMware, Inc. All rights reserved.
+ * VMware Confidential.
+ */
+
+@import "../base/fonts";
+
+/** @pattern .menu
+
+A vertical list of options from which the user makes a selection.  It may
+occur as a popup or dropdown, in a sidebar, or in the middle of the content.
+
+@example
+<ul class="menu">
+    <li class="is-selected"><a><%=phr.0%></a>
+    <li><a><%=phr.1%></a>
+    <li><a><%=phr.2%></a>
+</ul>
+*/
+
+@menu-text-color: @text-color;
+@menu-link-color: @menu-text-color;
+@menu-selected-color: #fff;
+@menu-selected-background-color: #68a6bd;
+@menu-hover-color: @menu-selected-color;
+@menu-hover-background-color: @menu-selected-background-color;
+@menu-separator-color: #e2e7eb;
+
+.menu {
+    @vpad: .5em;
+    @hpad: 10px;
+    @lineht: 1.25em;
+
+    padding: 0; // so that hover effects on <li> go to the edges of the menu ...
+    margin: 0;  // ... and any containing box
+    color: @menu-text-color;
+    .font > .size( normal );
+
+    > li,
+    &.dropdown-menu > li {
+        list-style: none;
+        padding: @vpad @hpad;
+        line-height: @lineht;
+        white-space: nowrap;
+
+        > * {
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        > a {
+            display: block;
+            white-space: nowrap;
+            padding: @vpad @hpad;
+            margin: (-@vpad) (-@hpad);
+            cursor: pointer;
+
+            &, &:hover, &:focus {
+                font-family: inherit;
+                color: @menu-link-color;
+                text-decoration: none;
+                text-shadow: none;
+            }
+        }
+
+        &.is-selected > a {
+            color: @menu-selected-color;
+            background: @menu-selected-background-color;
+        }
+
+        > a:hover {
+            color: @menu-hover-color;
+            background: @menu-hover-background-color;
+        }
+
+        &.menu-title { /** @member **/
+            padding-left: 0; // hang left into padding
+            .font > .size( larger );
+            .font > .variant( small-caps );
+            text-transform: lowercase; // all small-caps, no full-size caps
+        }
+
+        &.menu-hrule { /** @member **/
+            height: 0;
+            padding: 0;
+            border-top: 1px solid @menu-separator-color;
+            width: 100%;
+            margin: @vpad 0;
+        }
+
+        // Disabled state
+        // Gray out text and ensure the hover/focus state remains gray
+        &.is-disabled {
+            > a {
+                color: @disabled-text-color;
+                &:hover, &:focus {
+                    background: transparent;
+                    cursor: default;
+                }
+            }
+        }
+    }
+
+    &.center- {
+        text-align: center;
+    }
+
+    &.right- {
+        text-align: right;
+    }
+
+}

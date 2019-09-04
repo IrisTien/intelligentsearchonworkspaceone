@@ -1,0 +1,38 @@
+<section class="content-container app-favorites-edit">
+    <div ng-show="favoritesCtrl.isLoading" class="loading-favorites-editmode">
+        <spinner-loading></spinner-loading>
+    </div>
+    <main class="container-favorites-edit">
+        <div class="content-favorites-edit">
+            <div class="app-favorites-edit-header">
+                <h2>{{::'hub.apps.edit.favorites.prompt' | i18n}}</h2>
+                <p class="windows-touchscreen-message" ng-if="favoritesCtrl.isWindows">{{::'hub.apps.edit.favorites.windowstouchscreenmessage' | i18n}}</p>
+                <div class="editmode-close-button" ng-click="favoritesCtrl.exitEditMode($event)">
+                    <svg svg-symbol="icon-close-popup"></svg>
+                </div>
+
+                <div class="sort-warning-message-container" ng-if="favoritesCtrl.sortingWarningMessageShow">
+                    <h2 class="sort-warning-message update-without-actions" ng-if="favoritesCtrl.sortingOrderUpdatedWithoutActions">
+                        {{::'hub.apps.edit.favorites.favoritesupdatedwithoutactions' | i18n}}
+                    </h2>
+                    <h2 class="sort-warning-message" ng-if="favoritesCtrl.savingfavorites">
+                        {{::'hub.apps.edit.favorites.savecustomordering' | i18n}}
+                    </h2>
+                </div>
+            </div>
+            <section class="content-favorites-edit-body">
+
+                <div class="grid-container" ui-sortable="favoritesCtrl.sortableOptions" ng-model="favoritesCtrl.favoritesInEditMode" ui-sortable-update="favoritesCtrl.sortingUpdate()">
+                    <app-item currentview="FAVORITES_EDIT" class="grid-item app-item" ng-repeat="app in favoritesCtrl.favoritesInEditMode" app="app"></app-item>
+                    <div class="grid-item-empty" ng-repeat="app in favoritesCtrl.emptyFillers"></div>
+                </div>
+            </section>
+            <div class="app-favorites-edit-footer">
+                <div class="sort-actions-container">
+                    <span class="sort-action sort-cancel" ng-click="favoritesCtrl.cancelSorting()" ng-class="{'sort-button-enabled' : favoritesCtrl.sortingButtonEnabled}">{{::'hub.apps.edit.favorites.cancel' | i18n}}</span>
+                    <span class="sort-action primary-btn sort-save" ng-click="favoritesCtrl.saveCustomView()" ng-class="{'sort-button-enabled' : favoritesCtrl.sortingButtonEnabled}">{{::'hub.apps.edit.favorites.save' | i18n}}</span>
+                </div>
+            </div>
+        </div>
+    </main>
+</section>

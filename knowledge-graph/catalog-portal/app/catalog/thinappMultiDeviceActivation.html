@@ -1,0 +1,37 @@
+<div modal class="thinapp-devices footered- modal scrollable- fullscreen-mobile-">
+    <section class="dialog typography">
+        <div class="dialog-body">
+            <div>
+                <div class="simple- emblem">
+                    <div class="emblem-image" ng-style="{'background-image': ctrl.app.backgroundImage}">
+                    </div>
+                </div>
+                 <h3>{{ctrl.app.name}}</h3>
+                {{'app.thinappMultiDeviceAct.heading' | i18n:ctrl.app.name}}
+            </div>
+
+            <table class="device-table">
+                <thead>
+                <tr>
+                    <th>{{'app.thinappMultiDeviceAct.tableColumn.deviceName' | i18n }}</th>
+                    <th>{{'app.thinappMultiDeviceAct.tableColumn.requestStatus' | i18n }}</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody ng-repeat="device in ctrl.deviceReqs">
+                <tr>
+                    <td>{{device.machineName}}</td>
+                    <td>{{ctrl.getThinappRequestStatusMsg(device)}}</td>
+                    <td class="action-column">
+                        <button ng-click="ctrl.requestThinAppOnADevice(device.userDeviceId)" class="small- primary- button" id="perDeviceRequest" ng-show="ctrl.isRequestable(device)"> {{'app.thinappMultiDeviceAct.button.request' | i18n }}</button>
+                        <div ng-show="!ctrl.isRequestable(device)"><img src="app/graphics/tick.svg"></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <footer class="dialog-actions">
+            <button class="link- button large-" ng-click="ctrl.modal.cancel()">{{ 'button.cancel' | i18n }}</button>
+        </footer>
+    </section>
+</div>

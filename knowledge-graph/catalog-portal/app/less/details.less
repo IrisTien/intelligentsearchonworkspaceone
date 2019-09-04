@@ -1,0 +1,155 @@
+.details-main {
+
+    nav .bar {
+        display: table; // override: inline-table
+        margin: 0 auto;
+        width: 100%;
+        max-width: 30em;
+
+        > * {
+            width: 50%;
+        }
+
+        // TODO: customize buttons globally
+        .button {
+            background-image: none;
+            .font > .weight( normal );
+            &:first-child, &:last-child {
+                border-radius: 0;
+            }
+        }
+    }
+
+    .grid.appdetails-screenshots > li {
+
+        @media @page-S {
+            .grid > .width( 100%/4 );
+        }
+
+        @media @page-LP {
+            .grid > .width( 100%/3 );
+        }
+
+        .image {
+            border-color: 1px solid #eee;
+            cursor: pointer;
+        }
+    }
+
+    .details-filter-bar {
+        height: 52px;
+        background-color: @filter-bar-background-color;
+        border-bottom: 1px solid @filter-bar-divider-color;
+
+        .link-.button {
+            color: inherit;
+            border: none;
+        }
+    }
+}
+
+.appdetails {
+
+    @media @page-at-least-S {
+        margin: 20px 75px;
+    }
+
+    @media @page-at-least-M {
+        margin: 20px 100px;
+    }
+
+    @media @page-at-least-M {
+        margin: 20px 150px;
+    }
+
+    .appdetails-rating {
+        float: left;
+        line-height: 2em;
+    }
+
+    .appdetails-action {
+        float: right;
+        margin-top: 0.5em;
+        button {
+            .font > .size( xsmall );
+            .font > .tracking( very-loose );
+        }
+        @media @page-MP {
+            clear: both;
+            float: none;
+        }
+    }
+
+    .appdetails-nodata {
+        text-align: center;
+    }
+
+    .list {
+      word-wrap: break-word;
+
+      .inline-& > li + li {
+        margin-left: 1em;
+      }
+    }
+
+    .media-body h2 {
+        padding-top: 10px;
+    }
+}
+
+//Styles for zoomed image carousel
+.zoomedImageCarousel{
+    height: 100%;
+    .dialog-body{
+        padding: 0;
+        background: @mainBackgroundColor;
+    }
+    .zoomedImageCarouselSlides {
+        padding: 10px 0;
+        height: 88%; //for devices that doe snot support calc
+        height: ~"calc(100% - 70px)";
+        ul[rn-carousel] {
+            height: 100%;
+            width: 100%;
+            li:last-child{
+                padding: 0 5px;
+            }
+        }
+    }
+    .carouselHeader {
+        height: 50px;
+        padding: 10px;
+        .font > .weight(bold);
+        label{
+            color: inherit;
+        }
+        a {
+            float: right;
+        }
+    }
+    .carouselFooter{
+        height: 20px;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        text-align: center;
+        background: #fff;
+        .rn-carousel-indicator{
+            > span{
+                color: #71828B;
+            }
+            .active{
+                color: #0095D3;
+            }
+        }
+    }
+    .slide-img {
+        height: 100%;
+        margin: auto;
+        position: relative;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center center;
+    }
+}
+

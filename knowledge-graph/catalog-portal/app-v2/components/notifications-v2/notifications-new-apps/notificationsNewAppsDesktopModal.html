@@ -1,0 +1,27 @@
+<section class="content-container app-favorites-edit notifications-new-apps-modal">
+    <div ng-show="notificationNewAppsCtrl.isLoading" class="loading-favorites-editmode">
+        <spinner-loading></spinner-loading>
+    </div>
+    <main class="container-favorites-edit">
+        <div class="content-favorites-edit">
+            <div class="bookmark-all-header">
+                <h2>{{::'app.notification.newApps.title' | i18n}}</h2>
+                <p class="bookmark-all-message">{{::'app.notification.newApps.subtitle' | i18n}}</p>
+                <div class="editmode-close-button" ng-click="notificationNewAppsCtrl.goToNotifications()">
+                    <svg svg-symbol="icon-close-popup"></svg>
+                </div>
+            </div>
+            <section class="new-apps-modal-body">
+                <div class="grid-container">
+                    <app-item currentview="FAVORITES_EDIT" class="grid-item app-item" ng-repeat="app in notificationNewAppsCtrl.newApps" ng-click="notificationNewAppsCtrl.goToAppDetails(app.appId)" app="app"></app-item>
+                    <div class="grid-item-empty" ng-repeat="app in notificationNewAppsCtrl.emptyFillers"></div>
+                </div>
+            </section>
+            <div class="app-favorites-edit-footer">
+                <div class="sort-actions-container">
+                    <span class="sort-action primary-btn sort-save sort-button-enabled favorite-all-btn" ng-click="notificationNewAppsCtrl.bookmarkAll()">{{::'hub.notifications.new.apps.favorite.all' | i18n}}</span>
+                </div>
+            </div>
+        </div>
+    </main>
+</section>

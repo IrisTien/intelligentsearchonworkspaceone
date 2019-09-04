@@ -1,0 +1,955 @@
+@hub-notification-long-card-date-size: 15px;
+@hub-long-card-label-size: 14px;
+@hub-long-card-content-size: 15px;
+@page-breadcrumb-bar-height: 40px;
+@empty-notification-title-font-size: 21px;
+@empty-notification-description-font-size: 17px;
+@empty-v2-notification-title-font-size: 15px;
+@empty-v2-notification-description-font-size: 13px;
+@empty-notification-view-archive-button-font-size: 16px;
+@hub-long-card-action-btn-height: 50px;
+@button-standard-font-size: 14px;
+@desktop-date-font-size: 14px;
+@card-body-font-size: 13px;
+@notification-card-container-padding: 8px;
+@notification-card-header-height: 58px;
+@notification-card-actions-height: 40px;
+@notification-card-item-padding: 16px;
+@notification-icon-width: 32px;
+@hub-notification-bell-container-width: 38px;
+@hub-notification-bell-container-height: 50px;
+@hub-notification-date-text: 13px;
+@hub-notification-title-text-size: 17px;
+@hub-notification-card-border: #cdd0d3;
+@notification-border-radius: 6px;
+@notification-card-text-color: #000;
+@notification-card-close-button-color: #70777c;
+@notification-count-width: 14px;
+@notification-count-font-size: 11px;
+@notification-date-font-size: 13px;
+@notification-button-font-size: 13px;
+@notification-title-font-size: 17px;
+@notification-bookmark-all-header-height: 75px;
+@priority-background-gradient-start-color: #dcebf4;
+@priority-background-gradient-stop-color: #fff;
+@snack-bar-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1), 0 3px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+@snack-bar-font-size: 15px;
+
+.hub-notifications-card-container {
+  position: relative;
+  border: 1px solid @hub-notification-card-border;
+  background-color: @notification-card-background;
+  border-radius: @notification-border-radius;
+  z-index: 2000;
+  color: @notification-card-text-color;
+  margin: 14px 0;
+  width: 100%;
+
+  @media (min-width: @browser-hamburger-ribbon-transition) {
+    width: 450px;
+  }
+
+  .notification-img-invert {
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+  }
+
+  .notifications-content {
+    transition: opacity 0.3s;
+    -webkit-transition: opacity 0.3s;
+    opacity: 1;
+  }
+}
+
+.hub-notifications-card-container-mobile {
+  margin: 14px auto;
+}
+
+/*  Notification card header rules
+----------------------------------------------------
+*/
+
+.notifications-header-container {
+  position: relative;
+  width: 100%;
+  height: @notification-card-header-height;
+  font-size: 14px;
+  padding: 6px 32px 0 60px;
+  border-radius: 6px;
+
+  svg {
+    stroke-width: 0;
+  }
+
+  .icon-notifications-ws1 {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    margin-right: 12px;
+    display: inline-block;
+  }
+
+  .notifications-title {
+    .base-text-style(@notification-title-font-size, 600);
+    width: 100%;
+    line-height: 52px;
+    .single-line-ellipsis();
+  }
+
+  .notifications-title-with-subtitle {
+    .base-text-style(@hub-notification-title-text-size, 500);
+    width: 100%;
+    margin: 7px 0 2px;
+    .single-line-ellipsis();
+  }
+
+  .notifications-subtitle, .notifications-subtitle-timestamp {
+    .base-text-style(@desktop-date-font-size, 400);
+    opacity: @light-text-opacity;
+    .single-line-ellipsis();
+    max-width: calc(100% - 90px);
+    display: inline-block;
+  }
+
+  .notifications-subtitle:after {
+    content: '-';
+    margin-left: 5px;
+  }
+}
+
+.priority-background {
+  background: linear-gradient(@priority-background-gradient-start-color, @priority-background-gradient-stop-color);
+  background: -webkit-linear-gradient(@priority-background-gradient-start-color, @priority-background-gradient-stop-color);
+}
+
+/* Notification action container rules
+----------------------------------------------------
+*/
+.notifications-actions-container {
+  position: relative;
+  width: 94%;
+  margin: auto;
+  display: table;
+  table-layout: fixed;
+  // Do not define height, othrwise for card with no actions there is extra 40px whitespace
+  line-height: @notification-card-actions-height;
+
+
+  .hub-action-container {
+    display: table-cell;
+    padding: 4px 4px 15px;
+  }
+
+  .notification-button {
+    border-radius: 4px;
+    .base-text-style(@notification-button-font-size, 600);
+    text-align: center;
+    height: 96%;
+    line-height: 2.6;
+    width: 100%;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+}
+
+.hub-notification-bell-button {
+  width: @hub-notification-bell-container-width;
+  display: inline-block;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  z-index: 1000;
+}
+
+.notifications-actions-container .hub-action-container.disabled {
+  display: none;
+}
+
+.notifications-actions-container .hub-action-container.disabled {
+  display: none;
+}
+
+.notification-disabled {
+  background-color: @notification-disabled-background;
+}
+
+.section-title {
+  margin: 9px;
+  font-weight: bold;
+
+  @media (min-width: @browser-hamburger-ribbon-transition) {
+    width: 50%;
+    margin: 9px auto;
+  }
+}
+
+.notifications-close-button {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  z-index: 50;
+  color: @notification-card-close-button-color;
+}
+
+.notifications-archived-text {
+  .base-text-style(@hub-notification-date-text, 400);
+  position: relative;
+  margin: 16px 16px;
+
+  .left {
+    text-align: left;
+    .single-line-ellipsis();
+  }
+
+  .timestamp {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+.notifications-header-container {
+  .image-holder {
+    border-radius: 50%;
+    background-image: url(../app-v2/graphics-hub/icon-notification-default.svg);
+  }
+
+  .icon-notification-image {
+    .notification-icon(100%);
+    background: @white;
+    display: block;
+    border-radius: 50%;
+  }
+}
+
+.notifications-card-body-fields-section {
+  padding: 8px 6px 8px 0;
+}
+
+.notifications-body-text.field-body-text {
+  margin: 4px 0;
+}
+
+@keyframes notification-fade {
+  from {
+    background: rgba(7, 169, 237, 0.4);
+  }
+  to {
+    background: @white;
+  }
+}
+
+.notification-highlight {
+  animation: notification-fade 1s;
+}
+
+.notifications-container.content-container {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+
+  .section-headline-style2 {
+    margin-top: 16px;
+  }
+
+  @media (min-width: @browser-hamburger-ribbon-transition) {
+    margin-left: -130px;
+    left: 50%;
+  }
+  @media (min-width: @tabletL) {
+    margin-left: -170px;
+  }
+}
+
+.notifications-content-wrapper {
+  width: 100%;
+  padding: 0 @list-item-padding-h;
+}
+
+.empty-notification {
+  text-align: center;
+  width: 100%;
+  display: block;
+  padding: @list-item-padding-h @list-item-padding-h * 2;
+  margin-top: 40px;
+
+  @media (min-width: @phoneL) {
+    margin-top: 60px;
+  }
+
+  @media (min-width: @browser-hamburger-ribbon-transition) {
+    width: 450px;
+    margin-top: 80px;
+  }
+}
+
+.notifications-subpage-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: @gb-content-bg;
+
+  .empty-notification {
+    width: 100%;
+  }
+}
+
+.icon-empty-notification {
+  width: 240px;
+  height: 240px;
+  margin: auto;
+}
+
+.icon-v2-empty-notification {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+}
+
+.empty-notification-title {
+  .base-text-style(@empty-notification-title-font-size, 600);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.empty-notification-description {
+  .base-text-style(@empty-notification-description-font-size, 400);
+  line-height: 1.5;
+  opacity: @light-text-opacity;
+}
+
+.empty-v2-notification-title {
+  .base-text-style(@empty-v2-notification-title-font-size, 600);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.empty-v2-notification-description {
+  .base-text-style(@empty-v2-notification-description-font-size, 400);
+  line-height: 1.5;
+  opacity: @light-text-opacity;
+}
+
+.notifications-timestamp {
+  width: 90%;
+  margin-top: 16px;
+}
+
+.hub-notifications-timestamp-tablet {
+  width: 450px;
+  margin: 16px auto 0;
+}
+
+.view-archived-button {
+  display: block;
+  margin: 5px auto;
+  .base-text-style(@empty-notification-view-archive-button-font-size, 400);
+}
+
+@android-action-sheet-font-size: 16px;
+@android-action-sheet-item-height: 48px;
+@android-action-sheet-text-color: #696969;
+
+@hub-notification-filter-close-button-size: 18px;
+@hub-notification-filter-capsule-height: 32px;
+
+@hub-notification-filter-dropdown-item-size: 40px;
+
+.hub-notification-card-more-details {
+  height: 50px;
+  border-top: 1px solid #cdd0d3;
+  line-height: 50px;
+  text-align: right;
+  padding-right: 35px;
+  cursor: pointer;
+  background-image: url(../app-v2/graphics-hub/icon-right-arrow-light.svg);
+  background-position: right 2px center;
+  background-repeat: no-repeat;
+  background-size: 32px 32px;
+}
+
+.hub-notifications-collapsed {
+  .notifications-content {
+    max-height: 265px;
+    overflow: hidden;
+  }
+
+  .notifications-body-text {
+    .multi-line-ellipsis(2);
+    max-height: 50px;
+  }
+}
+
+.hub-notifications-card-container-hidden {
+  visibility: hidden;
+
+  .notifications-content {
+    opacity: 0;
+  }
+}
+
+.hub-long-notifications-timestamp {
+  .base-text-style(@hub-notification-long-card-date-size, 600);
+  opacity: .7;
+  .single-line-ellipsis();
+}
+
+.hub-notifications-nav-container {
+  position: absolute;
+  display: none;
+  left: 0;
+  padding-left: 10px;
+  @media (min-width: @browser-hamburger-ribbon-transition) {
+    display: block;
+  }
+}
+
+.notification-page-title {
+  display: none;
+}
+
+.notification-card-body-fields-content {
+  .base-text-style(@card-body-font-size, 400);
+  position: relative;
+  width: 100%;
+
+  .key {
+    width: 30%;
+    text-align: left;
+    display: inline-block;
+    opacity: .7;
+    .single-line-ellipsis();
+  }
+
+  .value {
+    width: 68%;
+    display: inline-block;
+    .single-line-ellipsis();
+  }
+}
+
+.hub-long-card-notifications-body-container {
+  .notification-card-body-fields-content {
+    margin: 12px 0 0;
+
+    .key, .value {
+      width: 49%;
+    }
+  }
+
+  .notification-card-body-comment textarea {
+    background: @notification-comment-bg;
+    border: 0;
+    width: 100%;
+    height: 100px;
+    border-radius: 4px;
+    resize: none;
+    font-size: @hub-long-card-content-size;
+    padding: 10px;
+  }
+}
+
+
+.notifications-body-container {
+  position: relative;
+  width: 100%;
+  padding: 8px 16px 0;
+  min-height: 45px;
+  margin-bottom: 6px;
+  line-height: 20px;
+  visibility: visible;
+
+  .notifications-body-text {
+    width: 100%;
+    font-size: @desktop-date-font-size;
+    line-height: 25px;
+    white-space: normal;
+    opacity: 0.9;
+
+    a {
+      display: inline-block;
+      word-break: break-all;
+      color: @primary-link-color;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .hub-notifications-date {
+    .base-text-style(@notification-date-font-size, 400);
+    color: @notification-date-text-color;
+    padding: 12px 0;
+    text-align: right;
+  }
+}
+
+.hub-long-notification {
+  .hub-long-card-notifications-actions-container.footer-actions {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+
+    .hub-action-container {
+      display: table-cell;
+      text-align: center;
+    }
+
+    .notification-button {
+      line-height: @hub-long-card-action-btn-height;
+    }
+
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+      display: none;
+    }
+  }
+
+  .notifications-body-container {
+    padding: 0;
+  }
+
+  .hub-long-card-notifications-actions-container.header-actions {
+    display: none;
+    margin-top: 12px;
+
+    .hub-action-container {
+      display: inline-block;
+    }
+
+    .notification-button {
+      min-width: 72px;
+      height: @action-button-height;
+      line-height: @action-button-height;
+      display: inline-block;
+      vertical-align: middle;
+      text-transform: uppercase;
+      text-align: center;
+      .base-text-style(@app-button-font-size, 600);
+      padding: 0 12px;
+      .single-line-ellipsis();
+      margin-right: 10px;
+      border-radius: 4px;
+    }
+
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+      display: block;
+    }
+  }
+
+  .content-container-scrollable {
+    height: ~ 'calc(100% - (@{hub-long-card-action-btn-height} + @{page-breadcrumb-bar-height}))';
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+      height: ~ 'calc(100% - @{page-breadcrumb-bar-height})';
+    }
+  }
+
+  .section-headline-style2 {
+    margin: @list-item-padding-h 0 @list-item-padding-h;
+  }
+
+  .notification-card-body-fields-content {
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+      & {
+        width: 49%;
+        display: inline-block;
+      }
+    }
+
+    .value {
+      white-space: normal;
+      vertical-align: top;
+    }
+  }
+
+  .notifications-body-text {
+    font-size: @hub-long-card-content-size;
+    opacity: 1;
+  }
+
+  .hub-long-card-label {
+    font-size: @hub-long-card-label-size;
+    opacity: .7;
+  }
+}
+
+// Move out in case we need branding on those
+.notifications-additional-body-section {
+  width: 90%;
+
+  .icon-additional-body-icons {
+    position: relative;
+    width: @notification-icon-width;
+    margin-right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    padding: 2px;
+    border-radius: 3px;
+  }
+
+  .notification-new-app-icon-container {
+    position: relative;
+    margin-right: 4px;
+    width: @notification-icon-width + 2px;
+    height: @notification-icon-width + 2px;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .notification-extra-icon-text {
+    display: inline-block;
+    position: absolute;
+    font-size: 14px;
+    opacity: @light-text-opacity;
+    line-height: 2.3;
+  }
+}
+
+.notifications-action-button-primary {
+  background-color: @primary-button-background;
+  color: @primary-button-text;
+
+  &.notification-button-disabled {
+    background-color: @notification-disabled-background;
+    color: @notification-card-close-button-color;
+    border: 1px solid @notification-card-close-button-color;
+    pointer-events: none;
+  }
+}
+
+.notifications-action-button-secondary {
+  background-color: @primary-button-text;
+  color: @primary-button-background;
+
+  &.notification-button-disabled {
+    background-color: @notification-disabled-background;
+    color: @notification-card-close-button-color;
+    border: 1px solid @notification-card-close-button-color;
+    pointer-events: none;
+  }
+}
+
+.notifications-header-container.hub-long-card-notifications-header-container {
+  padding: 15px 30px 30px 95px;
+  height: auto;
+  min-height: 110px;
+
+  .notifications-title, .notifications-title-with-subtitle {
+    line-height: 25px;
+    .multi-line-ellipsis(3);
+    white-space: normal;
+  }
+
+  .hub-long-card-icon {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    margin-right: 12px;
+    display: inline-block;
+
+    .icon-notification-image {
+      .notification-icon(100%);
+    }
+
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  @media (min-width: @browser-hamburger-ribbon-transition) {
+    padding: 15px 30px 30px 130px;
+    min-height: 140px;
+  }
+}
+
+.hub-notification-dialog-container {
+  box-shadow: 0 1px 6px 0 @app-tile-shadow-color;
+  background-color: @white;
+  position: fixed;
+  right: 8px;
+  top: 42px;
+  text-align: left;
+  z-index: 1000;
+  border-radius: 2px;
+}
+
+.hub-notification-actions-list {
+  background: transparent;
+  padding: 5px 0;
+  color: @android-action-sheet-text-color;
+
+  li {
+    .base-text-style(@android-action-sheet-font-size - 2px, 500);
+    width: 100%;
+    padding: 0 @list-item-padding-h;
+    height: @hub-notification-filter-dropdown-item-size;
+    line-height: @hub-notification-filter-dropdown-item-size;
+  }
+}
+
+.hub-filter-container {
+  display: inline-block;
+  padding-top: 16px;
+
+  @media (min-width: @browser-hamburger-ribbon-transition) {
+    padding-left: ~ 'calc((100% - 450px) / 2)';
+  }
+}
+
+.hub-filter-capsule {
+  height: @hub-notification-filter-capsule-height;
+  border-radius: @hub-notification-filter-capsule-height/2;
+  font-size: 13px;
+  padding: 6px;
+  background-color: @primary-button-background;
+}
+
+.filter-text {
+  color: @white;
+  margin: 0 4px;
+  vertical-align: middle;
+}
+
+.filter-close-button-container {
+  display: inline-block;
+  background-color: @white;
+  border-radius: @hub-notification-filter-close-button-size/2;
+}
+
+.filter-close-button {
+  width: @hub-notification-filter-close-button-size;
+  height: @hub-notification-filter-close-button-size;
+}
+
+.notifications-overflow-menu {
+  stroke: none;
+}
+
+.details-notifications {
+  background: @white;
+}
+
+.notifications-back-button {
+  left: 0;
+  top: 10px;
+  font-size: 15px;
+  line-height: 32px;
+  position: relative;
+}
+
+.icon-v2-empty-notification {
+  .primary-items {
+    fill: @empty-state-primary-item-stroke;
+  }
+}
+
+.new-apps-modal-body {
+  height: 100%;
+  max-height: 220px;
+  min-height: 200px;
+  overflow-y: auto;
+  position: relative;
+
+  @media (min-height: 360px) {
+    max-height: 220px;
+  }
+
+  @media (min-height: 480px) {
+    max-height: 320px;
+  }
+
+  @media (min-height: 600px) {
+    max-height: 480px;
+  }
+
+  @media (min-height: 720px) {
+    max-height: 600px;
+  }
+
+  @media (min-height: 840px) {
+    max-height: 720px;
+  }
+}
+
+.notifications-context-dialog-cancel {
+  border-top: 1px solid @hub-notification-card-border;
+  margin-top: 0;
+  border-radius: 0 !important;
+}
+
+.filter-text-container {
+  font-size: 16px;
+  color: @primary-text-color;
+  display: inline-block;
+  margin: 6px 12px 0 0;
+}
+
+.notifications-overflow-menu {
+  stroke: none;
+}
+
+.notifications-menu-item-selected-text {
+  color: @primary-text-color;
+}
+
+.notification-browser-title {
+  max-width: ~ "calc(100% - 32px)";
+  vertical-align: middle;
+  .single-line-ellipsis();
+  display: inline-block;
+}
+
+.notifications-dialog-overflow-menu {
+  width: 24px;
+  height: 24px;
+  stroke: none;
+  fill: @primary-text-color;
+  margin-top: 12px;
+}
+
+.notifications-dialog-overflow-menu-cancel {
+  width: 24px;
+  height: 24px;
+  stroke: none;
+  margin-top: 12px;
+}
+
+.android-filter-text-container {
+  margin: 6px 6px 0 0 !important;
+}
+
+.hub-notifications-filter-action {
+  display: inline-block !important;
+  padding-left: 4px;
+}
+
+.browser-mobile-filter-text {
+  text-transform: capitalize;
+}
+
+.notifications-filter-browser-mobile {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  font-size: 17px;
+  color: @primary-text-color;
+
+  svg {
+    margin-top: 10px;
+    fill: @primary-text-color;
+  }
+
+  p {
+    display: inline-block;
+    @media (max-width: 375px) {
+      display: none;
+    }
+  }
+}
+
+.favorite-all-btn {
+  cursor: pointer;
+}
+
+.priority-border {
+  border: 1px solid @primary-text-color;
+}
+
+.menu-item-container {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+}
+
+.solid-down-arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid @primary-text-color;
+  display: inline-block;
+  margin: 0 10px 3px 0;
+}
+
+.bookmark-all-header {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 0 @list-item-padding-h * 2;
+  height: @notification-bookmark-all-header-height;
+  z-index: 600;
+  border-bottom: solid 1px @list-item-divider-bg;
+  .single-line-ellipsis();
+
+  .bookmark-all-message {
+    font-size: 12px;
+    margin-top: 3px;
+  }
+
+  h2 {
+    font-size: @notification-title-font-size;
+    font-weight: bold;
+    margin-top: 20px;
+    line-height: 24px;
+  }
+}
+
+//snack bar notification
+.snack-bar-container {
+  height: 72px;
+  margin: 10px;
+  width: auto;
+  border-radius: 14px;
+  background-color: @white;
+  box-shadow: @snack-bar-shadow;
+  padding: 15px 10px;
+  cursor: pointer;
+  animation: slide-up 0.4s ease;
+  -webkit-animation: slide-up 0.4s ease;
+  -moz-animation: slide-up 0.4s ease;
+
+  .alert-icon, .close {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    padding: 5px;
+    vertical-align: top;
+  }
+
+  .title {
+    .base-text-style(@snack-bar-font-size, 500);
+    .single-line-ellipsis();
+  }
+
+  .sub-title {
+    .base-text-style(@snack-bar-font-size, 200);
+    .single-line-ellipsis();
+  }
+
+  .message {
+    display: inline-block;
+    width: ~ "calc(100% - 90px)";
+    line-height: 20px;
+
+    div:only-child {
+      margin: 10px 0;
+    }
+  }
+
+  @media (min-width: @browser-hamburger-ribbon-transition) {
+    width: 450px;
+    margin: 25px;
+  }
+}

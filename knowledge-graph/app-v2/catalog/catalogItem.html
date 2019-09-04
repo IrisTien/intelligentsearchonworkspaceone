@@ -1,0 +1,25 @@
+<div class="catalog-item" ng-class="{'tunnel-tile': catalogItemCtrl.app.isTunnelRequired}">
+    <svg svg-symbol="icon-tunnel" class="catalog-tunnel-icon-tablet" ng-if="catalogItemCtrl.app.isTunnelRequired"></svg>
+    <div class="catalog-item-click-area" ng-click="catalogItemCtrl.itemClicked(catalogItemCtrl.app.appId)">
+        <div class="catalog-app-icon" image-load>
+            <img ng-src="{{catalogItemCtrl.app.backgroundImage}}">
+        </div>
+        <p line-clamp2 lines="2" content="::catalogItemCtrl.app.name" class="catalog-item-caption"></p>
+        <p class="catalog-item-type">
+            <svg ng-if="catalogItemCtrl.app.isHorizonResource || catalogItemCtrl.app.isHorizonAirResource" svg-symbol="icon-horizon-watermark"></svg>
+            {{::catalogItemCtrl.app.appTypeDisplayVal}}
+        </p>
+        <p class="vpn-required-message" ng-if="catalogItemCtrl.app.isTunnelRequired">
+            <svg svg-symbol="icon-tunnel" class="catalog-tunnel-icon-mobile"></svg>
+            {{ ::'app.tunnel.header' | i18n }}
+        </p>
+        <div ng-if= "!catalogItemCtrl.directEnrollmentEnabled" tooltip tooltiptext="app.tooltip.viewdetails" triggerelement="catalog-item-click-area"></div>
+        <div ng-if= "catalogItemCtrl.directEnrollmentEnabled" class="catalog-item-actions recommended-apps-select-action">
+            <a class="catalog-button recommended-app-selector" ng-class="{'app-selected': catalogItemCtrl.app.isSelected}">
+                <div class="icon-recommended-app-bg"></div>
+                <svg svg-symbol="icon-recommended-app-selector"></svg>
+            </a>
+        </div>
+    </div>
+    <div ng-if= "!catalogItemCtrl.directEnrollmentEnabled" catalog-item-actions class="catalog-item-actions branding-icon-primary" app="catalogItemCtrl.app" stop-event="click"></div>
+</div>

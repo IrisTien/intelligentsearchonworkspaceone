@@ -1,0 +1,183 @@
+//Catalog styles
+
+.catalog-main {
+  overflow: visible;
+    
+  @media @page-at-least-M {
+      .appcenter-filter-show {
+          visibility: hidden; // because we have sidebar in catalog on larger screens
+      }
+      .searchFilterMsg {
+          display: none;
+      }
+  }
+    
+  @media @page-S-only {
+    .appcenter-categorydropdown {
+      margin: -45px 0 0 0px;
+    }
+  }
+
+  @media @page-at-most-MP {
+      @gridPadding: @grid-gutter/2;
+      //Decreasing vertical spacing between grid items for mobile phones
+      .grid > * {
+          padding: (@gridPadding)-3px @gridPadding;
+      }
+  }
+
+  .myapps-icon{
+    background: @floatingMyAppsIconColor;
+  }
+
+  .frame-header .page {
+    left: 0px;
+  }
+
+   
+    
+  .appcenter-categorydropdown {
+    padding: 10px 10px 10px 20px;
+    float: left;
+    margin: -42px 0 0;
+  }
+
+  .dropdown-panel {
+      .full-width-.button {
+          // TODO: should we apply this styling more generally?
+          font-variant: small-caps;
+          text-transform: lowercase;
+      }
+  }
+
+  .frame-sidebar {
+
+      .menu {
+
+          > li {
+              padding: 0.5em 20px;
+          }
+
+          li.menu-hrule {
+              border-bottom: 1px solid #bbc8d1;
+              padding: 0;
+          }
+
+          .menu-title {
+              padding: 0 0 10px 0;
+              img {
+                  width: 12px;
+                  color: #44525e;
+              }
+              .menu-title-text {
+                  padding-left: 4px;
+              }
+          }
+
+          > li > a {
+              color: inherit; // to allow for branding to override
+          }
+
+          > li.is-selected > a {
+              font-weight: bold;
+              background-color: inherit;
+          }
+      }
+  }
+
+  .mobileFilterBarContainer {
+      margin: @mobile-filter-dropdown-container-margin 0 @mobile-filter-dropdown-container-margin 0;
+  }
+
+  .welcomeMessageContainer {
+      height: @desktop-filter-dropdown-container-height - (@c-tile-padding/2);
+      width: 100%;
+      margin: auto;
+      padding: 40px (@l-tile-padding/2) (44px - (@c-tile-padding/2)) (@l-tile-padding/2);
+      .welcomeMessage {
+          font-size: @welcome-font-size;
+          line-height: @welcome-line-height;
+          .font .weight(thin);
+          float:left;
+          .ellipsis();
+      }
+      .desktopFilterBarContainer {
+          .dropdown-panel {
+              max-width: @desktop-filter-dropdown-container-width;
+              .menu-item-name {
+                  .ellipsis(@desktop-filter-dropdown-container-width - 45px);
+              }
+          }
+          .mobileFilterBar {
+              .filterDropdown {
+                  display: block;
+              }
+              .filterName {
+                  .ellipsis(@desktop-filter-dropdown-container-width - 35px);
+              }
+          }
+      }
+      @media @page-S {
+        .welcomeMessage {
+          width: 65%;
+        }
+      }
+    }
+
+     @media @page-at-least-S {
+        .sidebarred-.frame {
+            padding-bottom: @desktop-filter-dropdown-container-height - (@c-tile-padding/2);
+        }
+         
+        .page.full-bleed-{
+            padding: 0px 10px 10px 10px;
+        }
+    }
+
+    &.frame.view- {
+        > .headered-.frame.no-tabs- {
+            .frame > .header-height( 0 );
+            .frame-sidebar {
+              padding-top: @desktop-filter-dropdown-container-height;
+            }
+        }
+    }
+}
+
+.frame-header {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); //Remove grey flashes on tapping for mobile devices
+}
+
+.frame-body {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); //Remove grey flashes on tapping for mobile devices
+}
+
+.searchFilterMsg {
+  text-align: center;
+}
+
+//All confirm dialogs and modals are positioned at center of the page.
+.modal .modal-frame {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin: auto;
+  .translate(-50%, -50%);
+
+  @media @page-LP {
+    position: absolute;
+  }
+}
+
+
+@media @page-LP {
+  // account for localization
+  .installPrompt-action {
+    max-width: 50%;
+    padding: 6px 1em;
+  }
+}
+
+.button .button-text {
+  text-rendering: auto;
+}

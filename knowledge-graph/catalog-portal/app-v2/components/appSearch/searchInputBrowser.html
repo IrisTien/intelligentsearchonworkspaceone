@@ -1,0 +1,26 @@
+<div>
+    <div class="search-input-bar">
+        <label>
+            <svg svg-symbol="icon-searchglass" class="icon-input-searchglass"></svg>
+        </label>
+        <input type="text"
+               ng-model="ctrl.query.name"
+               ng-change="ctrl.onsearch()"
+               ng-model-options="{ debounce: 500 }"
+               placeholder="{{ ::'hub.apps.search.text' | i18n }}"
+               class="search-inputfield"
+               autocorrect="off"
+               autocapitalize="off"/>
+        <!--on mobile screen clear text and on desktop screen close search-->
+        <button class="search-clear-button" ng-click="ctrl.clearSearchResults()" ng-show="ctrl.query.name && !ctrl.loading">
+            <svg svg-symbol="icon-circle-x" class="search-clear-x-button"></svg>
+        </button>
+    </div>
+    <div class="search-results-scrim ng-isolate-scope" id="pt-search-scrim" ng-show="ctrl.query.name.length >=1" search-results-close
+         close="ctrl.clearSearchResults()" show-scrim="ctrl.query.name.length >=1">
+    </div>
+    <div search-dropdown scroll-input-blur template-url="app-v2/components/appSearch/searchDropDown.html"
+             search-item="'.search-item-app.active'" ng-if="ctrl.query.name.length">
+    </div>
+</div>
+

@@ -1,0 +1,123 @@
+@import "../shared/mixins.less";
+
+@mobile-headline-font-size: 64px;
+@mobile-search-input-text-font-size: 32px;
+@mobile-content-header-font-size: 19px;
+@mobile-content-header-font-size-android: 16px;
+@mobile-apps-headline-font-size: 18px;
+@mobile-empty-page-heading-font-size: 34px;
+
+@user-detail-header-name-font-size: 21px;
+@user-detail-header-text-font-size: 15px;
+@user-detail-profile-item-label-font-size: 13px;
+@user-detail-profile-item-content-font-size: 15px;
+
+@user-org-item-name-font-size: 15px;
+@user-org-item-title-font-size: 13px;
+
+@item-title-name-font-size: 11px;
+@item-description-text-size: 11px;
+
+@app-details-app-name-font-size: 21px;
+@details-section-content-font-size: 15px;
+
+@category-item-text-font-size: 17px;
+
+.single-line-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// This can be used for webkit based browsers, for example iOS and Android will be OK , but not windows
+.multi-line-ellipsis(@line-no) {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: @line-no;
+    -webkit-box-orient: vertical;
+}
+
+// Mobile content -- This is the equivalent of the UX Section Headline Style 2
+// ---------------------------------------
+.section-headline-style2 {
+  .base-text-style(@mobile-content-header-font-size, 700);
+}
+
+.android .section-headline-style2 {
+  font-size: @mobile-content-header-font-size-android;
+}
+
+// This is a mixin text class -- equivalent of App/People Title Name I prefer not used as a class directly as usually it is used in ng-repeat
+// and sometimes we have hundreds of them it bloat up the html
+.item-title-name {
+  .base-text-style(@item-title-name-font-size, 500);
+}
+
+// This is a mixin text class -- equivalent of Profile Description/Title Name I prefer not used as a class directly as usually it is used in ng-repeat
+// and sometimes we have hundreds of them it bloat up the html
+.item-description-text {
+  .base-text-style(@item-title-name-font-size, 400);
+}
+
+.notifications-archive-text {
+  .base-text-style(@user-detail-profile-item-label-font-size, 500);
+}
+
+.mobile-search-input-text {
+    font-size: @mobile-search-input-text-font-size;
+    font-weight: 400;
+}
+
+// For localization concerns, we should let it be two lines if needed, does not need to force one-line here
+.empty-page-heading {
+  .base-text-style(@mobile-empty-page-heading-font-size, 700);
+  margin-bottom: 12px;
+}
+
+// People Detail Text rules
+.user-detail-header-name {
+    font-size: @user-detail-header-name-font-size;
+    font-weight: 700;
+    margin: 16px 0 8px;
+}
+
+.user-detail-profile-item-label {
+    font-size: @user-detail-profile-item-label-font-size;
+    opacity: @light-text-opacity;
+    line-height: 1.6;
+    text-transform: capitalize;
+}
+
+.android .user-detail-profile-item-label {
+   font-size: 10px;
+   text-transform: uppercase;
+}
+
+.user-detail-profile-item-content {
+    .base-text-style(@user-detail-profile-item-content-font-size, 400);
+    line-height: 1.6;
+}
+
+//App details text rules
+.app-details-app-name-text {
+  .base-text-style(@app-details-app-name-font-size, 700);
+
+}
+.app-details-content-text {
+  font-size: @details-section-content-font-size;
+}
+
+// Catgory text
+.category-item-text {
+  .base-text-style(@category-item-text-font-size, 400)
+}
+
+// text links
+.text-link-style {
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.long-links {
+    word-break: break-all;
+}

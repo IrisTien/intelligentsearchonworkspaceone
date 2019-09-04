@@ -1,0 +1,41 @@
+<div ng-show="peopleCtrl.isLoading" class="apps-loading">
+    <div ng-include="'app-v2/common/spinner.html'"></div>
+</div>
+<article id="people-container" class="people content-container-scrollable" ng-class="{'disable-scroll': appCenterCtrl.$state.current.activeTab == 'peopleDetails'}">
+    <div class="content with-boundary" pull-to-refresh="peopleCtrl.clearCache()" scroll-container=".people.content-container-scrollable">
+        <section class="people-search-illo-header">
+                <ng-include src="'app-v2/svgincludes/illo-people-search-start.html'" class="illo-people-search-start"></ng-include>
+                <p class="search-for-people-text">{{ ::'appCenter.peopleSearch.atLeastThreeChars' | i18n }}</p>
+        </section>
+        <section class="content-body people-team-section" ng-if="peopleCtrl.managers.length || peopleCtrl.directReports.length || peopleCtrl.peers.length">
+            <div class="people-team-header">
+                <h3 class="people-team-title">{{ ::'app.people.labels.team' | i18n }}</h3>
+            </div>
+            <header class="collapse-panel-header non-collapsible">
+                <h3>{{::'app.people.labels.manager' | i18n}}</h3>
+            </header>
+            <div class="grid-container">
+                <div user-Item user="manager" class="grid-item people-team-item manager-card"
+                 ng-repeat="manager in peopleCtrl.managers track by $index+manager.id"></div>
+                <div ng-repeat="item in peopleCtrl.emptyFillers" class="grid-item-empty"></div>
+            </div>
+
+            <collapse-panel collapsible="peopleCtrl.collapsible" ng-class="{'collapsible-header' : peopleCtrl.collapsible}" class="people-peer-panel" ng-if="peopleCtrl.peers.length" headerlabel="{{::'app.people.labels.peers' | i18n}}">
+                <div class="grid-container">
+                    <div user-Item user="peer" class="grid-item people-team-item"
+                         ng-repeat="peer in peopleCtrl.peers track by $index+peer.id"></div>
+                    <div ng-repeat="item in peopleCtrl.emptyFillers" class="grid-item-empty"></div>
+                </div>
+            </collapse-panel>
+
+            <collapse-panel collapsible="peopleCtrl.collapsible" ng-class="{'collapsible-header' : peopleCtrl.collapsible}" class="people-directreports-panel" ng-if="peopleCtrl.directReports.length" headerlabel="{{::'app.people.labels.directReports' | i18n}}">
+                <div class="grid-container">
+                    <div user-Item user="directReport" class="grid-item people-team-item"
+                         ng-repeat="directReport in peopleCtrl.directReports track by $index+directReport.id"></div>
+                    <div ng-repeat="item in peopleCtrl.emptyFillers" class="grid-item-empty"></div>
+                </div>
+            </collapse-panel>
+        </section>
+    </div>
+</article>
+<div ng-show="appCenterCtrl.$state.current.activeTab == 'peopleDetails'" class="content-container user-details" ui-view></div>

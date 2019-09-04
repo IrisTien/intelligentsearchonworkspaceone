@@ -1,0 +1,97 @@
+@search-placeholder-text-color: #666;
+@search-cancel-button-width: 100px;
+
+@search-people-item-height: 64px;
+@search-people-avatar-size: 40px;
+@search-people-avatar-rim-width: 4px;
+@search-people-avatar-initial-font-size: 16px;
+
+@search-people-item-name-font-size: 15px;
+@search-people-item-title-font-size: 13px;
+
+@search-people-recent-item-name-font-size: 14px;
+@search-people-recent-item-line-height: 52px;
+@search-people-recent-item-icon-size: 24px;
+
+.people-search {
+    .full-screen(1000);
+}
+
+.search-people-loading {
+    .loader-android, .loader-ios {
+        top: 30%;
+    }
+}
+
+.people-search-headerline {
+    padding: 0 @list-item-padding-h;
+    padding-top: 8px;
+    line-height: 44px;
+}
+
+// There could be hundred items at times so use the right arrow as a background image, instead of svg -- otherwise will add hundreads of svg nodes unnessarily bloat the html
+.search-people-item {
+    position: relative;
+    width: 100%;
+    height: @search-people-item-height;
+    padding: (@search-people-item-height - @search-people-avatar-size)/2 @list-item-padding-right (@search-people-item-height - @search-people-avatar-size)/2 (@search-people-avatar-size + 32px);
+    .list-item-right-arrow-image-mixin();
+    .list-item-divider-mixin(@list-item-divider-bg);
+    cursor: pointer;
+
+    em {
+        background: @search-item-character-highlight-bg;
+    }
+}
+
+.search-people-item-avatar {
+    position: absolute;
+    top: (@search-people-item-height - @search-people-avatar-size)/2;
+    left: @list-item-padding-h;
+    .user-avatar-style(@search-people-avatar-size, @user-team-item-border-radius, @user-team-item-avatar-bg, @search-people-avatar-rim-width);
+}
+
+.search-people-avatar-initial {
+    .avatar-background(@avatar-gradient-color1, @avatar-gradient-color2);
+    @search-people-item-line-height: @search-people-avatar-size  - 2 * @search-people-avatar-rim-width;
+    .user-team-item-initial-style(@search-people-avatar-initial-font-size, @search-people-item-line-height, @user-team-item-initial-color);
+    font-weight: 500;
+
+    span {
+        text-transform: uppercase;
+        opacity: @user-initial-text-opacity;
+    }
+}
+
+.search-people-item-name {
+    font-size: @search-people-item-name-font-size;
+    font-weight: 500;
+    margin: 4px auto 6px;
+    .single-line-ellipsis();
+}
+
+.search-people-item-title {
+    font-size: @search-people-item-title-font-size;
+    font-weight: 300;
+    .single-line-ellipsis();
+}
+
+.search-people-empty-result {
+    text-align: center;
+    padding: @list-item-padding-h*3 @list-item-padding-h;
+}
+
+.search-people-recent-item {
+    width: 100%;
+    position: relative;
+    font-size: @search-people-recent-item-name-font-size;
+    line-height: @search-people-recent-item-line-height;
+    padding: 0 @list-item-padding-right 0 @list-item-padding-h;
+    .list-item-right-arrow-image-mixin();
+    .list-item-divider-mixin(@list-item-divider-bg);
+    .single-line-ellipsis();
+
+    svg {
+        display: none;
+    }
+}

@@ -1,0 +1,325 @@
+.masthead { /** @pattern **/
+    @hpad: 10px;
+    @useravatarSize: 24px;
+    @search-input-bg-color: #ebeef0;
+    @search-input-border-color: @mainBackgroundColor;
+    @search-input-active-border-color: #c4cdd3;
+    @logo-container-width: 200px;
+    @search-container-transition: .225s;
+    @search-input-transition-expand-in: .25s;
+    @search-input-transition-expand-out: .2s;
+        
+    .search-expand-animation(@search-input-transition) {
+        transition: all ease-in-out @search-input-transition;
+        -webkit-transition: all ease-in-out @search-input-transition;
+        -moz-transition: all ease-in-out @search-input-transition;
+        -ms-transition: all ease-in-out @search-input-transition;
+    }
+    
+     .search-fade-animation(@search-container-transition) {
+        transition: all ease-in-out @search-container-transition;
+        -webkit-transition: all ease-in-out @search-container-transition;
+        -moz-transition: all ease-in-out @search-container-transition;
+        -ms-transition: all ease-in-out @search-container-transition;
+    }
+    
+    
+    position: relative;
+
+    .masthead-left,
+    .masthead-right {
+        position: absolute;
+        top: 0;
+    }
+
+    .masthead-left {
+        left: 0;
+    }
+
+    .masthead-center {
+        text-align: center;
+    }
+
+    .masthead-right {
+        right: 0;
+        text-align: right;
+    }
+
+    &.desktop- {
+
+        .grid > .extend();
+
+        margin: 0 auto;
+
+        .grid > .width( @page-L-columns );
+
+        @media @page-M {
+            .grid > .width( @page-M-columns );
+        }
+
+        @media @page-S {
+            .grid > .width( @page-S-columns );
+        }
+
+        @media @page-W {
+            .grid > .width( @page-W-columns );
+        }
+
+        .masthead-left,
+        .masthead-right {
+            .box > .width( 4 );
+        }
+
+        .masthead-center {
+            .box > .width( remainder );
+        }
+
+        .masthead-right {
+            .box > .justify( right );
+        }
+
+        .masthead-left {
+            width: @logo-container-width;
+            top: 10px;
+            @media @page-S {
+                width: 170px;
+                top: 13px;
+            }
+        }
+
+        .userinfo-avatar {
+            font-size: @useravatarSize;
+            opacity: .6;
+        }
+
+        .dropdown-toggle {
+            .font > .size(small);
+            color: inherit;
+            > * {
+                vertical-align: middle;
+            }
+            > * + * {
+                margin-left: 10px;
+            }
+
+            height: 50px;
+            padding-right: 8px;
+        }
+
+        .userinfo {
+            .dropdown-panel {
+                ul.menu {
+                    text-align: left;
+                }
+            }
+        }
+
+        .userinfo-name {
+            .ellipsis(130px);
+        }
+
+        .input-.bar {
+            @search-border-radius: 4px;
+
+            background-color: @search-input-bg-color;
+            border: 1px solid @search-input-border-color;
+            border-radius: @search-border-radius;
+            vertical-align: top;
+            margin-top: (@masthead-height - @grid-gutter - @input-height)/2;
+
+            &::before,
+            & > * {
+                border: 0;
+            }
+
+            .clear-search{
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+
+            &:active {
+                border-color: @search-input-active-border-color;
+
+                & > .input-bar-action {
+                  // mobile Windows workaround, otherwise the element disappears before triggering onclick event
+                  visibility: visible;
+                }
+            }
+
+            & > input {
+                height: 30px;
+                color: @favorite-stroke-color;
+            }
+            .symbol {
+                stroke: @favorite-stroke-color;
+                fill: @favorite-stroke-color;
+            }
+        }
+
+        @media @page-S {
+            .masthead-right {
+                .box > .width( 2 );
+            }
+            .userinfo-name {
+                display: none;
+            }
+            .search-.input {
+                width: 15em;
+            }
+        }
+    }
+
+    &.mobile- {
+        .font > .size( xlarge );
+        &.search- {
+            padding: 0;
+        }
+        margin: 0;
+
+
+        .link-.button,
+        a.link {
+            color: inherit;
+            border: none;
+        }
+
+        .symbol {
+            font-size: 21px;
+        }
+
+        .symbol[symbol^="sort-"] {
+            width: 1.5em;
+        }
+
+        .button {
+            vertical-align: 0.2em;
+        }
+
+        .button > * {
+            vertical-align: middle;
+        }
+
+        .masthead-left,
+        .masthead-right {
+            // establish full-width for dropdown-panels in the masthead
+            width: 100%;
+            height: 0;
+
+            .dropdown {
+                position: static; // don't position dropdown-panel relative to dropdown itself
+                .dropdown-panel {
+                    top: @mobile-masthead-height;
+                    margin-top: 0;
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;
+                    border-top: none;
+                    width: 100%;
+                    box-shadow: 0 1px 3px rgba(0,0,0,.5);
+                }
+            }
+        }
+
+        .searchContainer {
+            //Opacity transition for search container
+            opacity: 1;
+            .search-fade-animation(@search-container-transition);
+            
+            position: absolute;
+            top: 0;
+            width: 100%;
+            background: @filter-bar-background-color;
+            z-index: 1;
+            padding: 0 @hpad;
+            svg {
+                font-size: 16px;
+            }
+            .icon-left, .icon-right {
+                position: absolute;
+                top: 5px;
+            }
+            .icon-left {
+                left: 10px;
+            }
+            .icon-right {
+                right: 10px;
+            }
+            .inputContainer {
+                position: relative;
+                //Positioning transition for input
+                margin-left: 0;
+                .search-expand-animation(@search-input-transition-expand-in);
+                #searchInput {
+                    border: 1px solid #e1e6e9;
+                    background-color: #ebeef0;
+                    border-radius: 1px;
+                    padding-left: 35px;
+                    height: 35px;
+                    //To override default iOS border styles for input
+                    -webkit-appearance: none;
+                    line-height: normal;
+                    //Width transition for input
+                    width: 80%;
+                    .search-expand-animation(@search-input-transition-expand-in);
+                }
+                .symbol {
+                    stroke: @favorite-stroke-color;
+                    fill: @favorite-stroke-color;
+                }
+            }
+            .close {
+                float: right;
+                color: @link-color;
+            }
+            &.ng-hide{
+                opacity: 0;
+                z-index: -1;
+                .inputContainer{
+                     margin-left: 75%;
+                    .search-expand-animation(@search-input-transition-expand-out);
+                     #searchInput{
+                          width: 5%;
+                         .search-expand-animation(@search-input-transition-expand-out);
+                    }
+                }
+            }
+            .input {
+                color: @favorite-stroke-color;
+            }
+        }
+        
+         .mastheadContainer {
+             margin: 0 @hpad;
+             position: relative;
+         }
+                 
+        .is-active .searchDropdown.dropdown-panel{
+          display: block;
+        }
+
+        .link-.button.symbolHighlight {
+            background-color: @basicGreenColor;
+            color: @symbol-highlight-text-color;
+        }
+    }
+}
+
+.masthead-logo {
+    .image > .aspect( 5.55/1 );
+    background-image: url('../app/graphics/logo.svg');
+    background-position: left center;
+    border: none;
+}
+.selected-category-name {
+  max-width: 100px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+
+
+

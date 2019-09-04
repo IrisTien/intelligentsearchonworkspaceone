@@ -1,0 +1,7 @@
+<svg id="icon-support" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    <path d="M22.77,9.24a9.57,9.57,0,1,0,0,13.53A9.57,9.57,0,0,0,22.77,9.24Zm-3.69,9.84a4.35,4.35,0,1,1,0-6.15A4.35,4.35,0,0,1,19.08,19.08Z" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M16.87,12.52H15.13a.91.91,0,0,1-.87-.93l-.87-4.66A.91.91,0,0,1,14.26,6h3.48a.91.91,0,0,1,.87.93l-.87,4.66A.91.91,0,0,1,16.87,12.52Z" fill="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M16.87,19.48H15.13a.91.91,0,0,0-.87.93l-.87,4.66a.91.91,0,0,0,.87.93h3.48a.91.91,0,0,0,.87-.93l-.87-4.66A.91.91,0,0,0,16.87,19.48Z" fill="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12.52,15.13v1.74a.91.91,0,0,1-.93.87l-4.66.87A.91.91,0,0,1,6,17.74V14.26a.91.91,0,0,1,.93-.87l4.66.87A.91.91,0,0,1,12.52,15.13Z" fill="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M19.48,15.13v1.74a.91.91,0,0,0,.93.87l4.66.87a.91.91,0,0,0,.93-.87V14.26a.91.91,0,0,0-.93-.87l-4.66.87A.91.91,0,0,0,19.48,15.13Z" fill="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

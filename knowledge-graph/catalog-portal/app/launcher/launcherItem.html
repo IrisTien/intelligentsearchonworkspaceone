@@ -1,0 +1,14 @@
+<div class="launcheritem">
+    <div class="emblem large-"
+         contextdialog="{uris:{'contextdialogTemplate':(true)}, scope:{app:launcherItemCtrl.app}}"
+         contextdialogTemplate="app/launcher/launcherContextDialog.html"
+         ng-click="launcherItemCtrl.launchApp(launcherItemCtrl.app, $event)" >
+        <a>
+            <div class="emblem-image" hm-hold="launcherItemCtrl.triggerContextdialog()"
+                 style="background-image: url('{{::launcherItemCtrl.app.icon}}')">
+            </div>
+            <h3 class="emblem-title" title="{{::launcherItemCtrl.app.name}}"
+                line-clamp content="::launcherItemCtrl.app.name" lines="2"></h3>
+        </a>
+    </div>
+</div>

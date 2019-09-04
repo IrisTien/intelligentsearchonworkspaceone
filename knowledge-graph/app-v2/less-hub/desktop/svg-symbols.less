@@ -1,0 +1,74 @@
+@mobile-default-taparea-size: 32px;
+@search-clear-x-button-bg: #61717D;
+
+// In general please only put fill color and stroke color in this file
+// THe position and dimention goes to the section where the icon resides
+.svg-symbol,
+[svg-symbol] {
+    display: inline-block;
+    height: @mobile-default-taparea-size;
+    width: @mobile-default-taparea-size;
+    vertical-align: top;
+}
+
+.icon-detail-close-button, .icon-subpage-back-button {
+    height: @mobile-default-taparea-size;
+    width: @mobile-default-taparea-size;
+    fill: currentColor;
+    stroke: currentColor;
+}
+
+.svg-symbol {
+    fill: currentColor;
+    stroke: currentColor;
+}
+
+// Empty state class
+//----------------------------------
+.primary-items {
+    stroke: @empty-state-primary-item-stroke;
+    fill: @empty-state-primary-item-fill;
+}
+
+.secondary-items {
+    stroke: @empty-state-secondary-item-stroke;
+    fill: @empty-state-secondary-item-fill;
+}
+
+.hub-no-apps .primary-items, .hub-no-apps .secondary-items {
+    fill: @content-bg;
+}
+
+// In search mode, the background will always be white so the fill should always be white
+.search-module {
+    &.hub-no-apps .primary-items, &.hub-no-apps .secondary-items {
+        fill: #fff!important;
+    }
+}
+
+.android .apps-search .primary-items, .android .people-search .primary-items {
+    stroke: @empty-state-primary-item-stroke!important;
+    fill: #fff!important;
+}
+
+.android .apps-search .secondary-items, .android .people-search .secondary-items {
+    stroke: @empty-state-secondary-item-stroke!important;
+    fill: #fff!important;
+}
+
+// Notification empty state graphic is different, it is sitting on the #f5f5f5 bg for light
+//----------------------------------
+.icon-empty-notification {
+    .primary-items {
+        fill: @gb-content-bg;
+    }
+
+    .secondary-items {
+        fill: @gb-content-bg;
+    }
+}
+
+.search-clear-x-button {
+    color: @search-clear-x-button-bg;
+}
+

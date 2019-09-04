@@ -1,0 +1,116 @@
+@collapse-panel-anim-time: 0.35s;
+@collapse-panel-header-height: 60px; // increased to 32 for touch screen
+@collapse-panel-header-font-size: 14px;
+@collapse-panel-header-padding: 60px;
+
+// We can not use height to animation as it is set to auto, we use max-height
+@icon-collpase-size: 30px;
+@collapse-panel-content-max-height: 1200px;
+@collapse-panel-content-anim-time: 0.35s;
+
+// Collpase header generic rules
+// ---------------------------------------
+.collapse-panel-header {
+	width: 100%;
+	height: @collapse-panel-header-height;
+	line-height: @collapse-panel-header-height ;
+	font-size: @collapse-panel-header-font-size;
+	position: relative;
+	text-align: left;
+    cursor: pointer;
+	font-weight: 500;
+
+	&.non-collapsible {
+        cursor: default;
+	}
+
+	h3 {
+		width: 100%;
+		padding-left: 60px;
+		.single-line-ellipsis();
+	}
+}
+
+// Tentative
+.icon-expand-collapse {
+	width: @icon-collpase-size;
+	height: @icon-collpase-size;
+	border-radius: 50%;
+	position: absolute;
+	top: @icon-collpase-size/2 + 6px;
+	left: @icon-collpase-size/2 - 2px;
+
+	&:before {
+		position: absolute;
+		content: '';
+		top: 10px;
+		left: 8px;
+		width: 10px;
+		height: 10px;
+		border-top: solid 2px @primary-icon-color;
+		border-right: solid 2px @primary-icon-color;
+		transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
+		transition: all @collapse-panel-content-anim-time*0.25 ease-in;
+		-webkit-transition: all @collapse-panel-content-anim-time*0.25 ease-in;
+	}
+
+	&:after {
+		content: '';
+		position: absolute;
+		background: @user-org-char-tree-color;
+		width: 1px;
+		height: 16px;
+		left: 13px;
+		top: 28px;
+	}
+}
+
+.collapse-panel-content {
+	font-size: @collapse-panel-header-font-size;
+	text-align: left;
+
+	&.collapsed {
+		display: none;
+	}
+}
+
+// People details overrides
+@user-org-reportee-section-header-height: 35px;
+// ---------------------------------------
+.user-org-reportee-section .collapse-panel-header {
+	height: @user-org-reportee-section-header-height;
+
+	h3 {
+		padding-left: 12px;
+		line-height: @user-org-reportee-section-header-height;
+	}
+}
+
+// tentative until we discuss with PM and UX about collapsed state
+.user-org-manager-section .collapse-panel-header:not(.collapsed) {
+	h3 {
+		display: none;
+	}
+
+	.icon-expand-collapse {
+		&:before {
+			top: 7px;
+			transform: rotate(-225deg);
+			-webkit-transform: rotate(-225deg);
+		}
+	}
+}
+
+.user-org-reportee-section {
+	.icon-expand-collapse {
+		display: none;
+	}
+}
+
+.user-org-manager-section {
+	h3 {
+		position: relative;
+		top: 6px;
+	}
+}

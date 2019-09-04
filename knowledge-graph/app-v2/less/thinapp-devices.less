@@ -1,0 +1,45 @@
+@device-mobile-gutter: 12px;
+
+.thinapp-device-list {
+    width: 100%;
+    paddining: 20px;
+    min-height: 120px;
+    text-align: left;
+    margin: 20px 0;
+
+    li {
+        width: 100%;
+        min-height: 46px;
+        line-height: 30px;
+        padding: 8px;
+        white-space: nowrap;
+        border-bottom: solid 1px #e8e8e8;
+    }
+
+    span {
+        display: inline-block;
+        white-space: normal;
+        vertical-align: top;
+
+        &.thinapp-device-name {
+            width:25%;
+        }
+        &.thinapp-device-req-msg {
+            width:60%;
+        }
+        &.thinapp-device-req-action {
+            width:15%;
+        }
+        &.thinapp-device-req-check {
+            width:15%;
+        }
+    }
+
+    .thinapp-device-heading {
+        font-family: "Open Sans Semibold", sans-serif;
+    }
+
+    svg {
+        color: @highlightblue;
+    }
+}

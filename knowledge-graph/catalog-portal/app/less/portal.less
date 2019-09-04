@@ -1,0 +1,960 @@
+@import "portal-assembler";
+
+@import "constants";
+
+@masthead-height: 80px;
+@mobile-masthead-height: 50px;
+@mobile-masthead-divider-color: #c4cdd3;
+@desktop-masthead-divider-color: #e0e5e8;
+@mobile-frame-header-height: 90px;
+@filter-bar-height: 42px;
+@circle-button-size: 50px;
+@filter-bar-background-color: #fff;
+@filter-bar-divider-color: #c4cdd3;
+@desktop-filter-dropdown-container-height: 120px;
+@mobile-filter-dropdown-container-height: 60px;
+@desktop-filter-dropdown-container-width: 180px;
+@filter-favorite-container-width: 36px;
+@error-text-color: #c84a54;
+@mobile-text-field-border-color: #44535f;
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+.theme-portal-masthead {
+    background-color: @desktopMastheadBackgroundColor;
+    color: @desktopMastheadForegroundColor;
+    border-bottom: 1px solid @desktop-masthead-divider-color;
+
+    @media @page-LP {
+      border-bottom: 1px solid @mobile-masthead-divider-color;
+    }
+}
+
+//override xydeco .frame #fff default background
+.theme-portal-background, .theme-portal-background.frame {
+    background: @mainBackgroundColor;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.frame.fullscreen- {
+    .frame > .header-height( @masthead-height );
+
+    @media @page-LP {
+        .frame > .header-height( 0 );
+    }
+
+    > .frame-header {
+        .masthead {
+            height: @masthead-height;
+            line-height: @masthead-height - @grid-gutter;
+        }
+    }
+}
+
+.frame.view- {
+    overflow: visible;
+    .frame > .header-height( @mobile-masthead-height);
+
+    @media @page-at-least-S {
+        .frame > .header-height( 0 );
+    }
+
+    > .frame-header {
+        .masthead {
+            height: @mobile-masthead-height;
+        }
+    }
+
+    > .headered-.frame {
+        .frame > .header-height( @filter-bar-height );
+        //.frame > .header-height( 0 );
+        .frame-sidebar {
+            padding-top: @filter-bar-height + @desktop-filter-dropdown-container-height + (@c-tile-padding/2) - 10px;//10px from padding bottom of tabs container
+        }
+
+        @media @page-LP {
+            .frame > .header-height( 0 );
+        }
+    }
+
+    .frame-sidebar {
+        .menu {
+            font-size: 13px;
+        }
+
+        .menu-title {
+            .font > .size(normal);
+            .font > .weight(bold);
+            font-variant: normal;
+            text-transform: uppercase;
+        }
+    }
+
+    > .spinner {
+        // position the spinner in the center of the frame so it won't scroll
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        .translate( -50%, -50% );
+        z-index: 2;
+    }
+}
+
+//Overriding masthead height for catalog and launcher page in order to accommodate navigation bar on mobile
+@media @page-at-most-LP {
+    .catalog-main.frame.view- , .launcher-main.frame.view- {
+      .frame > .header-height( @mobile-frame-header-height ,@mobile-masthead-height );
+    }
+    .catalog-main.frame.view-.no-tabs- {
+      .frame > .header-height( @mobile-masthead-height ,@mobile-masthead-height );
+    }
+}
+
+[branding] {
+    display: none;
+}
+
+.appstore-banner {
+  height: 26px;
+  float: left;
+}
+.passwordvault-banner {
+  p {
+    text-align: left;
+  }
+  .symbol {
+    font-size: 20px;
+    vertical-align: middle;
+  }
+}
+.emblem {
+  @emblem-size: 80px;
+  @emblem-image-size: 80px;
+
+  .emblem-flag {
+    .border-radius(0);
+    .translateX(-(@emblem-size / 2));
+    border-top-left-radius: 2px;
+    line-height: 1em;
+    max-width: @emblem-size;
+  }
+}
+
+.frame .frame-header.appcenter-filter-bar {
+  background-color: @filter-bar-background-color;
+  border-bottom: 1px solid @filter-bar-divider-color;
+
+    .dropdown {
+        .font > .size(normal);
+    }
+}
+
+.spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate( -50%, -50% );
+    z-index: 2;
+}
+
+.appcenter-floating-row {
+    position: absolute;
+    height: 0;
+    width: 100%;
+    top: @filter-bar-height/2 - @grid-gutter/4;
+    left: 0;
+    z-index: 3; // above both the frame-body and frame-header
+    .page-.grid {
+        height: 0; // so as not to prevent clicks through
+    }
+    ~ .pane,
+    ~ .frame-sidebar > .pane {
+        // the pane which the button floats over.  add padding
+        padding-top: @circle-button-size/2;
+    }
+    @media @page-LP {
+        bottom: @circle-button-size + @grid-gutter/2;
+        top: auto;
+        ~ .pane,
+        ~ .frame-sidebar > .pane {
+            padding-top: 0;
+            padding-bottom: 1.5 * @circle-button-size;
+        }
+        .page-.grid,
+        .balanced-.frame & .page-.grid { // override balanced- frame
+            width: 100%;
+            .box {
+                width: auto;
+            }
+        }
+    }
+
+}
+
+.circle-floating-icon {
+  @size: @circle-button-size;
+  @icon-size: 24px;
+  display: block;
+  width: @size;
+  height: @size;
+  .border-radius( 50% );
+  box-shadow: 0 2px 5px rgba(0,0,0,0.20);
+  font-size: @icon-size;
+  padding: (@size - @icon-size)/2;
+  margin: 0 auto;
+  svg{
+    color: white;
+  }
+}
+
+.navbar-categories-dropdown {
+  padding: 10px 10px 10px 20px;
+  float: left;
+  margin: -44px 0 0;
+}
+.navbar-categories-dropdown.hide-dropdown {
+  visibility: hidden;
+}
+.masthead-navigation-tabs {
+  background-color: @filter-bar-background-color;
+
+  @media @page-LP {
+    > .tabs {
+      padding: 0;
+
+      > li {
+        @tabHgt: 40px;
+
+        border: solid @filter-bar-divider-color;
+        border-width: 0 0 1px 1px;
+        height: @tabHgt;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        width: 50%;
+
+        &:first-child {
+          border-left: 0;
+          padding: 0;
+        }
+
+        a {
+          .font > .weight(bold);
+          border: 0;
+          float: none;
+          font-size: 14px;
+          line-height: @tabHgt;
+          color: @active-navtab-text-color;
+        }
+      }
+    }
+  }
+}
+
+
+
+.navigation-tabs-container {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  float: right;
+  margin: -@filter-bar-height 0 0 0;
+    
+  .navigation-image {
+    float: left;
+    vertical-align: middle;
+    width: 17px;
+    height: 17px;
+
+  }
+  .catalog-navigation-image {
+    width: 19px;
+  }
+}
+
+.navigation-tabs-container.catalog-margin {
+  margin: 5px 0 0 0;
+  padding: 0;
+}
+@media @page-LP {
+    .desktopOnly {
+        display: none;
+    }
+
+    .tabs.secondary- > li > a {
+       padding-left: 0;
+    }
+}
+
+@media @page-at-least-S {
+   .tabs.secondary- {
+    padding-top: 10px;
+  }    
+     
+  .mobileOnly {
+    display: none;
+  }
+
+  .frame {
+    .frame-drawer {
+      display: none;
+      &.is-active ~ *  {
+        .translate( 0, 0 );
+      }
+    }
+
+  }
+}
+
+ .frame {
+  .frame-drawer {
+    //Overriding frame component property that changes background color of drawer's siblings.
+    & ~ .spinner {
+      background-color: transparent;
+    }
+
+    &.hamburgermenu {
+      @hamburgermenu-divider: 1px solid rgba(255, 255, 255, .15);
+      @hamburgermenu-width: 87.5%;
+      @hamburgermenu-bgcolor: #586877;
+      @hamburgermenu-inactivecolor: #b2c0cc;
+      @hamburgermenu-activecolor: #fff;
+      @headerFooterHgt: 50px;
+
+      background-color: @hamburgermenu-bgcolor;
+      color: @hamburgermenu-inactivecolor;
+      font-size: 15px;
+      padding: 0;
+      width: @hamburgermenu-width;
+
+      &::after,
+      &.is-active::after {
+        .background-gradient (horizontal, rgba(0, 0, 0, 0), rgba(0, 0, 0, .15));
+        .transform(none);
+        left: auto;
+        right: 0;
+        width: 7px;
+      }
+
+      &.is-active ~ * {
+        .translateX(@hamburgermenu-width);
+      }
+
+      &.headered- {
+        padding-top: @headerFooterHgt;
+      }
+
+      &.footered- {
+        padding-bottom: @headerFooterHgt;
+      }
+
+      .hamburgermenu-header {
+        .hamburgermenu-headerfooter();
+        border-bottom: @hamburgermenu-divider;
+        color: @hamburgermenu-activecolor;
+        top: 0;
+      }
+
+      .hamburgermenu-footer {
+        .hamburgermenu-headerfooter();
+        border-top: @hamburgermenu-divider;
+        bottom: 0;
+      }
+
+      .hamburgermenu-headerfooter() {
+        height: @headerFooterHgt;
+        left: 0;
+        padding: 0 15px;
+        position: absolute;
+        right: 0;
+        .ellipsis();
+
+        & > * {
+          display: inline;
+          line-height: @headerFooterHgt;
+          vertical-align: middle;
+        }
+
+        a {
+          cursor: pointer;
+
+          &:hover {
+            color: @hamburgermenu-activecolor;
+          }
+        }
+
+        .userinfo-avatar {
+          font-size: 20px;
+        }
+
+        .userinfo-name {
+          margin-left: 10px;
+        }
+      }
+
+      .menu {
+        color: @hamburgermenu-inactivecolor;
+        font-size: inherit;
+
+        & > li {
+          overflow: hidden;
+          padding: 15px;
+          text-overflow: ellipsis;
+
+          & > a {
+            color: inherit;
+            line-height: normal; // prevent clipped descenders
+            margin: 0;
+            padding: 0;
+
+            &:hover {
+              color: @hamburgermenu-activecolor;
+              background: initial;
+            }
+          }
+
+          &.menu-title {
+            font-size: inherit;
+            font-variant: normal;
+            text-transform: uppercase;
+          }
+
+          &.is-selected > a {
+            background: 0;
+            color: @hamburgermenu-activecolor;
+          }
+
+          &.menu-hrule {
+                border-top: @hamburgermenu-divider;
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .drawer-overlay{
+      background-color: transparent;
+      display: none;
+      &.is-active{
+        display: block;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 5;
+      }
+  }
+ }
+
+.modal {
+    &.fullscreen-mobile- {
+        .modal-frame{
+            @media @page-LP {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    &.medium-desktop- {
+        .modal-frame {
+            @media @page-at-least-S {
+                width: 640px;
+                height: 400px;
+            }
+            @media @page-at-least-L {
+                width: 800px;
+                height: 600px;
+            }
+        }
+    }
+    &.small-desktop- {
+        .modal-frame {
+            @media @page-at-least-S {
+                width: 320px;
+                height: 480px;
+            }
+        }
+    }
+    &.new {
+        .modal-frame {
+            padding-top: 50px;
+        }
+        .modal-frame {
+            padding-bottom: 48px;
+        }
+        .no-footer {
+            padding-bottom: 0;
+        }
+        .dialog-header {
+            height: auto;
+            padding: 15px 20px;
+            border-bottom: 1px solid @desktop-masthead-divider-color;
+            h3 {
+                font-weight: 600;
+            }
+            .right-icon {
+                float: right;
+                padding: 0;
+                min-height: initial;
+            }
+            .close-ico {
+                height: 10px;
+                width: 10px;
+                margin-top: 5px;
+                color: @closeIconColor;
+            }
+        }
+        .dialog-body {
+            padding: 20px;
+        }
+        .dialog-actions {
+            padding: 15px 20px;
+            height: 50px;
+            border-top: 1px solid @desktop-masthead-divider-color;
+            .button.link- {
+                padding: 0;
+                min-height: inherit;
+            }
+        }
+    }
+
+    .dialog {
+        .form-row {
+            display: inline-block;
+            &.lock-icon {
+                margin-right: 5px;
+            }
+        }
+        .form-label {
+            width: 35%;
+        }
+        .dialog-body {
+            min-height: 60px;
+            font-size: 12px;
+            .left-container {
+                width: 100%;
+                display: inline-block;
+                vertical-align: top;
+                padding-right: 20px;
+                &.reduce-width {
+                    width: 44%;
+                }
+            }
+            .profile-container {
+                .label {
+                    display: inline-block;
+                    width: 50px;
+                }
+                .profile-value {
+                    width: 70%;
+                    display: inline-block;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    vertical-align: text-top;
+                }
+                .user-name {
+                    width: 95%;
+                }
+                p {
+                    margin-bottom: 5px;
+
+                    &:first-child {
+                        margin-bottom: 10px;
+                    }
+                }
+                .button.link- {
+                    padding: 0;
+                    min-height: initial;
+                    background: #fff;
+                }
+            }
+            .policy-container {
+                color: @inactive-navtab-text-color;
+                padding-top: 10px;
+
+                .password-policy {
+                  padding-bottom: 15px;
+                }
+            }
+            .password-container {
+                width: 55%;
+                display: inline-block;
+                vertical-align: bottom;
+
+                .new-password-label {
+                    text-align: center;
+                    color: @inactive-navtab-text-color;
+                }
+                .divider {
+                    padding-left: 20px;
+                    border-left: 1px solid @desktop-masthead-divider-color;
+                }
+            }
+            .form-fields-holder {
+                width: 100%;
+                margin-bottom: 15px;
+                display: inline-block;
+                &.no-margin {
+                    margin: 0;
+                }
+            }
+        }
+        .dialog-actions {
+            .password-save-button:focus, .close-button:focus {
+                border: none;
+            }
+            .move-left {
+                float: left;
+            }
+        }
+        .input-field {
+            width: 100%;
+            font-size: 12px;
+            border: 1px solid #e1e6e9;
+            border-radius: 1px;
+            padding-left: 15px;
+            height: 30px;
+            //To override default iOS border styles for input
+            -webkit-appearance: none;
+            line-height: normal;
+        }
+        input + input{
+            margin-top: 15px;
+        }
+        .error-messages {
+            padding-left: 20px;
+            color: @error-text-color;
+            margin-bottom: 10px;
+            min-height: 18px;
+            div {
+                display: inline-block;
+                width: 90%;
+            }
+        }
+        .error {
+            border-color: @error-text-color;
+        }
+    }
+}
+
+.noresultsmsg {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  .translate(-50%,-50%);
+  text-align: center;
+  max-width: 400px;
+
+    &.no-favorites {
+        @star-icon-color: #91A0AA;
+        color: @star-icon-color;
+        .symbol[symbol=star] {
+            font-size: 3em;
+            margin-bottom: 0.3em;
+            stroke: @star-icon-color;
+            fill: none;
+        }
+    }
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+@media @page-at-least-S {
+  .commonMenu {
+    display: none;
+  }
+}
+
+.navbar-categories-dropdown, .appcenter-categorydropdown {
+    /*
+    Default max height of dropdown panel is 600px. This could cause dropdown to not scroll
+    on devices less 750px. This could be a case in Windows 10 where app window size can be resized.
+    Adding couple of breakpoints to scale down dropdown's max height.
+    Masthead + Filter bar size + padding = 150px. So difference between break points need to be 150px.
+    */
+    .dropdown-panel {
+        @media (max-height: 750px) {
+            max-height: 500px;
+        }
+
+        @media (max-height: 650px) {
+          max-height: 400px;
+        }
+    }
+}
+
+.ellipsis(@max-width: 100%) {
+    max-width: @max-width;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+
+    // cannot be "optimizeRendering" for ellipsis to work on Android WebView version < 4.4
+    text-rendering: auto;
+}
+
+.message {
+  .button.close- {
+    right: 0.5em;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  a {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  &.info- .message-icon {
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.5em;
+    left: 0.5em;
+    color: inherit;
+  }
+
+  .link{
+    text-decoration: underline;
+    color: inherit;
+  }
+}
+
+.privacy-page-text{
+  color: @link-color
+}
+
+.tabletPotraitOnly {
+    display: none;
+    @media @page-S-only {
+        display: block;
+    }
+}
+
+//Mobile filter styles
+.filterBarContainer() {
+    @filter-bar-border-color: #a7b8c4;
+    .mobileFilterBar {
+        height: 32px;
+        border: 1px solid @filter-bar-border-color;
+        border-radius: 2px;
+        background-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+        .filterFavorite {
+            float: left;
+            padding: 6px 10px;
+            width: @filter-favorite-container-width;
+            color: #919fa9;
+            border-right: 1px solid @filter-bar-border-color;
+            text-align: center;
+            &:hover {
+                color: #576876;
+            }
+            &.is-active{
+                color: #f69631;
+                background-color: #dae1e4;
+                box-shadow: inset 0px 1px 1px 0px rgba(116,124,142,0.2);
+            }
+        }
+        .filterDropdown {
+            height: 100%; //Since all it's children float, we need to explicitly set height
+            .filterName {
+                float: left;
+                padding: 6px 10px;
+                font-size: 14px;
+            }
+            .filterIcon {
+                float: right;
+                height: 30px;
+                line-height: 30px;
+                a.link- {
+                  color: inherit;
+                }
+            }
+        }
+        svg.symbol {
+            stroke: none;
+        }
+
+        &.starred- {
+            .filterDropdown {
+                margin-left: @filter-favorite-container-width;
+                display: block;
+            }
+        }
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+    }
+}
+
+.desktopFilterBarContainer {
+    .filterBarContainer;
+
+    float: right;
+    cursor: pointer;
+    padding-top: 2px;
+    .mobileFilterBar {
+        width: @desktop-filter-dropdown-container-width;
+    }
+    .dropdown-panel {
+        min-width: 100%;
+    }
+}
+
+.mobileFilterBarContainer {
+    .filterBarContainer;
+    //height: @mobile-filter-dropdown-container-height;
+    width: 100%;
+    .mobileFilterBar {
+        height: 40px;
+
+        .filterFavorite {
+            padding: 10px;
+        }
+        .filterDropdown {
+            .filterName {
+                padding: 10px;
+                .ellipsis(85%)
+            }
+            .filterIcon {
+                height: 38px;
+                line-height: 38px;
+            }
+        }
+    }
+}
+
+.mobileFilterMenuContainer {
+
+    @menu-item-height: 30px;
+
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    left:0;
+    z-index: 10;
+
+    .menu > li {
+        border-bottom: 1px solid #e5e5e5;
+        line-height: @menu-item-height;
+        a {
+            /* By default a inside a .menu get blue link color.
+            Overriding it to get text branding color */
+            color: inherit;
+        }
+        .symbol {
+            height: @menu-item-height;
+            line-height: @menu-item-height;
+            color: @menu-selected-background-color;
+        }
+        .menu-item-name {
+            .ellipsis(90%);
+        }
+    }
+    .page {
+        margin-top: 20px;
+        width: 90%;
+        padding: 0;
+    }
+}
+
+.desktopFilterMenuContainer {
+    .button.link-:hover {
+        border: none;
+    }
+    .menu {
+        a {
+            font-size: 13px;
+            color: #44525e;
+            padding: 6px 10px;
+        }
+        li {
+            padding: 6px 0; //Overriding left/right padding for menu items
+            &:first-child {
+                padding-top: 0;
+            }
+        }
+    }
+
+}
+
+.password-page-mobile {
+    .masthead-right {
+        color: @link-color;
+    }
+    .back-arrow {
+        margin-top: 5px;
+        font-size: 18px;
+    }
+    .password-save-button {
+        text-transform: lowercase;
+    }
+    .page {
+        width: 100%;
+        font-size: 12px;
+    }
+    .policy-container {
+        text-align: center;
+    }
+    .error {
+        border-color: @error-text-color;
+    }
+}
+
+.warning-ico {
+    margin-right: 5px;
+    height: 1.3em;
+    width: 1.3em;
+}
+
+.input-fields-container {
+    .input-field-holder {
+        margin-bottom: 30px;
+        vertical-align: middle;
+        white-space: nowrap;
+        .input-field {
+            width: 100%;
+            font-size: 13px;
+            height: 24px;
+            line-height: 24px;
+            position: relative;
+            border: none;
+            border-bottom: 1px solid @mobile-text-field-border-color;
+
+            border-radius: 0;
+            padding: 0 0 8px 0;
+            margin: 0;
+            box-shadow: none;
+            color: #99a8b5;
+            background-color: transparent;
+            &.error {
+                border-color: @error-text-color;
+            }
+        }
+    }
+    .new-password-label {
+        text-align: center;
+        color: @inactive-navtab-text-color;
+    }
+    .error-messages {
+        color: @error-text-color;
+        width: 80%;
+        margin: 0 auto 20px;
+        min-height: 20px;
+        div {
+            display: inline-block;
+            width: 85%;
+        }
+
+    }
+}

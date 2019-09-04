@@ -1,0 +1,38 @@
+<div modal-new class="modal-fullscreen adaptive-management mobile-slide-modal">
+    <div class="adaptive-management-header">
+        <svg class="icon-modal-fullscreen-close" svg-symbol="icon-close" ng-click="modal.cancel()"></svg>
+    </div>
+    <div class="adaptive-management-content">
+        <div class="adaptive-management-content-scrollable">
+            <div class="adaptive-management-body">
+                <h2 class="adaptive-management-title">{{ ::'app.adaptivemanagement.ws1servicestitle' | i18n }}</h2>
+                <h3 class="adaptive-management-subtitle">{{ ::'app.adaptivemanagement.ws1servicessubtitle' | i18n }}</h3>
+                <ul class="adaptive-benefits-list">
+                    <li>
+                        <svg svg-symbol="illo-direct-install"></svg>
+                        <p>{{ ::'app.adaptivemanagement.valueproposition1' | i18n }}</p>
+                    </li>
+                    <li>
+                        <svg svg-symbol="illo-network-access"></svg>
+                        <p>{{ ::'app.adaptivemanagement.valueproposition2' | i18n }}</p>
+                    </li>
+                    <li>
+                        <svg svg-symbol="illo-productivity"></svg>
+                        <p>{{ ::'app.adaptivemanagement.valueproposition3' | i18n }}</p>
+                    </li>
+                    <li>
+                        <svg svg-symbol="illo-sync-device"></svg>
+                        <p>{{ ::'app.adaptivemanagement.valueproposition4' | i18n }}</p>
+                    </li>
+                </ul>
+
+                <a href class="privacy-page-text privacy-link" ng-click="appCenterCtrl.openPrivacyPage($event, privacyUrl)">{{ ::'app.adaptivemanagement.privacylink' | i18n }}</a>
+            </div>
+        </div>
+    </div>
+
+    <button class="adaptive-management-footer" type="button" role="button" id="adaptive-management-footer" ng-click="modal.close(true)">
+        {{ ::'appCenter.proceed' | i18n }}
+        <svg svg-symbol="icon-next-arrow"></svg>
+    </button>
+</div>

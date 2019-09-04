@@ -1,0 +1,105 @@
+<div class="launcher-main headered- view- frame" filter-menu="launcherCtrl.filterConfig" on-select="launcherCtrl.filterByLabel(item)">
+    <div frame-drawer hamburger-menu drawer-control="appCenterCtrl.drawerIsActive">
+    </div>
+
+    <div class="drawer-overlay" ng-class="{'is-active':appCenterCtrl.drawerIsActive}" ng-click="appCenterCtrl.toggleDrawer()"></div>
+
+    <div class="frame-header">
+        <div class="theme-portal-masthead">
+            <div class="mobile- masthead" ng-class="{ 'search-' : appCenterCtrl.searchMode }">
+                <div class="mastheadContainer">
+                    <div class="masthead-left">
+                        <div dropdown>
+                            <a class="iconic- link- button" ng-click="appCenterCtrl.toggleDrawer()">
+                                <svg symbol="hamburger"></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="masthead-center">
+                        {{::'appCenter.nav.myApps' | i18n}}
+                    </div>
+                    <div class="masthead-right">
+                        <a class="iconic- link- button" ng-click="appCenterCtrl.showSearch()">
+                            <svg symbol="search"></svg>
+                        </a>
+                    </div>
+                </div>
+                <div ng-include="'app/common/mobileSearchContainer.html'"></div>
+            </div>
+        </div>
+        <div class="masthead-navigation-tabs">
+            <ul class="secondary- center- tabs">
+                <!-- inline blocks: let the <li>s close themselves to suppress intervening whitespace -->
+                <li class="is-active">
+                    <a ng-click="appCenterCtrl.launcher()">{{'app.nav.tab.launcher' | i18n }}</a>
+                <li>
+                    <a ng-click="appCenterCtrl.catalog()">{{'app.nav.tab.catalog' | i18n }}</a>
+            </ul>
+        </div>
+    </div>
+
+    <div class="headered- frame">
+        <div class="frame-header appcenter-filter-bar">
+            <div class="full-bleed- page">
+                <div class="grid">
+                    <div class="navigation-tabs-container catalog-margin">
+                        <ul class="secondary- tabs">
+                            <li class="is-active">
+                                <img src="app/graphics/launcher_active.svg" class="navigation-image">
+                                <a ng-click="appCenterCtrl.launcher()">{{'app.nav.tab.launcher' | i18n }}</a>
+                            </li>
+                            <li>
+                                <img src="app/graphics/catalog_inactive.svg" class="navigation-image catalog-navigation-image">
+                                <a ng-click="appCenterCtrl.catalog()">{{'app.nav.tab.catalog' | i18n }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="vertically- scrollable- pane theme-portal-background" infinite-scroll onend="launcherCtrl.getNextPage()">
+            <div class="full-bleed- page theme-portal-text">
+                <div class="base- grid launcher-items-container">
+                    <div class="welcomeMessageContainer desktopOnly">
+                        <div ng-if="!launcherCtrl.showNoSearchResultsMsg" class="welcomeMessage">{{launcherCtrl.welcomeMessage}}</div>
+                        <div class="desktopFilterBarContainer">
+                            <div filter-bar="{ isDesktop: true, favEnabled: true, isFavorited: launcherCtrl.isFilteredByFav}"
+                                 selected-item="launcherCtrl.selectedCategory.name"
+                                 on-favorite="launcherCtrl.toggleFilterByFav()"></div>
+                        </div>
+                    </div>
+                    <div class="mobileFilterBarContainer mobileOnly">
+                        <div filter-bar="{ isDesktop: false, favEnabled: true, isFavorited: launcherCtrl.isFilteredByFav}"
+                             selected-item="launcherCtrl.selectedCategory.name"
+                             on-favorite="launcherCtrl.toggleFilterByFav()">
+                        </div>
+                    </div>
+                    <div ng-if="launcherCtrl.showNoSearchResultsMsg" class="noresultsmsg box mobileOnly">
+                        <strong>{{'appCenter.noSearchResults' | i18n}}</strong>
+                    </div>
+                    <div ng-if="launcherCtrl.showNoSearchResultsMsg" class="noresultsmsg box desktopOnly">
+                        <strong>{{'appCenter.noSearchResults' | i18n}}</strong>
+                    </div>
+                    <div ng-if="launcherCtrl.showNoFavoritedAppsMsg" class="noresultsmsg box no-favorites">
+                        <div>
+                            <svg symbol="star"></svg>
+                        </div>
+                        <strong>{{'myapps.noFavAppsMsg' | i18n}}</strong>
+                    </div>
+                    <div ng-if="launcherCtrl.showNoAppsMsg" class="noresultsmsg box">
+                        <div><no-apps-msg message="{{launcherCtrl.noAppsMsgHtml}}"></no-apps-msg></div>
+                    </div>
+                    <div launcher-item class="two- box"
+                         ng-repeat="app in launcherCtrl.visibleLauncherApps track by app.appId"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div spinner ng-show="launcherCtrl.isLoading"></div>
+
+    <div id="launch-progress-container">
+        <div spinner></div>
+    </div>
+
+</div>

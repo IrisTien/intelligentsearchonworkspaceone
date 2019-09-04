@@ -1,0 +1,187 @@
+/*
+ * Project Horizon
+ * (c) 2013-2014 VMware, Inc. All rights reserved.
+ * VMware Confidential.
+ */
+
+/** @pattern .list
+
+A simple list.  Items are arranged vertically, with no decoration.
+
+@example
+<ul class="list">
+  <li><%= s.1 %>
+  <li><%= s.2 %>
+  <li><%= s.3 %>
+</ul>
+*/
+
+@list-item-spacing: @typography-block-spacing/2;
+@list-hanging-indent: 2em;
+
+.list {
+
+    margin-left: @list-hanging-indent;
+
+    .list-item {
+        /** An item in a list */
+        list-style: none;
+        margin-top: @list-item-spacing;
+        text-indent: -@list-hanging-indent;
+        &:first-child {
+            margin-top: 0;
+        }
+
+        // Derived class interface
+        .extend () {
+            &:extend( .list .list-item );
+            &:first-child { &:extend( .list .list-item:first-child ); }
+        }
+    }
+
+    > li {
+        .list-item > .extend();
+    }
+
+    &.bullet- {
+    /**
+       A bulleted list.  Items are arranged vertically with colored bullets.
+       @example
+       <ul class="bullet- list">
+           <li><%= s.1 %>
+           <li><%= s.2 %>
+           <li><%= s.3 %>
+       </ul>
+    */
+        > * {
+            text-indent: 0;
+        }
+        > *::before {
+            display: inline-block;
+            .font > .family( symbol );
+            content: '•';
+            margin-left: -@list-hanging-indent;
+            width: @list-hanging-indent;
+            text-align: center;
+        }
+    }
+
+    &.inline- {
+    /**
+       An inline list.  Items are arranged left-to-right and flow as text.
+       @example
+       <ul class="inline- list">
+         <li><%= w.1 %>
+         <li><%= w.2 %>
+         <li><%= w.3 %>
+       </ul>
+    */
+        display: inline;
+        margin-left: 0;
+        > * {
+            display: inline;
+            padding: 0;
+            text-indent: 0;
+        }
+    }
+
+    &.comma- {
+    /**
+        An inline list of comma-separated items.
+    */
+        &:extend( .list.inline- all );
+        > li + li::before {
+            content: ', ';
+        }
+    }
+
+    &.arrow- {
+        /** An inline list, separated by arrows to indicate a sequence. */
+        &:extend( .list.inline- all );
+        > li + li::before {
+            content: ' ➜ ';
+            color: @light-greytext-color;
+        }
+    }
+
+    &.description- {
+        /** A list of terms and their definitions
+
+        @example[description-list.html]*/
+    }
+
+    .list-term,
+    &.description- > dt {
+        /** A term defined in a description list */
+        .list-item > .extend();
+        .font > .family( label );
+
+        + * {
+            margin-top: 0;
+        }
+
+        // Derived class interface
+        .extend () {
+            &:extend( .list .list-term );
+            + * {
+                &:extend( .list .list-term + * );
+            }
+        }
+    }
+
+    .list-description,
+    &.description- > dd {
+        /** The definition for a term in a description list */
+        .list-item > .extend();
+        text-indent: 0;
+
+        // Derived class interface
+        .extend () {
+            &:extend( .list .list-description );
+        }
+    }
+
+    &.compact-.description- {
+        /** A more compact description list, with terms and descriptions on the same line. */
+
+        > .list-term,
+        > dt {
+            display: inline;
+            margin-left: -2em;
+            &::after {
+                display: inline;
+                content: ': ';
+            }
+            &.list-item::after {
+                // no colon if this is just a list item
+                content: none;
+            }
+        }
+
+        > .list-description,
+        > dd {
+            display: inline;
+            margin-left: 0;
+            text-indent: 0;
+            &::after {
+                // line break after each dd
+                content: '\0a';
+                white-space: pre;
+            }
+            + ::before {
+                // and put a strut on the next line for margin
+                display: inline-block;
+                content: '';
+                height: 1em;
+                width: 0;
+                margin-top: @list-item-spacing;
+            }
+        }
+    }
+
+    // Derived class interface
+
+    .extend () {
+        &:extend( .list );
+    }
+}

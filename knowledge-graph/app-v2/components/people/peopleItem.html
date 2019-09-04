@@ -1,0 +1,9 @@
+<div ng-click="peopleItemCtrl.userDetails(peopleItemCtrl.user)">
+    <div class="user-{{peopleItemCtrl.category}}-item-avatar" image-load>
+        <p class="user-{{peopleItemCtrl.category}}-item-initial"><span ng-if="peopleItemCtrl.user.initial">{{peopleItemCtrl.user.initial}}</span></p>
+        <img ng-if="peopleItemCtrl.user.avatar" ng-src="{{peopleItemCtrl.user.avatar}}" class="user-avatar-img-style"/>
+    </div>
+    <p class="user-{{peopleItemCtrl.category}}-item-name">{{::peopleItemCtrl.user.userName}}</p>
+    <p class="user-{{peopleItemCtrl.category}}-item-title">{{::peopleItemCtrl.user.title}}</p>
+</div>
+

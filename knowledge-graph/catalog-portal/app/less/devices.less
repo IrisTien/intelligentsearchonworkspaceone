@@ -1,0 +1,149 @@
+.thinapp-devices {
+  .emblem {
+    float: left;
+    width: 100px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  .device-table {
+    margin-top: 20px;
+    tr {
+      td {
+        white-space: normal;
+      }
+    }
+  }
+  .device-icon{
+    height: 30px;
+    width: 30px;
+    vertical-align: middle;
+  }
+  h3 {
+    font-weight: bold;
+  }
+  table {
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: transparent;
+    display: table;
+  }
+  thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+  }
+  tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+  }
+
+  th {
+    vertical-align: bottom;
+    padding: 4px 5px;
+    font-weight: 700;
+    line-height: 20px;
+    display: table-cell;
+  }
+  tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+    background-color: #f9f9f9;
+  }
+  td, th {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: left;
+  }
+  td {
+    vertical-align: middle;
+  }
+}
+.thinapp-devices.modal {
+  .setAppPassword {
+    .form-group {
+      padding: 10px 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .error-text {
+      font-weight: bold;
+      color: #A94442;
+      padding: 5px 0;
+    }
+
+    h3{
+      word-wrap: break-word;
+    }
+    p {
+      padding-top: 5px;
+    }
+  }
+}
+
+.thinapp-devices.modal.fullscreen-mobile- {
+  .modal-frame{
+
+    // If a child element causes an overflow on older Android WebViews (pre 4.4),
+    // transform will be ignored when combined with position:fixed.
+    // Workaround is keep position:fixed for viewport relativity but avoid using transform.
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    transform: none;
+
+    @media @page-LP {
+      width: 100%;
+      height: 100%;
+
+      left: 0;
+      top: 0;
+    }
+
+    @media @page-at-least-S {
+      width: 80%;
+      height: 400px;
+
+      margin-left: -40%;
+      margin-top: -200px;
+    }
+  }
+
+  .dialog-body {
+    overflow-x: auto;
+  }
+}
+.thinapp-devices.modal {
+  .userDevices {
+    h3{
+      margin-bottom:20px;
+    }
+    td, th {
+      word-wrap: break-word;
+      white-space: normal;
+    }
+    .lastLoginTimeLabel {
+      font-weight: 700;
+      margin-right: 5px;
+    }
+    .unlinkDeviceBtn {
+      float:right;
+    }
+
+    > .spinner {
+      // position the spinner in the center of the frame so it won't scroll
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      .translate( -50%, -50% );
+      z-index: 2;
+    }
+  }
+}

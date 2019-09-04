@@ -1,0 +1,42 @@
+<div class="desktop- masthead">
+    <div class="masthead-left">
+        <div class="contained- image masthead-logo"></div>
+    </div>
+    <div class="masthead-center">
+        <span class="input- bar">
+            <label>
+                <svg symbol="search"></svg>
+            </label>
+            <input search-input class="search- input" type="text" ng-model="appCenterCtrl.searchText"
+                   ng-model-options="{ debounce: 1000 }" control="appCenterCtrl.desktopSearchInputControl" placeholder="{{'appCenter.searchApps' | i18n }}">
+            <button class="iconic- button clear-search" type="button" ng-click="appCenterCtrl.clearDesktopSearchText()" ng-show="appCenterCtrl.searchText">
+                <svg symbol="circle-x"></svg>
+            </button>
+        </span>
+    </div>
+    <div ng-hide="!!appCenterCtrl.horizon && !appCenterCtrl.horizon.showUserInfo" class="masthead-right">
+        <div dropdown class="right- dropdown userinfo">
+            <div class="dropdown-toggle">
+                <svg class="userinfo-avatar" symbol="avatar"></svg><!--
+                --><span class="userinfo-name" title="{{appCenterCtrl.user.firstName + ' ' +appCenterCtrl.user.lastName}}">{{appCenterCtrl.user.firstName + ' ' +appCenterCtrl.user.lastName}}</span><!--
+                --><svg id="dropdown-carat" symbol="carat-down"></svg>
+            </div>
+            <div dropdown-panel>
+                <div class="dropdown-arrow dropdown-arrow-right">
+                    <svg class="border" symbol="components/dropdown/graphics/arrow.svg"></svg>
+                    <svg class="bg" symbol="components/dropdown/graphics/arrow.svg"></svg>
+                </div>
+                <ul class="menu">
+                    <li>{{::appCenterCtrl.user.emailAddress}}</li>
+                    <li class="menu-hrule"></li>
+                </ul>
+                <div ng-include="'app/common/commonMenu.html'">
+                </div>
+                <ul class="menu" ng-show="!appCenterCtrl.isWebClip">
+                    <li><a ng-click="appCenterCtrl.signout($event)" id="signout-link">{{'userInfo.signout'  | i18n}}</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>

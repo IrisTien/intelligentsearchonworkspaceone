@@ -1,0 +1,87 @@
+@import "../shared/mixins.less";
+
+@navigation-button-margin-top: 4px;
+@navigation-bar-height: 20px;
+@search-module-right-offset: 20px;
+
+@desktop-right-module-width-s: 400px;
+@desktop-right-module-width-m: 560px;
+@desktop-right-module-width-l: 700px;
+
+.breadcrumb-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: @breadcrumb-height;
+    padding: 0 @list-item-padding-h;
+    background: rgba(255, 255, 255,.98);
+    z-index: 600;
+    min-width: @hub-desktopapp-width-min;
+}
+
+.desktop-subpage-back-button {
+    margin-top: @navigation-button-margin-top;
+}
+
+.desktop-page-title {
+    width: 200px;
+    font-size: 32px;
+    line-height: @breadcrumb-height + 10px;
+    font-weight: bold;
+    .single-line-ellipsis();
+}
+
+.search-bar-container {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.desktop-refresh-button {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+
+    &.is-refreshing {
+        -webkit-animation:spin 1s linear infinite;
+        animation:spin 1s linear infinite;
+    }
+}
+
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.desktop-install-button {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.desktop-right-module {
+    padding: 0;
+    position: absolute;
+    top: @navigation-bar-height  + 4px;
+    right: @search-module-right-offset;
+    width: @desktop-right-module-width-s;
+
+    @media (min-width: @desktopapp-stop1) {
+        width: @desktop-right-module-width-m;
+    }
+
+    @media (min-width: @desktopapp-stop2) {
+        width: @desktop-right-module-width-l;
+    }
+}
+
+.notifications-enabled {
+    &.desktop-right-module {
+        width: @desktop-right-module-width-s + 50px;
+
+        @media (min-width: @desktopapp-stop1) {
+            width: @desktop-right-module-width-m + 50px;;
+        }
+
+        @media (min-width: @desktopapp-stop2) {
+            width: @desktop-right-module-width-l + 50px;;
+        }
+    }
+}

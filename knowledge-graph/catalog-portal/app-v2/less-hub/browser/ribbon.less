@@ -1,0 +1,484 @@
+@import "../shared/mixins.less";
+
+@topnav-width-max: 1120px;
+@hamburger-list-menu-size: 32px;
+// Temporary for layout, will be removed later, or replaced by branding value
+@ribbon-background: #fff;
+@topnav-item-height: 42px;
+@topnav-list-item-padding: 16px;
+@topnav-item-selected-color: #000;
+@topnav-list-item-gutter: 28px;
+@topnav-list-item-font-size: 18px;
+@ribbon-notification-count-container-width:26px;
+@ribbon-notification-count-font-size: 14px;
+
+@mobile-title-padding-h: 56px;
+@mobile-title-font-size: 20px;
+
+@hamburger-list-item-height: 48px;
+@hamburger-list-item-account-height: 50px;
+@hamburger-list-item-padding: 16px;
+@hamburger-list-item-gutter: 12px;
+@hamburger-list-item-font-size: 14px;
+@hamburger-line-anim-time: 0.5s;
+@mobile-avatar-size: 30px;
+@hamburger-list-icon-right-padding: 12px;
+@mobile-setting-panel-scrim: rgba(71, 71, 71,.75);
+
+@ribbon-account-container-width: 48px;
+@ribbon-avatar-size: 42px;
+@ribbon-avatar-initial-font-size: 16px;
+
+@ribbon-logo-width: 200px;
+@ribbon-logo-height: 44px;
+
+@ribbon-profile-width: 250px;
+@ribbon-profile-width-min: 140px;
+@ribbon-dropdown-anim-time: 0.5s;
+
+@page-breadcrumb-bar-height: 40px;
+@page-breadcrumb-text-font-size: 14px;
+
+@selected-nav-border-height: 3px;
+
+.ribbon-container {
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: @ribbon-height-s;
+    background: @ribbon-background;
+    box-shadow: 0 2px 2px rgba(0,0,0,.15);
+    z-index: 600;
+
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+        height: @ribbon-height-m;
+    }
+}
+
+.ribbon-nav-list {
+    max-width: @topnav-width-max;
+    position: relative;
+    margin: 0 auto;
+    padding: 0 @list-item-padding-h;
+    display: none;
+
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+        display: block;
+    }
+
+    li {
+        display: inline-block;
+        height: @ribbon-height-m;
+        line-height: @ribbon-height-m;
+        margin: 0 @topnav-list-item-gutter;
+        position: relative;
+        vertical-align: top;
+        font-size: @topnav-list-item-font-size;
+        font-weight: bold;
+        .single-line-ellipsis();
+
+        &:hover {
+            border-bottom: solid @selected-nav-border-height @topnav-item-selected-color;
+        }
+
+        &:first-child {
+          padding-left: 0;
+        }
+
+        &.selected-tab {
+            color: @primary-text-color;
+            border-bottom: solid @selected-nav-border-height @primary-text-color;
+        }
+
+        a {
+          display: inline-block;
+        }
+    }
+}
+
+.ribbon-profile-container {
+    position: absolute;
+    top: (@ribbon-height-m - @ribbon-avatar-size)/2;
+    right: @list-item-padding-h;
+    width: @ribbon-avatar-size;
+    height: @ribbon-height-m - ((@ribbon-height-m - @topnav-item-height)/2);
+
+    &:hover {
+        border-bottom: solid @selected-nav-border-height @topnav-item-selected-color;
+    }
+
+    &.settings-active {
+        border-bottom: solid @selected-nav-border-height @primary-text-color;
+    }
+}
+
+.ribbon-avatar {
+    background-image: url(../app-v2/graphics/icon-profile.svg);
+    background-size: contain;
+    width: @ribbon-avatar-size;
+    height: @ribbon-avatar-size;
+    border-radius: 50%;
+    text-align: center;
+
+    img {
+        width: 100%;
+        // adding height, even though in cases if the source image is not a square, better off to stretch to cover the whole area
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        background: @white;
+    }
+}
+
+.ribbon-profile-dropdown-container {
+    width: @ribbon-profile-width;
+    position: absolute;
+    top: @ribbon-avatar-size + 4px;
+    right: 0;
+    height: 0;
+    z-index: 500;
+    overflow: hidden;
+    transition: height @ribbon-dropdown-anim-time;
+
+    ul {
+        position: absolute;
+        right:0;
+        display: block;
+        min-width: @ribbon-profile-width-min;
+        max-width: @ribbon-profile-width - 10px;
+        margin: 12px 5px 0;
+        text-align: left;
+        background: @white;
+        border: solid 1px #ccc;
+        z-index: 50;
+        border-radius: 5px;
+        padding: 5px 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+
+        &:before, &:after{
+            .caret-basic-style;
+        }
+
+        &:before {
+            .up-caret-before(@caret-pos-x, @profile-caret-height);
+        }
+
+        &:after {
+            .up-caret-after(@caret-pos-x, @profile-caret-height);
+        }
+    }
+}
+
+.ribbon-profile-list {
+    li {
+        display: block;
+        cursor: pointer;
+        padding:0 16px!important;
+        font-size: 14px;
+        font-weight: normal;
+        height: 32px;
+        line-height: 36px;
+        margin: 0;
+
+        &:hover {
+            color: @primary-text-color;
+            border-bottom: 0!important;
+            background: @list-item-default-hover-color;
+        }
+
+        a {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            .single-line-ellipsis();
+        }
+    }
+
+    li.border-top {
+        margin-top: 5px;
+        border-top: solid 1px #ccc;
+    }
+}
+
+.is-active .ribbon-profile-dropdown-container {
+    height: 200px;
+}
+
+.ribbon-notification-count {
+    display: inline-block;
+    line-height: @ribbon-notification-count-container-width - 2;
+    border-radius: @ribbon-notification-count-container-width/2;
+    margin: 0 0 2px 6px;
+    font-size: @ribbon-notification-count-font-size;
+    color: @white;
+    border: none;
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+    .notification-count{
+      .notification-count-size(@ribbon-notification-count-container-width);
+      padding: 0 4px;
+      border-radius: @ribbon-notification-count-container-width/2;
+      display: inline-block;
+    }
+}
+
+li.ribbon-nav-logo {
+    width: @ribbon-logo-width;
+    height: @ribbon-logo-height;
+    background-image: url(../app-v2/graphics-hub/logo-hub.svg);
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin: 11px 0;
+}
+
+.ribbon-nav-list li.ribbon-nav-logo:hover {
+    border-bottom: 0;
+}
+
+.ribbon-account-container {
+    position: absolute;
+    top: 12px;
+    right: 24px;
+    height: 0;
+    width: @ribbon-account-container-width;
+    height: @ribbon-account-container-width;
+}
+
+.ribbon-avatar-initial {
+    .avatar-background (@avatar-gradient-color1, @avatar-gradient-color2);
+    border-radius: 50%;
+    font-weight: 500;
+    position: absolute;
+    top:0;
+    right:0;
+    font-size: @ribbon-avatar-initial-font-size;
+    width: @ribbon-avatar-size;
+    height: @ribbon-avatar-size;
+    line-height: @ribbon-avatar-size;
+    text-transform: uppercase;
+    color: @user-team-item-initial-color;
+
+    span {
+        opacity: @user-initial-text-opacity;
+    }
+}
+
+.settings-mobile-container {
+    // This trick enables the mobile side panel to take on it's parent width which is 100% of the viewport size
+    height:0;
+
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+        display: none;
+    }
+}
+
+.hamburger-menu {
+    position: fixed;
+    width: @hamburger-list-menu-size;
+    height: @hamburger-list-menu-size;
+    top: (@ribbon-height-s - @hamburger-list-menu-size)/2 + 2px;
+    left: @hamburger-list-item-padding;
+    z-index: 2000;
+
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+        display: none;
+    }
+
+    span {
+        position: absolute;
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: #000;
+        border-radius: 1px;
+        z-index: 1;
+        left: 0;
+        transform-origin: 0 0;
+        transition: transform @hamburger-line-anim-time cubic-bezier(0.77,0.2,0.05,1.0), width @hamburger-line-anim-time, background @hamburger-line-anim-time cubic-bezier(0.77,0.2,0.05,1.0), opacity @hamburger-line-anim-time ease;
+
+        &.first-line {
+            top: 7px;
+        }
+
+        &.second-line {
+            top: 14px;
+        }
+
+        &.third-line {
+            top: 21px;
+        }
+    }
+}
+
+.is-active .hamburger-menu {
+    span {
+        width: 22px;
+    }
+
+    span.first-line {
+        opacity: 1;
+        transform: rotate(45deg) ;
+    }
+
+    span.second-line {
+        opacity: 0;
+        transform: rotate(0deg) scale(0.2, 0.2);
+    }
+
+    span.third-line {
+        transform: rotate(-45deg) translate(-2px, 0px) ;
+    }
+}
+
+.settings-mobile-panel {
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 100vh;
+    transform: translate3d(-100%, 0, 0);
+    z-index: 1500;
+    transition: transform @hamburger-line-anim-time cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+.mobile-nav-list li {
+    height: @hamburger-list-item-height;
+    line-height: @hamburger-list-item-height;
+
+    a {
+        display: inline-block;
+        padding: 0 @hamburger-list-item-padding;
+        width: 100%;
+        .base-text-style(@hamburger-list-item-font-size, 500);
+        .single-line-ellipsis();
+    }
+
+    &.selected-tab a {
+        color: @primary-text-color;
+    }
+
+    &:hover {
+        background: @list-item-default-hover-color;
+    }
+
+    &.mobile-nav-divider {
+        width: 100%;
+        height: 8px;
+        border-top: solid 1px @list-item-divider-bg;
+        margin-top: 8px;
+    }
+
+    &.mobile-nav-account {
+        position: relative;
+    }
+}
+
+.is-active .settings-mobile-panel {
+    transform: translate3d(0, 0, 0);
+}
+
+.settings-mobile-panel-content {
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 80%;
+    height: 100%;
+    padding-top: @ribbon-height-s;
+    background: @ribbon-background;
+}
+
+.mobile-panel-scrim {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: @mobile-setting-panel-scrim;
+    opacity: 0;
+}
+
+.is-active .mobile-panel-scrim {
+    opacity: 1;
+    transition: opacity @hamburger-line-anim-time/4 cubic-bezier(0.77,0.2,0.05,1.0) @hamburger-line-anim-time * 0.8;
+}
+
+.mobile-title-container {
+    position: absolute;
+    width: 100%;
+    height: @ribbon-height-s;
+    padding: 0 @mobile-title-padding-h;
+    line-height: @ribbon-height-s;
+    font-size: @mobile-title-font-size;
+    font-weight: bold;
+    .single-line-ellipsis();
+
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+        display: none;
+    }
+
+    &.notification-mobile-browser-container {
+        @media (min-width: @phoneS) {
+            padding: 0 140px 0 @mobile-title-padding-h;
+        }
+
+    }
+}
+
+.mobile-nav-avatar {
+    position: absolute;
+    right: @list-item-padding-h;
+    top: (@hamburger-list-item-account-height - 28px)/2 - 4px;
+    padding: 4px;
+
+    img {
+        width: 100%;
+        // adding height, even though in cases if the source image is not a square, better off to stretch to cover the whole area
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        background: @white;
+    }
+}
+
+.mobile-avatar-initial {
+    .avatar-background (@avatar-gradient-color1, @avatar-gradient-color2);
+    border-radius: 50%;
+    font-weight: 500;
+    font-size: @ribbon-avatar-initial-font-size - 2;
+    width: @mobile-avatar-size;
+    height: @mobile-avatar-size;
+    line-height: @mobile-avatar-size;
+    text-transform: uppercase;
+    color: @user-team-item-initial-color;
+    text-align: center;
+
+    span {
+        opacity: @user-initial-text-opacity;
+    }
+}
+
+.page-breadcrumb-bar {
+    width: 100%;
+    height: @page-breadcrumb-bar-height;
+    margin: 0 auto;
+    background: @content-bg;
+    position: relative;
+}
+
+.page-breadcrumb-text {
+    padding: 0 @list-item-padding-h;
+    line-height: @page-breadcrumb-bar-height;
+    font-size: @page-breadcrumb-text-font-size;
+    .single-line-ellipsis();
+
+    &:hover a {
+        color: @primary-text-color;
+    }
+}

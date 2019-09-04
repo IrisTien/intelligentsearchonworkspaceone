@@ -1,0 +1,849 @@
+/*
+ * Project Horizon
+ * (c) 2013-2015 VMware, Inc. All rights reserved.
+ * VMware Confidential.
+ */
+
+@import "../base/fonts";
+@import "../page/page";
+
+/** @pattern .button
+
+A button consists of text and/or an image that clearly communicates
+what action will occur when the user touches it.
+A button can have an image, text, or both.
+
+@example[basic-buttons.html] Basic buttons
+
+**/
+
+@button-text-color: #717171;
+
+.button {
+
+    .config () {
+        @vmargin: 3px;
+        @hpad: 1.5em;
+        @min-width: 5em;
+        @max-lines: 3;
+        @text-color: @button-text-color;
+
+        @bg-color: #f3f3f3;
+        @highlight: fade(#fff, 50%);
+        @gradient-hi: fade(#fff, 10%);
+        @gradient-lo: fade(#000, 10%);
+        @drop-shadow: fade(#000, 15%);
+        @border-width: 1px;
+        @border-color: #bbb;
+        @border-radius: 2px;
+
+        @hover-bg-color: #e9e9e9;
+        @hover-border-color: #999;
+        @hover-highlight: fade(#fff, 75%);
+        @hover-gradient-hi: fade(#fff, 25%);
+        @hover-gradient-lo: fade(#000, 25%);
+        @hover-drop-shadow: fade(#000, 15%);
+
+        @active-text-color: #fff;
+        @active-bg-color: #6e6e6e;
+        @active-box-shadow: fade(#000, 40%);
+
+        @selected-box-shadow: fade(#000, 20%);
+
+        @primary-bg-color: #3498db;
+        @primary-border-color: #2980b9;
+        @primary-highlight: fade(#fff, 40);
+        @primary-drop-shadow: fade(#000, 30%);
+        @primary-text-color: #fff;
+        @primary-hover-bg-color: #57bee8;
+        @primary-active-bg-color: #379edd;
+
+        @danger-bg-color: #c90000;
+        @danger-border-color: #990000;
+        @danger-text-color: #fff;
+        @danger-hover-bg-color: #e70000;
+        @danger-active-bg-color: #a00000;
+
+        @safe-bg-color: #6db33f;
+        @safe-border-color: #387c2c;
+        @safe-text-color: #fff;
+        @safe-hover-bg-color: #8bc850;
+        @safe-active-bg-color: #3b832f;
+
+        @disabled-bg-color: fade( mix( @bg-color, #000, 85% ), 70% );
+        @primary-disabled-bg-color: fade( @primary-active-bg-color, 70% );
+        @danger-disabled-bg-color: fade( @danger-active-bg-color, 70% );
+        @safe-disabled-bg-color: fade( @safe-active-bg-color, 70% );
+
+        @badge-bg-color: #d8d8d8;
+        @badge-fg-color: #979797;
+        @badge-border-color: @badge-fg-color;
+    }
+
+    .button > .config();
+    .font > .config();
+
+    display: inline-block;
+    position: relative; // for badge
+
+    padding-left: @hpad;
+    padding-right: @hpad;
+    min-width: @min-width;
+
+    .font > .family( nav );
+    .font > .weight( semi-bold );
+
+    text-decoration: none;
+    color: @text-color;
+    -webkit-font-smoothing: antialiased;
+
+    border: @border-width solid @border-color;
+    border-radius: @border-radius;
+    outline: none;
+
+    box-shadow: 0 1px 1px @drop-shadow, inset 0 1px @highlight;
+
+    .background-color( @bg-color );
+    .background-gradient( vertical, @gradient-hi, @gradient-lo );
+    &:before {
+        .background-gradient( diagonal, @gradient-hi, @gradient-lo );
+    }
+
+    vertical-align: baseline;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+
+    .size( @size-normal ); // compute all vertical dimensions from font-size
+
+    p > & {
+        // Buttons in running text should not hit each other (line to line).
+        margin-top: @vmargin;
+        margin-bottom: @vmargin;
+    }
+
+    .button-text {
+        /** The text of the button.  Optional, unless the button also contains an
+            icon, in which case the text itself must be marked up as `button-text`.
+
+            Applying `button-text` also causes the text to be clipped with ellipses
+            if the text is too long to fit.
+            **/
+        display: inline-block;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .glyph {
+        // We set the size of any glyph to the line-height of the button below, in .size()
+        // However, we don't want to change the size of any caret glyphs, and we want them
+        // vertically aligned middle
+        &.down-caret- {
+            font-size: 100%;
+            vertical-align: middle;
+        }
+    }
+
+    > * {
+        // Since the glyph height == the line height,
+        // the best way to ensure any glyph does not alter the height
+        // of the button is to align everything at the bottom (not baseline).
+        vertical-align: bottom;
+    }
+
+    .button-badge { /**
+        A round badge overlaid on the button.
+
+        @example[button-badge.html] Button badge
+        **/
+        @d: 1.6em;
+
+        display: block;
+        position: absolute;
+        top: (-@d/2);
+        right: (-@d/2);
+        height: @d;
+        width: @d;
+        line-height: @d;
+        box-sizing: content-box;
+        border: 1px solid @badge-border-color;
+        background: @badge-bg-color;
+        color: @badge-fg-color;
+        border-radius: 50%;
+    }
+
+    &.is-hovered,
+    &:hover,
+    &:focus {
+        /** Adding `is-hovered` to a button will emulate the `:hover` state **/
+        box-shadow: 0 2px 1px @hover-drop-shadow, inset 0 1px @hover-highlight;
+        border-color: @hover-border-color;        background-color: @hover-bg-color;
+        color: @text-color;
+        &,
+        a[href]& {
+            text-decoration: none;
+        }
+        .background-gradient( vertical, @hover-gradient-hi, @hover-gradient-lo );
+        &:before {
+            .background-gradient( diagonal, @hover-gradient-hi, @hover-gradient-lo );
+        }
+    }
+
+    &.is-active,
+    /*&.is-loading,*/
+    &:active {
+        /** Adding `is-active` to a button will emulate the `:active` state **/
+        color: @active-text-color;
+        border-color: transparent;
+        box-shadow: inset 0 0 6px @active-box-shadow;
+        background-color: @active-bg-color;
+        .background-gradient( none );
+        &:before {
+            .background-gradient( none );
+        }
+    }
+
+    &.is-selected {
+        /** A button which `is-selected` will be highlighted to distinguish it
+            from other buttons in a button bar **/
+        // a combination of the hover state and the active state
+        background-color: @hover-bg-color;
+        box-shadow: inset 0 1px 3px @selected-box-shadow;
+    }
+
+    &.is-disabled,
+    &:disabled {
+        /** Adding `is-disabled` to a button will emulate the `:disabled` state **/
+        cursor: default;
+        color: fade( @text-color, 70% );
+        border-color: fade( @border-color, 40% );
+        box-shadow: none;
+        .background-color( @disabled-bg-color );
+        .background-gradient( none );
+        &:before {
+            .background-gradient( none );
+        }
+    }
+
+    &.is-loading { /**
+        Adding `is-loading` to a button will present a busy state
+        @example[loading-buttons.html] Loading buttons
+        **/
+        .animation( button-is-loading-animation 5s ease infinite );
+
+        &.primary-, &.safe-, &.danger- {
+            .animation( button-is-loading-animation-white 5s ease infinite );
+        }
+    }
+
+    &.left- {
+        float: left;
+    }
+
+    &.right- {
+        float:right;
+    }
+
+    &.primary- {
+        /**
+            A primary button is the button a user is most
+            likely wanting to click.  It is designed to be
+            easy to find, standing out from other buttons
+            and interactive elements on the page.
+            **/
+        color: @primary-text-color;
+        background-color: @primary-bg-color;
+        border-color: @primary-border-color;
+        &:hover, &:focus, &.is-hovered, &.is-selected {
+            background-color: @primary-hover-bg-color;
+            color: @primary-text-color;
+        }
+        &:active, &.is-active {
+            background-color: @primary-active-bg-color;
+            color: @primary-text-color;
+        }
+        &:disabled, &.is-disabled {
+            color: fade( @primary-text-color, 70% );
+            .background-color( @primary-disabled-bg-color );
+            border-color: fade( @primary-border-color, 20% );
+        }
+    }
+
+    &.danger- {
+        /**
+           A danger button is used for a potentially
+           dangerous action, such as deleting data.
+           **/
+        color: @danger-text-color;
+        background-color: @danger-bg-color;
+        border-color: @danger-border-color;
+        &:hover, &:focus, &.is-hovered, &.is-selected {
+            background-color: @danger-hover-bg-color;
+            color: @danger-text-color;
+        }
+        &:active, &.is-active {
+            background-color: @danger-active-bg-color;
+            color: @danger-text-color;
+        }
+        &:disabled, &.is-disabled {
+            color: fade( @danger-text-color, 70% );
+            .background-color( @danger-disabled-bg-color );
+            border-color: fade( @danger-border-color, 20% );
+        }
+    }
+
+    &.safe- {
+        /**
+           A safe button is often used along with
+           a danger button and indicates to the user
+           a generally safe action.
+           **/
+        color: @safe-text-color;
+        background-color: @safe-bg-color;
+        border-color: @safe-border-color;
+        &:hover, &:focus, &.is-hovered, &.is-selected {
+            background-color: @safe-hover-bg-color;
+            color: @safe-text-color;
+        }
+        &:active, &.is-active {
+            background-color: @safe-active-bg-color;
+            color: @safe-text-color;
+        }
+        &:disabled, &.is-disabled {
+            color: fade( @safe-text-color, 70% );
+            .background-color( @safe-disabled-bg-color );
+            border-color: fade( @safe-border-color, 20% );
+        }
+    }
+
+    &.text- {
+        /** A button that looks like the text around it. */
+        display: inline;
+        background: transparent;
+        box-shadow: none;
+        border-color: transparent;
+        min-width: 0;
+    }
+
+    &.link- {
+        /** A button that looks like a link.
+        @example[link-buttons.html] Link Buttons
+        */
+        &:extend( .button.text- );
+        display: inline-block;
+        color: @link-color;
+        font-size: inherit;
+        &:hover, &:focus, &.is-hovered, &.is-selected {
+            color: @link-hover-color;
+            background-color: transparent;
+            border-color: currentColor;
+        }
+        &:active, &.is-active {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        &:disabled, &.is-disabled {
+            border-color: transparent;
+            background-color: transparent;
+            opacity: 0.5;
+        }
+    }
+
+    &.hollow- {
+        /** A button with no background, and same-colored border and text. */
+        background: transparent;
+        box-shadow: none;
+        color: @text-color;
+        border-color: currentColor;
+        &:hover, &:focus &.is-hovered, &.is-selected {
+            &:extend( .button.is-hovered );
+        }
+        &:active, &.is-active {
+            &:extend( .button.is-active );
+        }
+        &.safe- {
+            color: @safe-active-bg-color;
+            &:hover, &.is-hovered, &.is-selected {
+                &:extend( .button.safe-.is-hovered );
+            }
+            &:active, &.is-active {
+                &:extend( .button.safe-.is-active );
+            }
+        }
+        &.danger- {
+            color: @danger-bg-color;
+            &:hover, &.is-hovered, &.is-selected {
+                &:extend( .button.danger-.is-hovered );
+            }
+            &:active, &.is-active, &.is-loading {
+                &:extend( .button.danger-.is-active );
+            }
+        }
+        &.primary- {
+            color: @primary-active-bg-color;
+            &:hover, &.is-hovered, &.is-selected {
+                &:extend( .button.primary-.is-hovered );
+            }
+            &:active, &.is-active {
+                &:extend( .button.primary-.is-active );
+            }
+        }
+        &:disabled, &.is-disabled {
+            background-color: transparent;
+            opacity: 0.5;
+        }
+    }
+
+    &.text-,
+    &.link- {
+        &.safe- {
+            &, &:hover, &:focus, &.is-hovered, &.is-selected {
+                color: @safe-active-bg-color;
+            }
+        }
+        &.danger- {
+            &, &:hover, &:focus, &.is-hovered, &.is-selected {
+                color: @danger-bg-color;
+            }
+        }
+        &.primary- {
+            &, &:hover, &:focus, &.is-hovered, &.is-selected {
+                color: @primary-active-bg-color;
+            }
+        }
+    }
+
+    &.close- {
+        &:extend( .button.text- );
+        .glyph > .extend();
+        .glyph > .apply(x-);
+        padding: 0;
+        min-height: 1em;
+        // the following should be re-factored into Dialog
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    &.x-small- {
+        /** A very small button **/
+        .size( @size-xsmall );
+    }
+
+    &.small- {
+        /** A small button **/
+        .size( @size-small );
+    }
+
+    &.medium- {
+        /** The default size **/
+        .size( @size-normal );
+    }
+
+    &.large- {
+        /** A larger button **/
+        .size( @size-large );
+    }
+
+    &.x-large- {
+        /** A much larger button **/
+        .size( @size-xlarge );
+
+        /**
+            @example[button-sizes.html] Different sizes of buttons
+        **/
+    }
+
+    &.iconic- {
+        /**
+           A button which contains an icon (or glyph), and possibly some text.
+           The padding is adjusted so that the left and right padding
+           are equal to the top and bottom padding, so that buttons which
+           contain only a single icon end up being square.
+
+           @example[iconic-buttons.html] Buttons with icons
+
+           Note that when combining icons and text you must wrap the
+           button text in a `<span class="button-text">`.  Also make sure to have no
+           whitespace between the `<i>` and the `<span>`.  Both of these are necessary
+           to obtain the proper (and consistent) spacing between the icon and the
+           text.  The `button-text` span also indicates the text to remove if the
+           button is collapsible.
+        **/
+
+        // padding is set by .size() mixin
+        min-width: 1em;
+
+        .glyph + .button-text {
+            margin-left: .5em;
+        }
+
+        .button-text + .glyph {
+            margin-left: .3em; // the icons are larger font-size, so this compensates
+        }
+
+        &.collapsible- {
+            /**
+               A collapsible iconic button will show only the icon on smaller
+               devices where space may be at a premium.  If the button is collapsible,
+               be sure the icon is identifiable enough to stand on its own.
+               **/
+
+            @media @page-M {
+                .button-text {
+                    display: none;
+                }
+                .button-text + .glyph {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+
+    &.text-.iconic-,
+    &.link-.iconic- {
+        // reduce the spacing when there is no border around the button
+        .glyph + .button-text {
+            margin-left: .25em;
+        }
+        .button-text + .glyph {
+            margin-left: .15em;
+        }
+    }
+
+    &.next-,
+    &.previous- {
+        position: relative; // context for the :before content (arrow)
+        overflow: visible;
+        min-width: 8em;
+
+        &:before {
+            content: ' ';
+            position: absolute;
+            top: -@border-width;
+            // width and height set by .size() mixin
+            .transform-origin( 0, 0 );
+            .rotate(45deg);
+            border: inherit;
+            background-color: inherit;
+            border-radius: inherit;
+        }
+
+        &:disabled,
+        &.is-disabled {
+            // Because of the overlaid :before content, we must use solid colors.
+            // They will only look the same on a white background.
+            .solid-background-color( @disabled-bg-color );
+            &.primary- {
+                .solid-background-color( @primary-disabled-bg-color );
+            }
+            &.danger- {
+                .solid-background-color( @danger-disabled-bg-color );
+            }
+            &.safe- {
+                .solid-background-color( @safe-disabled-bg-color );
+            }
+        }
+    }
+
+    &.next- {
+        /**
+           A next button is styled directionally so as to indicate
+           progress in the forward direction.
+         **/
+
+        border-right-width: 0;
+        padding-left: 3em;
+        padding-right: 2.5em;
+
+        &:before {
+            left: 100%;
+            border-width: @border-width @border-width 0 0;
+            box-shadow: inset 0 1px @highlight;
+        }
+        &:active,
+        &.is-active {
+            &:before {
+                box-shadow: inset -2px 2px 4px rgba(0,0,0,0.2);
+            }
+        }
+    }
+
+    &.previous- {
+        /**
+           A previous button is styled directionally the opposite of the
+           next button.
+         **/
+
+        border-left-width: 0;
+        padding-left: 2.5em;
+        padding-right: 3em;
+
+        &:before {
+            left: 0;
+            border-width: 0 0 @border-width @border-width;
+            box-shadow: inset 1px 0 @highlight;
+        }
+
+        &:active,
+        &.is-active {
+            &:before {
+                box-shadow: inset 2px -2px 4px rgba(0,0,0,0.2);
+            }
+        }
+
+        /**
+           @example[directional-buttons.html] Next and Previous Buttons
+         **/
+    }
+
+    &.inline- {
+        /**
+        A reduced-height button intended to be used inline in text and forms.
+        Its height is the same as a text input field.
+
+        All buttons are intended to align properly when set in a paragraph
+        of text; the text of the button will align with the adjacent text.
+        However, adding inline buttons to text or a form will cause lines
+        with buttons to have increased line height.  An inline button reduces
+        this effect. (It may or may not eliminate it completely depending on
+        the prevailing `line-height`).
+
+        @example[inline-buttons.html] Inline buttons
+        **/
+
+        // TODO: other sizes? (this is normal/medium)
+
+        .size( @size-normal );
+        height: 2 * @size-normal;
+
+    }
+
+    &.multiline- {
+        /**
+           A multiline button allows for additional content
+           by wrapping the text to additional line(s), if
+           required.  Often used with `width` or `max-width`
+           to constrain the overall width of the button.
+
+           @example[multiline-buttons.html] Buttons with long text
+
+
+           Note that the button height is limited to 3 lines, so that the button
+           does not begin to look like a notification.  Additional content will
+           be hidden.
+        **/
+        white-space: normal;
+        .button-text {
+            display: block;
+        }
+    }
+
+    &.full-width- {
+        display: block;
+        width: 100%;
+    }
+
+    &.block- {
+        &:extend( .button.full-width- );
+        border-radius: 0;
+        border-color: transparent;
+        color: #828082;
+        .background-color( #e5e4e5 );
+        .background-gradient( none );
+        &:hover,
+        &:focus {
+            color: #717171;
+        }
+
+        /**
+           @example[full-width-buttons.html] Full-width buttons
+         **/
+    }
+
+    // Mixins to modify/customize the button
+
+    // Extend the .button pattern
+    .extend () {
+        &:extend( .button );
+        &:hover, &:focus, &.is-hovered, &.is-selected { &:extend( .button.is-hovered ); }
+        &:active, &.is-active { &:extend( .button.is-active ); }
+        &:disabled, &.is-disabled { &:extend( .button.is-disabled ); }
+        > * { &:extend( .button > * ); }
+        .button-text { &:extend( .button .button-text ); }
+        .glyph { &:extend( .button .glyph ); }
+        .glyph.down-caret- { &:extend( .button .glyph.down-caret- ); }
+    }
+
+    // Set the nominal size and all parameters that are related
+    .size ( @font-size, @line-height: @font-size ) when (isnumber(@font-size)) {
+        @pad: (@line-height - 2*@border-width)/2;
+        @height: 2 * @line-height;
+        @caret-size: @height/sqrt(2);
+        line-height: @line-height;
+        min-height: @height;
+        padding-top: @pad;
+        padding-bottom: @pad;
+        font-size: @font-size;
+        &.iconic- {
+            padding: @pad;
+        }
+        .glyph {
+            font-size: @line-height;
+        }
+        .button-text {
+            max-height: (@max-lines*@line-height);
+        }
+        &.next-, &.previous- {
+            &:before {
+                width: @caret-size;
+                height: @caret-size;
+            }
+        }
+        &.next- {
+            margin-right: @height/2;
+        }
+        &.previous- {
+            margin-left: @height/2;
+        }
+    }
+
+    .size ( small ) {
+        .size( @size-small );
+    }
+
+}
+
+
+button {
+    .button > .extend();
+}
+
+/**
+   ## Button Bars ##
+
+   Buttons may be combined into a button bar, which causes the borders
+   between the buttons to be collapsed into one divider.
+
+   @example[button-bar.html] Button Bars
+
+ **/
+
+.bar {
+
+    &.button- {
+        /**
+           A button bar displays a series of buttons which
+           the user may select.
+
+        @example [button-bar] A Button Bar
+        <ul class="button- bar">
+          <li class="button">First
+          <li class="button">Second
+          <li class="button">Third
+        </ul>
+        **/
+
+        // Derived class mixin
+
+        .extend () {
+            .bar > .extend();
+        }
+    }
+
+    &.tool- {
+        /**
+           A tool bar displays a series of icons from
+           which the user may select.
+
+           @example [tool-bar] A Tool Bar
+           <ul class="tool- bar">
+             <li class="button"><i class="move- glyph"></i>
+             <li class="button"><i class="reload- glyph"></i>
+           </ul>
+           **/
+
+        > .button, > button {
+            &:extend( .button.iconic- all );
+        }
+    }
+
+    &.button-,
+    &.tool- {
+        > .button,
+        > button {
+            .button > .config();
+            border-style: solid;
+            border-color: @border-color;
+            border-width: @border-width 0 @border-width @border-width;
+            border-radius: 0;
+            // eliminate the drop shadow on individual buttons
+            box-shadow: inset 0 1px @highlight;
+            &:first-child {
+                border-top-left-radius: @border-radius;
+                border-bottom-left-radius: @border-radius;
+            }
+            &:last-child {
+                border-right-width: @border-width;
+                border-top-right-radius: @border-radius;
+                border-bottom-right-radius: @border-radius;
+            }
+
+            // Derived class mixin
+            .extend() {
+                &:extend( .bar.button- > .button );
+                &:first-child { &:extend( .bar.button- > .button:first-child ); }
+                &:last-child { &:extend( .bar.button- > .button:last-child ); }
+            }
+        }
+
+        &.x-small- {
+            > .button, > button {
+                &:extend( .button.x-small- all );
+            }
+        }
+        &.small- {
+            > .button, > button {
+                &:extend( .button.small- all );
+            }
+        }
+        &.medium- {
+            > .button, > button {
+                &:extend( .button.medium- all );
+            }
+        }
+        &.large- {
+            > .button, > button {
+                &:extend( .button.large- all );
+            }
+        }
+        &.x-large- {
+            > .button, > button {
+                &:extend( .button.x-large x- all );
+            }
+        }
+    }
+}
+
+.button-is-loading-frames (@color: @button-text-color) {
+    0%, 100% {
+        color: fade( @color, 20% );
+    }
+    35% {
+        color: fade( @color, 50% );
+    }
+    70% {
+        color: fade( @color, 70% );
+    }
+    85% {
+        color: @color;
+    }
+}
+
+@-webkit-keyframes button-is-loading-animation { .button-is-loading-frames(); }
+@-moz-keyframes button-is-loading-animation { .button-is-loading-frames(); }
+@keyframes button-is-loading-animation { .button-is-loading-frames(); }
+
+@-webkit-keyframes button-is-loading-animation-white { .button-is-loading-frames(#fff); }
+@-moz-keyframes button-is-loading-animation-white { .button-is-loading-frames(#fff); }
+@keyframes button-is-loading-animation-white { .button-is-loading-frames(#fff); }

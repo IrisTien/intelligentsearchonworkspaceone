@@ -1,0 +1,104 @@
+<div class="launcheritem-details-dialog invisible" ng-controller="LauncherItemContextDialogController as dialogCtrl">
+    <button class="dialog-close text- button" ng-click="close()">
+        <svg symbol="close"></svg>
+    </button>
+        <div class="info-container">
+            <div class="simple- emblem">
+                <div class="emblem-image" ng-style="{'background-image':('url('+ app.icon+')')}"></div>
+            </div>
+
+            <h3 class="app-name">{{app.name}}</h3>
+            <dl>
+                <dt>{{::'app.details.label.type' | i18n}}</dt>
+                <dd>{{'app.details.label.type.'+app.subType | i18n}}</dd>
+                <dt ng-if="app.version">{{::'app.details.label.version' | i18n}}</dt>
+                <dd ng-if="app.version">{{app.version}}</dd>
+                <dt ng-if="app.subType === 'THINAPP'">{{::'app.details.label.packageName' | i18n}}</dt>
+                <dd ng-if="app.subType === 'THINAPP'">{{app.optionalAppInfo.packageName}}</dd>
+            </dl>
+        </div>
+        <div class="dialog-text">
+            <dl>
+                <!--For ThinApp-->
+                <dt ng-if="dialogCtrl.hasAppRequirements && !launcherItemCtrl.isHorizon">
+                    {{::'app.details.label.requirement' | i18n}}</dt>
+                <dd ng-if="app.subType === 'THINAPP'">
+                    <span>{{::'app.details.thinapp.requirement' | i18n}}</span>
+                </dd>
+
+                <!--For XenApp-->
+                <dd ng-if="app.subType === 'XENAPP'">
+                    <span ng-click="preventCloseOnClick($event)" ng-bind-html="dialogCtrl.xenAppTooltip" ></span>
+                </dd>
+
+                <!--For XenAppDeliveryGroup-->
+                <dd ng-if="app.subType === 'XENAPPDELIVERYGROUP'">
+                    <span ng-click="preventCloseOnClick($event)" ng-bind-html="dialogCtrl.xenAppDeliveryGroupTooltip" ></span>
+                </dd>
+
+                <!--For ViewDesktop-->
+                <dd ng-if="app.subType === 'VIEWPOOL' && !launcherItemCtrl.isHorizon">
+                    <span ng-click="preventCloseOnClick($event)" ng-bind-html="dialogCtrl.viewDesktopTooltip" ></span>
+                </dd>
+
+                <!--For ViewApp-->
+                <dd ng-if="app.subType === 'VIEWAPP' && !launcherItemCtrl.isHorizon">
+                    <span ng-click="preventCloseOnClick($event)" ng-bind-html="dialogCtrl.viewAppTooltip" ></span>
+                </dd>
+
+                <!--For DesktoneDesktop-->
+                <dd ng-if="app.subType === 'DESKTONEDESKTOP' && !launcherItemCtrl.isHorizon">
+                    <span ng-click="preventCloseOnClick($event)" ng-bind-html="dialogCtrl.desktoneTooltip"></span>
+                </dd>
+
+                <!--For DesktoneApplication-->
+                <dd ng-if="app.subType === 'DESKTONEAPPLICATION' && !launcherItemCtrl.isHorizon">
+                    <span ng-click="preventCloseOnClick($event)" ng-bind-html="dialogCtrl.daasAppTooltip"></span>
+                </dd>
+            </dl>
+            <div class="app-description">
+                <span ng-if="app.description.length > 0" ng-bind-html="app.description"></span>
+                <div><a class="link" ng-click="dialogCtrl.appDetails(app);">{{::'app.details.label.seeFullDetails' | i18n}}</a></div>
+            </div>
+
+            <div ng-if="app.categories.length > 0"><dt>{{::'app.details.label.category' | i18n}}</dt><dd><span class="app-labels" ng-repeat="category in app.categories"><span>{{category}}</span>{{$last ? '' : ', '}}</span></dd></div>
+
+        </div>
+        <div class="dialog-actions">
+            <ul class="actions">
+                <!-- inline blocks: let the <li>s close themselves to suppress intervening whitespace -->
+                <li>
+                    <a class="hideApp" ng-click="dialogCtrl.hideApp(app, launcherCtrl.visibleLauncherApps, $index, $event);close();">
+                        <svg symbol="trash" ng-class="{'filled-' : app.favorite}"></svg>
+                    </a>
+                <li>
+                    <a class="favorite" ng-click="toggleFavorite(app, $event, launcherCtrl.isFilteredByFav, launcherCtrl.visibleLauncherApps, $index)">
+                        <svg symbol="star" ng-class="{'filled-' : app.favorite}"></svg>
+                    </a>
+                <li ng-show="app.usePerAppPassword">
+                    <a ng-click="openSetAppPasswordDialog($event)">
+                        <svg symbol="set-password"></svg>
+                    </a>
+            </ul>
+            <ul>
+                <li class="button launch-btn" ng-show="!app.isViewResource || (app.isViewResource && launcherItemCtrl.isAWJade) || (app.isViewResource && launcherItemCtrl.isHorizon)">
+                    <a ng-click="launcherItemCtrl.launchApp(launcherItemCtrl.app, $event)">{{::'myapps.dialog.openApp' | i18n}}</a>
+            </ul>
+            <ul class="launch-options" ng-show="app.isViewResource && !launcherItemCtrl.isAWJade && !launcherItemCtrl.isHorizon">
+                <li class="small- button launch-btn" ng-show="app.viewClientLaunchSupported">
+                    <a ng-click="launcherItemCtrl.openWithViewClient(launcherItemCtrl.app, $event)">
+                        {{::'myapps.dialog.openAppWithViewClient' | i18n}}
+                    </a>
+                <li class="small- button is-disabled" ng-show="!app.viewClientLaunchSupported">
+                    {{::'myapps.dialog.openAppWithViewClient' | i18n}}
+
+                <li class="small- launch-link link" ng-show="app.viewBrowserLaunchSupported">
+                    <a ng-click="launcherItemCtrl.openWithBrowser(launcherItemCtrl.app, $event)" ng-show="launcherItemCtrl.isViewOptionSupported(launcherItemCtrl.app, 'BROWSER')">
+                        {{::'myapps.dialog.openAppWithBrowser' | i18n}}
+                    </a>
+                <li class="small- launch-link link is-disabled" ng-show="!app.viewBrowserLaunchSupported">
+                    {{::'myapps.dialog.openAppWithBrowser' | i18n}}
+
+            </ul>
+        </div>
+</div>

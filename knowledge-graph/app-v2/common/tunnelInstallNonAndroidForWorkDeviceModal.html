@@ -1,0 +1,21 @@
+<div modal-new class="modal-fullscreen adaptive-management mobile-slide-modal tunnel-install-modal">
+    <div class="adaptive-management-header">
+        <svg class="icon-modal-fullscreen-close" svg-symbol="icon-close" ng-click="modal.cancel()"></svg>
+    </div>
+    <div class="adaptive-management-content">
+        <div class="adaptive-management-content-scrollable">
+            <div class="tunnel-app-body">
+                <p class="tunnel-install-help-text">{{ ::'app.tunnel.installHelpText' | i18n }}</p>
+                <p class="tunnel-install-step">
+                    <a id="tunnelApp" ng-click="catalogService.handleTunnelRedirect(tunnelUrl)"> {{ ::'app.tunnel.installStep1' | i18n:tunnelAppName }} </a>
+                </p>
+                <p class="tunnel-install-step">
+                    <a id="dependentApp" ng-click="catalogService.installDependentApp(dependentApp)"> {{ ::'app.tunnel.installStep2' | i18n:dependentApp.name }} </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <button class="adaptive-management-footer" type="button" role="button" id="adaptive-management-footer" ng-click="modal.close(true)">
+        {{ ::'button.close' | i18n }}
+    </button>
+</div>

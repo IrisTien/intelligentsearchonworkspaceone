@@ -1,0 +1,92 @@
+@app-tile-width-m: 98px;
+
+@app-icon-size-m: 58px;
+
+@app-tile-border-radius-s: 8px;
+@app-tile-border-radius-m: 8px;
+
+@app-label-height-s: 24px;
+@app-dots-width: 16px;
+@app-dots-height: 24px;
+
+@app-label-font-size-m: 12px;
+
+@app-tile-offset: 2px;
+@app-spinner-background: rgba(255,255,255,0.7);
+
+// This is the app tiles for the landing page, the sub pages are list view how should we do it? -- adding a class .app-tile-listview??
+.app-tile {
+    margin: 10px auto;
+    width: @app-tile-width-m;
+    height: @app-tile-width-m;
+    border-radius: @app-tile-border-radius-s;
+    padding: (@app-tile-width-m - @app-icon-size-m)/2;
+    background: @app-tile-bg-color;
+    box-shadow: 0 0 6px 0 @app-tile-shadow-color;
+    cursor: pointer;
+
+    &.disable-app {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.app-favorites-edit .app-tile {
+    width: @app-tile-width-m;
+    height: @app-tile-width-m;
+}
+
+.app-icon {
+    width: @app-icon-size-m;
+    height: @app-icon-size-m;
+    margin: auto;
+    .app-icon-background();
+
+    img {
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        position: relative;
+        top: 50%;
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 6px;
+        background: @white;
+    }
+}
+
+.app-favorites-edit .app-icon {
+    width: @app-icon-size-m;
+    height: @app-icon-size-m;
+}
+
+.app-label-container {
+    width: 100%;
+    height: 28px;
+    line-height: 14px;
+    padding: 0 (@app-dots-width + @app-tile-offset) 0 (@app-dots-width/2 - @app-tile-offset);
+    position: relative;
+    .base-text-style(@app-label-font-size-m, 600);
+    text-align: left;
+    white-space: normal;
+    background-image: url(../app-v2/graphics-hub/icon-dots-black.svg);
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-size: 16px 24px;
+
+    &.edit-mode {
+        background-image: none;
+    }
+}
+
+.app-label {
+    .multi-line-ellipsis(2);
+}
+
+.app-item-actions {
+    position: absolute;
+    width: @mobile-default-taparea-size - 6px;
+    height: @mobile-default-taparea-size - 4px;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}

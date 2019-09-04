@@ -1,0 +1,7 @@
+<svg id="icon-clipboard" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    <rect id="frame" x="8.34" y="5.48" width="16.36" height="21.05" rx="1.5" ry="1.5" fill="none" stroke="#2ca6df" stroke-miterlimit="10" stroke-width="1.3"/>
+    <path id="clip" d="M19.91,4H18.69a2,2,0,0,0-3.92,0H13.25a.8.8,0,0,0-.8.8V6.69a.8.8,0,0,0,.8.8h6.66a.8.8,0,0,0,.8-.8V4.77A.8.8,0,0,0,19.91,4ZM16.75,5.09a.73.73,0,1,1,.73-.73A.73.73,0,0,1,16.75,5.09Z" fill="#2ca6df" stroke-width="0"/>
+    <line id="line1" x1="10.63" y1="18.81" x2="22.25" y2="18.81" fill="none" stroke="#2ca6df" stroke-miterlimit="10" stroke-width="1.3"/>
+    <line id="line3" x1="10.63" y1="15.75" x2="22.25" y2="15.75" fill="none" stroke="#2ca6df" stroke-miterlimit="10" stroke-width="1.3"/>
+    <line id="line3-2" data-name="line3" x1="10.63" y1="12.5" x2="22.25" y2="12.5" fill="none" stroke="#2ca6df" stroke-miterlimit="10" stroke-width="1.3"/>
+</svg>

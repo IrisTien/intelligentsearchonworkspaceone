@@ -1,0 +1,407 @@
+@catalog-app-icon-size-s:56px;
+@catalog-app-icon-size-l:64px;
+@catalog-border-color: #CDD0D3;
+@catalog-item-actions-height-mobile:96px;
+@catalog-item-actions-height-desktop:40px;
+@catalog-tile-border-radius-m: 2px;
+@catalog-tile-border-radius-l: 3px;
+@catalog-actions-bg:rgba(123,134,143,0.07);
+@tooltip-bg-color: @white;
+@tooltip-border-color: #cdd0d3;
+@tunnel-tile-height: @catalog-item-height-s + 16px;
+
+.catalog-item {
+    position:relative;
+    width: 100%;
+    height: 100%;
+    color:@mediumgrey;
+    font-size: 14px;
+    padding: 12px;
+    text-align: left;
+    border-bottom: solid 1px @catalog-border-color;
+    transition: top 0.25s ease-out;
+
+    @media (min-width: @browser-transition-point) {
+        border-radius: @catalog-tile-border-radius-m;
+        text-align: center;
+        border-bottom: 0;
+        box-shadow: 0 1px 3px rgba(0,0,0,.15);
+    }
+
+    @media (min-width: @desktopM) {
+        border-radius: @catalog-tile-border-radius-l;
+        @media (min-width: @browser-transition-point) {
+            border-radius: @catalog-tile-border-radius-m;
+            text-align: center;
+            border-bottom: 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,.15);
+        }
+    }
+
+    &.tunnel-tile {
+        height: @tunnel-tile-height;
+
+        @media (min-width: @browser-transition-point) {
+            height: @catalog-item-height-m;
+        }
+
+        @media (min-width: @desktopM) {
+            height: @catalog-item-height-l;
+        }
+    }
+}
+
+.ws-shell .catalog-item {
+    @media (min-width: @browser-transition-point) {
+        &:hover {
+            top: 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,.15);
+            transition: none;
+        }
+    }
+}
+
+.catalog-item-click-area {
+    position: relative;
+    height: 100%;
+    cursor:pointer;
+
+    @media (min-width: @browser-transition-point) {
+        padding: 8px 0 0;
+        height: 136px;
+    }
+
+    @media (min-width: @desktopM) {
+        height: 156px;
+    }
+}
+
+.recommended-apps {
+    .catalog-item-click-area {
+        @media (min-width: @browser-transition-point) {
+            width:100%;
+            height: 100%;
+        }
+    }
+
+    .catalog-item-actions.recommended-apps-select-action {
+        background: none!important;
+        border: none!important;
+    }
+}
+
+.catalog-app-icon {
+    position: absolute;
+    top:(@catalog-item-actions-height-mobile - @catalog-app-icon-size-s - 24px)/2;
+    left:3px;
+    width: @catalog-app-icon-size-s;
+    height: @catalog-app-icon-size-s;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image:url("../app-v2/graphics/app-icon-placeholder.svg");
+
+    @media (min-width: @browser-transition-point) {
+        position: static;
+        display: block;
+        margin:0 auto 10px;
+    }
+    @media (min-width: @desktopM) {
+        margin:10px auto 15px;
+        width: @catalog-app-icon-size-l;
+        height: @catalog-app-icon-size-l;
+    }
+
+    img {
+        transform: translate(0, -50%);
+        -webkit-transform: translate(0, -50%);
+        -moz-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+        position: relative;
+        top: 50%;
+        width: 100%;
+    }
+}
+
+.catalog-item-click-area:not(.ws-shell):hover .catalog-app-icon {
+    transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transition: transform 0.15s ease-out;
+    -webkit-transition: transform 0.15s ease-out;
+    -moz-transition: transform 0.15s ease-out;
+    -ms-transition: transform 0.15s ease-out;
+}
+
+.catalog-item-caption {
+    width: 100%;
+    padding: 0 110px 0 74px;
+    font-size:16px;
+    // for this layout the caption start with 1 line in phone
+    height: 20px;
+    line-height:20px;
+    display: inline-block;
+    color:inherit;
+    font-family: "Open Sans Semibold", sans-serif;
+    margin-top: 12px;
+    // on small viewport size we use css text-overflow to make the ellipsis
+    // as the UX requirement is one line text
+    .single-line-ellipsis();
+
+    // CSS styles load first, line-clamp via js is slow so hide the overflow lines first
+    // then let the lineClamp directive to handle the ellipsis on the last visible line on non-webkit devices
+    overflow: hidden;
+
+    @media (min-width: @browser-transition-point) {
+        font-family: "Open Sans Regular", sans-serif;
+        font-size:14px;
+        // Need to change height to auto as the app name could be one-line or two-lines
+        height:auto;
+        max-height: 40px;
+        position: relative;
+        text-align: center;
+        margin-top: 0;
+        padding: 0;
+        // once change from horizontal tile in small viewport to card in larger viewport the captions will be two lines
+        // line-clamp will be applied, white space needs to be declared normal to make the directive to work
+        white-space: normal;
+        .multi-line-ellipsis(2);
+    }
+
+    @media (min-width: @desktopM) {
+        padding: 0;
+    }
+}
+
+.activate-bookmarking {
+    background-size: initial;
+    background-repeat: no-repeat;
+    background-image: url(../app-v2/graphics/icon-bookmarks-loading.gif);
+    background-size: 60%;
+    background-position: center;
+    width: inherit;
+    height: inherit;
+    pointer-events: none;
+}
+
+//This is a mixin that is used to style all the sub item captions that are followed after app name
+.catalog-item-secondary-style {
+     width:100%;
+     height: 20px;
+     line-height:20px;
+     .single-line-ellipsis();
+     opacity: @light-text-opacity;
+}
+
+.catalog-item-type {
+    .catalog-item-secondary-style();
+    padding: 0 110px 0 74px;
+    @media (min-width: @browser-transition-point) {
+        padding: 0;
+    }
+    .svg-symbol {
+        width: 15px;
+        height: 15px;
+        position: relative;
+        top: -2px;
+    }
+}
+
+.vpn-required-message {
+    .catalog-item-secondary-style();
+    padding: 0 30px 0 74px;
+    @media (min-width: @browser-transition-point) {
+        display: none;
+    }
+    .svg-symbol {
+        height: 14px;
+        width: 14px;
+    }
+}
+
+.catalog-item-actions {
+    position: absolute;
+    bottom: 0;
+    right:0;
+    width: 108px;
+    padding-right:4px;
+    font-size:0;
+    height: @catalog-item-height-s;
+    // make sure action items aka icon always sits on top
+    z-index: 100;
+    // this is for request button
+    text-align: center;
+
+    @media (min-width: @browser-transition-point) {
+        text-align: center;
+        background:@catalog-actions-bg;
+        width:100%;
+        padding-right: 0;
+        border-top: solid 1px @catalog-border-color;
+        height: @catalog-item-actions-height-desktop;
+    }
+
+    &:before {
+        .inline-block-vertical-align-helper(@catalog-item-height-s);
+
+        @media (min-width: @browser-transition-point) {
+            .inline-block-vertical-align-helper(@catalog-item-actions-height-desktop);
+        }
+    }
+
+    &.recommended-apps-select-action {
+        right: -10px;
+        height: 72px;
+
+        &:before {
+            height:72px;
+        }
+        @media (min-width: @browser-transition-point) {
+            right:0;
+            bottom:6px;
+            height:44px;
+        }
+
+        .catalog-button {
+            width:44px !important;
+            height:44px!important;
+            padding: 10px;
+            position:relative;
+
+            .icon-recommended-app-bg {
+                width:24px;
+                height:24px;
+                background: #fff;
+                border: solid 2px #cdd0d3;
+                border-radius:50%;
+
+                @media (min-width: @browser-transition-point) {
+                    margin-right:-2px;
+                }
+            }
+
+            svg {
+                position:absolute;
+                top:6px;
+                left:6px;
+                stroke: #f3f3f4;
+            }
+
+            &.app-selected {
+
+                .icon-recommended-app-bg {
+                    background: @highlightblue;
+                    border: solid 2px @highlightblue;
+                }
+
+                svg {
+                    stroke:#fff;
+                }
+
+            }
+        }
+    }
+}
+
+.catalog-button {
+    display: inline-block;
+    // 4px is the gap of the inline-block sitting side by side
+    width: 44px;
+    height:44px;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.catalog-item-actions {
+    // in the listview UX want the only button to align right
+    text-align: right;
+    // in the tile view they want the button to be centered
+    @media (min-width: @browser-transition-point) {
+        text-align:center;
+    }
+
+    .two-buttons {
+        text-align:center;
+    }
+
+    .catalog-button {
+        line-height: 44px;
+        margin: 0 4px;
+        // use line-height to vertical align
+        @media (min-width: @browser-transition-point) {
+            margin:0;
+            width: @catalog-item-width-m - @catalog-item-actions-height-desktop - 8px;
+            height: @catalog-item-actions-height-desktop;
+        }
+
+        @media (min-width: @desktopM) {
+            width: @catalog-item-width-l - @catalog-item-actions-height-desktop - 8px;
+        }
+
+        &.one {
+            .action-text {
+                display: none;
+                @media (min-width: @browser-transition-point) {
+                    display: inline-block;
+                    .action-text-icon {
+                        height: 16px;
+                        width: 16px;
+                        margin-bottom: 3px;
+                    }
+                }
+            }
+            .action-icon {
+                @media (min-width: @browser-transition-point) {
+                    display: none;
+                }
+            }
+        }
+
+        &.two.primary {
+            span {
+                display: none;
+                @media (min-width: @browser-transition-point) {
+                    display: inline-block;
+                }
+            }
+            svg {
+                @media (min-width: @browser-transition-point) {
+                    display: none;
+
+                }
+
+            }
+        }
+
+        &.two.secondary {
+            @media (min-width: @browser-transition-point) {
+                float:right;
+                width: @catalog-item-actions-height-desktop;
+                line-height:38px;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 1px;
+                    height: @catalog-item-actions-height-desktop - 12px;
+                    background: @catalog-border-color;
+                    top:6px;
+                    left:-1px;
+                }
+            }
+        }
+
+        .action-text {
+            font-size: 15px;
+            line-height: @catalog-item-actions-height-desktop - 6px;
+            .single-line-ellipsis();
+        }
+    }
+}
+
+.catalog-item .catalog-button:hover .action-text {
+    font-family: "Open Sans Semibold", sans-serif;
+}

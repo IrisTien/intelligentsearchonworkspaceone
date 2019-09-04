@@ -1,0 +1,12 @@
+<svg id="promo-banner2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 325 180">
+	<defs>
+		<linearGradient id="linear-gradient" x1="43.44" y1="211.01" x2="43.44" y2="210.03" gradientTransform="matrix(309.3, -250.47, -250.47, -309.3, 39529.99, 76181.82)" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+		</linearGradient>
+		<linearGradient id="linear-gradient-2" x1="43.68" y1="211.16" x2="43.68" y2="210.18" gradientTransform="matrix(-239.77, -201.19, -201.19, 239.77, 53139.59, -41669.63)" xlink:href="#linear-gradient"/>
+		<linearGradient id="linear-gradient-3" x1="43.67" y1="210.81" x2="43.67" y2="209.84" gradientTransform="matrix(67.56, 252.15, 252.15, -67.56, -55769.54, 3271.47)" xlink:href="#linear-gradient"/>
+	</defs>
+	<path id="arc1" d="M325,39.12A199,199,0,0,0,20.72,180H325Z" fill-opacity="0.22" fill="url(#linear-gradient)"/>
+	<path id="arc2" d="M325,0H180.65A156.64,156.64,0,0,0,195.5,180H325Z" fill-opacity="0.22" fill="url(#linear-gradient-2)"/>
+	<path id="arc3" d="M78.78,80.64A130.52,130.52,0,0,0,325,97.88V0H83A129.87,129.87,0,0,0,78.78,80.64Z" fill-opacity="0.22" fill="url(#linear-gradient-3)"/>
+</svg>

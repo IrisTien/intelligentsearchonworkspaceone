@@ -1,0 +1,201 @@
+@app-list-border: 1px solid rgba(0, 0, 0, .25);
+@app-list-icon-size: 56px;
+@app-list-item-height: 84px;
+@app-list-center-padding: 16px 160px 0 88px;
+@app-list-center-padding-m: 16px 240px 0 104px;
+@app-list-padding-right-s: 140px;
+@app-list-padding-right-m: 220px;
+
+@app-list-icon-top: (@app-list-item-height - @app-list-icon-size)/2;
+@app-list-name-font-size: 15px;
+@app-list-text-font-size: 13px;
+@app-list-inline-svg-size: 16px;
+
+@apps-navigation-bar-height: 40px;
+@apps-navigation-text-font-size: 14px;
+
+@applist-inline-left: @category-left-panel-width + 10px;
+
+@app-list-dismiss-button-size: 24px;
+@app-list-dismiss-button-padding: 4px;
+
+@app-section-header-font-size: 24px;
+
+.app-list-browser {
+  z-index: 100;
+  background: @white;
+  display: block;
+
+  @media (min-width: @browser-hamburger-ribbon-transition) {
+      position: fixed;
+      top: 0;
+      left: @applist-inline-left;
+      width: ~ 'calc(100% - @{applist-inline-left})';
+      height: 100%;
+      overflow: hidden;
+  }
+
+  @media (min-width: @browser-category-transition) {
+      position: fixed;
+      left: 50%;
+      margin-left: -@content-max-width/2 + @applist-inline-left;
+  }
+}
+
+.app-list-browser .content-container-scrollable, .apps-detail .content-container-scrollable {
+  height: ~ 'calc(100% - @{apps-navigation-bar-height})';
+}
+
+.app-list-content {
+    width: 100%;
+    height: auto;
+    position:relative;
+
+    @media (min-width: @browser-hamburger-ribbon-transition) {
+        padding-right: @list-item-padding-h + 8px;
+        background: @content-bg;
+    }
+}
+
+.app-list-content .page-breadcrumb-text {
+  @media (min-width: @browser-hamburger-ribbon-transition) {
+      padding: 0;
+  }
+}
+
+.app-list-wrapper {
+    width: 100%;
+    min-height: ~ 'calc(100vh - @{ribbon-height-m} - @{apps-navigation-bar-height})';
+    background: @white;
+
+    @media (min-width: @browser-category-transition) {
+        width: @content-max-width - @applist-inline-left;
+    }
+}
+
+.app-list-section-header {
+  font-size: @app-section-header-font-size;
+  padding: @list-item-padding-h * 1.5 @list-item-padding-h @list-item-padding-h;
+  font-weight: 700;
+
+  @media (min-width: @browser-category-transition) {
+    font-size: @app-section-header-font-size + 8px;
+    padding: @list-item-padding-h*2 @list-item-padding-h * 2 @list-item-padding-h;
+  }
+}
+
+.app-list-item {
+  padding: @app-list-center-padding;
+  position: relative;
+  display: block;
+  min-height: @app-list-item-height;
+  width: 100%;
+  background: @white;
+  .list-item-divider-mixin(@list-item-divider-bg, 0);
+  cursor: pointer;
+
+  @media (min-width: @browser-hamburger-ribbon-transition) {
+      padding: @app-list-center-padding-m;
+  }
+
+  &:before {
+      left: @list-item-padding-h;
+      width: ~ 'calc(100% - 32px)';
+
+      @media (min-width: @browser-category-transition) {
+          left: @list-item-padding-h * 2;
+          width: ~ 'calc(100% - 64px)';
+      }
+  }
+
+  .app-list-item-icon {
+      @media (min-width: @browser-category-transition) {
+        left: @list-item-padding-h * 2;
+      }
+  }
+
+  .app-list-item-actions {
+      @media (min-width: @browser-category-transition) {
+        right: 40px;
+      }
+  }
+}
+
+.app-list-item-icon {
+    .app-icon(@app-list-icon-size, @app-list-icon-top);
+}
+
+.app-list-item-name {
+    //define the margin padding etc in the class instead of mixin class
+    .base-text-style(@app-list-name-font-size, 600);
+    white-space: normal;
+    line-height: 20px;
+    .multi-line-ellipsis(2);
+}
+
+.app-list-item-type {
+    .base-text-style(@app-list-text-font-size, 400);
+    .single-line-ellipsis();
+    opacity: 0.55;
+    line-height: 22px;
+
+    svg {
+        width: @app-list-inline-svg-size;
+        height: @app-list-inline-svg-size;
+        margin-top: 3px;
+    }
+}
+
+.app-list-item-actions {
+  height: 100%;
+  position: absolute;
+  right: @list-item-padding-h - 2px;
+  top: 0;
+  // This is the vertical align helper
+  &:before {
+      content: '';
+      display: inline-block;
+      height: 100%;
+      width: 1px;
+      vertical-align: middle;
+  }
+}
+
+// Faborite button styles
+// ---------------------------------------
+.app-list-item-actions, .search-item-actions {
+  // The icon only are shown in smaller viewport
+    .icon-app-favorite-button, .icon-app-un-favorite-button {
+        width: @mobile-default-taparea-size;
+        margin: 0 4px;
+        vertical-align: middle;
+    }
+
+  .app-favoriting-spinner {
+      position: relative;
+      padding: 4px;
+      margin: 0 4px;
+      width: @mobile-default-taparea-size;
+      height: @mobile-default-taparea-size;
+      display: inline-block;
+      vertical-align: middle;
+  }
+
+  .app-favorited {
+      .icon-app-favorite-button, .app-favoriting-spinner {
+          display: none;
+      }
+  }
+
+  .app-not-favorited {
+      .icon-app-un-favorite-button, .app-favoriting-spinner {
+        display: none;
+      }
+  }
+
+  .app-favoriting {
+      .icon-app-favorite-button, .icon-app-un-favorite-button {
+        display: none;
+      }
+  }
+}

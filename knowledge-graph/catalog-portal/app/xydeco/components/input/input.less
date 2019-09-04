@@ -1,0 +1,428 @@
+/*
+ * Project Horizon
+ * (c) 2013-2014 VMware, Inc. All rights reserved.
+ * VMware Confidential.
+ */
+
+@import "../button/button";
+@import "../base/fonts";
+@import "../base/mixins";
+
+/** @pattern .input
+
+A field where the user may type to enter data.
+
+@example
+<p>
+<!-- A text input -->
+<input type="text" name="t1" value="Joe">
+<!-- A number input -->
+<input type="number" name="n1" value="6">
+
+*/
+
+
+@input-fontSize: 14px; // TODO: other sizes?
+@input-lineHeight: 16px;
+@input-height: 2*@input-lineHeight;
+@input-horizontalPadding: .25em;
+@input-verticalPadding: (@input-height - @input-lineHeight)/2 - @input-borderWidth;
+@input-text-width: 30em;
+@input-code-width: 30em;
+@input-select-width: 10em;
+@input-search-width: 20em;
+@input-password-width: 10em;
+@input-number-width: 5em;
+@input-borderWidth: 1px;
+@input-borderRadius: 2px;
+@input-backgroundColor: #ffffff;
+@input-borderColor: #cccccc;
+@input-internal-borderWidth: @input-borderWidth;
+@input-placeholder-color: #999999;
+@input-focus-borderColor: #0099ff;
+@input-addon-backgroundColor: #f8f8f8;
+@input-disabled-backgroundColor: #eee;
+
+.input {
+
+    display: inline-block;
+    font-size: @input-fontSize;
+    line-height: @input-lineHeight;
+    max-width: 100%;
+    padding: @input-verticalPadding @input-horizontalPadding;
+    border: @input-borderWidth solid @input-borderColor;
+    border-radius: @input-borderRadius;
+    background: @input-backgroundColor;
+    outline: none;
+
+    .font > .family( inherit );
+    .font > .color( inherit );
+
+    .lines( 1 );
+
+    &:active,
+    &:focus,
+    &.is-active {
+        border-color: @input-focus-borderColor;
+        outline: none;
+    }
+
+    &::-webkit-input-placeholder {
+        color: @input-placeholder-color;
+    }
+
+    &::-moz-placeholder {
+        color: @input-placeholder-color;
+    }
+
+    &.is-hidden {
+        /** A hidden input field. */
+        display: none;
+    }
+
+    &.is-invalid {
+        /** An input field with an invalid value. */
+        border-color: @danger-color;
+    }
+
+    &.full-width- {
+        /** An input field which is as wide as its parent container. */
+        width: 100%;
+        min-width: 100%;
+    }
+
+    &.number- {
+        /** An input field intended for numeric (integer) input. */
+        width: ( @input-number-width + 2 * @input-horizontalPadding );
+        text-align: right;
+    }
+
+    &.text- {
+        /** An input field intended for text input. */
+        white-space: pre;
+        width: ( @input-text-width + 2 * @input-horizontalPadding );
+        &.is-disabled{
+          background-color: @input-disabled-backgroundColor;
+        }
+    }
+
+    &.search- {
+        /** An input field intended for entering a search string */
+        white-space: pre;
+        width: ( @input-search-width + 2 * @input-horizontalPadding );
+    }
+
+    &.code-,
+    &.email- {
+        /** An input field intended for computer code. */
+        white-space: pre;
+        width: ( @input-code-width + 2 * @input-horizontalPadding );
+    }
+
+    &.password- {
+        /** An input field intended for password input. */
+        white-space: pre;
+        width: ( @input-password-width + 2 * @input-horizontalPadding );
+    }
+
+    &.stealth- {
+        /** An input field (usually for text) which does not look
+        like an input until you focus on it (by clicking or tabbing
+        onto it).
+
+        @example
+        <!-- A text input -->
+        <input class="stealth- input" type="text" name="t1" value="Joe">
+        <!-- A number input -->
+        <input class="stealth- input" type="number" name="n1" value="6">
+
+        */
+
+        font-family: inherit;
+        font-weight: inherit;
+
+        &:not(:focus) {
+            background: transparent;
+            border-color: transparent;
+            text-overflow: ellipsis;
+        }
+
+        &:hover {
+            border-color: @input-borderColor;
+        }
+
+        &:focus {
+            border-color: @input-focus-borderColor;
+        }
+    }
+
+    &.multiline- {
+      height: auto;
+    }
+
+    .lines( @n ) {
+        height: @input-height + (@n - 1) * @input-lineHeight;
+    }
+
+    &.image- {
+        height: 0;
+        background: url("images/checkerboard.svg");
+        padding-bottom: 33%;
+        width: 100%;
+        position: relative;
+        vertical-align: top;
+
+        img {
+            max-height: 100%;
+            max-width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            .translate(-50%,-50%);
+        }
+    }
+
+    // Derived style interface
+
+   .extend () {
+       &:extend( .input );
+    }
+
+    .extend ( @mod ) {
+        .extend;
+        .modify( @mod );
+    }
+
+    .modify ( text- ) { &:extend( .input.text- ); }
+    .modify ( code- ) { &:extend( .input.code- ); }
+    .modify ( email- ) { &:extend( .input.email- ); }
+    .modify ( number- ) { &:extend( .input.number- ); }
+    .modify ( password- ) { &:extend( .input.password- ); }
+    .modify ( prefixed- ) { &:extend( .input.prefixed- ); }
+
+    .provide ( is-hidden ) {
+        &.is-hidden { &:extend( .input.is-hidden ); }
+    }
+
+    .provide ( is-active ) {
+        &:active,
+        &:focus,
+        &.is-active {
+            &:extend( .input.is-active );
+        }
+    }
+
+    .provide ( is-invalid ) {
+        &.is-invalid { &:extend( .input.is-invalid ); }
+    }
+
+
+}
+
+input,
+select,
+textarea {
+    .input > .extend;
+    .input > .provide( is-active );
+    .input > .provide( is-hidden );
+    .input > .provide( is-invalid );
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    padding: 0;
+    height: 1em;
+    width: 1em;
+    vertical-align: baseline;
+    margin: 0 .25em;
+}
+
+input[type="number"] {
+    .input > .modify( number- );
+}
+
+input[type="text"],
+textarea {
+    .input > .modify( text- );
+}
+
+input[type="password"] {
+    .input > .modify( password- );
+}
+
+input[type="email"] {
+    .input > .modify( email- );
+}
+
+input[type="url"] {
+    .input > .modify( code- );
+}
+
+input[type="button"],
+input[type="submit"] {
+    .button > .extend();
+    width: auto;
+    height: auto;
+}
+
+select {
+    .input > .lines(1);
+    min-width: ( @input-select-width + 2 * @input-horizontalPadding );
+}
+
+textarea,
+textarea.input {
+    .input > .lines(4);
+    resize: none;
+}
+
+option {
+    font: inherit;
+}
+
+/**
+    ## Input bars
+
+    A group of inputs and other fields presented together in a bar.
+    Usually contains one primary input field, with related labels
+    and/or controls contained within a single UI element.  The size
+    of the `input- bar` can be constrained, and the fields will
+    be sized to fit inside.
+
+    @example
+    <p>
+      <span class="input- bar">
+        <label><%= phr %></label>
+        <input type="text">
+      </span>
+    </p>
+    <p>
+      <span class="input- bar">
+        <i class="user- glyph"></i>
+        <input type="text">
+      </span>
+    </p>
+    <p>
+      <span class="input- bar">
+        <i class="search- glyph"></i>
+        <input class="search- input" type="text">
+        <span class="input-bar-action iconic- button"><i class="x- glyph"></i></span>
+      </span>
+    </p>
+    <!-- demo styling -->
+    <style>
+    p + p { margin-top: 1em; }
+    .bar.input- { width: 300px; }
+    </style>
+
+**/
+
+.bar.input- {
+       /**
+        An input bar displays one or more inputs,
+        along with additional fields or controls.
+
+        @example [input-bar] An Input Bar
+        <span class="input- bar">
+          <label><%= phr %></label>
+          <input type="text" value="type here">
+          <i class="right- glyph"></i>
+        </span>
+        **/
+
+    line-height: @input-lineHeight;
+    position: relative; // positioning context for inner border
+    z-index: 0; // stacking context for &:before background
+    background-color: @input-backgroundColor;
+    border-radius: @input-borderRadius;
+    border-style: none;
+    border-color: @input-borderColor;
+
+    &:before {
+        // draw the background as an underlay to avoid double borders.
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        border: 1px solid;
+        border-color: inherit;
+        border-radius: @input-borderRadius;
+        background: transparent;
+        z-index: -1;
+    }
+
+    > * {
+        display: table-cell;
+        margin: 0;
+        padding: @input-verticalPadding .5em;
+        background: @input-addon-backgroundColor;
+        border-style: solid;
+        border-color: inherit;
+        border-width: @input-borderWidth 0 @input-borderWidth @input-internal-borderWidth;
+        border-radius: 0;
+        &:first-child,
+        &.button:first-child,
+        &.dropdown:first-child .dropdown-toggle {
+            border-left-width: 0;
+            border-top-left-radius: @input-borderRadius;
+            border-bottom-left-radius: @input-borderRadius;
+        }
+        &:last-child,
+        &.button:last-child,
+        &.dropdown:last-child .dropdown-toggle {
+            border-right-width: @input-internal-borderWidth;
+            border-top-right-radius: @input-borderRadius;
+            border-bottom-right-radius: @input-borderRadius;
+        }
+    }
+
+    > .input,
+    > input {
+        background: transparent;
+    }
+
+    > .dropdown {
+        padding: 0;
+    }
+
+    > .button,
+    > button {
+        border-radius: 0;
+        box-shadow: none;
+        vertical-align: bottom;
+    }
+
+    .symbol {
+        font-size: @input-lineHeight;
+    }
+
+    > .dropdown .dropdown-toggle {
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+    }
+
+    &.full-width-,
+    &.fixed-width- {
+        .input-group-primary,
+        > .input,
+        > input {
+            // stretch the input to make the bar as wide as it needs to be
+            width: 100%;
+        }
+    }
+
+    > .is-hidden,
+    .input-bar-action {
+        visibility: hidden;
+    }
+
+    > .is-visible,
+    &:hover .input-bar-action,
+    > input:active ~ .input-bar-action,
+    > input:focus ~ .input-bar-action {
+        visibility: visible;
+    }
+}

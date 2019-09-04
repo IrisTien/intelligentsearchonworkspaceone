@@ -1,0 +1,155 @@
+// Project Horizon
+// (c) 2013-2014 VMware, Inc. All rights reserved.
+// VMware Confidential.
+
+@import "../grid/grid";
+@import "../typography/typography";
+
+/** @pattern .page
+
+The main content area of the screen, which changes as the user navigates.
+Presented as a centered, fixed-width rectangle, styled as a piece of paper
+floating over the background.
+
+A page should occur within a `pane`, which will handle scrolling if the
+page size exceeds the area in which it is viewed.
+
+Relative to the grid system, a page is like a box in that it may contain
+one or more grids.  The defaut width of a page is 22 columns.  f the browser
+width is too small, the page width will "snap" down to 16 columns. With the
+`widescreen-` modifier, an additional 28-column page width is enabled.
+
+By default, half a grid of padding is added to each side of the page, so
+a grid inside a page will be only 21 columns (15 columns on narrower screens).
+This padding can be removed by adding the `fullbleed-` modifier, allowing a
+full 22-column grid to be embedded in the page.
+*/
+
+@page-margin: 10px; // minimum "grey space" visible each side of page
+@page-horizontal-padding: @grid-modulus/2;
+@page-top-padding: @grid-gutter;
+@page-bottom-padding: @page-horizontal-padding;
+@page-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+
+// Responsive breakpoints, by number of grids in width
+@page-SP-columns: 5; // small phones (e.g. iphone 5)
+@page-MP-columns: 6; // most phones
+@page-LP-columns: 9; // large phones or phablets
+@page-S-columns: 12; // tablets (portrait mode)
+@page-M-columns: 16; // tablets (landscale mode) and small laptops
+@page-L-columns: 22; // most laptops
+@page-W-columns: 28; // widescreen desktop monitors
+
+@page-SP-min: (@page-SP-columns * @grid-modulus); // acceptable to have no margins
+@page-MP-min: (@page-MP-columns * @grid-modulus);
+@page-LP-min: (@page-LP-columns * @grid-modulus);
+@page-S-min: ((@page-S-columns * @grid-modulus) + 2 * @page-margin);
+@page-M-min: ((@page-M-columns * @grid-modulus) + 2 * @page-margin);
+@page-L-min: ((@page-L-columns * @grid-modulus) + 2 * @page-margin);
+@page-W-min: ((@page-W-columns * @grid-modulus) + 2 * @page-margin);
+
+@page-SP-max: (@page-MP-min - 1px);
+@page-MP-max: (@page-LP-min - 1px);
+@page-LP-max: (@page-S-min - 1px);
+@page-S-max: (@page-M-min - 1px);
+@page-M-max: (@page-L-min - 1px);
+@page-L-max: (@page-W-min - 1px);
+
+@page-at-least-MP: ~"screen and (min-width: @{page-MP-min}) /*at least MP*/";
+@page-at-least-LP: ~"screen and (min-width: @{page-LP-min}) /*at least LP*/";
+@page-at-least-S: ~"screen and (min-width: @{page-S-min}) /*at least S*/";
+@page-at-least-M: ~"screen and (min-width: @{page-M-min}) /*at least M*/";
+@page-at-least-L: ~"screen and (min-width: @{page-L-min}) /*at least L*/";
+@page-at-least-W: ~"screen and (min-width: @{page-W-min}) /*at least W*/";
+
+@page-at-most-SP: ~"screen and (max-width: @{page-SP-max}) /*at most SP*/";
+@page-at-most-MP: ~"screen and (max-width: @{page-MP-max}) /*at most MP*/";
+@page-at-most-LP: ~"screen and (max-width: @{page-LP-max}) /*at most LP*/";
+@page-at-most-S: ~"screen and (max-width: @{page-S-max}) /*at most S*/";
+@page-at-most-M: ~"screen and (max-width: @{page-M-max}) /*at most M*/";
+@page-at-most-L: ~"screen and (max-width: @{page-L-max}) /*at most L*/";
+
+@page-SP-only: @page-at-most-SP;
+@page-MP-only: ~"@{page-at-least-MP} and (max-width: @{page-MP-max}) /*MP only*/";
+@page-LP-only: ~"@{page-at-least-LP} and (max-width: @{page-LP-max}) /*LP only*/";
+@page-S-only: ~"@{page-at-least-S} and (max-width: @{page-S-max}) /*S only*/";
+@page-M-only: ~"@{page-at-least-M} and (max-width: @{page-M-max}) /*M only*/";
+@page-L-only: ~"@{page-at-least-L} and (max-width: @{page-L-max}) /*L only*/";
+@page-W-only: @page-at-least-W;
+
+// If we design to page L, we can use the following shorthands:
+@page-SP: @page-at-most-SP;
+@page-MP: @page-at-most-MP;
+@page-LP: @page-at-most-LP;
+@page-S: @page-at-most-S;
+@page-M: @page-at-most-M;
+@page-L: @page-L-only;
+@page-W: @page-at-least-W;
+
+.page {
+    .typography > .use( font );
+
+    padding: @page-top-padding @page-horizontal-padding @page-bottom-padding;
+    margin: 0 auto;
+    background: @page-background-color;
+    min-height: 100%;
+    box-shadow: @page-box-shadow;
+
+    &.full-height- {
+        /** A page which is as tall as will fit within its parent container. */
+        height: 100%;
+    }
+
+    &.full-bleed- {
+        /** A page without a visible edge, border, or padding.
+        Because of the reduced padding, a 22-column (or 16-column) grid will fit inside. */
+        padding: @grid-gutter/2;  // normal box padding
+        background: transparent;
+        box-shadow: none;
+    }
+
+    &.widescreen- {
+        /** A page which changes width to account for wider screens.
+
+            With the `widescreen-` modifier, the page may be as wide as
+            28 columns, leaving 27 columns for a grid inside.  The full 28
+            columns are available with a `full-bleed- widescreen- page`.
+
+            By adding this modifier to a page, you are asserting that the content
+            is able to be layed out effectively on wide pages.  If the page does
+            not lay out well on a wide screen, do not use the `widescreen-` modifier.
+        */
+
+        @media @page-W {
+            .grid > .width( @page-W-columns );
+        }
+    }
+}
+
+.page,
+.page-.grid {
+
+    .grid > .width( @page-L-columns );
+
+    @media @page-M {
+        .grid > .width( @page-M-columns );
+    }
+
+    @media @page-S {
+        .grid > .width( @page-S-columns );
+    }
+
+    @media @page-LP {
+        .grid > .width( @page-LP-columns );
+    }
+
+    @media @page-MP {
+        .grid > .width( @page-MP-columns );
+    }
+
+    @media @page-SP {
+        .grid > .width( @page-SP-columns );
+        padding-left: @grid-gutter/2;
+        padding-right: @grid-gutter/2;
+    }
+}

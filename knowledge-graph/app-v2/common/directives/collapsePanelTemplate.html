@@ -1,0 +1,7 @@
+<div class="collapse-panel-container">
+    <header class="collapse-panel-header" ng-class="{'collapsed': collapsed, 'non-collapsible': !collapsible}" ng-click="collapsible && toggleCollapsePanel()">
+        <svg class="icon-expand-collapse" svg-symbol="icon-expand-collapse" ng-if="collapsible"></svg>
+        <h3>{{headerlabel}}</h3>
+    </header>
+    <section ng-transclude class="collapse-panel-content" ng-class="{'collapsed': collapsed, 'non-collapsible': !collapsible}"></section>
+</div>

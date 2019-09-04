@@ -1,0 +1,249 @@
+@container-max-width:1440px;
+@sidebar-width: 208px;
+@content-title-offset-margin: 48px;
+@desktopL: (@desktopM+@bookmark-item-width-m+@bookmark-item-margin-m*2+10px);
+@desktopXL: (@desktopM+@bookmark-item-width-m*2+@bookmark-item-margin-m*4+20px);
+
+.global-container{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: @paleblue;
+    color:@mediumgrey;
+}
+
+.width-boundary{
+    max-width: @container-max-width;
+    margin: 0 auto;
+}
+
+.content-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index:0;
+    padding-top: @masthead-height;
+    padding-bottom: @bottom-nav-height;
+    //needs to define this for settings detail page dismissal animation to work
+    transition: z-index 0s 0.35s;
+
+    @media(min-width: @browser-transition-point) {
+        padding-bottom: 0;
+    }
+}
+
+.topnav-nolaunchableapps .content-container{
+    padding-top: @masthead-height;
+    @media(min-width: @tabletM) {
+        padding-top: @header-height;
+    }
+}
+
+.ws-shell .content-container {
+    @media(min-width: @browser-transition-point) {
+        padding-bottom: @bottom-nav-height;
+    }
+}
+
+
+.footer-hidden .content-container, .ws-shell .footer-hidden .content-container {
+    padding-bottom: 0;
+}
+
+.ws-shell.ws-nativenav .content-container {
+    padding-bottom: 0!important;
+}
+
+.topnav-hide .content-container {
+    padding-top: @header-height;
+}
+
+.people-search .content-container {
+    padding-top: @header-height;
+
+    @media(min-width: @browser-transition-point) {
+        padding-top: @masthead-height;
+    }
+}
+
+.ws-shell .people-search .content-container {
+    @media(min-width: @browser-transition-point) {
+        padding-top: @header-height;
+    }
+}
+
+.filter-open .content-container {
+    z-index: 1000; // to be higher than the masthead and footer which is 500
+    transition: z-index 0s;
+
+    @media(min-width: @browser-transition-point) {
+        z-index: 10;
+    }
+
+    //ios scroll issue on multiple scrolls overlapping
+    .catalog.content-container-scrollable{
+        overflow-y: hidden;
+
+        @media(min-width: @browser-transition-point) {
+            overflow-y: auto;
+        }
+    }
+}
+
+.content-top .content-container {
+    z-index: 1000; // to be higher than the masthead and footer which is 500
+    //needs to define this for settings detail page dismissal animation to work
+    transition: z-index 0s;
+
+    @media(min-width: @browser-transition-point) {
+        z-index: 10;
+    }
+}
+// in ws shell keep the higher index
+.ws-shell .content-top .content-container {
+    @media(min-width: @browser-transition-point) {
+        z-index: 1000;
+    }
+}
+
+.content-container-scrollable{
+    width:100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;//For bookmark organizer (edit mode)
+    -webkit-overflow-scrolling: touch;
+}
+
+// MIXINS for the .content-body
+.set-gridcontainer-width(@number-of-items, @item-width, @item-margin) {
+    width: @item-width * @number-of-items + @item-margin * (@number-of-items + 1) * 2;
+}
+
+.set-gridcontainer-margin-left(@number-of-items, @item-width, @item-margin) {
+    margin-left: -(@item-width * @number-of-items + @item-margin * (@number-of-items + 1) * 2)/2;
+}
+
+.set-gridcontainer-width-with-sidebar (@number-of-items, @item-width, @item-margin, @sidebar-width) {
+    width: @item-width * @number-of-items + @item-margin * (@number-of-items + 1) * 2 - @sidebar-width;
+    margin-left: @sidebar-width;
+}
+
+.content {
+    width: 100%;
+    font-size: 0;
+    min-height:100%;
+    margin: 0 auto;
+
+    @media (min-width: @desktopM) {
+        .set-gridcontainer-width(@bookmark-row-m, @bookmark-item-width-m, @bookmark-item-margin-l);
+    }
+
+    @media (min-width: @desktopL) {
+        .set-gridcontainer-width(@bookmark-row-l, @bookmark-item-width-m, @bookmark-item-margin-l);
+    }
+
+    @media (min-width: @desktopXL) {
+        .set-gridcontainer-width(@bookmark-row-xl, @bookmark-item-width-m, @bookmark-item-margin-l);
+    }
+
+    @media (min-width:@desktopHighRes) {
+        .set-gridcontainer-width(@bookmark-row-xxl, @bookmark-item-width-m, @bookmark-item-margin-l);
+    }
+}
+
+.people .content {
+    @media (min-width: @desktopM) {
+        width: 100%;
+        max-width: @desktopM + 76px;
+        margin: 0 auto;
+    }
+
+    @media (min-width: @desktopXL) {
+        max-width: @desktopXL + 120px;
+    }
+}
+
+.content-body, .content-body-with-sidebar,
+.content-sidebar {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    text-align: center;
+    font-size: 0;
+}
+
+.content-body {
+    width: 100%;
+    display: inline-block;
+    margin: 0 auto;
+    min-height:100%;
+}
+
+.content-sidebar {
+    width: @sidebar-width;
+    vertical-align: top;
+    padding-left:48px;
+    display: none;
+    text-align: left;
+    height: 100%;
+    position: absolute;
+    overflow-y: hidden;
+
+    @media (min-width: @desktopM) {
+        display: inline-block;
+        font-size: 14px;
+    }
+}
+
+.content-body-with-sidebar {
+    width: 100%;
+    margin: 0 auto;
+
+    @media (min-width: @desktopM) {
+        .set-gridcontainer-width-with-sidebar(@bookmark-row-m, @bookmark-item-width-m, @bookmark-item-margin-l, @sidebar-width);
+    }
+
+    @media (min-width: @desktopL) {
+        .set-gridcontainer-width-with-sidebar(@bookmark-row-l, @bookmark-item-width-m, @bookmark-item-margin-l, @sidebar-width);
+    }
+
+    @media (min-width: @desktopXL) {
+        .set-gridcontainer-width-with-sidebar(@bookmark-row-xl, @bookmark-item-width-m, @bookmark-item-margin-l, @sidebar-width);
+    }
+
+    @media (min-width: @desktopHighRes) {
+        .set-gridcontainer-width-with-sidebar(@bookmark-row-xxl, @bookmark-item-width-m, @bookmark-item-margin-l, @sidebar-width);
+    }
+}
+
+.content-header {
+    position: relative;
+}
+
+.content-header-title {
+    .content-header-text();
+    .single-line-ellipsis();
+    text-align: left;
+    height: 80px;
+    line-height: 100px;
+    margin-left: @content-title-offset-margin;
+    position: relative;
+    display: none;
+    @media(min-width: @desktopM) {
+        display: block;
+    }
+}
+
+.ws-shell .content-header-title {
+    @media(min-width: @desktopM) {
+        display: none;
+    }
+}
+
+img:not([src]){
+    display: none;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}

@@ -1,0 +1,56 @@
+<div modal-context class="details-main headered- view- frame theme-portal-background">
+    <div class="frame-header">
+        <div class="theme-portal-masthead">
+            <div class="mobile- masthead">
+                <div class="masthead-left">
+                    <a class="iconic- link- button" ng-click="::preferencesCtrl.backAction()">
+                       <svg symbol="mobile-back-arrow"></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="headered- frame">
+        <div class="frame-header">
+            <div class="details-filter-bar">
+                <div class="page- grid">
+                    <div class="four- box has-overflow">
+                        <a class="iconic- link- button" ng-click="::preferencesCtrl.backAction()">
+                            <svg symbol="arrow-left"></svg>
+                            <span>{{::'app.details.link.back' | i18n}}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vertically- scrollable- backdrop- pane">
+            <div class="page">
+                <div class="media">
+                    <div class="media-image">
+                        <img src="app/graphics/vmware-view.svg">
+                    </div>
+                    <div class="media-body typography">
+                        <p>{{'myapps.launch.view.selectPreferredLaunchClient' | i18n }}</p>
+                        <p>
+                            <fieldset>
+                                <input type="radio" ng-model="preferencesCtrl.preferredClient" value="NATIVE" id="native">
+                                <label>{{'myapps.launch.view.preferredClient.horizonView' | i18n }}&nbsp;<span ng-if="preferencesCtrl.preferredClient == 'NATIVE'">{{'myapps.launch.view.preferredClient.isDefault' | i18n }}</span></label>
+                                <br/>
+                                <input type="radio" ng-model="preferencesCtrl.preferredClient" value="BROWSER" id="browser">
+                                <label>{{'myapps.launch.view.preferredClient.browser' | i18n }}&nbsp;<span ng-if="preferencesCtrl.preferredClient == 'BROWSER'">{{'myapps.launch.view.preferredClient.isDefault' | i18n }}</span></label>
+                            </fieldset>
+                        </p>
+                    </div>
+                </div>
+                <div class="actions">
+                    <ul class="right-to-left- actions">
+                        <li><button ng-click="preferencesCtrl.saveLaunchDesktopPreference();" class="primary- button"> {{'button.save' | i18n }}</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

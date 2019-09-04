@@ -1,0 +1,470 @@
+@import "../base/colors";
+@import "../base/fonts";
+
+/** @pattern .glyph
+
+Glyphs are small graphical elements, roughly the same size as text characters.
+Implemented as a custom web font, glyphs can be manipulated using CSS
+text effects.
+
+@example The set of available glyphs
+<ul>
+<li><i class="glyph"></i> Default (placeholder)
+<li><i class="app-center- glyph"></i> app-center- glyph
+<li><i class="bang- glyph"></i> bang- glyph
+<li><i class="bullet- glyph"></i> bullet- glyph
+<li><i class="bullseye- glyph"></i> bullseye- glyph
+<li><i class="check- glyph"></i> check- glyph
+<li><i class="check-circle- glyph"></i> check-circle- glyph
+<li><i class="clock- glyph"></i> clock- glyph
+<li><i class="columns- glyph"></i> columns- glyph
+<li><i class="connector- glyph"></i> connector- glyph
+<li><i class="coverflow- glyph"></i> coverflow- glyph
+<li><i class="down-caret- glyph"></i> down-caret- glyph
+<li><i class="directory- glyph"></i> directory- glyph
+<li><i class="empty- glyph"></i> empty- glyph
+<li><i class="gear- glyph"></i> gear- glyph
+<li><i class="grid- glyph"></i> grid- glyph
+<li><i class="hamburger- glyph"></i> hamburger- glyph
+<li><i class="health- glyph"></i> health- glyph
+<li><i class="i- glyph"></i> i- glyph
+<li><i class="identity- glyph"></i> identity- glyph
+<li><i class="launch- glyph"></i> launch- glyph
+<li><i class="left- glyph"></i> left- glyph
+<li><i class="list- glyph"></i> list- glyph
+<li><i class="move- glyph"></i> move- glyph
+<li><i class="move-to-beginning- glyph"></i> move-to-beginning- glyph
+<li><i class="move-to-end- glyph"></i> move-to-end- glyph
+<li><i class="play- glyph"></i> play- glyph
+<li><i class="plus- glyph"></i> plus- glyph
+<li><i class="policy- glyph"></i> policy- glyph
+<li><i class="power- glyph"></i> power- glyph
+<li><i class="reload- glyph"></i> reload- glyph
+<li><i class="reverse-play- glyph"></i> reverse-play- glyph
+<li><i class="right- glyph"></i> right- glyph
+<li><i class="search- glyph"></i> search- glyph
+<li><i class="solid-disc- glyph"></i> solid-disc- glyph
+<li><i class="solid-square- glyph"></i> solid-square- glyph
+<li><i class="star- glyph"></i> star- glyph
+<li><i class="sync- glyph"></i> sync- glyph
+<li><i class="trash- glyph"></i> trash- glyph
+<li><i class="user-group- glyph"></i> user-group- glyph
+<li><i class="user- glyph"></i> user- glyph
+<li><i class="x- glyph"></i> x- glyph
+</ul>
+<!-- demo style -->
+<style>
+li { float: left; width: 15em; margin: .5em;}
+</style>
+
+**/
+
+
+.glyph {
+    // Defaults:
+
+    .size( 1em );
+    .fontface( "hznglyphs" );
+    .at( "\f100" );
+
+    display: inline-block;
+    line-height: 1em;
+    width: 1em;
+    box-sizing: content-box;
+
+    text-align: center;
+
+    font-weight: normal;
+    font-style: normal;
+
+    text-decoration: inherit;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    position: relative; // context for background
+
+    &:before, &:after {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        // Should also have the following, but fails badly in FF:
+        // vertical-align: middle;
+    }
+
+    &:before {
+        // For some effects we need two overlaid copies of the glyph, but by default
+        // we don't show the first (background) one.
+        visibility: hidden;
+        width: 0;
+    }
+
+    &.circled- {
+        @pad: .5em;
+        @stroke: 2px;
+        /** Add a circle around the glyph.
+
+            @example
+            <i class="circled- check- glyph"></i>
+            <i class="circled- x- glyph"></i>
+            <i class="circled- bang- glyph"></i>
+            <style>
+            .check-.glyph{ color: #58bf6c; }
+            .x-.glyph{ color: #f35958; }
+            .bang-.glyph{ color: #fff; border-color: #f3b319; }
+            </style>
+        */
+        padding: @pad;
+        border: @stroke solid; // default color: same as text
+        border-radius: 50%;
+    }
+
+    &.boxed- {
+        @stroke: 1px;
+        @pad: .2em;
+        /** Add a box around the glyph.
+
+            @example
+            <i class="boxed- check- glyph"></i>
+
+        */
+        padding: @pad;
+        border: @stroke solid;
+        border-radius: 2*@stroke;
+    }
+
+    /** ## Special Effects on Glyphs ##
+
+        The following effects utilize `-webkit-background-clip: text` and
+        are only available on Webkit browsers.  They fallback to the simple
+        glyph on other browsers.
+    */
+
+    &.cutout- {
+        /** Applies an inner shadow effect, which makes the glyph look cut out
+            from the background.  This only works on webkit browsers.
+
+         @example Cutout glyphs
+         <ul>
+         <li><i class="cutout- gear- glyph"></i> cutout- gear- glyph
+         <li><i class="cutout- grid- glyph"></i> cutout- grid- glyph
+         <li><i class="circled- cutout- app-center- glyph"></i> circled- cutout- app-center- glyph
+         <li><i class="circled- cutout- user- glyph"></i> circled- cutout- user- glyph
+         <li><i class="circled- cutout- sync- glyph"></i> circled- cutout- sync- glyph
+         </ul>
+         <!-- demo style -->
+         <style>
+         li { margin: .5em;}
+         .glyph { font-size: 4em; }
+         </style>
+
+         **/
+        .cutout-effect();
+    }
+
+    &.emboss- {
+        /** Applies a shadow to make the glyph look raised off the page. */
+
+        .emboss-effect();
+    }
+
+    &.gloss- {
+        /** Applies a gloss effect using a gradient fill on the glyph.
+            The gradient fill only works on webkit browsers.
+
+         @example Glyphs with gloss and emboss effects
+         <ul>
+         <li><i class="gloss- emboss- gear- glyph"></i> gloss- emboss- gear- glyph
+         <li><i class="gloss- emboss- grid- glyph"></i> gloss- emboss- grid- glyph
+         <li><i class="gloss- emboss- solid-disc- glyph"></i> gloss- emboss- solid-disc- glyph
+         </ul>
+         <!-- demo style -->
+         <style>
+         li { margin: .5em;}
+         .glyph { color: #999; }
+         </style>
+         **/
+
+        .masked( transparent, -webkit-linear-gradient(rgba(255,255,255,0.5), transparent) );
+    }
+
+    // Mixins to modify/customize the glyph
+
+    // Extend the .glyph pattern
+    .extend () {
+        &:extend( .glyph );
+        &:before { &:extend( .glyph:before ); }
+        &:after { &:extend( .glyph:after ); }
+    }
+
+    // Apply the circled- modifier
+    .apply ( circled- ) {
+        &:extend( .glyph.circled- );
+    }
+
+    // Apply the boxed- modifier
+    .apply ( boxed- ) {
+        &:extend( .glyph.boxed- );
+    }
+
+    // Set the size of the glyph
+    .size ( @s ) {
+        .font > .size( @s );
+    }
+
+    // Set the color(s) of the glyph (foreground and background, if any)
+    .color ( @foreground ) {
+        &:after {
+            color: @foreground;
+        }
+    }
+
+    .color ( @foreground, @background ) {
+        .color( @foreground);
+        &:before {
+            color: @background;
+        }
+    }
+
+    // Set the opacity of the (foreground of the) glyph
+
+    .opacity ( @foreground ) {
+        &:after {
+            opacity: @foreground;
+        }
+    }
+
+    .opacity ( @foreground, @t ) {
+        &:after {
+            opacity: @foreground;
+            .transition( opacity, @t );
+        }
+    }
+
+    // Use a different font face
+    .fontface ( @face ) {
+        font-family: @face;
+    }
+
+    // Select the glyph by position (character code) in the font.  We
+    // set both before and after content, to facilitate masking effects.
+    .at ( @code ) {
+        &:after, &:before { content: @code; }
+    }
+
+    // Move the glyph itself within its em-box.  Useful when trying to align
+    // precisely, e.g., when stacking.
+
+    .nudge ( @y ) {
+        &:after {
+            .transform( translateY( -@y ) );
+        }
+    }
+
+    .nudge ( @x, @y ) {
+        &:after {
+            .transform( translate(-@x, -@y) );
+        }
+    }
+
+    // Set a background color/image which is masked by the glyph, using Webkit's
+    // 'background-clip: text' property.
+    .masked ( @color, @webkit-gradient: -webkit-linear-gradient(transparent, transparent) ) {
+        &:after {
+            color: @color;
+            // Note: gradient MUST be a -webkit gradient, otherwise we'll get an
+            // unclipped background block on other browsers.
+            background: @color @webkit-gradient; // this rule must fail if not webkit
+            -webkit-background-clip: text; // only webkit supports 'text'
+            -webkit-text-fill-color: transparent; // like color, but webkit only
+        }
+    }
+
+    .unmasked () {
+        &:after {
+            background: transparent;
+            -webkit-background-clip: border-box;
+            -webkit-text-fill-color: inherit;
+        }
+    }
+
+    // CSS Effects that can be applied to the glyph.  Use these mixins because
+    // some effects are only applied to parts of the glyph, and these mixins
+    // will coordinate combined effects.
+
+    .emboss-effect ( @shadow: #000, @distance: .07em, @fade: 40 ) when (iscolor(@shadow)) {
+        text-shadow: none;
+        &:before {
+            // put the drop shadow on the background glyph, so it only appears outside the glyph
+            visibility: visible;
+            text-shadow: fade( @shadow, @fade ) 0 @distance @distance;
+        }
+    }
+
+    .emboss-effect ( none ) {
+        &:before {
+            text-shadow: none;
+        }
+    }
+
+    .cutout-effect ( @color: #999, @distance: .05em, @fade: 50, @highlight: #fff ) when (iscolor(@color)) {
+        text-shadow: fade( @highlight, @fade ) 0 @distance @distance;
+        .masked( @color );
+    }
+
+    .cutout-effect ( none ) {
+        text-shadow: none;
+        .unmasked();
+    }
+
+    .gradient-effect ( vertical, @top, @bottom ) {
+        .masked( transparent, -webkit-linear-gradient(top, @top, @bottom) );
+    }
+
+    .gradient-effect ( none ) {
+        .unmasked();
+    }
+
+    .gloss-effect ( @fade: 90, @color: #fff ) when (isnumber(@fade)) {
+        .gradient-effect( vertical, fade( @color, @fade ), transparent );
+    }
+
+    .gloss-effect ( none ) {
+        .gradient-effect(none);
+    }
+
+}
+
+@import "hznglyphs";
+
+.glyph {
+    // continued...
+
+    // TODO: eliminate stacked glyphs; everything we do below can be done more
+    //       simply by manipulating the glyph's background and border.
+
+    /** ## Stacked Glyphs ##
+
+        Multi-colored icons can be built up by stacking up glyphs. The solid disc
+        and solid square glyphs are often used as backgrounds, with another glyph
+        being displayed on top.
+    **/
+
+    &.stacked- {
+        /** Stack two glyphs on top of each other.  The usual modifiers are used
+            to specify the top (foreground) glyph.  Additional modifier classes
+            prefixed with `on-` specify the bottom (background) glyph.  The foreground
+            glyph is automatically scaled to "fit" within the background.
+
+        @example Stacked glyphs
+        <ul>
+        <li><i class="play- stacked- on-solid-square- glyph"></i> play- stacked- on-solid-square- glyph
+        <li><i class="x- stacked- on-solid-disc- glyph"></i> x- stacked- on-solid-disc- glyph
+        <li><i class="solid-disc- stacked- on-solid-disc- glyph"></i>
+            <i class="solid-square- stacked- on-solid-square- glyph"></i>
+            <i class="solid-square- stacked- on-solid-disc- glyph"></i>
+            <i class="solid-disc- stacked- on-solid-square- glyph"></i>
+            solid-{disc,square}- stacked- on-solid-{disc,square}- glyph
+        <li><i class="favorite- glyph"></i> favorite- glyph
+        <li><i class="info- glyph"></i> info- glyph
+        </ul>
+        <!-- demo style -->
+        <style>
+        li { margin: .5em;}
+        </style>
+        **/
+
+        &:before {
+            // the background glyph
+            visibility: visible;
+            color: inherit;
+        }
+
+        &:after {
+            // the foreground glyph
+            color: white;
+            width: 100%;
+            // better cross-browser support for top than middle (which would be more intuitive):
+            vertical-align: top;
+        }
+
+        // Only certain glyphs make sense as backgrounds for stacking.  We only define the
+        // necessary classes and mixins (below) for those.
+
+        &.on-solid-disc- {
+            /** Show the icon with a solid disc behind it. */
+            .glyph > .apply-background( solid-disc- );
+        }
+
+        &.on-solid-square- {
+            /** Show the icon with a solid square behind it. */
+            .glyph > .apply-background( solid-square- );
+        }
+
+    }
+
+    .scale-foreground( @scale ) {
+        &:after {
+            font-size: @scale;
+        }
+    }
+
+    .apply-background( solid-disc-, @scale: .66666em ) {
+        // @scale: .707 would keep the entire icon square within the circle.
+        &:before {
+            &:extend( .glyph.solid-disc-:after );
+        }
+        .scale-foreground( @scale );
+    }
+
+    .apply-background( solid-square-, @scale: .80em ) {
+        // @scale: 1 would make the icon touch the edges of the square
+        &:before {
+            &:extend( .glyph.solid-square-:after );
+        }
+        .scale-foreground( @scale );
+    }
+
+    .stacked( @fg ) {
+        &:before{ &:extend( .glyph.stacked-:before ); }
+        &:after{ &:extend( .glyph.stacked-:after ); }
+        .glyph > .apply( @fg );
+    }
+
+    .stacked( @fg, @bg ) {
+        .stacked( @fg );
+        .glyph > .apply-background( @bg );
+    }
+
+    .stacked( @fg, @bg, @scale ) {
+        .stacked( @fg );
+        .glyph > .apply-background( @bg, @scale );
+    }
+
+    &.favorite- {
+        /** A white star in a yellow circle.  It is defined
+            using stacked glyph mixins. */
+        .glyph > .stacked( star-, solid-disc-, .85em );
+        .glyph > .color( white, #fdb813 );
+        // Only Chrome needs a little nudge here:
+        &:after {
+            -webkit-transform: translateY( -0.05em );
+        }
+    }
+
+    &.info- {
+        /** A white "i" in a grey circle.  It is defined
+            using stacked glyph mixins. */
+        .glyph > .stacked( i-, solid-disc- );
+        .glyph > .color( white, @greytext-color );
+    }
+
+    &.warning- {
+        /** A white "!" in a red circle.  It is defined
+            using stacked glyph mixins. */
+        .glyph > .stacked( bang-, solid-disc- );
+        .glyph > .color( white, @danger-color );
+    }
+
+
+}

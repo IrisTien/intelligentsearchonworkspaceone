@@ -1,0 +1,196 @@
+
+/** @pattern .catalogitem
+
+Card layout for catalog items which is vertical on desktop/tablet and horizontal layout on mobile.
+Each catalog item has an app icon (emblem), name, other metadata, and a button.
+On mobile, the layout changes to span the width of the parent box for a vertical list and
+we float the image left in case of mobile view.
+
+**/
+
+@app-hover-border-color: #3d87c3;
+@hover-border-size: 2px;
+@hpad: 0px;
+@tpad: 20px;
+@bpad: 0px;
+@button-height: 40px;
+@button-background-color: #ebeef0;
+.catalogitem {
+
+    @max-title-lines: 2;
+    @lineht: 18px;
+
+    position: relative;
+    cursor: pointer;
+
+    .notouch- & {
+        border-radius: 4px;
+        border-width: @hover-border-size;
+        border-color: transparent;
+        border-style: solid;
+    }
+    .notouch- &:hover {
+        border-color: @app-hover-border-color;
+        box-shadow: 0px 2px 8px 0 rgba(0, 0, 0, 0.36);
+
+        .box-module {
+            box-shadow: none;
+        }
+    }
+
+    .box-module {
+        background: #ffffff;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,.18);
+        @media @page-at-least-LP {
+            border-radius: 4px;
+        }
+
+        .notouch- &:hover {
+        }
+
+        @media @page-at-least-S {
+            padding: @tpad @hpad @bpad;
+        }
+
+        //Styles for non touch only devices
+
+    }
+
+    .catalogitem-info {
+        margin: @title-info-margin;
+        @media @page-at-least-LP {
+            margin: @title-info-margin;
+        }
+        color: @catalogAppMetadataColor;
+        .font > .size( normal );
+        line-height: @lineht;
+        height: (@max-title-lines + 2) * @lineht; // +2 for app type, padding between app type and button
+    }
+
+    .catalogitem-name p {
+        color: @catalogAppNameColor;
+        display: inline-block;
+        overflow: hidden;
+        max-width: 100%;
+        max-height: @max-title-lines * @lineht;
+        text-overflow: ellipsis;
+
+      @media @page-at-most-MP {
+        white-space: nowrap;
+      }
+    }
+
+    .catalogitem-type {
+        .font > .size( small );
+    }
+
+    .catalogitem-rating {
+        margin-bottom: .5em;
+    }
+
+    .catalogitem-action {
+        .font > .size( small );
+        @media @page-at-least-S {
+            border: 0;
+            border-radius: 0;
+            font-family: @font-family-semiBold;
+            height: @button-height;
+            background-color: @button-background-color;
+            &:disabled {
+                opacity: 1;
+                background-color: @button-background-color;
+                span {
+                    opacity: 0.5;
+                }
+            }
+        }
+
+    }
+
+    .catalogitem-actiontext {
+      .ellipsis;
+        padding-bottom: 1px;
+    }
+
+    .catalogitem-mgmtrequired-desktop {
+        float: right;
+        @media @page-at-least-S {
+            margin-right: 10px;
+        }
+    }
+
+    .catalogitem-mgmtrequired-mobile {
+        display: none;
+    }
+
+    a[href] {
+        color: inherit;
+    }
+
+    .emblem {
+      &.simple- {
+        .emblem > .border( none );
+      }
+    }
+
+    @media @page-MP {
+        .catalogitem-type {
+            max-width: 45%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    @media @page-MP {
+        @pad: 10px;
+        @emblem-size: 80px;
+        @margin-between-boxes: 16px; //For mobile without list view. Soon to be changed
+
+        .box-module {
+            border: @hover-border-size solid transparent; // required so elements don't jump on hover
+            height: @emblem-size;
+            padding: @pad @pad @pad @emblem-size;
+            margin-bottom: @margin-between-boxes;
+
+            //Styles for non touch only devices
+            .notouch- &,
+            .notouch- &:hover {
+                padding: (@pad)-@hover-border-size (@pad)-@hover-border-size (@pad)-@hover-border-size (@pad+@emblem-size)-@hover-border-size;
+            }
+        }
+
+        .emblem {
+            position: absolute;
+            left: 0;
+            top: 0;
+            .emblem > .border( none );
+        }
+
+        .catalogitem-info {
+            margin: 0;
+            height: 2 * @lineht;
+        }
+
+        .catalogitem-action {
+            width: 8em;
+            position: absolute;
+            bottom: @pad;
+            right: @pad;
+            padding-left: .5em;
+            padding-right: .5em;
+            .font > .tracking( loose );
+        }
+
+        .catalogitem-mgmtrequired-mobile {
+            padding-right: 7.8em;
+            float: right;
+            display: block;
+
+        }
+
+        .catalogitem-mgmtrequired-desktop {
+            display: none;
+        }
+    }
+}

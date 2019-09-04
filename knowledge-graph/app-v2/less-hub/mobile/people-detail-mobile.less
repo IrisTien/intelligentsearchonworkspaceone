@@ -1,0 +1,341 @@
+@user-detail-header-height: 190px;
+@user-detail-header-padding: 12px;
+@user-profile-tabs-height: 44px;
+
+@user-detail-profile-content-padding-left: 16px;
+@user-detail-profile-content-padding-right: 52px;
+@user-detail-profile-item-height: 56px;
+@user-detail-profile-item-margin-bottom: 8px;
+
+@user-org-item-height: 60px;
+@user-org-avatar-size: 44px;
+@user-org-avatar-rim-width: 2px;
+@user-org-avatar-initial-font-size: 16px;
+
+@user-org-item-name-font-size: 15px;
+@user-org-item-title-font-size: 13px;
+
+@people-org-bar-width: 40px;
+@user-org-avatar-margin: (@user-org-item-height - @user-org-avatar-size)/2;
+
+@user-profile-tab-default-font-size-ios: 19px;
+@user-profile-tab-default-font-size-android: 13px;
+
+@user-org-current-user-highlight-color-android: #f2f6f8;
+
+@user-detail-small-header-name-font-size: 17px;
+
+@user-org-item-employnumber-font-size: 15px;
+
+.details-people {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1250;
+    background: @details-page-bg;
+
+    .masthead-mobile {
+        z-index: 1500;
+        box-shadow: 0 0 0 rgba(255,255,255,0);
+    }
+}
+
+.scrolled.details-people .masthead-mobile {
+    box-shadow: 0 1px 3px 0 @masthead-box-shadow-color;
+}
+
+.user-detail-small-header {
+    opacity: 0;
+    text-align: center;
+    line-height: @masthead-mobile-height-ios;
+    transition: all 0.25s;
+    .base-text-style(@user-detail-small-header-name-font-size, 600);
+    .single-line-ellipsis();
+}
+
+.android .user-detail-small-header {
+    line-height: @masthead-mobile-height-android;
+}
+
+.scrolled .user-detail-small-header {
+    opacity: 1;
+}
+
+.people-detail-back-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: (@masthead-mobile-height-ios - @mobile-default-taparea-size)/2 6px;
+}
+
+.android .people-detail-back-button {
+    padding: (@masthead-mobile-height-android - @mobile-default-taparea-size)/2 6px;
+}
+
+.people-detail-search-button {
+    position: absolute;
+    top: (@masthead-mobile-height-ios - @mobile-default-taparea-size)/2 - 1px;
+    right: 10px;
+}
+
+.android .people-detail-search-button {
+    top: (@masthead-mobile-height-android - @mobile-default-taparea-size)/2 - 1px;
+}
+
+.user-detail-header {
+    width: 100%;
+    min-height: @user-detail-header-height;
+    padding: @list-item-padding-h + 4px 0 @list-item-padding-h + 8px;
+    position: relative;
+    text-align: center;
+    .list-item-divider-mixin(@list-item-divider-bg);
+}
+
+.android .user-detail-header:before {
+    display: none;
+}
+
+.user-detail-header-avatar {
+    position: relative;
+    .user-avatar-style(@user-avatar-width-m, @user-team-item-border-radius, @user-team-item-avatar-bg, @user-team-avatar-rim-width-m);
+}
+
+.user-detail-initial {
+    .avatar-background(@avatar-gradient-color1, @avatar-gradient-color2);
+    @user-team-item-initial-line-height-m: @user-avatar-width-m  - 2 * @user-team-avatar-rim-width-m;
+    .user-team-item-initial-style(@user-team-item-initial-size, @user-team-item-initial-line-height-m, @user-team-item-initial-color);
+}
+
+.tab-hidden {
+    display: none;
+}
+
+// The styles for profile section
+// ---------------------------------------
+.user-detail-profile-content {
+    margin-bottom: 24px;
+    border-bottom: solid 1px @list-item-divider-bg;
+}
+
+.android .user-detail-profile-content {
+    padding-bottom: 8px;
+}
+
+.user-detail-section-devider {
+    width: 100%;
+    height: 1px;
+    background: @list-item-divider-bg;
+    margin-left: @user-detail-header-padding;
+    margin-top: 24px;
+}
+
+.user-profile-tabs {
+    height: @user-profile-tabs-height;
+    font-size: 0;
+    margin-bottom: 8px;
+}
+
+.android .user-profile-tabs {
+    box-shadow: 0 2px 3px @masthead-box-shadow-color;
+    margin-bottom: 12px;
+}
+
+.user-profile-tab {
+    display: inline-block;
+    height: @user-profile-tabs-height;
+    line-height: @user-profile-tabs-height + 16px;
+    max-width: 45%;
+    .base-text-style(@user-profile-tab-default-font-size-ios, 400);
+    margin: 0 @list-item-padding-h;
+    .single-line-ellipsis();
+
+    &.selected {
+        color: @fullscreen-default-text-color;
+        font-weight: 600;
+        border-bottom: solid 2px @fullscreen-default-text-color;
+    }
+}
+
+// Android override
+.android .user-profile-tab {
+    width: 50%;
+    max-width: 50%;
+    margin: 0 0 8px;
+    text-align: center;
+    line-height: @user-profile-tabs-height;
+    font-size: @user-profile-tab-default-font-size-android;
+    text-transform: uppercase;
+
+    &.selected {
+        border-bottom: solid 2px @primary-text-color;
+    }
+}
+
+.user-detail-profile-item {
+    padding: 8px @user-detail-profile-content-padding-right 8px @user-detail-profile-content-padding-left;
+    min-height: @user-detail-profile-item-height;
+    margin-top: @user-detail-profile-item-margin-bottom;
+    position: relative;
+
+    .list-item-divider-mixin(@list-item-divider-bg);
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:last-child:before {
+        height: 0;
+    }
+}
+
+// Android
+.android .user-detail-profile-item {
+    .list-item-divider-mixin('transparent');
+}
+
+.user-profile-action {
+    position: absolute;
+    top: (@user-detail-profile-item-height - @mobile-default-taparea-size)/2;
+    right: 10px;
+}
+
+// Styles for people org item
+// ---------------------------------------
+.user-detail-org-section {
+    padding: 0 @user-detail-profile-content-padding-left @user-detail-profile-content-padding-left;
+}
+
+.people-org-item {
+    width: 100%;
+    height: @user-org-item-height;
+    text-align: left;
+    display: block;
+    position: relative;
+    margin: 6px 0;
+    padding: @user-org-avatar-margin @user-org-avatar-margin @user-org-avatar-margin @user-org-item-height + 4px;
+
+    &:after {
+        content: '';
+        height: @user-org-item-height;
+        position: absolute;
+        // This is to generate the vertical line on the org chart
+        width: 1px;
+        background: @user-org-char-tree-color;
+        height: @user-org-item-height + 12px;
+        left: @people-org-bar-width/2 + 8px;
+        top: -6px;
+    }
+
+    &.current-user {
+        border-radius: @user-org-item-height/2;
+        background: @user-org-current-user-bg;
+    }
+}
+
+// For no direct reports, the tree of the last item does not show
+.no-direct-reports.people-org-item {
+    &:last-child:after {
+        height: (@user-org-item-height + 12px)/2;
+    }
+}
+
+.no-managers-section.people-org-item {
+    &:first-child:after {
+        height: (@user-org-item-height + 12px)/2;
+        top: 24px;
+    }
+}
+
+// Android
+.android .people-org-item {
+    &.current-user {
+        border-radius: 0;
+        background: transparent;
+        &:before {
+            content: '';
+            position: absolute;
+            width: ~ 'calc(100% + 32px)';
+            height: @user-org-item-height;
+            background: @user-org-current-user-bg;
+            top: 0;
+            left: -@list-item-padding-h;
+            z-index: 0;
+        }
+
+        .user-org-item-name {
+            position: relative;
+        }
+
+        .user-org-item-title {
+            position: relative;
+        }
+    }
+}
+
+.user-org-reportee-section .people-org-item {
+    // people-org-item has the horizontal bar so need extra padding
+    @reportee-section-padding-left: @people-org-bar-width + @user-org-item-height + 4px;
+    padding: @user-org-avatar-margin @user-org-avatar-margin @user-org-avatar-margin @reportee-section-padding-left;
+
+    // The before pseudo element is to generate the horizontal bar
+    &:before {
+        content: '';
+        width: @people-org-bar-width/2;
+        position: absolute;
+        border-top: solid 1px @user-org-char-tree-color;
+        left: @people-org-bar-width/2 + 8px;
+        top: @user-org-item-height/2;
+    }
+
+    &:last-child:after {
+        height: @user-org-item-height/2 + 6px;
+    }
+}
+
+.user-org-item-avatar {
+    .user-avatar-style(@user-org-avatar-size, @user-team-item-border-radius, @user-team-item-avatar-bg, @user-org-avatar-rim-width);
+    position: absolute;
+    top: (@user-org-item-height - @user-org-avatar-size)/2;
+    left: 6px;
+    z-index:10;
+}
+
+.user-org-reportee-section .user-org-item-avatar {
+    left: @people-org-bar-width + 8px;
+}
+
+.user-detail-header-text {
+    line-height: 26px;
+    opacity: @light-text-opacity;
+}
+
+.user-org-item-initial {
+    .avatar-background(@avatar-gradient-color1, @avatar-gradient-color2);
+    @user-team-item-initial-line-height: @user-org-avatar-size  - 2 * @user-org-avatar-rim-width;
+    .user-team-item-initial-style(@user-org-avatar-initial-font-size, @user-team-item-initial-line-height, @user-team-item-initial-color);
+
+    span {
+        opacity: @user-initial-text-opacity;
+        text-transform: uppercase;
+    }
+}
+
+.user-org-item-name {
+    .base-text-style(@user-org-item-name-font-size, 600);
+    .single-line-ellipsis();
+    line-height: 1.6;
+}
+
+.user-detail-header-employeenumber {
+    opacity: @light-text-opacity;
+    .base-text-style(@user-org-item-employnumber-font-size, 400);
+    margin-bottom: 16px;
+}
+
+.user-org-item-title {
+    opacity: @light-text-opacity;
+    .base-text-style(@user-org-item-title-font-size, 400);
+    .single-line-ellipsis();
+}

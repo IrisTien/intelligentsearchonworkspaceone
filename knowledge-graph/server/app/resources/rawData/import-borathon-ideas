@@ -1,0 +1,10 @@
+LOAD CSV WITH HEADERS FROM "file:///2019-bj-borathon.csv" AS line
+CREATE (:Idea {title: line.title,
+                 created: line.created,
+                 teamMamber: line.teamMembers,
+                 submitter: line.submitter,
+                 shortName: line.shortName,
+                 theme: line.theme,
+                 description: line.description,
+                 link: line.link})
+          

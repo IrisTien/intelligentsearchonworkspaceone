@@ -1,0 +1,24 @@
+<h2 class="settings-detail-title">{{::'app.devices.heading' | i18n }}</h2>
+<div class="empty-devices-message" ng-if="devicesCtrl.devices.length < 1 && !devicesCtrl.isLoading">
+    <ng-include src="'app-v2/svgincludes/illo-empty-device.html'" class="illo-empty-device"></ng-include>
+    <p>{{::'app.devices.emptyDeviceListMessage' | i18n}}</p>
+</div>
+<ul class="device-list" ng-if="devicesCtrl.devices.length > 0 && !devicesCtrl.isLoading">
+    <li class="device-heading"><p class="device-heading-name">{{::'app.devices.heading' | i18n }}</p> <p class="device-heading-time"> {{::'app.devices.tableColumn.lastLoginTime' | i18n}}</p></li>
+
+    <li ng-repeat="device in devicesCtrl.devices track by $index" ng-class="device.osFamily">
+        <p class="device-icon-name">
+            <ng-include src="device.iconfilename"></ng-include>
+            <span class="device-name">{{::device.machineName}}</span>
+        </p>
+        <p class="last-login-time">
+            <span class="heading">{{::'app.devices.tableColumn.lastLoginTime' | i18n}}</span>
+            <span class="login-date-time">{{::device.lastLoginTime | date:'medium'}}</span>
+        </p>
+        <p class="unlink-device" ng-show="device.osFamily == 'Windows'">
+            <a class="unlink-device-link" ng-click="devicesCtrl.unlinkDevice(device, $event)">
+                {{'app.devices.unlinkDevice' | i18n }}
+            </a>
+        </p>
+    </li>
+</ul>

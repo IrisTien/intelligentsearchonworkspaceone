@@ -1,0 +1,26 @@
+<div ng-show="notificationCtrl.isLoading" class="apps-loading">
+    <div ng-include="'app-v2/common/spinner.html'"></div>
+</div>
+<div class="notifications-container mobile">
+    <div class="notification-item angular-animate" ng-repeat="notification in notificationCtrl.notifications track by notification.id">
+        <div notification-card data="notification" on-archive="notificationCtrl.archiveNotification(notification.id)"></div>
+    </div>
+    <div ng-if="!notificationCtrl.notifications.length && !notificationCtrl.isLoading" class="empty-notification">
+        <svg class="icon-empty-notification" svg-symbol="icon-empty-notification"></svg>
+        <p class="notification-description">
+            {{::'app.notification.empty' | i18n}}
+        </p>
+        <p ng-if="notificationCtrl.hasArchivedNotifications">
+            <button class="view-archived-button" ng-click="notificationCtrl.goToArchived($event)">{{::'app.notification.see.archived' | i18n}}</button>
+        </p>
+    </div>
+    <div class="mobile-notifications-overflow-actions-container" ng-class="{'active': notificationCtrl.showNotificationsOverflowActions}">
+        <div class="overflow-actions-overlay" ng-click="notificationCtrl.hideNotificationOverflowActions()">
+        </div>
+        <div class="overflow-actions-content">
+            <svg svg-symbol="icon-close-popup" class="overflow-actions-close" ng-click="notificationCtrl.hideNotificationOverflowActions()"></svg>
+            <p class="list-item archive-all" ng-click="notificationCtrl.archiveAll()">{{::'app.notification.archive.all' | i18n}}</p>
+            <p class="list-item" ng-click="notificationCtrl.goToArchived()">{{::'app.notification.see.archived' | i18n}}</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,153 @@
+// Import fonts
+@import "fonts/open-sans-fontface/open-sans.less";
+@OpenSansPath: "../fonts/open-sans-fontface/fonts";
+
+//Importing components
+@import "@{Xy}/base/base.less";
+@font-family-body: "Open Sans", Verdana, Tahoma, sans-serif;
+@font-family-heading: "Open Sans", Verdana, Tahoma, sans-serif;
+@font-family-semiBold: "Open Sans Semibold",Verdana,Tahoma,sans-serif;
+
+@import "@{Xy}/image/image.less";
+@import "@{Xy}/glyph/glyph.less";
+@import "@{Xy}/symbol/symbol.less";
+@import "@{Xy}/spinner/spinner.less";
+@import "@{Xy}/rating/rating.less";
+@import "@{Xy}/bar/bar.less";
+@import "@{Xy}/link/link.less";
+@import "@{Xy}/input/input.less";
+//Hiding the clear button in input fields
+::-ms-clear {
+    display: none;
+}
+input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+}
+@input-addon-backgroundColor: transparent;
+@input-internal-borderWidth: 0;
+@input-borderRadius: 8px;
+
+@import "@{Xy}/button/button.less";
+.button {
+    .config () {
+        @highlight: transparent;
+        @gradient-hi: transparent;
+        @gradient-lo: transparent;
+        @hover-highlight: transparent;
+        @hover-gradient-hi: transparent;
+        @hover-gradient-lo: transparent;
+        @drop-shadow: transparent;
+        @border-radius: 4px;
+
+        // Despite what the names sound like, these are the colors for "hollow" buttons:
+        @text-color: #979797;
+        @safe-active-bg-color: #6DB33F;
+        @primary-active-bg-color: #5e9a36;
+        @primary-hover-bg-color: #5e9a36;
+        @primary-border-color: #6db33f;
+        @primary-bg-color: #6db33f;
+        @primary-text-color: #FFFFFF;
+    }
+
+    //No borders for all gb links
+    &.link-:hover {
+        border-color: transparent;
+    }
+}
+
+@import "@{Xy}/frame/frame.less";
+@frame-S-sidebar-width: 0;
+@frame-LP-sidebar-width: 0;
+
+@import "@{Xy}/typography/typography.less";
+@import "@{Xy}/emblem/emblem.less";
+.emblem {
+    .config {
+        @title-color: inherit;
+        @text-shadow: inherit;
+    }
+}
+@import "@{Xy}/pane/pane.less";
+
+@import "@{Xy}/page/page.less";
+@page-box-shadow: 0 0 1px rgba(0,0,0,0.5);
+
+@import "@{Xy}/box/box.less";
+@import "@{Xy}/grid/grid.less";
+@import "@{Xy}/media/media.less";
+@import "@{Xy}/dropdown/dropdown.less";
+@dropdown-offset: 2px;
+
+@import "@{Xy}/list/list.less";
+.centered-.list{
+  text-align: left;
+  margin: 0 auto;
+  display: inline-block;
+}
+@import "@{Xy}/menu/menu.less";
+@menu-link-color: #44525e;
+@menu-selected-color: #FFFFFF;
+@menu-selected-background-color: #6EB145;
+@menu-hover-background-color: #DBE0E3;
+@menu-hover-color: #44525e;
+
+@import "@{Xy}/actions/actions.less";
+@import "@{Xy}/breadcrumb/breadcrumb.less";
+@import "@{Xy}/tabs/tabs.less";
+@active-navtab-text-color: #5E6F78;
+@inactive-navtab-text-color: #939CA3;
+
+.tabs.secondary- {
+  color: inherit;
+  background-color: inherit;
+
+  & > li {
+    padding: 7px 0 0;
+    margin-left: 45px;
+
+    &:first-child {
+      margin-left: 0;
+      padding-left: 0;
+    }
+
+    &.is-active {
+      border-bottom: 4px solid #6DB33F;
+      padding-bottom: 5px;
+
+      a {
+        border: none;
+        color: @active-navtab-text-color;
+      }
+    }
+
+    a {
+      float: right;
+      color: @active-navtab-text-color;
+      text-shadow: none;
+
+      @media @page-at-least-S {
+        padding-left: 10px;
+      }
+    }
+  }
+}
+
+@import "@{Xy}/dialog/dialog.less";
+@import "@{Xy}/modal/modal.less";
+
+@import "masthead.less";
+@import "launcher.less";
+@import "catalogitem.less";
+@import "catalog.less";
+@import "details.less";
+@import "settings.less";
+@import "notify.less";
+@import "installButton.less";
+@import "devices.less";
+@import "stepper.less";
+@import "grid-override.less";
+
+
+input, select {
+  -webkit-tap-highlight-color: transparent;
+}

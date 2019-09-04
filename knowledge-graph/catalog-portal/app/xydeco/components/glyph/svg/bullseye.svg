@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 72 72">
+<g id="Icon">
+<!-- Icon picto1c-07.svg -->
+	<g>
+		<path d="M36,0C16.118,0,0,16.118,0,36c0,19.883,16.118,36,36,36s36-16.117,36-36C72,16.118,55.882,0,36,0z M36,63
+			C21.112,63,9,50.889,9,36C9,21.112,21.112,9,36,9s27,12.112,27,27C63,50.889,50.888,63,36,63z"/>
+		<circle cx="36.667" cy="35.666" r="18"/>
+	</g>
+</g>
+</svg>

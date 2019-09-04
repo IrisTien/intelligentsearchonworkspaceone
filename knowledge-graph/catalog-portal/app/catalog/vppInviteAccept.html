@@ -1,0 +1,14 @@
+<div modal class="headered- footered- modal medium-max-">
+    <section class="dialog">
+        <header class="dialog-header">
+            <h3>{{ title }}</h3>
+        </header>
+        <div class="dialog-body">
+            <p>{{ message }}</p>
+        </div>
+        <footer class="dialog-actions">
+            <button class="link- button" ng-click="modal.cancel()">{{ 'decline' | i18n }}</button>
+            <button class="primary- button" ng-click="modal.close(true)">{{ 'appCenter.acceptInvite' | i18n }}</button>
+        </footer>
+    </section>
+</div>

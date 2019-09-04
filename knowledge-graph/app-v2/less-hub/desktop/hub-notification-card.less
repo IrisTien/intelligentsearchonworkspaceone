@@ -1,0 +1,55 @@
+@notification-desktop-count-width: 16px;
+
+.hub-desktop-notification-bell-button {
+  width: @hub-notification-bell-container-width;
+  display: inline-block;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+  margin-left: 10px;
+
+  .notification-count {
+    position: absolute;
+    // in this case notification count height is the same as notification count width
+    line-height: @notification-desktop-count-width - 2;
+    border-radius: 10px;
+    text-align: center;
+    left: 15px;
+    padding: 0 2px;
+    .notification-count-size(@notification-desktop-count-width);
+    .base-text-style(@notification-count-font-size, 600);
+  }
+}
+
+.hub-long-notification {
+  .page-breadcrumb-bar {
+    display: none;
+  }
+
+  .details-notifications{
+    z-index: 1250;
+
+    &.content-container {
+      padding-top: 32px;
+    }
+
+    .content {
+      padding-left:0;
+    }
+
+    p {
+      line-height: 1.5;
+    }
+  }
+}
+
+.notification-loading-container {
+  .content{
+    padding: 0;
+  }
+}
+
+.snack-bar-container{
+  margin: 10px auto;
+}

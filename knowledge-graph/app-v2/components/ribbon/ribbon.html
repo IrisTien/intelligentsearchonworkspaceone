@@ -1,0 +1,42 @@
+<div dropdown-list class="settings-mobile-container">
+    <div class="dropdown-toggle hamburger-menu">
+        <span class="first-line"></span>
+        <span class="second-line"></span>
+        <span class="third-line"></span>
+    </div>
+    <div dropdown-panel-body class="settings-mobile-panel" id= "pt-ribbon-dropdown" ng-include="'app-v2/components/ribbon/settingMobilePanel.html'">
+    </div>
+</div>
+
+<div class="mobile-title-container" ng-class="{'notification-mobile-browser-container' : ribbonCtrl.showNotificationsFilters}">
+    <!-- make sure this one is two way binding-->
+   <h2><span class="notification-browser-title">{{ribbonCtrl.browserPageTitle }}</span><span ng-if="ribbonCtrl.showNotificationsFilters" class="ribbon-notification-count" notification-count></span></h2>
+    <div class="notifications-filter-browser-mobile" ng-if="ribbonCtrl.showNotificationsFilters"  contextdialog="{uris:{'contextdialogTemplate':(true)}}" contextdialogTemplate="app-v2/components/notifications-v2/notificationsV2ContextDialog.html">
+        <p class="browser-mobile-filter-text" ng-bind="ribbonCtrl.filter"></p>
+        <svg svg-symbol="icon-notification-filter" class="notifications-overflow-menu"></svg>
+    </div>
+</div>
+
+<div class="ribbon-nav-list">
+    <!-- to do the following is just for layout transition, the ng-if depending on the tenant configuration will add later to avoid to write to many protractor tests at once -->
+    <ul>
+        <li id="ribbon-nav-logo" class="ribbon-nav-logo"></li>
+        <li id="ribbon-nav-apps" ui-sref-active="selected-tab"><a ui-sref="apps">{{::'hub.nav.label.apps' | i18n }}</a></li>
+        <li id="ribbon-nav-people" ng-if="ribbonCtrl.showPeopleTab" ui-sref-active="selected-tab"><a ui-sref="people">{{::'hub.nav.label.people' | i18n }}</a></li>
+        <li id="ribbon-nav-notifications" ng-if="ribbonCtrl.showNotifications" ui-sref-active="selected-tab"><a ui-sref="notifications">{{::'hub.nav.label.notification' | i18n }}</a><span class="ribbon-notification-count" notification-count></span></li>
+    </ul>
+
+    <section dropdown-list class="ribbon-profile-container" ng-class="{'settings-active': ribbonCtrl.isSettingsLoaded}">
+        <div class="dropdown-toggle ribbon-dropdown-toggle">
+            <div class="ribbon-avatar">
+                <p class="ribbon-avatar-initial" ng-if="ribbonCtrl.userInfo.initials"><span>{{::ribbonCtrl.userInfo.initials}}</span></p>
+                <img ng-if="ribbonCtrl.userInfo.imageURL" ng-src="{{::ribbonCtrl.userInfo.imageURL}}" class="masthead-avatar-image"/>
+            </div>
+        </div>
+        <div dropdown-panel-body class="ribbon-profile-dropdown-container" id= "pt-profile-dropdown" ng-include="'app-v2/components/ribbon/ribbonDropdown.html'">
+        </div>
+    </section>
+</div>
+
+
+

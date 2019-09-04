@@ -1,0 +1,170 @@
+@import "../shared/mixins.less";
+
+@masthead-mobile-padding-s: 16px;
+@masthead-mobile-padding-m: 32px;
+@masthead-mobile-headline-font-size: 17px;
+@masthead-mobile-android-headline-font-size: 20px;
+@masthead-avatar-size-ios: 28px;
+@masthead-avatar-size-android: 30px;
+
+@masthead-avatar-initial-font-size: 12px;
+@masthead-svg-size: 32px;
+
+@masthead-right-width: 90px;
+// This is the android default text start point when there is a icon
+@masthead-left-width: 72px;
+
+@masthead-mobile-search-height: 52px;
+
+@masthead-mobile-search-android-bg: #fff;
+
+.masthead-mobile {
+    position: fixed;
+    z-index: 600;
+    width: 100%;
+    height: @masthead-mobile-height-ios;
+    background: @masthead-bg;
+    padding: 0 @masthead-right-width;
+    color: @masthead-text-color;
+    top: 0;
+    left: 0;
+    box-shadow: 0 1px 3px 0 @masthead-box-shadow-color;
+}
+
+// Let's making android override right below each class otherwise when the rules are more then we have to scroll a lot to search the android section
+.android .masthead-mobile {
+    height: @masthead-mobile-height-android;
+    text-align: left;
+    padding: 0 @masthead-right-width 0 @masthead-left-width;
+
+    &.no-notification {
+        padding-left: @list-item-padding-h;
+    }
+}
+
+.masthead-mobile.search {
+    z-index: 1500;
+    height: @masthead-mobile-search-height;
+    padding: 0;
+}
+
+.android .masthead-mobile.search {
+    height: @masthead-mobile-height-android;
+    // UX requires the android search page to be always white so hardcode here
+    background: @masthead-mobile-search-android-bg!important;
+    color: #000!important;
+}
+
+// Need to adjust the content-container for ios
+.ios .apps-search .content-container, .ios .people-search .content-container {
+    padding-top: @masthead-mobile-search-height;
+}
+
+.masthead-mobile-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: @masthead-left-width;
+    height: @masthead-mobile-height-ios;
+    padding: (@masthead-mobile-height-ios - @masthead-svg-size)/2 6px;
+}
+
+.android .masthead-mobile-left {
+    height: @masthead-mobile-height-android;
+    padding: (@masthead-mobile-height-android - @masthead-svg-size)/2 6px;
+}
+
+.masthead-mobile-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 0;
+    width: @masthead-right-width;
+    height: @masthead-mobile-height-ios;
+    // Padding here is for the child element the h1 headline to have a width and ellipises have the correct width
+    padding: (@masthead-mobile-height-ios - @masthead-svg-size)/2 0;
+    text-align: right;
+
+    .search-icon{
+      display: inline;
+      margin-right: 9px;
+    }
+}
+
+.masthead-extended-width {
+    width: 50%;
+}
+
+.android .masthead-mobile-right {
+    height: @masthead-mobile-height-android;
+    padding: (@masthead-mobile-height-android - @masthead-svg-size)/2 0;
+}
+
+.masthead-headline {
+    .base-text-style(@masthead-mobile-headline-font-size, 700);
+    line-height: @masthead-mobile-height-ios;
+    text-align: center;
+    .single-line-ellipsis();
+}
+
+.android .masthead-headline {
+    line-height: @masthead-mobile-height-android;
+    text-align: left;
+    font-size: 20px;
+}
+
+.masthead-avatar {
+    background-image: url(../app-v2/graphics/icon-profile.svg);
+    background-size: contain;
+    height: @masthead-avatar-size-ios;
+    width: @masthead-avatar-size-ios;
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+    font-weight: 500;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: (@masthead-svg-size - @masthead-avatar-size-ios)/2 @list-item-padding-h (@masthead-svg-size - @masthead-avatar-size-ios)/2 0;
+
+    img {
+        width: 100%;
+        // adding height, even though in cases if the source image is not a square, better off to stretch to cover the whole area
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+    }
+}
+
+.android .masthead-avatar {
+    margin: (@masthead-svg-size - @masthead-avatar-size-android)/2 16px (@masthead-svg-size - @masthead-avatar-size-android)/2 4px;
+}
+
+.masthead-avatar-initial {
+    .avatar-background (@avatar-gradient-color1, @avatar-gradient-color2);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    font-weight: 500;
+    font-size: @masthead-avatar-initial-font-size;
+    line-height: @masthead-avatar-size-ios;
+    color: @user-team-item-initial-color;
+
+    span {
+        opacity: @user-initial-text-opacity;
+    }
+}
+
+.android .masthead-avatar-initial {
+    line-height: @masthead-avatar-size-android;
+}
+
+input.dummy-input {
+    width: 0;
+    height: 0;
+    border: 0;
+    position: fixed;
+    z-index: -1;
+    opacity: 0;
+}

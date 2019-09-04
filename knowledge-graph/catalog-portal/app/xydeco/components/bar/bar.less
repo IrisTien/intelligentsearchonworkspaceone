@@ -1,0 +1,43 @@
+/** @pattern .bar
+
+A bar is a horizontal, packed arrangement of items, such as buttons, tools, or input fields.
+
+@example [basic] Basic Bar Layout
+<ul class="bar">
+  <li>First
+  <li>Second
+  <li>Third
+</ul>
+
+ **/
+
+.bar {
+
+    .config () {
+        @drop-shadow: fade(#000, 15%);
+    }
+    .config();
+
+    display: inline-table;
+    max-width: 100%;
+    white-space: nowrap;
+
+    &.full-width- {
+        /** A bar which stretches to the full width of the parent container */
+        width: 100%;
+    }
+
+    > * {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    // Derived class mixin
+
+    .extend() {
+        &:extend( .bar );
+        > * {
+            &:extend( .bar > * );
+        }
+    }
+}

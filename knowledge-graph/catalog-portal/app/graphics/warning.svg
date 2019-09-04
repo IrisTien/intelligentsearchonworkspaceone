@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="107px" height="95px" viewBox="0 0 107 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_warning_small</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Request-Failed-(Error)" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="-iPHONE-6_GENERIC-ERROR" sketch:type="MSArtboardGroup" transform="translate(-322.000000, -469.000000)">
+            <g id="Message-modal" sketch:type="MSLayerGroup" transform="translate(95.000000, 413.000000)">
+                <g id="icon_warning_small" transform="translate(230.000000, 59.000000)" sketch:type="MSShapeGroup">
+                    <path d="M98.7208694,77.6997722 L56.2088441,4.92287137 C55.5975035,3.8522991 53.7620138,0.64204985 50.3985395,0.64204985 C47.0335974,0.64204985 45.1995756,3.8522991 44.5867671,4.92287137 L2.07694354,77.6997722 C1.46486901,78.768877 -0.369886765,81.8265018 1.15883175,84.5796115 C1.92355796,85.9546989 3.75904764,87.7898608 7.88724814,87.7898608 L92.909097,87.7898608 C95.2032757,87.7898608 97.9561432,86.8726467 99.1795584,84.732236 C100.861662,81.8265018 99.4855956,78.768877 98.7208694,77.6997722 L98.7208694,77.6997722 Z" id="Stroke-1" stroke="#E95350" stroke-width="6.84316716"></path>
+                    <path d="M54.8327773,27.8561582 L53.9153994,56.4475553 L46.5756424,56.4475553 L45.6575306,27.8561582 L54.8327773,27.8561582" id="Fill-2" fill="#E95350"></path>
+                    <path d="M50.245154,72.9588761 C47.0335974,72.9588761 45.04619,70.665841 44.8935383,67.6082161 C44.8935383,64.7039495 46.8809458,62.2568223 50.245154,62.2568223 C53.4567105,62.2568223 55.4448518,64.7039495 55.4448518,67.6082161 C55.5975035,70.665841 53.4567105,72.9588761 50.245154,72.9588761" id="Fill-3" fill="#E95350"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

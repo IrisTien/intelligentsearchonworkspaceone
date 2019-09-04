@@ -1,0 +1,20 @@
+<div message-context class="pane">
+    <div ng-controller="MessageDemo as demo">
+        <div>
+            <p><button  ng-click="$message.show([demo.error])">
+                Show error Message </button></p>
+            <p><button  ng-click="$message.show([demo.success])">
+                Show success Message </button></p>
+            <p><button  ng-click="$message.show([demo.warning])">
+                Show warning Message </button></p>
+            <p><button  ng-click="$message.show([demo.info])">
+                Show info Message </button></p>
+            <p><button  ng-click="$message.show([demo.untyped])">
+                Show uncategorized Message </button></p>
+            <p><button  ng-click="$message.show(demo.all)">
+                Show several Messages</button></p>
+            <p><button  ng-click="$message.show([demo.custom])">
+                Show Message with custom template</button></p>
+        </div>
+    </div>
+</div>

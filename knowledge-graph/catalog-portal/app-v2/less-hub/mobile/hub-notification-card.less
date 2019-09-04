@@ -1,0 +1,61 @@
+@notification-count-width: 14px;
+@notification-count-font-size: 11px;
+@notification-date-font-size: 13px;
+@notification-button-font-size: 13px;
+@notification-title-font-size: 17px;
+@priority-background-gradient-start-color: #dcebf4;
+@priority-background-gradient-stop-color: #fff;
+
+.hub-notifications-container {
+  padding: 0 16px;
+
+  .content-container {
+    background: @gb-content-bg;
+  }
+}
+
+.hub-notification-bell-button {
+  width: @hub-notification-bell-container-width;
+  display: inline-block;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  z-index: 1000;
+}
+
+.notification-count {
+  position: absolute;
+  border-radius: 10px;
+  text-align: center;
+  left: 15px;
+  padding: 0 2px;
+  .notification-count-size(@notification-count-width);
+  .base-text-style(@notification-count-font-size, 600);
+}
+
+.hub-long-notification {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1250;
+  background: @gb-fullscreen-bg;
+  color: @gb-fullscreen-default-text-color;
+
+  p {
+    line-height: 1.5;
+  }
+
+  .masthead-mobile.long-card-details-actions {
+    box-shadow: none;
+  }
+
+  .page-breadcrumb-bar {
+    display: none;
+  }
+
+  .content-container-scrollable {
+    height: ~ 'calc(100% - @{hub-long-card-action-btn-height})';
+  }
+}

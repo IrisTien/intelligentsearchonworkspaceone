@@ -1,0 +1,39 @@
+.stepper {
+    @circle-size: 24px;
+    @circle-color: #DCDCDC;
+    @line-padding: 4px;
+    .step {
+        position: relative;
+        min-height: @circle-size;
+        > div:first-child {
+            position: static;
+            height: 0;
+        }
+        .body {
+            margin: 0 @circle-size ;
+            padding: 0 @circle-size/2;
+            padding-bottom: 20px;
+        }
+        &:last-child .line {
+            display: none;
+        }
+        .circle {
+            width: @circle-size;
+            height: @circle-size;
+            line-height: 20px;
+            border-radius: @circle-size/2;
+            position: relative;
+            color: @circle-color;
+            text-align: center;
+            border: 2px solid;
+            font-size: 11px;
+        }
+        .line {
+            position: absolute;
+            border-left: 1px solid @circle-color;
+            left: @circle-size/2;
+            bottom: @line-padding;
+            top: @circle-size + @line-padding;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+<div modal-new class="modal-fullscreen modal-settings-nativenav">
+    <section class="dialog-container">
+        <header class="dialog-header no-symbol">
+            <h2 class="settings-desktopapp-nativenav-heading">{{ ::'app.logout.title' | i18n }}</h2>
+            <svg svg-symbol="icon-close-popup" class="modal-popup-close-icon" ng-click="$modal.cancel(); $event.stopPropagation();"></svg>
+        </header>
+        <div class="dialog-body">
+            <p class="settings-desktopapp-nativenav-message">{{ ::'app.logout.confirm.msg' | i18n }}</p>
+            <p class="settings-desktopapp-nativenav-actions">
+                <span class="button-action-desktopapp secondary-button" ng-click="$modal.cancel(); $event.stopPropagation();">
+                {{ ::'button.cancel' | i18n }}
+                </span>
+                <span class="button-action-desktopapp primary-button" ng-click="$modal.close();">
+                {{ ::'userInfo.signout' | i18n }}
+                </span>
+            </p>
+        </div>
+    </section>
+</div>

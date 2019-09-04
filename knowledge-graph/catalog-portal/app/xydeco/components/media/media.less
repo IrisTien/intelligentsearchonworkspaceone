@@ -1,0 +1,60 @@
+/*
+ * Project Horizon
+ * (c) 2013-2014 VMware, Inc. All rights reserved.
+ * VMware Confidential.
+ */
+
+@import "../grid/grid";
+@import "../box/box";
+
+/** @pattern .media
+
+A concise reference to some entity, consisting of an image,
+title, and description.  The name `media` was
+[coined by Nicole Sullivan](http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/).
+
+@example
+<div class="eight- grid">
+  <div class="media">
+    <div class="media-image">
+      <svg><circle cx="50" cy="50" r="50" fill="#fc0"/></svg>
+    </div>
+    <div class="media-body typography">
+      <h2> <%= h.0 %> </h2>
+      <p> <%= p.1 %> </p>
+    </div>
+  </div>
+</div>
+
+*/
+
+.media {
+
+    &:extend( .grid );
+
+    .indent();
+
+    .media-image {
+
+        &:extend( .box );
+        &.right-:extend( .box.right- ) { }
+
+        /** The area where the image is shown. */
+        img, svg {
+            width: 100%;
+        }
+    }
+
+    .media-body {
+        /** The textual content, usually including a title and description. */
+        &:extend( .box, .box.remainder- );
+    }
+
+    // specify the indent (space for image) in # of boxes
+    .indent( @n: 2 ) {
+        .media-image {
+            .box > .width(@n);
+        }
+    }
+
+}

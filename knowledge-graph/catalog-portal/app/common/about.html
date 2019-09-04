@@ -1,0 +1,34 @@
+<div class="usersettings headered- view- frame theme-portal-background">
+    <div class="frame-header">
+        <div class="theme-portal-masthead">
+            <div class="mobile- masthead">
+                <div class="masthead-left">
+                    <a class="iconic- link- button" ng-click="::appCenterCtrl.backAction()">
+                        <svg symbol="mobile-back-arrow"></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="vertically- scrollable- backdrop- pane">
+        <div class="page">
+            <article class="typography">
+                <header>
+                    <div class="usersettings-title">{{ 'app.about.heading' | i18n }}</div>
+                </header>
+                <section>
+                    <p>
+                        {{'app.about.copyright' | i18n }}
+                    </p>
+                </section>
+                <nav>
+                    <ul class="menu">
+                        <li><a class="external-link" target="_blank" ng-href="{{'app.about.patentsLink' | i18n}}">{{'app.about.button.label.patents' | i18n}}</a></li>
+                        <li><a ng-if="isOnPrem" class="external-link" target="_blank" ng-href="{{'app.about.licenseAgreementLink' | i18n}}">{{'app.about.button.label.licenseAgreement' | i18n}}</a></li>
+                        <li><a ng-if="!isOnPrem" class="external-link" target="_blank" ng-href="{{'app.about.saasLicenseAgreementLink' | i18n}}">{{'app.about.button.label.licenseAgreement' | i18n}}</a></li>
+                    </ul>
+                </nav>
+            </article>
+        </div>
+    </div>
+</div>

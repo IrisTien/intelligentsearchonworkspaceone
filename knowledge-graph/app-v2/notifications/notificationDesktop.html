@@ -1,0 +1,30 @@
+<div class="desktop-notifications-container" ng-if="appCenterCtrl.isNotificationDropdownActive" ng-controller="NotificationController as notificationCtrl">
+    <div class="notification-header">
+        <svg ng-show="notificationCtrl.showArchived" class="close-archived" svg-symbol="icon-detail-back" ng-click="notificationCtrl.getNotifications()"></svg>
+        <span ng-show="!notificationCtrl.showArchived">{{::'myapps.mobilepagetitle.notification' | i18n}}</span>
+        <span ng-show="notificationCtrl.showArchived">{{::'myapps.mobilepagetitle.archived' | i18n}}</span>
+        <svg ng-show="!notificationCtrl.showArchived" class="notifications-overflow-actions" svg-symbol="icon-dots" ng-click="notificationCtrl.toggleNotificationsOverflowContainer()"></svg>
+    </div>
+    <div ng-show="notificationCtrl.isLoading" class="apps-loading">
+        <div ng-include="'app-v2/common/spinner.html'"></div>
+    </div>
+    <div class="notifications-container desktop">
+        <div class="notification-item" ng-repeat="notification in notificationCtrl.notifications track by notification.id">
+            <div notification-card data="notification" on-archive="notificationCtrl.archiveNotification(notification.id)"></div>
+        </div>
+        <div ng-if="!notificationCtrl.notifications.length && !notificationCtrl.isLoading" class="empty-notification">
+            <svg class="icon-empty-notification" svg-symbol="icon-empty-notification"></svg>
+            <p class="notification-description">
+                {{::'app.notification.empty' | i18n}}
+            </p>
+            <p ng-if="notificationCtrl.hasArchivedNotifications">
+                <button class="view-archived-button" ng-click="notificationCtrl.getNotifications(true)">{{::'app.notification.see.archived' | i18n}}</button>
+            </p>
+        </div>
+    </div>
+    <div class="notifications-overflow-actions-container" ng-show="notificationCtrl.showNotificationsOverflowActions">
+        <svg svg-symbol="icon-close-popup" class="notifications-overflow-close" ng-click="notificationCtrl.toggleNotificationsOverflowContainer()"></svg>
+        <p class="overflow-action archive-all" ng-click="notificationCtrl.archiveAll()">{{::'app.notification.archive.all' | i18n}} </p>
+        <p class="overflow-action" ng-click="notificationCtrl.getNotifications(true)">{{::'app.notification.see.archived' | i18n}}</p>
+    </div>
+</div>

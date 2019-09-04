@@ -1,0 +1,16 @@
+<div class="headered- hamburgermenu" ng-class="{'footered-': !appCenterCtrl.isWebClip}">
+    <div class="hamburgermenu-header">
+        <svg class="userinfo-avatar" symbol="avatar"></svg><!--
+        --><span class="userinfo-name" title="{{appCenterCtrl.user.firstName + ' ' +appCenterCtrl.user.lastName}}">
+            {{ appCenterCtrl.user.firstName + ' ' +appCenterCtrl.user.lastName }}
+        </span>
+    </div>
+
+    <div class="vertically- scrollable- pane">
+        <div class="commonMenu" ng-include="'app/common/commonMenu.html'"></div>
+    </div>
+
+    <div class="hamburgermenu-footer" ng-show="appCenterCtrl.showSignoutLinkInMobile">
+        <a class="signout-link" ng-click="appCenterCtrl.signout($event)">{{'userInfo.signout' | i18n}}</a>
+    </div>
+</div>

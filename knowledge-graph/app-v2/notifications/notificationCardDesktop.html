@@ -1,0 +1,25 @@
+<div class="notifications-card-container-desktop" ng-class="{ 'notification-disabled' : !notificationCardCtrl.cardEnabled}">
+    <svg ng-if="!notificationCardCtrl.notification.read_at" svg-symbol="icon-close-popup" class="notifications-close-button" ng-click="notificationCardCtrl.dismissNotification()"></svg>
+    <div class="notifications-content">
+        <div class="notifications-header-container">
+            <svg ng-if="notificationCardCtrl.isNewAppNotification" svg-symbol="icon-notification-new-apps" class="icon-notifications-ws1 icon-new-app-notification"></svg>
+            <div ng-if="notificationCardCtrl.image" class="icon-notifications-ws1 image-holder">
+                <img class="icon-notification-image" ng-src="{{notificationCardCtrl.image}}"/>
+            </div>
+            <svg ng-if="!notificationCardCtrl.isNewAppNotification && !notificationCardCtrl.image" svg-symbol="icon-notification-default" class="icon-notifications-ws1 icon-default-notification"></svg>
+            <h2 class="notifications-title">{{ notificationCardCtrl.title }}</h2>
+        </div>
+        <div class="notifications-body-container">
+            <p class="notifications-body-text" ng-bind-html="notificationCardCtrl.message"></p>
+            <div ng-if="notificationCardCtrl.additionalBodySection" class="notifications-additional-body-section">
+                <div ng-repeat="app in notificationCardCtrl.newApps" ng-include="'app-v2/notifications/new-app-icon-item.html'" class="new-app-icon-container"></div>
+                <p ng-if="notificationCardCtrl.excessIconsMessage" class="notification-extra-icon-text">{{ notificationCardCtrl.excessIconsMessage }}</p>
+            </div>
+            <div class="notifications-date">{{ notificationCardCtrl.date }}</div>
+        </div>
+        <div class="notifications-actions-container">
+            <span ng-repeat="action in notificationCardCtrl.actions" ng-click="notificationCardCtrl.performAction(action)"
+                  ng-style="notificationCardCtrl.desktopMaxButtonWidthStyle" ng-class="notificationCardCtrl.getLabelClass(action)" ng-bind="notificationCardCtrl.getLabel(action)"></span>
+        </div>
+    </div>
+</div>

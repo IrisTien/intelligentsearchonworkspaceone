@@ -1,0 +1,16 @@
+<div class="settings-detail-content-container">
+    <div class="settings-detail-mobile-header">
+        <div class="settings-back" id="pt-support-report-button"
+             ng-click="::supportCtrl.dismissSupportDetail()">
+            <svg svg-symbol="icon-page-back" class="icon-page-back"></svg>
+        </div>
+        <h2>{{::'appCenter.support.sendReportTitle' | i18n }}</h2>
+    </div>
+    <div class="settings-detail-content-scrollable">
+        <section id="report-ios-problems" ng-if="supportCtrl.isIOS">
+            <p ng-include="'app-v2/svgincludes/illo-shake.html'"></p>
+            <p>{{::'appCenter.reportProblems.ios.sendLogInstruction' | i18n}}</p>
+            <p>{{::'appCenter.reportProblems.ios.turnOnOffInstruction' | i18n}}</p>
+        </section>
+    </div>
+</div>

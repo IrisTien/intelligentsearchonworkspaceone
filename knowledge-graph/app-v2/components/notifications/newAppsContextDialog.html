@@ -1,0 +1,20 @@
+<section class="appitem-contextdialog-container" ng-controller="NewAppsNotificationController as newAppsNotificationCtrl">
+    <!-- scrim to dismiss the dialog box -->
+    <button class="appitem-contextdialog-scrim"></button>
+
+    <div class="appitem-contextdialog-content">
+        <div class="appitem-contextdialog-actions">
+            <ul class="appitem-contextdialog-actions-list">
+                <li>
+                    <a class="hub-bookmark-all-new-apps" ng-click="newAppsNotificationCtrl.bookmarkAll()">
+                        <span>{{::'hub.notifications.new.apps.favorite.all' | i18n}}</span>
+                    </a>
+                </li>
+            </ul>
+            <!-- Only iOS has the cancel button -->
+            <ul ng-if="newAppsNotificationCtrl.isIOS" class="appitem-contextdialog-actions-list cancel-action">
+                <li><a>{{::'button.cancel' | i18n}}</a></li>
+            </ul>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,28 @@
+<div class="mobileFilterMenuContainer mobileOnly" ng-show="!$filter.config.closeFilterMenu">
+    <div class=" headered- view- frame theme-portal-background">
+        <div class="frame-header">
+            <div class="theme-portal-masthead">
+                <div class="mobile- masthead">
+                    <div class="masthead-left">
+                        <a class="iconic- link- button" ng-click="$filter.close()">
+                            <svg symbol="mobile-back-arrow"></svg>
+                        </a>
+                    </div>
+                    <div class="masthead-center">
+                        <span>{{::'appCenter.nav.filter' | i18n}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="headered- frame">
+            <div class="vertically- scrollable- backdrop- pane">
+                <div class="page">
+                    <div list-view items="$filter.config.items" select-item="$filter.selectItem(item)"
+                            default-item="$filter.config.defaultItem">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

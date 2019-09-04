@@ -1,0 +1,28 @@
+<data-owl-carousel class="owl-carousel" data-options="appPromotionsBrowserCtrl.carouselConfig" ng-class="{'ios-android': appPromotionsBrowserCtrl.isIOSAndroid,
+    'lone-banner': appPromotionsBrowserCtrl.promotions.length == 1}">
+    <div class="promotion-card" owl-carousel-item="" ng-repeat="promotion in ::appPromotionsBrowserCtrl.promotions"
+         ng-class="{'one': $index%3 === 0, 'two': $index%3 === 1, 'three': $index%3 === 2}">
+        <div class="promotion-card-content category-promotion" ng-if="promotion.customizationEntityType === 'CATEGORY'">
+            <div class="category-promotion-wrapper">
+                <p class="category-promo-title">{{::'hub.promotions.banner.category.title' | i18n}}</p>
+                <p class="category-promo-name" line-clamp2 lines="2" content="::promotion.identifier"></p>
+                <a class="app-button promotion-app-action-button" ui-sref="apps.list({ category: '{{promotion.identifier}}', type:'category' })">
+                    {{::'hub.promotions.banner.category.open' | i18n}}
+                </a>
+            </div>
+        </div>
+        <div class="promotion-card-content app-promotion" ng-if="promotion.customizationEntityType === 'APPLICATION'">
+            <div class="app-promo-tile">
+                <div class="app-promo-icon" image-load>
+                    <img ng-src="{{appPromotionsBrowserCtrl.getAppIcon(promotion.identifier)}}">
+                </div>
+            </div>
+            <div class="app-promo-title-content">
+                <p class="app-promo-name" line-clamp2 lines="2" content="::appPromotionsBrowserCtrl.getAppName(promotion.identifier)"></p>
+                <a class="app-button promotion-app-action-button" ui-sref="apps.details({ appId: '{{promotion.identifier}}' })">
+                    {{::'hub.promotions.banner.app.get' | i18n}}
+                </a>
+            </div>
+        </div>
+    </div>
+</data-owl-carousel>

@@ -1,0 +1,161 @@
+@tooltip-halfwidth: 6px;
+@tooltip-height: 8px;
+
+.tooltip {
+    position: absolute;
+    font-size: 14px;
+    bottom: 100%;
+    left: 50%;
+    padding: 2px 5px;
+    min-width: 40px;
+    max-width: 160px;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    -moz-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    box-shadow: 0 1px 2px rgba(0,0,0,.25), 0 -1px 2px rgba(0,0,0,.10);
+    background:@white;
+    display: none;
+    z-index: 5;
+    // directions of the caret, use margin to generate the gap between the edge of the tooptip to the trigger element
+    &:before {
+        content: '';
+        position: absolute;
+        z-index: 5;
+        left: 50%;
+        margin-left: -@tooltip-halfwidth;
+        width: 0;
+        height: 0;
+        border-left: @tooltip-halfwidth solid transparent;
+        border-right: @tooltip-halfwidth solid transparent;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        z-index: 10;
+        left: 50%;
+        margin-left: -@tooltip-halfwidth;
+        width: 0;
+        height: 0;
+        border-left: @tooltip-halfwidth solid transparent;
+        border-right: @tooltip-halfwidth solid transparent;
+    }
+
+    &.bottom {
+
+        &:before {
+            top: auto;
+            bottom: -@tooltip-height;
+            border-top: @tooltip-height solid @tooltip-border-color;
+        }
+
+        &:after {
+            top: auto;
+            bottom: -(@tooltip-height - 1px);
+            border-top: @tooltip-height solid @tooltip-bg-color;
+        }
+    }
+
+    &.top {
+
+        &:before {
+            top: -@tooltip-height;;
+            bottom: auto;
+            border-bottom: @tooltip-height solid @tooltip-border-color;
+        }
+
+        &:after {
+            top: -(@tooltip-height - 1px);
+            bottom: auto;
+            border-bottom: @tooltip-height solid @tooltip-bg-color;
+        }
+    }
+}
+
+.show-tooltip .tooltip{
+    display: block;
+}
+
+.settings-desktopapp-footer-list .tooltip {
+    white-space: nowrap;
+
+    &.bottom {
+      margin-bottom: 2px;
+    }
+}
+
+.bookmark-app-item .tooltip {
+    position: absolute;
+    font-size: 14px;
+    top: @catalog-app-icon-size-s + 20px;
+    // default tooltip using bottom to position so need override the bottom property
+    bottom:auto;
+    min-width:100px;
+    max-width:200px;
+    color: inherit;
+    border: solid 1px @tooltip-border-color;
+    background: @tooltip-bg-color;
+    z-index:500;
+    display: none;
+
+    @media (min-width: @browser-transition-point) {
+        display: block;
+        top: @catalog-app-icon-size-s + 80px;
+    }
+
+    @media (min-width: @desktopM) {
+        top: @catalog-app-icon-size-l + 90px;
+    }
+
+    p {
+        width:100%;
+        min-width:100px;
+    }
+}
+
+// non tooltips inside the ws-shell
+.ws-shell .tooltip {
+    display: none!important;
+}
+
+// Catalog view details tooltip one line
+.catalog-item .tooltip {
+    top: @catalog-app-icon-size-s + 80px;
+    z-index:200;
+    height:24px;
+    display: none;
+
+    @media (min-width: @browser-transition-point) {
+        display: block;
+    }
+
+    @media (min-width: @desktopM) {
+        display: block;
+        top: @catalog-app-icon-size-l + 90px;
+    }
+
+    p {
+      .single-line-ellipsis();
+    }
+}
+
+.bookmark-app-item {
+  // For localization concern "Click to launch" can be wrap to second line
+    .nonthinapp-tooltip .tooltip {
+        p {
+            max-width: 160px;
+        }
+    }
+
+    // Setting up a width will force it to wrap into the next line, for "Only available on Windows
+    .thinapp-tooltip .tooltip {
+        width: 140px;
+    }
+}
+
+.contextmenu-on.bookmark-app-item .tooltip {
+    display: none;
+}

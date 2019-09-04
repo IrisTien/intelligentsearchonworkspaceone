@@ -1,0 +1,30 @@
+<div class="people-search-avatar" image-load>
+    <span ng-if="user.initial" class="user-detail-initial">{{user.initial}}</span>
+    <img ng-show="user.avatar" ng-src="{{user.avatar}}" class="people-search-avatar-icon"/>
+</div>
+<div class="people-search-item-body" ng-class="{'no-email': !ctrl.copyEmailSupported && !ctrl.nativeEmailClientSupported}">
+    <p class="people-search-item-name" ng-bind-html="user.userName | highlight:ctrl.query.name"></p>
+    <p class="people-search-item-title" ng-bind-html="user.title"></p>
+    <p class="people-search-item-email" ng-class="{'copied-email-highlight': user.isCopied}">
+        <span>{{user.email}}</span>
+    </p>
+</div>
+<div ng-if="!user.isCopied" class="people-search-tooltip-trigger">
+    <div ng-if="::ctrl.copyEmailSupported">
+        <a role="button" aria-label="copyEmailButtonLabel" ng-click="ctrl.copyEmail(user)" stop-event="click">
+            <svg svg-symbol="icon-copy-email" class="people-search-item-copy-email-icon branding-icon-primary"></svg>
+        </a>
+        <p class="copy-email-tooltip" tooltip tooltiptext="app.tooltip.copyEmail"
+             triggerelement="people-search-tooltip-trigger"></p>
+    </div>
+    <div ng-if="::ctrl.nativeEmailClientSupported">
+        <a role="button" aria-label="openEmailButtonLabel" ng-click="ctrl.openEmail(user.email)" stop-event="click">
+            <svg svg-symbol="icon-email" class="people-search-item-email-icon branding-icon-primary"></svg>
+        </a>
+    </div>
+</div>
+<p ng-if="user.isCopied" class="email-copied-notification" ng-class="{'copied-email': user.isCopied}">
+    <svg svg-symbol="icon-messaging-check" class="icon-check branding-icon-primary"></svg>
+    <span class="people-search-email-copied">{{ ::'app.peopleSearch.emailCopied' | i18n }}</span>
+</p>
+

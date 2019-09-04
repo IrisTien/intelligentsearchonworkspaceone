@@ -1,0 +1,125 @@
+// Import the correct set of variables - light by default but get we can apply the other 3 themes by changing the @gb-theme
+// the variable to be 'dark' or "dark2" or "light2" -- i currently only have to theme variables
+// There will be a customized theme similar to what we have now and we needed to generate that css by using all the variabled we get from the branding values
+// ---------------------------------------
+@import 'color-variables-@{gb-theme}.less';
+
+// Branding colors -- these will be overridden by the new greenbox admin-console branding values
+@light-text-opacity: 0.7;
+@primary-icon-color: @gb-primary-icon-color;
+@white: #ffffff;
+@primary-text-color: @gb-primary-text-color;
+@primary-link-color: @gb-primary-link-color;
+
+@secondary-text-color: @gb-secondary-text-color;
+
+// fullscreen colors
+// ---------------------------------------
+@fullscreen-bg: @gb-fullscreen-bg;
+@fullscreen-default-text-color: @gb-fullscreen-default-text-color;
+
+// Masthead colors
+// ---------------------------------------
+@masthead-bg: @gb-masthead-bg;
+@masthead-text-color: @gb-masthead-text-color;
+@masthead-box-shadow-color: @gb-masthead-box-shadow-color;
+
+// Spinner Colors
+// ---------------------------------------
+@loading-spinner-overlay-bg: @gb-loading-spinner-overlay-bg;
+@ios-spinner-fill-color-start: @gb-ios-spinner-fill-color-start;
+@ios-spinner-fill-color-end: fade(@ios-spinner-fill-color-start, 50%);
+
+
+// Content colors
+// ---------------------------------------
+@content-bg: @gb-content-bg;
+
+// Generic list item
+@list-item-divider-bg: @gb-list-item-divider-bg;
+@list-item-right-arrow-image: @gb-list-item-right-arrow-image;
+
+// Apps Section Color
+// ---------------------------------------
+@app-tile-bg-color: @gb-app-tile-bg-color;
+@app-tile-shadow-color: @gb-app-tile-shadow-color;
+
+@gb-category-content-bg: @gb-masthead-bg;
+
+//Detail Section
+// ---------------------------------------
+@gb-app-detail-divider-color: @gb-user-detail-devider-bg;
+
+// People Section
+// ---------------------------------------
+@user-team-item-avatar-bg: @gb-user-team-item-avatar-bg;
+@avatar-gradient-color1: @gb-avatar-gradient-color1;
+@avatar-gradient-color2: @gb-avatar-gradient-color2;
+
+@user-team-item-initial-color: @gb-user-team-item-initial-color;
+@user-team-item-box-shadow: @gb-user-team-item-box-shadow;
+
+// People Detail
+// ---------------------------------------
+@user-details-bg: @content-bg;
+@user-detail-profile-content-bg: @gb-user-detail-profile-content-bg;
+@user-org-char-tree-color: @gb-user-org-char-tree-color;
+@user-org-current-user-bg: @gb-user-org-current-user-bg;
+
+@app-rating-selected-color: @gb-app-rating-selected-color;
+@app-rating-default-color: @gb-app-rating-default-color;
+
+
+  // Notifications
+// ---------------------------------------
+@notification-card-background : @gb-notification-card-background;
+@primary-button-text : @gb-primary-button-text;
+@primary-button-background : @gb-primary-button-background;
+@custom-icon-background : @gb-custom-icon-background;
+@notification-count-color : @gb-notification-count-color;
+@notification-count-border-color : @gb-notification-count-border-color;
+@notification-count-background-color : @gb-notification-count-background-color;
+@notification-disabled-background : @gb-notification-disabled-background;
+@notification-date-text-color : @gb-notification-date-text-color;
+@notification-card-body-text-color : @gb-notification-card-body-text-color;
+@notification-comment-bg: @gb-search-input-bg;
+
+// Buttons
+// ---------------------------------------
+@primary-button-color: @gb-primary-button-color;
+@primary-button-text-color: @gb-primary-button-text-color;
+@secondary-button-color: @gb-secondary-button-color;
+@secondary-button-text-color: @gb-secondary-button-text-color;
+@disabled-button-color: @gb-button-disabled-color;
+@button-android-disabled-background: @gb-button-android-disabled-background;
+@button-android-disabled-color: @gb-button-android-disabled-color;
+
+// Spinners
+// ---------------------------------------
+@android-spinner-border-color: @gb-android-spinner-border-color;
+
+
+// Search
+// ---------------------------------------
+@search-item-character-highlight-bg: @gb-search-item-character-highlight-bg;
+@list-item-right-arrow-image: @gb-list-item-right-arrow-image;
+@search-input-bg: @gb-search-input-bg;
+
+
+// Notify
+// ---------------------------------------
+@notify-background: @gb-notify-background;
+@notify-error-background: @gb-notify-error-background;
+
+
+// Empty state illustration colors
+// ---------------------------------------
+@empty-state-primary-item-stroke: @gb-empty-state-primary-item-stroke;
+@empty-state-primary-item-fill: @gb-empty-state-primary-item-fill;
+
+@empty-state-secondary-item-stroke: @gb-empty-state-secondary-item-stroke;
+@empty-state-secondary-item-fill: @gb-empty-state-secondary-item-fill;
+
+
+// Color variable specific to hub browser and hub desktop
+@browser-scrim-color: rgba(0,0,0, .15);

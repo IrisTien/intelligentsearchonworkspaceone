@@ -1,0 +1,9 @@
+<svg id="illo-network-access" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56">
+    <line x1="21" y1="30.12" x2="35" y2="30.12" fill="none" stroke="#6c747d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <circle cx="28" cy="47.12" r="1" fill="#6c747d" stroke-width="0"/>
+    <line x1="21" y1="44.12" x2="35" y2="44.12" fill="none" stroke="#6c747d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path d="M35,49.12a1,1,0,0,1-1,1H22a1,1,0,0,1-1-1v-22a1,1,0,0,1,1-1H34a1,1,0,0,1,1,1Z" fill="none" stroke="#6c747d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path d="M34.86,22.32a7.1,7.1,0,0,0-13.75,0" fill="none" stroke="#6c747d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path d="M40.68,35.2a17.77,17.77,0,1,0-25.36,0" fill="none" stroke="#6c747d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path d="M39,29.15a12.44,12.44,0,1,0-22,0" fill="none" stroke="#6c747d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+</svg>

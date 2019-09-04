@@ -1,0 +1,185 @@
+@app-list-border: 1px solid rgba(0, 0, 0, .25);
+@app-list-icon-size: 56px;
+@app-list-item-height: 84px;
+@app-list-center-padding: 16px 160px 0 88px;
+@app-list-center-padding-m: 16px 240px 0 104px;
+@app-list-padding-right-s: 140px;
+@app-list-padding-right-m: 220px;
+
+@app-list-icon-top: (@app-list-item-height - @app-list-icon-size)/2;
+@app-list-name-font-size: 15px;
+@app-list-text-font-size: 13px;
+@app-list-inline-svg-size: 16px;
+
+@apps-list-header-height: 60px;
+
+@applist-inline-left: @category-left-panel-width + 10px;
+
+@app-list-dismiss-button-size: 32px;
+
+// We use the same template for desktop and browser
+.app-list-browser {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: @applist-inline-left;
+  width: ~ 'calc(100% - @{applist-inline-left})';
+  height: 100%;
+  overflow: hidden;
+  min-width: @hub-desktopapp-width-min - @applist-inline-left;
+  background: @content-bg;
+
+  @media (min-width: @browser-category-transition) {
+      left: 50%;
+      margin-left: -@content-max-width/2 + @applist-inline-left;
+  }
+}
+
+.app-list-browser .content-container-scrollable, .apps-detail .content-container-scrollable {
+  height: ~ 'calc(100% - @{apps-list-header-height})';
+}
+
+// Desktop and browser share the same template
+.apps-navigation-bar {
+  display: none;
+}
+
+.apps-list-header {
+  height: @apps-list-header-height;
+  line-height: @apps-list-header-height + 20px;
+  position: relative;
+  padding: 0 @list-item-padding-h;
+}
+
+.app-list-dismiss-button {
+  position: absolute;
+  display: block;
+  width: @app-list-dismiss-button-size;
+  height: @app-list-dismiss-button-size;
+  right: 12px;
+  top: 20px;
+  z-index: 50;
+
+  @media (min-width: @browser-category-transition) {
+    left: 725px;
+  }
+}
+
+.app-list-content {
+  width: 100%;
+  height: auto;
+  position:relative;
+}
+
+.app-list-wrapper {
+  width: 100%;
+  min-height: ~ 'calc(100vh - @{breadcrumb-height} - @{apps-list-header-height})';
+
+  @media (min-width: @browser-category-transition) {
+      width: @content-max-width - @applist-inline-left;
+  }
+}
+
+.app-list-item {
+  padding: @app-list-center-padding;
+  position: relative;
+  display: block;
+  min-height: @app-list-item-height;
+  width: 100%;
+  .list-item-divider-mixin(@list-item-divider-bg, 0);
+  cursor: pointer;
+
+  &:before {
+      left: 32px;
+      width: ~ 'calc(100% - 60px)';
+  }
+
+  .app-list-item-icon {
+    background: @white;
+  }
+
+  .app-list-item-actions {
+    @media (min-width: @browser-category-transition) {
+      right: 40px;
+    }
+  }
+}
+
+.app-list-item-icon {
+  .app-icon(@app-list-icon-size, @app-list-icon-top);
+}
+
+.app-list-item-name {
+  //define the margin padding etc in the class instead of mixin class
+  .base-text-style(@app-list-name-font-size, 600);
+  white-space: normal;
+  line-height: 20px;
+  .multi-line-ellipsis(2);
+}
+
+.app-list-item-type {
+  .base-text-style(@app-list-text-font-size, 400);
+  .single-line-ellipsis();
+  opacity: 0.55;
+  line-height: 22px;
+
+  svg {
+    width: @app-list-inline-svg-size;
+    height: @app-list-inline-svg-size;
+    margin-top: 3px;
+  }
+}
+
+.app-list-item-actions {
+  height: 100%;
+  position: absolute;
+  right: @list-item-padding-h - 2px;
+  top: 0;
+  // This is the vertical align helper
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    width: 1px;
+    vertical-align: middle;
+  }
+}
+
+// Faborite button styles
+// ---------------------------------------
+.app-list-item-actions, .search-item-actions {
+  // The icon only are shown in smaller viewport
+  .icon-app-favorite-button, .icon-app-un-favorite-button {
+      width: @mobile-default-taparea-size;
+      margin: 0 4px;
+      vertical-align: middle;
+  }
+
+  .app-favoriting-spinner {
+      position: relative;
+      padding: 4px;
+      margin: 0 4px;
+      width: @mobile-default-taparea-size;
+      height: @mobile-default-taparea-size;
+      display: inline-block;
+      vertical-align: middle;
+  }
+
+  .app-favorited {
+    .icon-app-favorite-button, .app-favoriting-spinner {
+      display: none;
+    }
+  }
+
+  .app-not-favorited {
+    .icon-app-un-favorite-button, .app-favoriting-spinner {
+      display: none;
+    }
+  }
+
+  .app-favoriting {
+    .icon-app-favorite-button, .icon-app-un-favorite-button {
+      display: none;
+    }
+  }
+}

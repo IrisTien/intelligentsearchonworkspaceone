@@ -1,0 +1,22 @@
+<h1 class="masthead-headline">{{mastheadCtr.title}}</h1>
+<div class="masthead-mobile-left">
+    <div ng-if="mastheadCtr.showNotificationsBell && mastheadCtr.inAppNotificationEnabled" ui-sref="apps.notifications" class="hub-notification-bell-button">
+        <svg svg-symbol="icon-bell"></svg>
+        <div notification-count></div>
+    </div>
+    <div class="mobile-subpage-back-button" ng-if="mastheadCtr.subPage"
+         ng-click="mastheadCtr.goBack()">
+        <subpage-back-button></subpage-back-button>
+    </div>
+</div>
+
+<div class="masthead-mobile-right">
+    <input type="text" class="dummy-input" ng-if="mastheadCtr.isIOS">
+    <div ng-click="mastheadCtr.openSearch(mastheadCtr.searchPath)" class="search-icon" ng-hide="mastheadCtr.hideSearch">
+        <svg svg-symbol="icon-searchglass" class="icon-bell" ng-hide="mastheadCtr.disabled"></svg>
+    </div>
+    <div class="masthead-avatar" ng-click="mastheadCtr.accounts()" ng-hide="mastheadCtr.hideAvatar">
+        <p class="masthead-avatar-initial" ng-if="mastheadCtr.userInfo.initials"><span>{{mastheadCtr.userInfo.initials}}</span></p>
+        <img ng-if="mastheadCtr.userInfo.imageURL" ng-src="{{mastheadCtr.userInfo.imageURL}}" class="masthead-avatar-image"/>
+    </div>
+</div>

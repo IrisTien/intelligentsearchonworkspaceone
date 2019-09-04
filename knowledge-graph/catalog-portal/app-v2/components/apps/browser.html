@@ -1,0 +1,54 @@
+<div ng-if="appsCtrl.appLoading" class="apps-loading-preview-container">
+    <div ng-include="'app-v2/components/apps/browserPreview.html'"></div>
+</div>
+<main class="content-container apps-landing" app-orientation-directive min-favorite-count="appsCtrl.minFavoriteCount"
+      max-section-apps-count="appsCtrl.maxSectionAppsCount" one-row-section-apps-count="appsCtrl.oneRowSectionAppsCount"
+      min-section-apps-count="appsCtrl.minSectionAppsCount" update-displayed-apps="appsCtrl.updateDisplayedApps()">
+    <article class="content-container-scrollable" ng-class="{'scroll-hidden': appsCtrl.scrollDisabled}">
+        <div class="content" ng-class="{'no-category': appsCtrl.fullScreenView}">
+            <section class="search-module" ng-hide="appsCtrl.noApps">
+                <app-search class="search-bar-container"></app-search>
+            </section>
+        </div>
+        <div class="content left-panel" ng-if="!appsCtrl.appLoading" ng-class="{'no-category': appsCtrl.fullScreenView}">
+             <!--display empty state when there is no entitlements-->
+            <section class="apps-module apps-empty" ng-if="appsCtrl.noApps">
+                <div class="hub-no-apps-all" ng-include="'app-v2/svgincludes-hub/hub-no-apps.html'"></div>
+                <p class="no-apps-text">{{::'hub.apps.no.apps.msg1' | i18n}}</p>
+                <p class="no-apps-text">{{::'hub.apps.no.apps.msg2' | i18n}}</p>
+            </section>
+
+            <!-- Display other type of app module like newApps, recommended apps -->
+            <ng-include src="customization" ng-if="appsCtrl.canBeDisplayedBrowser(customization)"
+                        ng-repeat="customization in appsCtrl.customizationsOrder" class="apps-module {{customization | lowercase}}" ng-class="{'no-border2': !appsCtrl.favorites.length && !appsCtrl.entitlementsLoadFromDbFailed}">
+            </ng-include>
+
+             <!--display all apps when there is no customization-->
+            <section class="apps-module apps-all" ng-if="appsCtrl.showAllApps">
+                <div class="apps-module-header">
+                    <h2 class="section-headline-style2 apps-module-headline">
+                        <span>{{::'hub.apps.allApps' | i18n}}</span>
+                    </h2>
+                </div>
+                <div class="apps-module-content">
+                    <div class="grid-container">
+                        <app-item class="grid-item app-item"
+                                  ng-repeat="app in appsCtrl.entitlements"
+                                  app="app" favorite-enabled="appsCtrl.favoritesEnabled"></app-item>
+                        <!-- Do not remove these still needed if the app count number small than the minSectionAppsCount -->
+                        <div class="grid-item-empty" ng-repeat="app in appsCtrl.emptyFillers"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="apps-module-category" ng-if="appsCtrl.canCategoryBeDisplayed(customization)">
+                <div class="category-container browser">
+                    <category-component category="appsCtrl.categories"
+                                        default-label="appsCtrl.defaultLabels"></category-component>
+                </div>
+            </section>
+        </div>
+    </article>
+</main>
+
+<div ui-view ng-if="!appsCtrl.appLoading"></div>

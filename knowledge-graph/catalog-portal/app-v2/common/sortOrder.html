@@ -1,0 +1,5 @@
+<ul class="sort-list">
+    <li ng-repeat="type in bookmarksCtrl.sortType.types" ng-class="{'selected': type.id === bookmarksCtrl.sortType.model}">
+        <a class="sort-order-list-label" ng-click="bookmarksCtrl.changeSortType(type.id, type.text)">{{type.text}}</a>
+    </li>
+</ul>

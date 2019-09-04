@@ -1,0 +1,45 @@
+<div modal class="headered- footered- modal">
+    <div class="dialog">
+        <div class="dialog-header">
+            <h3>Select Color</h3>
+        </div>
+        <div class="dialog-body">
+            <ul class="list">
+                <li>
+                    <input type="radio" ng-model="color" value="#ff0000">
+                    <span class="swatch" style="background-color: #ff0000"></span>
+                    Red
+                </li>
+                <li>
+                    <input type="radio" ng-model="color" value="#00ff00">
+                    <span class="swatch" style="background-color: #00ff00"></span>
+                    Green
+                </li>
+                <li>
+                    <input type="radio" ng-model="color" value="#0000ff">
+                    <span class="swatch" style="background-color: 0000ff"></span>
+                    Blue
+                </li>
+                <li>
+                    <input type="radio" ng-model="color" value="">
+                    <span class="swatch"></span>
+                    None
+                </li>
+            </ul>
+        </div>
+        <div class="dialog-actions">
+            <ul class="right-to-left- actions">
+                <li>
+                    <button class="primary- button" ng-click="$modal.close(color)">
+                        Select
+                    </button>
+                </li>
+                <li>
+                    <button class="link- button" ng-click="$modal.cancel()">
+                        Cancel
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

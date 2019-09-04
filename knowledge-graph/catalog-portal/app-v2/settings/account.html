@@ -1,0 +1,34 @@
+<div class="settings-detail-content-container">
+    <div class="settings-detail-mobile-header">
+        <div class="settings-back settings-account-button" ng-click="::settingsCtrl.dismissSettingsDetail()">
+            <svg svg-symbol="icon-page-back" class="icon-page-back"></svg>
+        </div>
+        <h2>{{::'userInfo.account' | i18n}}</h2>
+    </div>
+    <div class="settings-detail-content-scrollable" >
+        <div class="settings-detail-content">
+            <div class="setting-desktop-profile-container" ng-show="appCenterCtrl.userAvailable">
+                <h2 class="settings-detail-title">{{::'userInfo.profile' | i18n}}</h2>
+                <div class="desktop-profile-avatar-container profile-avatar" image-load>
+                    <img ng-src="{{appCenterCtrl.user.imageURL}}" ng-show="appCenterCtrl.user.imageURL" class="settings-user-avatar"/>
+                </div>
+                <p class="settings-profile-name">
+                    <span class="profile-label">{{::'userInfo.profile.name' | i18n}} </span>
+                    <span class="profile-content">{{'fullname' | i18n : appCenterCtrl.user.firstName : appCenterCtrl.user.lastName}}</span>
+                </p>
+                <p class="settings-profile-username"><span class="profile-label">{{::'userInfo.profile.username' | i18n}} </span>
+                    <span class="profile-content">{{::appCenterCtrl.user.userName}}</span>
+                </p>
+                <p class="settings-profile-email"><span class="profile-label">{{::'userInfo.profile.email' | i18n}} </span>
+                    <span class="profile-content">{{::appCenterCtrl.user.emailAddress}}</span>
+                </p>
+            </div>
+            <div class="setting-desktop-profile-container" ng-if="settingsCtrl.userInfo.changePasswordAllowed">
+                <h2>{{::'userInfo.profile.password' | i18n}}
+                <span class="password-change" ng-click="::settingsCtrl.openPasswordDialog()">{{::'userInfo.profile.passwordchange' | i18n}}</span>
+                </h2>
+                <p>{{::'userInfo.profile.passwordprompt' | i18n}}</p>
+            </div>
+        </div>
+    </div>
+</div>

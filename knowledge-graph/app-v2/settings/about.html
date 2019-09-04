@@ -1,0 +1,35 @@
+<div class="settings-detail-content-container">
+    <div class="settings-detail-mobile-header">
+        <div class="settings-back settings-about-button" id="pt-settings-about-back" ng-click="::settingsCtrl.dismissSettingsDetail()">
+            <svg svg-symbol="icon-page-back" class="icon-page-back"></svg>
+        </div>
+        <h2>{{::'userInfo.about' | i18n}}</h2>
+    </div>
+
+    <div class="settings-detail-content-scrollable">
+        <div class="settings-detail-content">
+            <h2 class="settings-detail-title">{{'app.about.heading' | i18n }}</h2>
+            <p class="about-description">{{'app.about.copyright' | i18n }}</p>
+
+            <a target="_blank" ng-href="{{'app.about.patentsLink' | i18n}}" class="about-sublink patent-button">
+                <svg svg-symbol="icon-openapp-small"></svg>{{'app.about.button.label.patents' | i18n }}
+            </a>
+
+            <a ng-if="isOnPrem" target="_blank" ng-href="{{'app.about.licenseAgreementLink' | i18n}}" class="about-sublink licence-button" >
+                <svg svg-symbol="icon-openapp-small"></svg>{{'app.about.button.label.licenseAgreement' | i18n }}
+            </a>
+
+            <a ng-if="!isOnPrem" target="_blank" ng-href="{{'app.about.saasLicenseAgreementLink' | i18n}}" class="about-sublink licence-button" >
+                <svg svg-symbol="icon-openapp-small"></svg>{{'app.about.button.label.licenseAgreement' | i18n }}
+            </a>
+
+            <div class="about-promo-container" ng-if="settingsCtrl.showMacAppDownloadBanner || appCenterCtrl.isMobileNonWindowBrowser">
+                <h2 class="settings-detail-title promo-download-title">{{::'userInfo.settings.promo.title' | i18n}}</h2>
+                <p>{{::'userInfo.settings.promo.message' |i18n}}</p>
+                <p class="about-promo-actions">
+                    <button class="about-promo-action primary-button" id="pt-promo-download-link" ng-click="settingsCtrl.downloadApp()"> {{::'app.promotion.banner.download' | i18n }}</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

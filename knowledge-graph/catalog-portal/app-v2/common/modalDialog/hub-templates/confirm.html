@@ -1,0 +1,18 @@
+<div modal-new="modal-confirmation" class="hub-modal-container hub-confirm-modal">
+    <section class="dialog-container">
+        <header class="dialog-header no-symbol" ng-if="title">
+            <h3 class="modal-title">{{::title | i18n }}</h3>
+        </header>
+        <div class="dialog-body">
+            <p class="modal-content-text" ng-show="message">{{::message | i18n }}</p>
+        </div>
+        <footer class="dialog-actions two-action">
+            <button class="button-action secondary-action modal-button-secondary" ng-click="$modal.cancel();$event.stopPropagation();">
+                {{::cancel | i18n }}
+            </button>
+            <button class="button-action primary-action modal-button-primary" ng-click="$modal.close()">
+                {{::ok | i18n }}
+            </button>
+        </footer>
+    </section>
+</div>
